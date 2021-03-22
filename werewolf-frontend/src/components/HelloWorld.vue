@@ -24,6 +24,7 @@
     },
     setup(props) {
       const result = props.message.split(""); // 正确, 'message' 被声明为字符串
+      var a: number = 0;
       return { result };
     },
   });
