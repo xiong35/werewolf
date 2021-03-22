@@ -1,7 +1,6 @@
 <div align="center" id="top"> 
   <img width="100" src="werewolf-frontend/public/wolf.png" alt="Werewolf Logo" />
 
-  &#xa0;
 
   <!-- <a href="https://werewolf.netlify.app">Demo</a> -->
 </div>
@@ -90,7 +89,7 @@ $ npm run dev
 
 ## :memo: License ##
 
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+本项目使用 MIT 证书. 查看 [LICENSE](LICENSE) 以了解详情.
 
 
 Made with :heart: by <a href="https://github.com/xiong35" target="_blank">xing35</a>
