@@ -6,9 +6,12 @@
     "build": "vite build"
   },
   "dependencies": {
+    "socket.io-client": "^4.0.0",
     "vue": "^3.0.4"
   },
   "devDependencies": {
+    "@types/socket.io-client": "^1.4.36",
+    "@types/vue": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/compiler-sfc": "^3.0.4",
