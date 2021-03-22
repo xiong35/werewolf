@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "declaration": false,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es6",
+        "sourceMap": false,
+        "outDir": "./dist",
+        "baseUrl": "./"
+    },
+    "exclude": [
+        "node_modules"
+    ]
+    // "include": ["ormconfig.json"]
+}
