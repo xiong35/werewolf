@@ -1,19 +1,10 @@
-type Token = string;
-type ID = string | any;
-type day = number; // 第一夜: 0, 第 n 天白天: 2n-1, 第 n 天晚上: 2n
+import { Character } from "./defines";
 
-enum Character {
-  HUNTER = "HUNTER",
-  WITCH = "WITCH",
-  SEER = "SEER",
-  GUARD = "GUARD",
-  VILLAGER = "VILLAGER",
-  WEREWOLF = "WEREWOLF",
-  SHERIFF = "SHERIFF",
-  HOST = "HOST",
-}
+export type Token = string;
+export type ID = string | any;
+export type day = number; // 第一夜: 0, 第 n 天白天: 2n-1, 第 n 天晚上: 2n
 
-interface roomModel {
+export interface RoomModel {
   roomNumber: string; // 房间号码, 6 位数字
   creator: ID; // 创建者 ID
   password?: string; // 是否设置密码, 存放哈希过的密码
@@ -24,13 +15,16 @@ interface roomModel {
   isFinished: boolean; // 是否已结束 -> 游戏结束重置
 }
 
-interface playerModel {
+export interface PublicPlayerModel {
   index: number; // 玩家编号 -> 游戏结束重置
   name: string; // 昵称
-  character: Character; // 游戏角色 -> 游戏结束重置
-  characterStatus: any; // 允许自定义 -> 游戏结束重置
   isAlive: boolean; // 是否存活 -> 游戏结束重置
   isSheriff: boolean; // 是否为警长 -> 游戏结束重置
+}
+
+export interface PlayerModel extends PublicPlayerModel {
+  character: Character; // 游戏角色 -> 游戏结束重置
+  characterStatus: any; // 允许自定义 -> 游戏结束重置
   die: {
     // 具体死亡信息 -> 游戏结束重置
     at: day; // 第几天死的
