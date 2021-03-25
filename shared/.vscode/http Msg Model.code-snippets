@@ -3,7 +3,7 @@
 		"scope": "typescript",
 		"prefix": "http#",
 		"body": [
-			"import { ID } from \"../models\";",
+			"import { ID, index } from \"../models\";",
 			"import {} from \"../defines\";",
 			"",
 			"export interface ${TM_FILENAME/(.*)Msg\\..+$/$1/}Request {",

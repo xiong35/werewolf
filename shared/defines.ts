@@ -69,7 +69,7 @@ export enum GameState {
    * 老警长 10s 选择，
    * 选择后 10s 时间确认
    */
-  ASSIGN_SHERIFF = "指派警长",
+  SHERIFF_ASSIGN = "指派警长",
 
   /**
    * 自由发言
