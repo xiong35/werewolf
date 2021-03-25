@@ -2,6 +2,8 @@ import { Socket, Server } from "socket.io";
 import * as Koa from "koa";
 import { createServer } from "http";
 
+import { Events } from "../../shared/WSEvents";
+
 const app = new Koa();
 
 app.use(async (ctx, next) => {
@@ -31,16 +33,21 @@ const httpServer = createServer(app.callback());
 const io = new Server(httpServer, {
   cors: {
     origin: "http://127.0.0.1:3000",
-    methods: ["*"],
+    methods: ["GET", "POST"],
   },
+  path: "/werewolf-api",
 });
 
 io.on("connection", (socket: Socket) => {
   console.log("connected");
 
   socket.send({ result: "result" });
+  socket.emit("serverUpgrade", {
+    result: "result",
+    type: "upgrade",
+  });
 
-  socket.on("my event", (...args) => {
+  socket.on(Events.EXILE, (...args) => {
     console.log(args);
   });
 });

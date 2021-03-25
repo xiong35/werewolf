@@ -1,5 +1,5 @@
-import { day, PublicPlayerModel, index } from "../models";
-import { GameState, Potion } from "../defines";
+import { day, PublicPlayerModel, index } from "../ModelDefs";
+import { GameState, Potion } from "../GameDefs";
 
 export interface ChangeStatusMsg {
   day: day; // 当前天数

@@ -1,5 +1,5 @@
-import { ID, index } from "../models";
-import { Potion } from "../defines";
+import { ID, index } from "../ModelDefs";
+import { Potion } from "../GameDefs";
 
 export interface WitchActRequest {
   ID: ID; // 鉴权用的 ID

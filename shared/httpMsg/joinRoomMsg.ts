@@ -1,5 +1,5 @@
-import { ID, index } from "../models";
-import { Character } from "../defines";
+import { ID, index } from "../ModelDefsefs";
+import { Character } from "../GameDefs";
 
 export interface JoinRoomRequest {
   name: string; // 昵称

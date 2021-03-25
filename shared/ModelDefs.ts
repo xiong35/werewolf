@@ -1,4 +1,4 @@
-import { Character, GameState } from "./defines";
+import { Character, GameState } from "./GameDefs";
 
 export type Token = string;
 export type ID = string;
@@ -6,7 +6,7 @@ export type index = number;
 
 export type day = number; // 第一夜: 0, 第 n 天白天: 2n-1, 第 n 天晚上: 2n
 
-export interface RoomModel {
+export interface RoomDef {
   roomNumber: string; // 房间号码, 6 位数字
   creatorID: ID; // 创建者 ID
   playerIDs: ID[]; // 参与者 ID
@@ -19,14 +19,14 @@ export interface RoomModel {
   nextStatus: GameState[]; // 接下来的游戏状态的栈
 }
 
-export interface PublicPlayerModel {
+export interface PublicPlayerDef {
   index: index; // 玩家编号 -> 游戏结束重置
   name: string; // 昵称
   isAlive: boolean; // 是否存活 -> 游戏结束重置
   isSheriff: boolean; // 是否为警长 -> 游戏结束重置
 }
 
-export interface PlayerModel extends PublicPlayerModel {
+export interface PlayerDef extends PublicPlayerDef {
   character: Character; // 游戏角色 -> 游戏结束重置
   characterStatus: any; // 允许自定义 -> 游戏结束重置
   die: {

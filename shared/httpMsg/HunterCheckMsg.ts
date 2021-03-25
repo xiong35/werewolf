@@ -1,5 +1,5 @@
-import { ID, index } from "../models";
-import {} from "../defines";
+import { ID, index } from "../ModelDefs";
+import {} from "../GameDefs";
 
 export interface HunterCheckRequest {
   ID: ID; // 鉴权用的 ID

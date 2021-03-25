@@ -3,7 +3,7 @@
 		"scope": "typescript",
 		"prefix": "ws#",
 		"body": [
-			"import { } from \"../models\"",
+			"import { } from \"../ModelDefs\"",
 			"",
 			"export interface ${TM_FILENAME/(.*)\\..+$/$1/}Msg {",
 			"  $1",

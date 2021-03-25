@@ -1,4 +1,4 @@
-import {} from "../models";
+import {} from "../ModelDefs";
 
 /**
  * Server to Client

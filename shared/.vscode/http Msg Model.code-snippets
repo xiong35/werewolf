@@ -3,8 +3,8 @@
 		"scope": "typescript",
 		"prefix": "http#",
 		"body": [
-			"import { ID, index } from \"../models\";",
-			"import {} from \"../defines\";",
+			"import { ID, index } from \"../ModelDefs\";",
+			"import {} from \"../GameDefs\";",
 			"",
 			"export interface ${TM_FILENAME/(.*)Msg\\..+$/$1/}Request {",
 			"  ID: ID; // 鉴权用的 ID",
