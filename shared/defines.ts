@@ -19,38 +19,81 @@ export enum Potion {
  * // TODO 每个状态需要一个 http 请求来结束
  */
 export enum GameState {
-  /** 狼人杀人 */
-  WOLF_KILL = "WOLF_KILL",
+  /**
+   * 狼人杀人
+   * 预言家验人入栈
+   */
+  WOLF_KILL = "狼人杀人",
 
-  /** 预言家验人 */
-  SEER_CHECK = "SEER_CHECK",
+  /**
+   * 预言家验人
+   * 女巫用药 入栈
+   */
+  SEER_CHECK = "预言家验人",
 
-  /** 女巫用药 */
-  WITCH_ACT = "WITCH_ACT",
+  /**
+   * 女巫用药
+   * 守卫保人 入栈
+   */
+  WITCH_ACT = "女巫用药",
 
-  /** 守卫保人 */
-  GUARD_PROTECT = "GUARD_PROTECT",
+  /**
+   * 守卫保人
+   * 猎人查看开枪状态 入栈
+   */
+  GUARD_PROTECT = "守卫保人",
 
-  /** 猎人查看开枪状态 */
-  HUNTER_CHECK = "HUNTER_CHECK",
+  /**
+   * 猎人查看开枪状态
+   * 自由发言或上警 入栈
+   */
+  HUNTER_CHECK = "猎人查看开枪状态",
 
-  /** 上警 */
-  SHERIFF_ELECT = "SHERIFF_ELECT",
+  /**
+   * 上警
+   * 投票选警长 入栈
+   */
+  SHERIFF_ELECT = "上警",
 
-  /** 警长竞选 */
-  SHERIFF_VOTE = "SHERIFF_VOTE",
+  /**
+   * 投票选警长
+   * - 自由发言, 指派警长 入栈
+   * - 平票: 投票选警长 入栈
+   */
+  SHERIFF_VOTE = "投票选警长",
 
-  /** 自由发言 */
-  DAY_DISCUSS = "DAY_DISCUSS",
+  /**
+   * 指派警长，
+   * 指当前警长去世了, 指定新的警长
+   *
+   * 老警长 10s 选择，
+   * 选择后 10s 时间确认
+   */
+  ASSIGN_SHERIFF = "指派警长",
 
-  /** 投票出人 */
-  EXILE_VOTE = "EXILE_VOTE",
+  /**
+   * 自由发言
+   * - 投票出人 入栈
+   * - 如果猎人死了, 猎人开枪入栈
+   */
+  DAY_DISCUSS = "自由发言",
 
-  /** 猎人开枪 */
-  HUNTER_SHOOT = "HUNTER_SHOOT",
+  /**
+   * 投票出人
+   * - 猎人死了: 开枪入栈
+   * - 警长死了: 指派警长入栈
+   * - 平票: 投票出人入栈
+   *
+   * 狼人杀人 入栈
+   */
+  EXILE_VOTE = "投票出人",
+
+  /**
+   * 猎人开枪
+   * 可能有留遗言入栈
+   */
+  HUNTER_SHOOT = "猎人开枪",
 
   /** 留遗言 */
-  LEAVE_MSG = "LEAVE_MSG",
+  LEAVE_MSG = "留遗言",
 }
-
-GameState[2];
