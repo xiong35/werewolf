@@ -1,0 +1,14 @@
+{
+	"web socket message define": {
+		"scope": "typescript",
+		"prefix": "ws#",
+		"body": [
+			"import { } from \"../models\"",
+			"",
+			"export interface ${TM_FILENAME/(.*)\\..+$/$1/}Msg {",
+			"  $1",
+			"}"
+		],
+		"description": "web socket message define"
+	}
+}
