@@ -1,0 +1,23 @@
+{
+	"http message define": {
+		"scope": "typescript",
+		"prefix": "http#",
+		"body": [
+			"import { ID } from \"../models\";",
+			"import {} from \"../defines\";",
+			"",
+			"export interface ${TM_FILENAME/(.*)Msg\\..+$/$1/}Request {",
+			"  ID: ID; // 鉴权用的 ID",
+			"  roomNumber: string; // 当前房间号",
+			"  $1",
+			"}",
+			"",
+			"export interface ${TM_FILENAME/(.*)Msg\\..+$/$1/}Response {",
+			"  status: number;",
+			"  msg: string;",
+			"  data: {}",
+			"}"
+		],
+		"description": "http message define"
+	}
+}
