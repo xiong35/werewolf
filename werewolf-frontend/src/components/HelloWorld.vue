@@ -19,13 +19,7 @@
       },
     },
     setup(props) {
-      const socket = io("http://127.0.0.1:3030", {
-        path: "/werewolf-api",
-      });
-
-      socket.on("message", (...args: any[]) => {
-        console.log(args);
-      });
+      const socket = io("http://127.0.0.1:3030", {});
 
       const count = ref(1);
 
