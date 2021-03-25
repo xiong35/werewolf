@@ -15,24 +15,26 @@
   "dependencies": {
     "koa": "^2.13.1",
     "koa-router": "^10.0.0",
+    "mongoose": "^5.12.2",
     "socket.io": "^4.0.0"
   },
   "devDependencies": {
-    "@types/socket.io": "^2.1.13",
     "@types/koa": "^2.13.1",
-    "@types/koa-router": "^7.4.1",
-    "@types/node": "^14.14.35",
     "@types/koa-bodyparser": "^4.2.2",
+    "@types/koa-router": "^7.4.1",
+    "@types/mongoose": "^5.10.4",
+    "@types/node": "^14.14.35",
+    "@types/socket.io": "^2.1.13",
     "eslint-config-koa": "^2.0.2",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-standard": "^5.0.0",
-    "typescript": "^4.2.3",
     "nodemon": "^1.19.0",
     "pm2": "^3.5.0",
     "ts-node": "^8.1.0",
-    "tsconfig-paths": "^3.8.0"
+    "tsconfig-paths": "^3.8.0",
+    "typescript": "^4.2.3"
   }
 }

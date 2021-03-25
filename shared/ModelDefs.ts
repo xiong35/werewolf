@@ -32,10 +32,10 @@ export interface PlayerDef extends PublicPlayerDef {
   die: {
     // 具体死亡信息 -> 游戏结束重置
     at: day; // 第几天死的
-    fromName: string | string[]; // 被哪些人杀死的(名字)
+    fromIndex: index[]; // 被哪些人杀死的(名字)
     fromCharacter: Character; // 被哪个角色杀死的
   };
   hasVotedAt: ID[]; // index 是天数, value 是投给了谁 -> 游戏结束重置
   // 包括 狼人杀人 / 神职发动技能 / 白天投票
-  SheriffVotes: ID[]; // index 是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
+  sheriffVotes: ID[]; // index 是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
 }
