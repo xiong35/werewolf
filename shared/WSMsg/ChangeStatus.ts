@@ -8,14 +8,15 @@ export interface ChangeStatusMsg {
   curPlayerStatus: PublicPlayerModel[];
 }
 
-type PublicMsg = SheriffElectMsg | DayMsg;
+type PublicMsg = VoteMsg | DayMsg;
 
 export interface DayMsg {
   die?: ID;
 }
 
-export interface SheriffElectMsg {
-  inElection: ID[]; // 上警的玩家 id
+export interface VoteMsg {
+  choices: ID[]; // 被投票的玩家 id
+  for: "SHERIFF" | "EXILE";
 }
 
 export interface WitchMsg {

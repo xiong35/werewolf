@@ -1,4 +1,4 @@
-import { Character } from "./defines";
+import { Character, GameState } from "./defines";
 
 export type Token = string;
 export type ID = string | any;
@@ -13,6 +13,7 @@ export interface RoomModel {
   needingCharacters: Character[]; // 设置的角色
   remainingCharacters: Character[]; // 还需要的角色
   isFinished: boolean; // 是否已结束 -> 游戏结束重置
+  nextStatus: GameState[]; // 接下来的游戏状态的栈
 }
 
 export interface PublicPlayerModel {
