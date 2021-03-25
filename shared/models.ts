@@ -1,23 +1,26 @@
 import { Character, GameState } from "./defines";
 
 export type Token = string;
-export type ID = string | any;
+export type ID = string;
+export type index = number;
+
 export type day = number; // 第一夜: 0, 第 n 天白天: 2n-1, 第 n 天晚上: 2n
 
 export interface RoomModel {
   roomNumber: string; // 房间号码, 6 位数字
-  creator: ID; // 创建者 ID
-  password?: string; // 是否设置密码, 存放哈希过的密码
+  creatorID: ID; // 创建者 ID
   playerIDs: ID[]; // 参与者 ID
+  password?: string; // 是否设置密码, 存放哈希过的密码
   currentDay: day; // 当前天数 -> 游戏结束重置
   needingCharacters: Character[]; // 设置的角色
-  remainingCharacters: Character[]; // 还需要的角色
+  remainingCharacters: Character[]; // 还需要的角色 // TODO t 人后补回来他的角色
+  remainingIndexes: index[]; // 空缺的玩家号码
   isFinished: boolean; // 是否已结束 -> 游戏结束重置
   nextStatus: GameState[]; // 接下来的游戏状态的栈
 }
 
 export interface PublicPlayerModel {
-  index: number; // 玩家编号 -> 游戏结束重置
+  index: index; // 玩家编号 -> 游戏结束重置
   name: string; // 昵称
   isAlive: boolean; // 是否存活 -> 游戏结束重置
   isSheriff: boolean; // 是否为警长 -> 游戏结束重置

@@ -1,6 +1,6 @@
-import { ID } from "../models";
+import { index } from "../models";
 
 export interface RoomJoinMsg {
   name: string; // 加入的玩家名
-  id: ID; // 加入的玩家 ID
+  index: index; // 加入的玩家编号
 }
