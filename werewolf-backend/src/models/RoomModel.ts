@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const roomSchema = new Schema({
   roomNumber: String,
   creatorID: String,
-  playerIDs: [String],
+  playerIDs: { type: [Schema.Types.ObjectId], ref: "Players" },
   currentDay: Number,
   needingCharacters: [String],
   remainingCharacters: [String],
@@ -12,4 +12,6 @@ const roomSchema = new Schema({
   nextStatus: [String],
 });
 
-export const RoomModel = model("room", roomSchema);
+const Room = model("Rooms", roomSchema);
+
+export default Room;

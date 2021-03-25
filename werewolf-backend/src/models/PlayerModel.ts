@@ -16,4 +16,6 @@ const playerSchema = new Schema({
   sheriffVotes: { type: [Number], default: [] },
 });
 
-export const Player = model("player", playerSchema);
+const Player = model("Players", playerSchema);
+
+export default Player;
