@@ -4,7 +4,7 @@ import * as KoaBody from "koa-body";
 import * as cors from "@koa/cors";
 
 import router from "./routes";
-import handleError from "./middleware/handleError";
+import useHandleError from "./middleware/handleError";
 
 mongoose.connect("mongodb://localhost/werewolf", {
   useNewUrlParser: true,
@@ -17,7 +17,7 @@ const app = new Koa<
 >();
 
 app
-  .use(handleError)
+  .use(useHandleError())
   .use(cors())
   .use(KoaBody())
 
