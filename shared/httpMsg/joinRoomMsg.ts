@@ -1,4 +1,4 @@
-import { ID, index } from "../ModelDefsefs";
+import { ID, index } from "../ModelDefs";
 import { Character } from "../GameDefs";
 
 export interface JoinRoomRequest {

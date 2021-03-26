@@ -1,17 +1,20 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Model, Document } from "mongoose";
+import { RoomDef } from "../../../shared/ModelDefs";
 
 const roomSchema = new Schema({
   roomNumber: String,
-  creatorID: String,
+  creatorID: Schema.Types.ObjectId,
   playerIDs: { type: [Schema.Types.ObjectId], ref: "Players" },
-  currentDay: Number,
+  currentDay: { type: Number, default: 0 },
   needingCharacters: [String],
   remainingCharacters: [String],
   remainingIndexes: [Number],
-  isFinished: Boolean,
-  nextStatus: [String],
+  isFinished: { type: Boolean, default: false },
+  nextStatus: { type: [String], default: [] },
 });
 
-const Room = model("Rooms", roomSchema);
+interface RoomProps extends RoomDef, Document {}
+
+const Room: Model<RoomProps> = model("Rooms", roomSchema);
 
 export default Room;

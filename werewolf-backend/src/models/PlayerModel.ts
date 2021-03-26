@@ -1,4 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Model, Document } from "mongoose";
+
+import { PlayerDef } from "../../../shared/ModelDefs";
 
 const playerSchema = new Schema({
   index: Number,
@@ -16,6 +18,8 @@ const playerSchema = new Schema({
   sheriffVotes: { type: [Number], default: [] },
 });
 
-const Player = model("Players", playerSchema);
+interface PlayerProps extends Document, PlayerDef {}
+
+const Player: Model<PlayerProps> = model("Players", playerSchema);
 
 export default Player;
