@@ -1,11 +1,14 @@
 import { Middleware } from "koa";
-import Room from "../models/RoomModel";
-import Player from "../models/PlayerModel";
+import Room from "../../models/RoomModel";
+import Player from "../../models/PlayerModel";
+import socket from "../../index";
+import { Events } from "../../../../shared/WSEvents";
+import { RoomJoinMsg } from "../../../../shared/WSMsg/RoomJoin";
 
 import {
   JoinRoomRequest,
   JoinRoomResponse,
-} from "../../../shared/httpMsg/JoinRoomMsg";
+} from "../../../../shared/httpMsg/JoinRoomMsg";
 
 const roomJoin: Middleware = async (ctx) => {
   const req = ctx.request.body as JoinRoomRequest;
@@ -39,6 +42,13 @@ const roomJoin: Middleware = async (ctx) => {
       needingCharacters: room.needingCharacters,
     },
   };
+
+  const roomJoinMsg: RoomJoinMsg = {
+    index: player.index,
+    name: player.name,
+  };
+
+  socket.emit(Events.ROOM_JOIN, roomJoinMsg);
 
   ctx.body = ret;
 };

@@ -1,11 +1,11 @@
 import { Middleware } from "koa";
-import Room from "../models/RoomModel";
-import Player from "../models/PlayerModel";
+import Room from "../../models/RoomModel";
+import Player from "../../models/PlayerModel";
 
 import {
   CreateRoomRequest,
   CreateRoomResponse,
-} from "../../../shared/httpMsg/CreateRoomMsg";
+} from "../../../../shared/httpMsg/CreateRoomMsg";
 
 const roomCreate: Middleware = async (ctx, next) => {
   const req = ctx.request.body as CreateRoomRequest;

@@ -1,7 +1,7 @@
 import * as Router from "koa-router";
 
-import roomCreate from "../handlers/roomCreate";
-import roomJoin from "../handlers/roomJoin";
+import roomCreate from "../handlers/http/roomCreate";
+import roomJoin from "../handlers/http/roomJoin";
 
 const roomRouter = new Router();
 
