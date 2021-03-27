@@ -13,7 +13,6 @@ export interface JoinRoomResponse {
   data: {
     ID: ID; // token
     index: index;
-    total: number; // 总共有多少人
     needingCharacters: Character[]; // 设置的人物
   };
 }

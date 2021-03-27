@@ -11,6 +11,7 @@ const roomSchema = new Schema({
   remainingIndexes: [Number],
   isFinished: { type: Boolean, default: false },
   nextStatus: { type: [String], default: [] },
+  password: String,
 });
 
 interface RoomProps extends RoomDef, Document {}

@@ -9,28 +9,24 @@ import {
 
 const roomCreate: Middleware = async (ctx, next) => {
   const req = ctx.request.body as CreateRoomRequest;
-
-  const playerNum = req.characters.length;
-  const randInd = Math.floor(Math.random() * playerNum);
-  const remainingCharacters = [...req.characters];
-  const character = remainingCharacters.splice(randInd, 1)[0];
+  const { characters, name, password } = req;
 
   const creator = new Player({
     index: 1,
-    name: req.name,
-    character,
+    name,
   });
-  console.log(creator);
+
+  // TODO 检查创建房间的人数配比
 
   const room = new Room({
     roomNumber: Math.random().toString().slice(2, 8),
     creatorID: creator._id,
     playerIDs: [creator._id],
-    needingCharacters: req.characters,
-    remainingCharacters,
-    remainingIndexes: new Array(playerNum - 1)
+    needingCharacters: characters,
+    remainingIndexes: new Array(characters.length - 1)
       .fill(0)
       .map((_, i) => i + 2),
+    password,
   });
 
   await Promise.all([creator.save(), room.save()]);
