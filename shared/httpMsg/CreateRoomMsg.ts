@@ -12,5 +12,6 @@ export interface CreateRoomResponse {
   msg: string;
   data: {
     roomNumber: string;
+    ID: ID;
   };
 }
