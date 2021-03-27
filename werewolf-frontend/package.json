@@ -18,6 +18,9 @@
     "@vue/compiler-sfc": "^3.0.4",
     "eslint": "^7.22.0",
     "eslint-plugin-vue": "^7.7.0",
+    "node-sass": "^5.0.0",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
     "vite": "^1.0.0-rc.13"
   }
 }

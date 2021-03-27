@@ -21,3 +21,11 @@
   });
   export default Home;
 </script>
+
+
+<style lang="scss">
+  button {
+    display: block;
+    width: 200px;
+  }
+</style>
