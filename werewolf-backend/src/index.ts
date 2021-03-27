@@ -2,6 +2,7 @@ import * as Koa from "koa";
 import * as mongoose from "mongoose";
 import * as KoaBody from "koa-body";
 import * as cors from "@koa/cors";
+import * as logger from "koa-logger";
 
 import router from "./routes";
 import useHandleError from "./middleware/handleError";
@@ -17,6 +18,8 @@ const app = new Koa<
 >();
 
 app
+  .use(logger())
+
   .use(useHandleError())
   .use(cors())
   .use(KoaBody())
