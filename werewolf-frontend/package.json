@@ -7,7 +7,8 @@
   },
   "dependencies": {
     "socket.io-client": "^4.0.0",
-    "vue": "^3.0.4"
+    "vue": "^3.0.4",
+    "vue-router": "^4.0.5"
   },
   "devDependencies": {
     "@types/socket.io-client": "^1.4.36",

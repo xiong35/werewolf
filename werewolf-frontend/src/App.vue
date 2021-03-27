@@ -1,19 +1,22 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld message="Hello Vue 3.0 + Vite" />
+  <p>
+    <router-link to="/">Go to Home</router-link>
+    <br />
+    <router-link to="/about">Go to About</router-link>
+  </p>
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
-  import HelloWorld from "./components/HelloWorld.vue";
-
   import { defineComponent } from "vue";
+  import { RouterLink, RouterView } from "vue-router";
 
   const Component = defineComponent({
     name: "App",
     components: {
-      HelloWorld,
+      RouterLink,
+      RouterView,
     },
-    // 已启用类型推断
   });
 
   export default Component;
