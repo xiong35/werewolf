@@ -1,5 +1,5 @@
 <template>
-  <div @click="onClick" class="btn">
+  <div class="btn">
     <span>{{ content }}</span>
     <div class="btn-mask"></div>
   </div>
@@ -11,7 +11,6 @@
   const Btn = defineComponent({
     name: "Btn",
     props: {
-      onClick: Function,
       content: String,
     },
   });

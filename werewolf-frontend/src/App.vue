@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <div class="main light">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">
@@ -15,3 +17,11 @@
 
   export default Component;
 </script>
+
+
+<style lang="scss" scoped>
+  .main {
+    max-width: 500px;
+    margin: auto;
+  }
+</style>
