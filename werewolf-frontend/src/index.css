@@ -1,11 +1,17 @@
-.main.dark {
+:root.dark {
   --bg: #111;
   --on-bg: #eee;
 }
 
-.main {
+:root {
   --bg: #eee;
   --on-bg: #111;
+}
+
+* {
+  color: var(--on-bg);
+  background-color: var(--bg);
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .main {

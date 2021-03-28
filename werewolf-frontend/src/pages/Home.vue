@@ -1,6 +1,6 @@
 <template>
   <div class="main-page">
-    <img src="../assets/werewolf.svg" alt="logo" class="logo svg" />
+    <img :src="`/src/assets/werewolf${theme}.svg`" alt="logo" class="logo" />
 
     <div class="title">狼人杀</div>
     <Btn
@@ -17,7 +17,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from "vue";
+  import { defineComponent } from "vue";
+
+  import { theme } from "../global/theme";
 
   import Btn from "../components/Btn.vue";
 
@@ -25,7 +27,7 @@
     name: "Home",
     components: { Btn },
     setup(props) {
-      return {};
+      return { theme };
     },
   });
   export default Home;
@@ -41,7 +43,7 @@
   .main-page {
     .logo {
       padding-top: 10vh;
-      width: 20vh;
+      width: 18vh;
       margin: auto;
       display: block;
     }

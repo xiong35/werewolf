@@ -25,8 +25,7 @@
   .btn {
     cursor: pointer;
     display: inline-block;
-    border: $border-width solid currentColor;
-    color: var(--on-bg);
+    border: $border-width solid;
     border-radius: 5px;
     line-height: 2.5;
     width: 6rem;
