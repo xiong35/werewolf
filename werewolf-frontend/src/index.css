@@ -1,10 +1,10 @@
 :root.dark {
   --bg: #111;
-  --on-bg: #eee;
+  --on-bg: #f8f8f8;
 }
 
 :root {
-  --bg: #eee;
+  --bg: #f8f8f8;
   --on-bg: #111;
 }
 

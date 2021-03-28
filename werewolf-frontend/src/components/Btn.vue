@@ -21,7 +21,7 @@
 
 
 <style lang="scss" scoped>
-  $border-width: 2px;
+  $border-width: 3px;
   .btn {
     cursor: pointer;
     display: inline-block;
