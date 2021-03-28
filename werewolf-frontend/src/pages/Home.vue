@@ -1,9 +1,18 @@
 <template>
   <div class="main-page">
-    <img src="../../public/wolf.png" alt="logo" class="logo" />
-    <div class="spacer"></div>
-    <Btn class="main-page-btn" content="加入房间"></Btn>
-    <Btn class="main-page-btn" content="创建房间"></Btn>
+    <img src="../assets/werewolf.svg" alt="logo" class="logo svg" />
+
+    <div class="title">狼人杀</div>
+    <Btn
+      @click="$router.push('joinRoom')"
+      class="main-page-btn"
+      content="加入房间"
+    ></Btn>
+    <Btn
+      @click="$router.push('createRoom')"
+      class="main-page-btn"
+      content="创建房间"
+    ></Btn>
   </div>
 </template>
 
@@ -16,13 +25,7 @@
     name: "Home",
     components: { Btn },
     setup(props) {
-      const count = ref(1);
-
-      const add = () => {
-        count.value++;
-      };
-
-      return { add, count };
+      return {};
     },
   });
   export default Home;
@@ -30,6 +33,11 @@
 
 
 <style lang="scss" scoped>
+  @font-face {
+    font-family: gete;
+    src: url(../assets/gete.ttf);
+  }
+
   .main-page {
     .logo {
       padding-top: 10vh;
@@ -38,8 +46,12 @@
       display: block;
     }
 
-    .spacer {
-      height: 10vh;
+    .title {
+      margin: 7vh;
+      text-align: center;
+      font-size: 3rem;
+      font-weight: bolder;
+      font-family: gete;
     }
 
     .main-page-btn {
