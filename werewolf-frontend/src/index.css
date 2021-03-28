@@ -1,0 +1,15 @@
+.main.dark {
+  --bg: #111;
+  --on-bg: #eee;
+}
+
+.main.light {
+  --bg: #eee;
+  --on-bg: #111;
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg);
+}
