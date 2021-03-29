@@ -75,7 +75,7 @@
     }
 
     .character {
-      width: 20vw;
+      width: 40%;
       margin: auto;
     }
 

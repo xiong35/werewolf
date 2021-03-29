@@ -14,7 +14,13 @@
         <input type="text" placeholder="请输入昵称" v-model="nickname" />
       </UseBorder>
     </div>
-    <Btn content="确认创建"></Btn>
+    <div class="password">
+      <span class="title">房间密码：</span>
+      <UseBorder>
+        <input type="text" placeholder="(可选)" v-model="password" />
+      </UseBorder>
+    </div>
+    <Btn @click="create" content="确认创建"></Btn>
   </div>
 </template>
 
@@ -25,15 +31,18 @@
   import Btn from "../components/Btn.vue";
   import UseBorder from "../components/UseBorder.vue";
 
-  import { characters, nickname } from "../reactivity/room";
-
-  // import { Character } from "../../../shared/GameDefs";
+  import { characters, nickname, password, create } from "../reactivity/room";
 
   const CreateRoom = defineComponent({
     name: "CreateRoom",
     components: { RoomCharacterTile, Btn, UseBorder },
     setup(props) {
-      return { characters, nickname };
+      return {
+        characters,
+        nickname,
+        password,
+        create,
+      };
     },
   });
 
@@ -58,7 +67,8 @@
       }
     }
 
-    .name {
+    .name,
+    .password {
       .title {
         position: relative;
         bottom: 0.08em;
@@ -68,7 +78,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
+      margin: 2rem 1rem;
       input {
         max-width: calc(100% - 1rem);
         border: none;

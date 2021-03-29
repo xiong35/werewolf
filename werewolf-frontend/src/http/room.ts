@@ -3,14 +3,14 @@ import request from "./_request";
 import {
   CreateRoomRequest,
   CreateRoomResponse,
-} from "../../../shared/httpMsg/CreateRoomMsg";
+} from "../../shared/httpMsg/CreateRoomMsg";
 
 export async function createRoom(
   data: CreateRoomRequest
 ): Promise<CreateRoomResponse> {
   const res = (await request({
     url: "/room/create",
-    method: "GET",
+    method: "POST",
     data,
   })) as unknown;
 
