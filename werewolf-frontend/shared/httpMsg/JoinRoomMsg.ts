@@ -3,7 +3,7 @@ import { Character } from "../GameDefs";
 
 export interface JoinRoomRequest {
   name: string; // 昵称
-  password: string; // 哈希过的密码
+  password?: string; // 哈希过的密码
   roomNumber: string; // 六位房间号
 }
 

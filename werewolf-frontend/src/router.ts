@@ -10,7 +10,14 @@ import WaitRoom from "./pages/WaitRoom.vue";
 const routes = [
   { path: "/", component: Home },
   { path: "/createRoom", component: CreateRoom },
-  { path: "/joinRoom", component: JoinRoom },
+  {
+    path: "/joinRoom",
+    component: JoinRoom,
+    props: (route: any) => ({
+      pw: route.query.pw,
+      number: route.query.number,
+    }),
+  },
   { path: "/play", component: Play },
   { path: "/recon", component: Recon },
   { path: "/waitRoom", component: WaitRoom },

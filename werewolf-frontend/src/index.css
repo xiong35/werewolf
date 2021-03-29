@@ -12,10 +12,19 @@
   color: var(--on-bg);
   background-color: var(--bg);
   transition: color 0.2s, background-color 0.2s;
+  user-select: none;
 }
 
 .main {
   width: 100vw;
   height: 100vh;
   background-color: var(--bg);
+}
+
+input {
+  border: none;
+}
+
+input:focus {
+  outline: none;
 }

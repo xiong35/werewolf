@@ -1,6 +1,6 @@
 <template>
   <div class="createroom">
-    <span class="title">角色</span>
+    <span class="title">角色设置</span>
     <div class="tile-wrapper">
       <RoomCharacterTile
         :key="name"
@@ -9,15 +9,25 @@
       ></RoomCharacterTile>
     </div>
     <div class="name">
-      <span class="title">你的昵称：</span>
+      <span class="hint">你的昵称：</span>
       <UseBorder>
-        <input type="text" placeholder="请输入昵称" v-model="nickname" />
+        <input
+          maxlength="10"
+          type="text"
+          placeholder="请输入昵称"
+          v-model="nickname"
+        />
       </UseBorder>
     </div>
     <div class="password">
-      <span class="title">房间密码：</span>
+      <span class="hint">房间密码：</span>
       <UseBorder>
-        <input type="text" placeholder="(可选)" v-model="password" />
+        <input
+          type="text"
+          maxlength="20"
+          placeholder="(可选)"
+          v-model="password"
+        />
       </UseBorder>
     </div>
     <Btn @click="create" content="确认创建"></Btn>
@@ -31,7 +41,12 @@
   import Btn from "../components/Btn.vue";
   import UseBorder from "../components/UseBorder.vue";
 
-  import { characters, nickname, password, create } from "../reactivity/room";
+  import {
+    characters,
+    nickname,
+    password,
+    create,
+  } from "../reactivity/createRoom";
   import { showDialog } from "../reactivity/dialog";
 
   const CreateRoom = defineComponent({
@@ -71,23 +86,20 @@
 
     .name,
     .password {
-      .title {
+      .hint {
         position: relative;
         bottom: 0.08em;
         word-break: keep-all;
         margin-right: 0.5rem;
+        font-weight: bold;
       }
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 2rem 1rem;
+      margin: 2rem 0;
       input {
         max-width: calc(100% - 1rem);
-        border: none;
         padding: 0.5rem;
-        &:focus {
-          outline: none;
-        }
       }
       .useborder {
         max-width: 50%;

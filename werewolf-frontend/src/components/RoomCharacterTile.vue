@@ -17,7 +17,7 @@
 <script lang="ts">
   import { defineComponent, toRef } from "vue";
 
-  import { setCharacter, characters } from "../reactivity/room";
+  import { setCharacter, characters } from "../reactivity/createRoom";
 
   import { ChineseNames, SetableCharacters } from "../../shared/GameDefs";
 
