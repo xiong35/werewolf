@@ -1,7 +1,8 @@
 <template>
   <div class="btn">
-    <span>{{ content }}</span>
-    <div class="btn-mask"></div>
+    <UseBorder>
+      <span class="content">{{ content }}</span>
+    </UseBorder>
   </div>
 </template>
 
@@ -9,8 +10,11 @@
   //  TODO  水波纹效果?
   import { defineComponent } from "vue";
 
+  import UseBorder from "./UseBorder.vue";
+
   const Btn = defineComponent({
     name: "Btn",
+    components: { UseBorder },
     props: {
       content: String,
     },
@@ -21,40 +25,12 @@
 
 
 <style lang="scss" scoped>
-  $border-width: 3px;
   .btn {
     cursor: pointer;
     display: inline-block;
-    border: $border-width solid;
-    border-radius: 5px;
-    line-height: 2.5;
-    width: 6rem;
-    text-align: center;
-    position: relative;
-
-    .btn-mask {
-      position: absolute;
-      right: 6%;
-      top: -2 * $border-width;
-      height: 3 * $border-width;
-      width: 8px;
-      background-color: var(--bg);
-      &::before,
-      &::after {
-        content: "";
-        width: $border-width;
-        height: $border-width;
-        background-color: currentColor;
-        position: absolute;
-        border-radius: 50%;
-        top: $border-width;
-      }
-      &::before {
-        left: -$border-width / 2;
-      }
-      &::after {
-        right: -$border-width / 2;
-      }
+    .content {
+      padding: 0.5rem;
+      display: inline-block;
     }
   }
 </style>

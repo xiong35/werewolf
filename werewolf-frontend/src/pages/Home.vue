@@ -3,16 +3,8 @@
     <img :src="`/src/assets/werewolf${theme}.svg`" alt="logo" class="logo" />
 
     <div class="title">狼人杀</div>
-    <Btn
-      @click="$router.push('joinRoom')"
-      class="main-page-btn"
-      content="加入房间"
-    ></Btn>
-    <Btn
-      @click="$router.push('createRoom')"
-      class="main-page-btn"
-      content="创建房间"
-    ></Btn>
+    <Btn @click="$router.push('joinRoom')" content="加入房间"></Btn>
+    <Btn @click="$router.push('createRoom')" content="创建房间"></Btn>
   </div>
 </template>
 
@@ -56,9 +48,10 @@
       font-family: gete;
     }
 
-    .main-page-btn {
+    .btn {
       display: block;
       margin: 5vh auto;
+      text-align: center;
     }
   }
 </style>
