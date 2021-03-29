@@ -13,6 +13,17 @@ export enum Potion {
   MEDICINE = "MEDICINE",
 }
 
+export const ChineseNames: Record<Character, string> = {
+  HUNTER: "猎人",
+  GUARD: "守卫",
+  HOST: "主持人",
+  SEER: "预言家",
+  SHERIFF: "警长",
+  VILLAGER: "村民",
+  WEREWOLF: "狼人",
+  WITCH: "女巫",
+};
+
 /**
  * 当前是什么游戏阶段
  * // TODO 每个状态需要一个 http 请求来结束
