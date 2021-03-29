@@ -1,6 +1,6 @@
 import { Schema, model, Model, Document } from "mongoose";
 
-import { PlayerDef } from "../../../shared/ModelDefs";
+import { PlayerDef } from "../../../werewolf-frontend/shared/ModelDefs";
 
 const playerSchema = new Schema({
   index: Number,

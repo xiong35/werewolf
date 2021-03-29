@@ -5,7 +5,7 @@ import Player from "../../models/PlayerModel";
 import {
   CreateRoomRequest,
   CreateRoomResponse,
-} from "../../../../shared/httpMsg/CreateRoomMsg";
+} from "../../../../werewolf-frontend/shared/httpMsg/CreateRoomMsg";
 
 const roomCreate: Middleware = async (ctx, next) => {
   const req = ctx.request.body as CreateRoomRequest;

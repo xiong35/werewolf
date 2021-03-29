@@ -2,7 +2,7 @@ import { Socket, Server } from "socket.io";
 import * as Koa from "koa";
 import { createServer } from "http";
 
-import { Events } from "../../shared/WSEvents";
+import { Events } from "../../werewolf-frontend/shared/WSEvents";
 
 const app = new Koa();
 

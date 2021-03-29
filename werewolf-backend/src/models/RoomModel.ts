@@ -1,5 +1,5 @@
 import { Schema, model, Model, Document } from "mongoose";
-import { RoomDef } from "../../../shared/ModelDefs";
+import { RoomDef } from "../../../werewolf-frontend/shared/ModelDefs";
 
 const roomSchema = new Schema({
   roomNumber: String,

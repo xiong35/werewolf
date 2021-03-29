@@ -9,7 +9,7 @@
 			"import {",
 			"  $3,",
 			"  $4,",
-			"} from \"../../../../shared/httpMsg/$2\";",
+			"} from \"../../../../werewolf-frontend/shared/httpMsg/$2\";",
 			"",
 			"const ${TM_FILENAME/(.*)\\..+$/$1/}: Middleware = async (ctx) => {",
 			"  const req = ctx.request.body as $3;",
