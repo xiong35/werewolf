@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+import { showDialog } from "../reactivity/dialog";
+
 export default function request(config: AxiosRequestConfig) {
   const instance = axios.create({
     baseURL: "http://127.0.0.1:3030",
@@ -22,7 +24,8 @@ export default function request(config: AxiosRequestConfig) {
       if (data.status === 200) {
         return data;
       } else {
-        return; // TODO
+        showDialog(data.msg);
+        return null;
       }
     },
     (err) => {

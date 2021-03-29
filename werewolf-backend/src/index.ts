@@ -33,12 +33,16 @@ app
   .use(logger())
 
   .use(useHandleError())
-  .use(cors())
+  .use(
+    cors({ credentials: true, origin: "http://localhost:3000" })
+  )
   .use(KoaBody())
 
   .use(router.routes())
   .use(router.allowedMethods());
 
 httpServer.listen(3030);
+
+console.log("listen on 3030");
 
 export default io.of("/werewolf-api");
