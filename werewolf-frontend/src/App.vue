@@ -7,7 +7,7 @@
 <script lang="ts">
   import { defineComponent } from "vue";
   import { RouterView } from "vue-router";
-  import { theme, DARK } from "./global/theme";
+  import { theme, DARK } from "./reactivity/theme";
 
   const Component = defineComponent({
     name: "App",

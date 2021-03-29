@@ -19,7 +19,7 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import { theme } from "../global/theme";
+  import { theme } from "../reactivity/theme";
 
   import Btn from "../components/Btn.vue";
 

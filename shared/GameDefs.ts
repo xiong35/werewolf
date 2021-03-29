@@ -1,13 +1,12 @@
-export enum Character {
-  HUNTER = "HUNTER",
-  WITCH = "WITCH",
-  SEER = "SEER",
-  GUARD = "GUARD",
-  VILLAGER = "VILLAGER",
-  WEREWOLF = "WEREWOLF",
-  SHERIFF = "SHERIFF",
-  HOST = "HOST",
-}
+export type SetableCharacters =
+  | "HUNTER"
+  | "WITCH"
+  | "SEER"
+  | "GUARD"
+  | "VILLAGER"
+  | "WEREWOLF";
+
+export type Character = SetableCharacters | "SHERIFF" | "HOST";
 
 export enum Potion {
   POISON = "POISON",
