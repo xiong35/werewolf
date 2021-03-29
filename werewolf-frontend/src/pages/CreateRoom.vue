@@ -32,6 +32,7 @@
   import UseBorder from "../components/UseBorder.vue";
 
   import { characters, nickname, password, create } from "../reactivity/room";
+  import { showDialog } from "../reactivity/dialog";
 
   const CreateRoom = defineComponent({
     name: "CreateRoom",
@@ -42,6 +43,7 @@
         nickname,
         password,
         create,
+        showDialog,
       };
     },
   });
@@ -94,7 +96,6 @@
 
     .btn {
       margin: auto;
-      display: block;
     }
   }
 </style>
