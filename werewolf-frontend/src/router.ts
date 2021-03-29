@@ -9,18 +9,23 @@ import WaitRoom from "./pages/WaitRoom.vue";
 
 const routes = [
   { path: "/", component: Home },
-  { path: "/createRoom", component: CreateRoom },
+  {
+    path: "/createRoom",
+    name: "createRoom",
+    component: CreateRoom,
+  },
   {
     path: "/joinRoom",
+    name: "joinRoom",
     component: JoinRoom,
     props: (route: any) => ({
       pw: route.query.pw,
       number: route.query.number,
     }),
   },
-  { path: "/play", component: Play },
-  { path: "/recon", component: Recon },
-  { path: "/waitRoom", component: WaitRoom },
+  { path: "/play", name: "play", component: Play },
+  { path: "/recon", name: "recon", component: Recon },
+  { path: "/waitRoom", name: "waitRoom", component: WaitRoom },
 ];
 
 const router = createRouter({

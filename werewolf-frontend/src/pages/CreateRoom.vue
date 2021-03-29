@@ -30,7 +30,7 @@
         />
       </UseBorder>
     </div>
-    <Btn @click="create" content="确认创建"></Btn>
+    <Btn @click="create($router)" content="确认创建"></Btn>
   </div>
 </template>
 

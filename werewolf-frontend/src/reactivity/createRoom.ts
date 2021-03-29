@@ -1,5 +1,7 @@
-import { reactive, onMounted, ref } from "vue";
+import { reactive, ref } from "vue";
 import * as sha256 from "sha256";
+import { Router } from "vue-router";
+
 import { createRoom } from "../http/room";
 import { SetableCharacters } from "../../shared/GameDefs";
 
@@ -31,7 +33,7 @@ export function setCharacter(
 export const nickname = ref<string>("");
 export const password = ref<string>("");
 
-export async function create() {
+export async function create(router: Router) {
   if (!nickname.value) return showDialog("请填写昵称");
 
   let characterNames: SetableCharacters[] = [];
@@ -42,9 +44,20 @@ export async function create() {
     );
   });
 
-  await createRoom({
+  const res = await createRoom({
     characters: characterNames,
     name: nickname.value,
     password: password.value ? sha256(password.value) : undefined,
   });
+
+  if (res?.status === 200) {
+    showDialog("创建成功, 进入等待房间");
+    router.push({
+      name: "waitRoom",
+      query: {
+        pw: password.value,
+        number: res.data.roomNumber,
+      },
+    });
+  }
 }
