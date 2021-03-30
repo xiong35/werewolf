@@ -1,5 +1,9 @@
 import { Schema, model, Model, Document } from "mongoose";
-import { RoomDef } from "../../../werewolf-frontend/shared/ModelDefs";
+import {
+  RoomDef,
+  PlayerDef,
+  PublicPlayerDef,
+} from "../../../werewolf-frontend/shared/ModelDefs";
 
 const roomSchema = new Schema({
   roomNumber: String,
@@ -14,8 +18,44 @@ const roomSchema = new Schema({
   password: String,
 });
 
+roomSchema.static("listAll", function (roomNumber: string) {
+  return new Promise((res) => {
+    this.findOne({ roomNumber })
+      .populate("playerIDs")
+      .exec(function (err, room) {});
+  });
+});
+
 interface RoomProps extends RoomDef, Document {}
 
 const Room: Model<RoomProps> = model("Rooms", roomSchema);
 
 export default Room;
+
+export function listAllOfNumber(
+  roomNumber: string
+): Promise<PublicPlayerDef[]> {
+  return new Promise((res) => {
+    Room.findOne({ roomNumber }).exec((err, room) => {
+      res(listAllOfRoom(room));
+    });
+  });
+}
+
+export function listAllOfRoom(
+  room: RoomProps
+): Promise<PublicPlayerDef[]> {
+  return new Promise((res) => {
+    room.populate("playerIDs", (err, room) => {
+      const players = (room.playerIDs as unknown) as PlayerDef[];
+      res(
+        players.map((p) => ({
+          index: p.index,
+          isAlive: p.isAlive,
+          isSheriff: p.isSheriff,
+          name: p.name,
+        }))
+      );
+    });
+  });
+}

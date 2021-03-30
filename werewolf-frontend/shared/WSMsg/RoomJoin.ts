@@ -1,6 +1,3 @@
-import { index } from "../ModelDefs";
+import { PublicPlayerDef } from "../ModelDefs";
 
-export interface RoomJoinMsg {
-  name: string; // 加入的玩家名
-  index: index; // 加入的玩家编号
-}
+export type RoomJoinMsg = PublicPlayerDef[];

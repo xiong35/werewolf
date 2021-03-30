@@ -5,7 +5,8 @@ import { Router } from "vue-router";
 import { createRoom } from "../http/room";
 import { SetableCharacters } from "../../shared/GameDefs";
 
-import { showDialog } from "../reactivity/dialog";
+import { players, needingCharacters } from "./players";
+import { showDialog } from "./dialog";
 
 export const characters = reactive<
   Record<SetableCharacters, number>
@@ -44,6 +45,8 @@ export async function create(router: Router) {
     );
   });
 
+  needingCharacters.value = characterNames;
+
   const res = await createRoom({
     characters: characterNames,
     name: nickname.value,
@@ -51,13 +54,24 @@ export async function create(router: Router) {
   });
 
   if (res?.status === 200) {
+    const data = res.data;
+
     showDialog("创建成功, 进入等待房间");
     router.push({
       name: "waitRoom",
       query: {
         pw: password.value,
-        number: res.data.roomNumber,
+        number: data.roomNumber,
       },
     });
+
+    players.value = [
+      {
+        index: 1,
+        isAlive: true,
+        name: nickname.value,
+        isSheriff: false,
+      },
+    ];
   }
 }

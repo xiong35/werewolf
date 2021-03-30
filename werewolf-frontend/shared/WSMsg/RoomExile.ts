@@ -1,9 +1,6 @@
-import { index } from "../ModelDefs";
+import { PublicPlayerDef } from "../ModelDefs";
 
 /**
  * Server to Client
  */
-export interface RoomExileMsg {
-  name: string; //  被 t 的昵称
-  index: index; // 被 t 的序号
-}
+export type RoomExileMsg = PublicPlayerDef[];

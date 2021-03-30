@@ -1,8 +1,12 @@
 import { ref } from "vue";
-import { joinRoom } from "../http/room";
 import * as sha256 from "sha256";
 
-import { showDialog } from "../reactivity/dialog";
+import { joinRoom } from "../http/room";
+import { socket, Events } from "../http/_socket";
+import { RoomJoinMsg } from "../../shared/WSMsg/RoomJoin";
+
+import { showDialog } from "./dialog";
+import { players } from "./players";
 
 export const password = ref("");
 export const roomNumber = ref("");
@@ -18,3 +22,9 @@ export async function join() {
     password: password.value ? sha256(password.value) : undefined,
   });
 }
+
+socket.on(Events.ROOM_JOIN, (msg: RoomJoinMsg) => {
+  console.log(msg);
+
+  players.value = msg;
+});
