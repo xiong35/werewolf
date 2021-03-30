@@ -5,27 +5,34 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, toRefs, onMounted } from "vue";
+
+  import { CLIENT_BASE_URL } from "../../shared/constants";
 
   import QRCode from "easyqrcodejs";
 
   const WaitRoom = defineComponent({
     name: "WaitRoom",
     components: {},
-    mounted() {
-      new QRCode(document.getElementById("qr-code"), {
-        text: "https://cssscript.com",
-        logo: "/wolf.png",
-        logoWidth: 20,
-        logoHeight: 20,
-        // logoBackgroundColor: "pink",
-        logoBackgroundTransparent: true,
-        width: 100,
-        height: 100,
-      });
+    props: {
+      pw: String,
+      number: String,
     },
+    setup(props) {
+      const { pw, number } = toRefs(props);
+      onMounted(() => {
+        new QRCode(document.getElementById("qr-code"), {
+          text: `${CLIENT_BASE_URL}/joinRoom?pw=${pw}&number=${number}`,
+          logo: "/wolf.png",
+          logoWidth: 20,
+          logoHeight: 20,
+          width: 100,
+          height: 100,
+        });
+      });
 
-    setup(props) {},
+      return {};
+    },
   });
 
   export default WaitRoom;

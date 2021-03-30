@@ -25,7 +25,15 @@ const routes = [
   },
   { path: "/play", name: "play", component: Play },
   { path: "/recon", name: "recon", component: Recon },
-  { path: "/waitRoom", name: "waitRoom", component: WaitRoom },
+  {
+    path: "/waitRoom",
+    name: "waitRoom",
+    component: WaitRoom,
+    props: (route: any) => ({
+      pw: route.query.pw,
+      number: route.query.number,
+    }),
+  },
 ];
 
 const router = createRouter({

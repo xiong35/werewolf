@@ -38,3 +38,9 @@ export interface PlayerDef extends PublicPlayerDef {
   // 包括 狼人杀人 / 神职发动技能 / 白天投票
   sheriffVotes: ID[]; // index 是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
 }
+
+export interface TokenDef {
+  ID: ID;
+  datetime: number;
+  roomNumber: string;
+}
