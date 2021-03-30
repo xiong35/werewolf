@@ -15,6 +15,7 @@ export default function request(config: AxiosRequestConfig) {
   instance.interceptors.request.use(
     (config) => {
       config.headers.Authorization = getToken();
+      // Token
       return config;
     },
     (err) => {

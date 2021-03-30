@@ -36,7 +36,5 @@ export async function join(router: Router) {
 }
 
 socket.on(Events.ROOM_JOIN, (msg: RoomJoinMsg) => {
-  console.log(msg);
-
   players.value = msg;
 });
