@@ -49,6 +49,12 @@ const roomJoin: Middleware = async (ctx) => {
 
   io.emit(Events.ROOM_JOIN, roomJoinMsg);
 
+  if (roomJoinMsg.length === room.needingCharacters.length) {
+    io.emit(Events.GAME_BEGIN);
+    // TODO create socket room namespace,
+    // TODO allocate character
+  }
+
   ctx.body = ret;
 };
 

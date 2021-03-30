@@ -1,12 +1,10 @@
-:root.dark,
-.main.dark {
+.wrapper.dark {
   --bg: #111;
   --on-bg: #f8f8f8;
   --secondary: #222;
 }
 
-:root,
-.main {
+.wrapper {
   --bg: #f8f8f8;
   --on-bg: #111;
   --secondary: #eee;

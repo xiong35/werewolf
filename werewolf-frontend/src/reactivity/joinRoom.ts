@@ -6,6 +6,7 @@ import { socket, Events } from "../http/_socket";
 import { RoomJoinMsg } from "../../shared/WSMsg/RoomJoin";
 import router from "../router";
 
+import { toggleTheme } from "./theme";
 import { showDialog } from "./dialog";
 import { players } from "./players";
 
@@ -37,4 +38,15 @@ export async function join() {
 
 socket.on(Events.ROOM_JOIN, (msg: RoomJoinMsg) => {
   players.value = msg;
+});
+
+socket.on(Events.GAME_BEGIN, () => {
+  showDialog("游戏开始, 天黑请闭眼👁️");
+  toggleTheme("-dark");
+  router.push({
+    name: "play",
+    query: {
+      number: roomNumber.value,
+    },
+  });
 });

@@ -1,7 +1,9 @@
 <template>
-  <div class="main" :class="{ dark: theme === DARK }">
-    <router-view></router-view>
-    <Dialog></Dialog>
+  <div class="wrapper" :class="{ dark: theme === DARK }">
+    <div class="main">
+      <router-view></router-view>
+      <Dialog></Dialog>
+    </div>
   </div>
 </template>
 
@@ -28,8 +30,12 @@
 
 
 <style lang="scss" scoped>
-  .main {
-    max-width: 500px;
-    margin: auto;
+  .wrapper {
+    width: 100vw;
+    height: 100vh;
+    .main {
+      max-width: 500px;
+      margin: auto;
+    }
   }
 </style>
