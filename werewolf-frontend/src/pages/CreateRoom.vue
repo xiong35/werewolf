@@ -88,7 +88,7 @@
     .password {
       .hint {
         position: relative;
-        bottom: 0.08em;
+        bottom: 0.04em;
         word-break: keep-all;
         margin-right: 0.5rem;
         font-weight: bold;

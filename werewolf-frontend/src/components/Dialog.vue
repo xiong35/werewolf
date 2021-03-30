@@ -43,7 +43,7 @@
       margin: auto;
       max-width: 80%;
       box-sizing: border-box;
-      padding: 10% 10% 5%;
+      padding: 2rem 2rem 1rem;
       inset: -3rem 0 0;
       width: 20rem;
       height: min-content;
