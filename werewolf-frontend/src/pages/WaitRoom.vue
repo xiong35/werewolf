@@ -1,19 +1,20 @@
 <template>
   <div class="waitroom">
+    <RoomPlayerList></RoomPlayerList>
     <div id="qr-code"></div>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, toRefs, onMounted } from "vue";
+  import QRCode from "easyqrcodejs";
 
   import { CLIENT_BASE_URL } from "../../shared/constants";
-
-  import QRCode from "easyqrcodejs";
+  import RoomPlayerList from "../components/RoomPlayerList.vue";
 
   const WaitRoom = defineComponent({
     name: "WaitRoom",
-    components: {},
+    components: { RoomPlayerList },
     props: {
       pw: String,
       number: String,
@@ -30,8 +31,6 @@
           height: 100,
         });
       });
-
-      return {};
     },
   });
 
