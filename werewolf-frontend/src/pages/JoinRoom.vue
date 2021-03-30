@@ -24,12 +24,13 @@
         <input maxlength="8" type="text" placeholder="" v-model="nickname" />
       </UseBorder>
     </div>
-    <Btn @click="join" content="确认加入"></Btn>
+    <Btn @click="join($router)" content="确认加入"></Btn>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, toRefs } from "vue";
+  import { useRouter } from "vue-router";
 
   import UseBorder from "../components/UseBorder.vue";
   import Btn from "../components/Btn.vue";
