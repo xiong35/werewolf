@@ -1,16 +1,20 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+import { SERVER_BASE_URL } from "../../shared/constants";
+
 import { showDialog } from "../reactivity/dialog";
+import { getToken } from "../utils/token";
 
 export default function request(config: AxiosRequestConfig) {
   const instance = axios.create({
-    baseURL: "http://127.0.0.1:3030",
+    baseURL: SERVER_BASE_URL,
     timeout: 60000,
     withCredentials: true,
   });
 
   instance.interceptors.request.use(
     (config) => {
+      config.headers.Authorization = getToken();
       return config;
     },
     (err) => {
