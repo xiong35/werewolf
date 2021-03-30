@@ -24,7 +24,7 @@
         <input maxlength="8" type="text" placeholder="" v-model="nickname" />
       </UseBorder>
     </div>
-    <Btn @click="join($router)" content="确认加入"></Btn>
+    <Btn @click="join()" content="确认加入"></Btn>
   </div>
 </template>
 

@@ -1,9 +1,9 @@
 import { reactive, ref } from "vue";
 import * as sha256 from "sha256";
-import { Router } from "vue-router";
 
 import { createRoom } from "../http/room";
 import { SetableCharacters } from "../../shared/GameDefs";
+import router from "../router";
 
 import { players, needingCharacters } from "./players";
 import { showDialog } from "./dialog";
@@ -34,7 +34,7 @@ export function setCharacter(
 export const nickname = ref<string>("");
 export const password = ref<string>("");
 
-export async function create(router: Router) {
+export async function create() {
   if (!nickname.value) return showDialog("请填写昵称");
 
   let characterNames: SetableCharacters[] = [];
