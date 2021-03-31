@@ -8,7 +8,7 @@ import router from "../router";
 import { toggleTheme } from "./theme";
 import { showDialog } from "./dialog";
 import { players } from "./players";
-import { setToken } from "../utils/token";
+import { getToken, setToken } from "../utils/token";
 
 export const password = ref("");
 export const roomNumber = ref("");
@@ -26,7 +26,7 @@ export async function join() {
 
   if (res.status === 200) {
     if (res.data.open) {
-      _gameBegin(roomNumber.value);
+      gameBegin();
     } else {
       socket.emit(Events.ROOM_JOIN, roomNumber.value);
       showDialog("成功加入房间!");
@@ -47,10 +47,11 @@ socket.on(Events.ROOM_JOIN, (msg: RoomJoinMsg) => {
 });
 
 socket.on(Events.GAME_BEGIN, () => {
-  _gameBegin(roomNumber.value);
+  gameBegin();
 });
 
-function _gameBegin(roomNumber: string) {
+export function gameBegin() {
+  const roomNumber = getToken()?.roomNumber;
   showDialog("游戏开始, 天黑请闭眼👁️");
   setTimeout(() => {
     toggleTheme("-dark");

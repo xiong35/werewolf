@@ -2,12 +2,14 @@ import { reactive, ref } from "vue";
 import * as sha256 from "sha256";
 
 import { SetableCharacters } from "../../shared/GameDefs";
+import { RoomJoinMsg } from "../../shared/WSMsg/RoomJoin";
 import { createRoom } from "../http/room";
 import { socket, Events } from "../http/_socket";
 import router from "../router";
 import { players, needingCharacters } from "./players";
 import { showDialog } from "./dialog";
 import { setToken } from "../utils/token";
+import { gameBegin } from "./joinRoom";
 
 export const characters = reactive<
   Record<SetableCharacters, number>
@@ -79,3 +81,13 @@ export async function create() {
     ];
   }
 }
+
+socket.on(Events.GAME_BEGIN, () => {
+  gameBegin();
+});
+
+socket.on(Events.ROOM_JOIN, (msg: RoomJoinMsg) => {
+  console.log("#", msg);
+
+  players.value = msg;
+});

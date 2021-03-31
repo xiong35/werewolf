@@ -41,18 +41,20 @@ const roomJoin: Middleware = async (ctx) => {
     },
   };
 
+  await Promise.all([player.save(), room.save()]);
+
   const roomJoinMsg: RoomJoinMsg = await listAllOfRoom(room);
 
   io.to(roomNumber).emit(Events.ROOM_JOIN, roomJoinMsg);
 
   if (roomJoinMsg.length === room.needingCharacters.length) {
+    console.log("#game being");
+
     io.to(roomNumber).emit(Events.GAME_BEGIN);
     ret.data.open = true;
     const needingCharacters = [...room.needingCharacters];
     room.playerIDs.forEach(async (_id) => {
       const p = await Player.findOne({ _id });
-      console.log(p);
-
       const index = Math.round(
         Math.random() * needingCharacters.length
       );
@@ -96,7 +98,6 @@ const roomJoin: Middleware = async (ctx) => {
       p.save();
     });
   }
-  await Promise.all([player.save(), room.save()]);
 
   ctx.body = ret;
 };

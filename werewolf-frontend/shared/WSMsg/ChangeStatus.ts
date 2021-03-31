@@ -1,4 +1,4 @@
-import { day, PublicPlayerModel, index } from "../ModelDefs";
+import { day, PublicPlayerDef, index } from "../ModelDefs";
 import { GameState, Potion } from "../GameDefs";
 
 export interface ChangeStatusMsg {
@@ -6,7 +6,7 @@ export interface ChangeStatusMsg {
   setStatus: GameState;
   publicMsg: PublicMsg;
   timeout: number; // 有多少秒可以确认
-  curPlayerStatus: PublicPlayerModel[];
+  curPlayerStatus: PublicPlayerDef[];
 }
 
 type PublicMsg = VoteMsg | DayMsg;

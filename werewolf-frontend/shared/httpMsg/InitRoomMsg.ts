@@ -1,9 +1,7 @@
 import { PublicPlayerDef } from "../ModelDefs";
 import { Character } from "../GameDefs";
 
-export interface InitRoomRequest {
-  roomNumber: string; // 六位房间号
-}
+export interface InitRoomRequest {}
 
 export interface InitRoomResponse {
   status: number;

@@ -1,9 +1,7 @@
 import { index } from "../ModelDefs";
 import {} from "../GameDefs";
 
-export interface HunterCheckRequest {
-  roomNumber: string; // 当前房间号
-}
+export interface HunterCheckRequest {}
 
 export interface HunterCheckResponse {
   status: number;

@@ -7,10 +7,10 @@ import {
 } from "../../../../werewolf-frontend/shared/httpMsg/InitRoomMsg";
 
 const roomInit: Middleware = async (ctx) => {
-  const req = ctx.request.body as InitRoomRequest;
-  const { roomNumber } = req;
+  const roomNumber = ctx.get("RoomNumber");
 
   const room = await Room.findOne({ roomNumber });
+  if (!room) ctx.error(404, "未找到此房间号");
 
   const players = await listAllOfRoom(room);
 
