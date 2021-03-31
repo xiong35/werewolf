@@ -1,14 +1,14 @@
 import { ref } from "vue";
 import * as sha256 from "sha256";
 
+import { RoomJoinMsg } from "../../shared/WSMsg/RoomJoin";
 import { joinRoom } from "../http/room";
 import { socket, Events } from "../http/_socket";
-import { RoomJoinMsg } from "../../shared/WSMsg/RoomJoin";
 import router from "../router";
-
 import { toggleTheme } from "./theme";
 import { showDialog } from "./dialog";
 import { players } from "./players";
+import { setToken } from "../utils/token";
 
 export const password = ref("");
 export const roomNumber = ref("");
@@ -38,6 +38,7 @@ export async function join() {
         },
       });
     }
+    setToken(res.data.ID, roomNumber.value);
   }
 }
 

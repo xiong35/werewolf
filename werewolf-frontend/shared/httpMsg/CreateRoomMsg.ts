@@ -1,4 +1,4 @@
-import { ID, index } from "../ModelDefs";
+import { index, ID } from "../ModelDefs";
 import { Character } from "../GameDefs";
 
 export interface CreateRoomRequest {

@@ -1,13 +1,13 @@
 import { reactive, ref } from "vue";
 import * as sha256 from "sha256";
 
+import { SetableCharacters } from "../../shared/GameDefs";
 import { createRoom } from "../http/room";
 import { socket, Events } from "../http/_socket";
-import { SetableCharacters } from "../../shared/GameDefs";
 import router from "../router";
-
 import { players, needingCharacters } from "./players";
 import { showDialog } from "./dialog";
+import { setToken } from "../utils/token";
 
 export const characters = reactive<
   Record<SetableCharacters, number>
@@ -66,6 +66,8 @@ export async function create() {
         number: data.roomNumber,
       },
     });
+
+    setToken(data.ID, data.roomNumber);
 
     players.value = [
       {
