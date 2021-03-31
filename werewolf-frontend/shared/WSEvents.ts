@@ -7,4 +7,5 @@ export enum Events {
 
   /** 游戏相关 */
   CHANGE_STATUS = "CHANGE_STATUS", // 设置游戏当前状态
+  NOTICE_GET_STATUS = "NOTICE_GET_STATUS", // 自己请求角色信息 // TODO
 }

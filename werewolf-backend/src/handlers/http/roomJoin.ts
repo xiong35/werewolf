@@ -31,8 +31,6 @@ const roomJoin: Middleware = async (ctx) => {
 
   room.playerIDs.push(player._id);
 
-  await Promise.all([player.save(), room.save()]);
-
   const ret: JoinRoomResponse = {
     status: 200,
     msg: "ok",
@@ -43,17 +41,58 @@ const roomJoin: Middleware = async (ctx) => {
     },
   };
 
-  room.populate("playerIDs");
-
   const roomJoinMsg: RoomJoinMsg = await listAllOfRoom(room);
 
-  io.emit(Events.ROOM_JOIN, roomJoinMsg);
+  io.to(roomNumber).emit(Events.ROOM_JOIN, roomJoinMsg);
 
   if (roomJoinMsg.length === room.needingCharacters.length) {
-    io.emit(Events.GAME_BEGIN);
-    // TODO create socket room namespace,
-    // TODO allocate character
+    io.to(roomNumber).emit(Events.GAME_BEGIN);
+    ret.data.open = true;
+    const needingCharacters = [...room.needingCharacters];
+    room.playerIDs.forEach(async (_id) => {
+      const p = await Player.findOne({ _id });
+      console.log(p);
+
+      const index = Math.round(
+        Math.random() * needingCharacters.length
+      );
+      const character = room.needingCharacters.splice(index, 1)[0];
+
+      p.character = character;
+      switch (character) {
+        case "GUARD":
+          p.characterStatus = {
+            protects: [],
+          };
+          break;
+        case "HUNTER":
+          p.characterStatus = {
+            canShoot: false,
+          };
+          break;
+        case "SEER":
+          p.characterStatus = {
+            checked: [],
+          };
+          break;
+        case "WEREWOLF":
+          p.characterStatus = {
+            wantToKills: [],
+          };
+          break;
+        case "WITCH":
+          p.characterStatus = {
+            poison: { useDay: -1, useIndex: -1 },
+            medicine: { useDay: -1, useIndex: -1 },
+          };
+          break;
+        default:
+          break;
+      }
+      p.save();
+    });
   }
+  await Promise.all([player.save(), room.save()]);
 
   ctx.body = ret;
 };

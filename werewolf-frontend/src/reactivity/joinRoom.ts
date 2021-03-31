@@ -25,14 +25,19 @@ export async function join() {
   });
 
   if (res.status === 200) {
-    showDialog("成功加入房间!");
-    router.push({
-      name: "waitRoom",
-      query: {
-        pw: password.value,
-        number: roomNumber.value,
-      },
-    });
+    if (res.data.open) {
+      _gameBegin(roomNumber.value);
+    } else {
+      socket.emit(Events.ROOM_JOIN, roomNumber.value);
+      showDialog("成功加入房间!");
+      router.push({
+        name: "waitRoom",
+        query: {
+          pw: password.value,
+          number: roomNumber.value,
+        },
+      });
+    }
   }
 }
 
@@ -41,12 +46,18 @@ socket.on(Events.ROOM_JOIN, (msg: RoomJoinMsg) => {
 });
 
 socket.on(Events.GAME_BEGIN, () => {
-  showDialog("游戏开始, 天黑请闭眼👁️");
-  toggleTheme("-dark");
-  router.push({
-    name: "play",
-    query: {
-      number: roomNumber.value,
-    },
-  });
+  _gameBegin(roomNumber.value);
 });
+
+function _gameBegin(roomNumber: string) {
+  showDialog("游戏开始, 天黑请闭眼👁️");
+  setTimeout(() => {
+    toggleTheme("-dark");
+    router.push({
+      name: "play",
+      query: {
+        number: roomNumber,
+      },
+    });
+  }, 1000);
+}

@@ -2,6 +2,7 @@ import { reactive, ref } from "vue";
 import * as sha256 from "sha256";
 
 import { createRoom } from "../http/room";
+import { socket, Events } from "../http/_socket";
 import { SetableCharacters } from "../../shared/GameDefs";
 import router from "../router";
 
@@ -55,6 +56,7 @@ export async function create() {
 
   if (res?.status === 200) {
     const data = res.data;
+    socket.emit(Events.ROOM_JOIN, data.roomNumber);
 
     showDialog("创建成功, 进入等待房间");
     router.push({

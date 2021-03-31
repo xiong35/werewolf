@@ -14,5 +14,6 @@ export interface JoinRoomResponse {
     ID: ID; // token
     index: index;
     needingCharacters: Character[]; // 设置的人物
+    open?: boolean; // 是否直接开始
   };
 }

@@ -10,6 +10,7 @@ import { WS_PATH } from "../../werewolf-frontend/shared/constants";
 
 import router from "./routes";
 import useHandleError from "./middleware/handleError";
+import { setup } from "./ws";
 
 mongoose.connect("mongodb://localhost/werewolf", {
   useNewUrlParser: true,
@@ -31,9 +32,7 @@ const io = new Server(httpServer, {
   path: WS_PATH,
 });
 
-io.on("connection", () => {
-  console.log("ws connected");
-});
+setup(io);
 
 app
   .use(logger())
