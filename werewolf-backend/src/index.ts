@@ -10,6 +10,7 @@ import { WS_PATH } from "../../werewolf-frontend/shared/constants";
 
 import router from "./routes";
 import useHandleError from "./middleware/handleError";
+import useAuth from "./middleware/auth";
 import { setup } from "./ws";
 
 mongoose.connect("mongodb://localhost/werewolf", {
@@ -36,11 +37,12 @@ setup(io);
 
 app
   .use(logger())
-
-  .use(useHandleError())
   .use(
     cors({ credentials: true, origin: "http://localhost:3000" })
   )
+
+  .use(useHandleError())
+
   .use(KoaBody())
 
   .use(router.routes())

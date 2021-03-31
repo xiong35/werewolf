@@ -14,8 +14,9 @@ export default function request(config: AxiosRequestConfig) {
 
   instance.interceptors.request.use(
     (config) => {
-      config.headers.Authorization = getToken()?.ID;
-      // Token
+      const token = getToken();
+      config.headers.Token = token?.ID;
+      config.headers.RoomNumber = token?.roomNumber;
       return config;
     },
     (err) => {
