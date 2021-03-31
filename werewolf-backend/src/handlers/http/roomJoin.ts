@@ -68,11 +68,15 @@ const roomJoin: Middleware = async (ctx) => {
         case "HUNTER":
           p.characterStatus = {
             canShoot: false,
+            shootAt: {
+              day: -1,
+              player: -1,
+            },
           };
           break;
         case "SEER":
           p.characterStatus = {
-            checked: [],
+            checks: [],
           };
           break;
         case "WEREWOLF":
@@ -82,8 +86,8 @@ const roomJoin: Middleware = async (ctx) => {
           break;
         case "WITCH":
           p.characterStatus = {
-            poison: { useDay: -1, useIndex: -1 },
-            medicine: { useDay: -1, useIndex: -1 },
+            POISON: { useDay: -1, useAt: -1 },
+            MEDICINE: { useDay: -1, useAt: -1 },
           };
           break;
         default:

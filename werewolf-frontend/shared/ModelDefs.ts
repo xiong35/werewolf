@@ -1,10 +1,10 @@
-import { Character, GameState } from "./GameDefs";
+import { Character, GameState, Potion } from "./GameDefs";
 
 export type Token = string;
 export type ID = string;
 export type index = number;
 
-export type day = number; // 第一夜: 0, 第 n 天白天: 2n-1, 第 n 天晚上: 2n
+export type day = number; // 第0夜: 0, 第 n 天白天: 2n-1, 第 n 天晚上: 2n
 
 export interface RoomDef {
   roomNumber: string; // 房间号码, 6 位数字
@@ -15,7 +15,7 @@ export interface RoomDef {
   needingCharacters: Character[]; // 设置的角色
   remainingIndexes: index[]; // 空缺的玩家号码
   isFinished: boolean; // 是否已结束 -> 游戏结束重置
-  nextStatus: GameState[]; // 接下来的游戏状态的栈
+  nextStatus: GameState[]; // 接下来的游戏状态的栈 -> 游戏结束重置
 }
 
 export interface PublicPlayerDef {
@@ -27,7 +27,7 @@ export interface PublicPlayerDef {
 
 export interface PlayerDef extends PublicPlayerDef {
   character: Character; // 游戏角色 -> 游戏结束重置
-  characterStatus: any; // 允许自定义 -> 游戏结束重置
+  characterStatus: CharacterStatus; // 允许自定义 -> 游戏结束重置
   die: {
     // 具体死亡信息 -> 游戏结束重置
     at: day; // 第几天死的
@@ -44,3 +44,37 @@ export interface TokenDef {
   datetime: number;
   roomNumber: string;
 }
+
+export interface HunterState {
+  canShoot: boolean;
+  shootAt: {
+    day: day;
+    player: index;
+  };
+}
+
+export interface GuardState {
+  protects: index[];
+}
+
+export interface SeerState {
+  checks: {
+    index: index;
+    isWerewolf: boolean;
+  }[];
+}
+
+export interface WerewolfState {
+  wantToKills: index[];
+}
+
+interface PotionState {
+  useDay: day;
+  useAt: index;
+}
+
+export type WitchState = Record<Potion, PotionState>;
+
+export type CharacterStatus = Partial<
+  HunterState | GuardState | SeerState | WerewolfState | WitchState
+>;
