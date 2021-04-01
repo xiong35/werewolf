@@ -1,13 +1,11 @@
 import { ref } from "vue";
 import * as sha256 from "sha256";
 
-import { RoomJoinMsg } from "../../shared/WSMsg/RoomJoin";
 import { joinRoom } from "../http/room";
-import { socket, Events } from "../http/_socket";
+import { socket, Events } from "../socket";
 import router from "../router";
 import { toggleTheme } from "./theme";
 import { showDialog } from "./dialog";
-import { players } from "./players";
 import { getToken, setToken } from "../utils/token";
 
 export const password = ref("");
@@ -41,14 +39,6 @@ export async function join() {
     setToken(res.data.ID, roomNumber.value);
   }
 }
-
-socket.on(Events.ROOM_JOIN, (msg: RoomJoinMsg) => {
-  players.value = msg;
-});
-
-socket.on(Events.GAME_BEGIN, () => {
-  gameBegin();
-});
 
 export function gameBegin() {
   const roomNumber = getToken()?.roomNumber;
