@@ -50,9 +50,9 @@ const roomJoin: Middleware = async (ctx) => {
   if (roomJoinMsg.length === room.needingCharacters.length) {
     console.log("#game being");
 
-    io.to(roomNumber).emit(Events.GAME_BEGIN);
     ret.data.open = true;
     const needingCharacters = [...room.needingCharacters];
+    const promises = [];
     room.playerIDs.forEach(async (_id) => {
       const p = await Player.findOne({ _id });
       const index = Math.round(
@@ -95,8 +95,11 @@ const roomJoin: Middleware = async (ctx) => {
         default:
           break;
       }
-      p.save();
+      promises.push(p.save());
     });
+
+    await Promise.all(promises);
+    io.to(roomNumber).emit(Events.GAME_BEGIN);
   }
 
   ctx.body = ret;

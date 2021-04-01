@@ -46,7 +46,7 @@
       padding: 2rem 2rem 1rem;
       inset: -3rem 0 0;
       width: 20rem;
-      height: min-content;
+      height: min-content; // TODO min content + inset = bug
       .dialog-content {
         height: 8rem;
         display: flex;

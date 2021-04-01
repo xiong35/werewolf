@@ -1,9 +1,12 @@
 import * as Router from "koa-router";
+import characterStatus from "../handlers/http/playCharacterStatus";
 
 const gameRouter = new Router();
 
-gameRouter.post("game ExileVote", "/ExileVote", (ctx, next) => {
-  ctx.body = ctx.URL;
-});
+gameRouter.post(
+  "game characterStatus",
+  "/characterStatus",
+  characterStatus
+);
 
 export default gameRouter;
