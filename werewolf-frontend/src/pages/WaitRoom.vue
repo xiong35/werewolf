@@ -14,7 +14,7 @@
   import RoomPlayerList from "../components/RoomPlayerList.vue";
   import Btn from "../components/Btn.vue";
   import { showDialog } from "../reactivity/dialog";
-  import { players, needingCharacters } from "../reactivity/players";
+  import { players, needingCharacters } from "../reactivity/play";
   import { initRoom } from "../http/room";
 
   const WaitRoom = defineComponent({

@@ -1,6 +1,6 @@
 import { RoomJoinMsg } from "../../shared/WSMsg/RoomJoin";
 
-import { players } from "../reactivity/players";
+import { players } from "../reactivity/play";
 
 export default function roomJoin(msg: RoomJoinMsg) {
   console.log("#ws on room join");

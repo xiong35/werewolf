@@ -6,7 +6,11 @@ export type SetableCharacters =
   | "VILLAGER"
   | "WEREWOLF";
 
-export type Character = SetableCharacters | "SHERIFF" | "HOST";
+export type Character =
+  | SetableCharacters
+  | "SHERIFF"
+  | "HOST"
+  | "";
 
 export enum Potion {
   POISON = "POISON",
@@ -22,6 +26,7 @@ export const ChineseNames: Record<Character, string> = {
   VILLAGER: "村民",
   WEREWOLF: "狼人",
   WITCH: "女巫",
+  "": "",
 };
 
 /**
