@@ -5,7 +5,7 @@ import { SetableCharacters } from "../../shared/GameDefs";
 import { createRoom } from "../http/room";
 import { socket, Events } from "../socket";
 import router from "../router";
-import { players, needingCharacters } from "./play";
+import { players, needingCharacters } from "./game";
 import { showDialog } from "./dialog";
 import { setToken } from "../utils/token";
 

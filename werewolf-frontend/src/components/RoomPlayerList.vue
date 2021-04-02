@@ -33,7 +33,7 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import { playerList } from "../reactivity/play";
+  import { playerList } from "../reactivity/game";
 
   import { theme } from "../reactivity/theme";
 
