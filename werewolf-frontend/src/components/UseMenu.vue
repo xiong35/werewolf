@@ -49,14 +49,15 @@
       width: 80%;
       max-width: 20rem;
       .cancel {
-        $size: 1rem;
+        $size: 1.5rem;
         position: absolute;
-        top: 0;
-        right: 0;
+        top: -$size * 0.5;
+        right: -$size * 0.5;
         width: $size;
         height: $size;
         padding: $size;
         cursor: pointer;
+        background-color: transparent;
       }
     }
   }

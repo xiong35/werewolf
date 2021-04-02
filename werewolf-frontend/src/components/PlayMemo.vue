@@ -1,12 +1,5 @@
 <template>
-  <UseMenu
-    v-show="showMemo"
-    :onCancel="
-      () => {
-        showMemo = false;
-      }
-    "
-  >
+  <UseMenu v-show="showMemo" :onCancel="() => (showMemo = false)">
     <span class="title">备忘录</span>
     <textarea v-model="memoContent" rows="20"></textarea>
   </UseMenu>
@@ -17,7 +10,7 @@
 
   import { showMemo, memoContent } from "../reactivity/playPage";
 
-  import UseMenu from "../components/UseMenu.vue";
+  import UseMenu from "./UseMenu.vue";
 
   const Memo = defineComponent({
     name: "Memo",

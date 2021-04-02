@@ -2,9 +2,12 @@
   <div class="play">
     <PlayerList></PlayerList>
     <div class="actions">
-      <Btn content="查看角色"></Btn>
+      <Btn @click="showCharacter = true" content="查看角色"></Btn>
       <Btn content="显示操作"></Btn>
       <Btn @click="showMemo = true" content="备忘速记"></Btn>
+      <Btn content="事件记录"></Btn>
+
+      <Character></Character>
       <Memo></Memo>
     </div>
   </div>
@@ -15,7 +18,8 @@
 
   import PlayerList from "../components/RoomPlayerList.vue";
   import Btn from "../components/Btn.vue";
-  import Memo from "../components/Memo.vue";
+  import Memo from "../components/PlayMemo.vue";
+  import Character from "../components/PlayCharacter.vue";
 
   // TODO implement play
 
@@ -28,6 +32,7 @@
       Btn,
       PlayerList,
       Memo,
+      Character,
     },
     setup(props) {
       return {
