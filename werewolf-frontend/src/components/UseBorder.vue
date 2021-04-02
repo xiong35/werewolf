@@ -1,7 +1,7 @@
 <template>
-  <span class="useborder">
+  <span class="use-border">
     <slot></slot>
-    <div class="useborder-mask"></div>
+    <div class="use-border-mask"></div>
   </span>
 </template>
 
@@ -21,12 +21,12 @@
 <style lang="scss" scoped>
   $border-width: 3px;
 
-  .useborder {
+  .use-border {
     border: $border-width solid;
     border-radius: 5px;
     position: relative;
     display: inline-block;
-    .useborder-mask {
+    .use-border-mask {
       position: absolute;
       right: 6%;
       top: -2 * $border-width;

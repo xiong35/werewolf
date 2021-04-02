@@ -1,8 +1,8 @@
 <template>
-  <UseMenu :show="timeLeft > 0" @click="timeLeft = 0">
+  <UseMenu :show="timeLeft > 0" :onCancel="() => (timeLeft = 0)">
     <div class="dialog-content">
       <span class="content">{{ content }}</span>
-      <div class="confirm">确认({{ timeLeft }}s)</div>
+      <div @click="timeLeft = 0" class="confirm">确认({{ timeLeft }}s)</div>
     </div>
   </UseMenu>
 </template>
@@ -34,8 +34,5 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
-    .content {
-      font-size: 1.2rem;
-    }
   }
 </style>
