@@ -1,30 +1,22 @@
 <template>
-  <div
-    class="dialog-container"
-    :style="{
-      display: timeLeft <= 0 ? 'none' : 'block',
-    }"
-    @click="timeLeft = 0"
-  >
-    <UseBorder>
-      <div class="dialog-content">
-        <span class="content">{{ content }}</span>
-        <div class="confirm">确认({{ timeLeft }}s)</div>
-      </div>
-    </UseBorder>
-  </div>
+  <UseMenu :show="timeLeft > 0" @click="timeLeft = 0">
+    <div class="dialog-content">
+      <span class="content">{{ content }}</span>
+      <div class="confirm">确认({{ timeLeft }}s)</div>
+    </div>
+  </UseMenu>
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from "vue";
+  import { defineComponent } from "vue";
 
   import { content, timeLeft } from "../reactivity/dialog";
 
-  import UseBorder from "./UseBorder.vue";
+  import UseMenu from "./UseMenu.vue";
 
   const Dialog = defineComponent({
     name: "Dialog",
-    components: { UseBorder },
+    components: { UseMenu },
     setup(props) {
       return { timeLeft, content };
     },
@@ -35,31 +27,15 @@
 
 
 <style lang="scss" scoped>
-  .dialog-container {
-    position: fixed;
-    inset: 0;
-    .useborder {
-      position: absolute;
-      top: 43%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      max-width: 80%;
-      box-sizing: border-box;
-      padding: 2rem 2rem 1rem;
-      width: 20rem;
-      .dialog-content {
-        height: 8rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        .content {
-          font-size: 1.2rem;
-        }
-        .confirm {
-          padding: 1rem;
-        }
-      }
+  .dialog-content {
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    .content {
+      font-size: 1.2rem;
     }
   }
 </style>
