@@ -30,3 +30,18 @@ input {
 input:focus {
   outline: none;
 }
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--bg);
+  border-radius: 20px;
+  border: 3px solid var(--on-bg);
+}

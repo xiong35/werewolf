@@ -1,5 +1,5 @@
 <template>
-  <div class="use-menu" v-show="show">
+  <div class="use-menu">
     <UseBorder>
       <slot></slot>
       <img
@@ -24,7 +24,6 @@
       UseBorder,
     },
     props: {
-      show: { type: Boolean, default: false },
       onCancel: { type: Function, required: true },
     },
     setup(props) {
@@ -42,7 +41,7 @@
     inset: 0;
     .use-border {
       position: absolute;
-      top: 43%;
+      top: 46%;
       left: 50%;
       transform: translate(-50%, -50%);
       box-sizing: border-box;
