@@ -1,5 +1,5 @@
 <template>
-  <div class="btn">
+  <div class="btn" :class="{ disabled }">
     <UseBorder>
       <span class="content">{{ content }}</span>
     </UseBorder>
@@ -17,6 +17,10 @@
     components: { UseBorder },
     props: {
       content: String,
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
     },
   });
 
@@ -31,6 +35,10 @@
     .content {
       padding: 0.5rem;
       display: inline-block;
+    }
+    &.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
   }
 </style>
