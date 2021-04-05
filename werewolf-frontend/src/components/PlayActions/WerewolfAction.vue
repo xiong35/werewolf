@@ -1,7 +1,7 @@
 <template>
-  <div class="guard-action">
+  <div class="werewolf-action">
     <ActionTemplate>
-      <Btn content="选择守护对象"></Btn>
+      <Btn content="选择杀害对象"></Btn>
     </ActionTemplate>
   </div>
 </template>
@@ -12,8 +12,8 @@
   import Btn from "../Btn.vue";
   import ActionTemplate from "./ActionTemplate.vue";
 
-  const GuardAction = defineComponent({
-    name: "GuardAction",
+  const WerewolfAction = defineComponent({
+    name: "WerewolfAction",
     components: {
       Btn,
       ActionTemplate,
@@ -23,11 +23,11 @@
     },
   });
 
-  export default GuardAction;
+  export default WerewolfAction;
 </script>
 
 
 <style lang="scss" scoped>
-  .guard-action {
+  .werewolf-action {
   }
 </style>

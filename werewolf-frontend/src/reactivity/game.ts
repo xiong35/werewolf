@@ -20,7 +20,7 @@ export const needingCharacters = ref<Character[]>([
 export const characterStatus = reactive<CharacterStatus>({
   protects: [],
 });
-export const character = ref<Character>("GUARD");
+export const character = ref<Character>("WITCH");
 
 export const playerList = computed(() => {
   return new Array(needingCharacters.value.length)

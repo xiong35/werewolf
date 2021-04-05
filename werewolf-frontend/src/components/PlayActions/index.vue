@@ -21,7 +21,7 @@
         {
           onCancel: () => (showActions.value = false),
         },
-        h(char2Action[character.value])
+        () => h(char2Action[character.value] ?? "div")
       );
       return withDirectives(dialogVNode, [[vShow, showActions.value]]);
     },

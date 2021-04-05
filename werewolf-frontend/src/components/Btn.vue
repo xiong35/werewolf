@@ -1,5 +1,9 @@
 <template>
-  <div class="btn" :class="{ disabled }">
+  <div
+    class="btn"
+    :class="{ disabled }"
+    @click="(e) => (disabled ? null : onClick(e))"
+  >
     <UseBorder>
       <span class="content">{{ content }}</span>
     </UseBorder>
@@ -21,6 +25,7 @@
         type: Boolean,
         default: false,
       },
+      onClick: { type: Function, default: () => {} },
     },
   });
 

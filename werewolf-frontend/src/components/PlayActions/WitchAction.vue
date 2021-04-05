@@ -1,7 +1,8 @@
 <template>
-  <div class="guard-action">
+  <div class="witch-action">
     <ActionTemplate>
-      <Btn content="选择守护对象"></Btn>
+      <Btn content="使用灵药"></Btn>
+      <Btn content="使用毒药"></Btn>
     </ActionTemplate>
   </div>
 </template>
@@ -12,8 +13,8 @@
   import Btn from "../Btn.vue";
   import ActionTemplate from "./ActionTemplate.vue";
 
-  const GuardAction = defineComponent({
-    name: "GuardAction",
+  const WitchAction = defineComponent({
+    name: "WitchAction",
     components: {
       Btn,
       ActionTemplate,
@@ -23,11 +24,11 @@
     },
   });
 
-  export default GuardAction;
+  export default WitchAction;
 </script>
 
 
 <style lang="scss" scoped>
-  .guard-action {
+  .witch-action {
   }
 </style>
