@@ -5,28 +5,33 @@
       <Btn @click="showCharacter = true" content="查看角色"></Btn>
       <Btn @click="showActions = true" content="显示操作"></Btn>
       <Btn @click="showMemo = true" content="备忘速记"></Btn>
-      <Btn content="事件记录"></Btn>
+      <Btn @click="showEvents = true" content="事件记录"></Btn>
 
       <Actions></Actions>
       <Character></Character>
       <Memo></Memo>
+      <Events></Events>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, onMounted } from "vue";
 
   import PlayerList from "../components/RoomPlayerList.vue";
   import Btn from "../components/Btn.vue";
+  import Events from "../components/PlayEvents.vue";
   import Memo from "../components/PlayMemo.vue";
   import Character from "../components/PlayCharacter.vue";
   import Actions from "../components/PlayActions/index.vue";
 
-  // TODO implement play
-
-  import { characterStatus, character } from "../reactivity/game";
-  import { showMemo, showActions, showCharacter } from "../reactivity/playPage";
+  import { characterStatus, character, refresh } from "../reactivity/game";
+  import {
+    showMemo,
+    showActions,
+    showCharacter,
+    showEvents,
+  } from "../reactivity/playPage";
 
   const Play = defineComponent({
     name: "Play",
@@ -36,14 +41,18 @@
       Memo,
       Character,
       Actions,
+      Events,
     },
     setup(props) {
+      onMounted(refresh);
+
       return {
         characterStatus,
         character,
         showMemo,
         showActions,
         showCharacter,
+        showEvents,
       };
     },
   });
