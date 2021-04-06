@@ -1,12 +1,8 @@
 import * as Router from "koa-router";
-import characterStatus from "../handlers/http/playCharacterStatus";
+import gameStatus from "../handlers/http/gameStatus";
 
 const gameRouter = new Router();
 
-gameRouter.post(
-  "game characterStatus",
-  "/characterStatus",
-  characterStatus
-);
+gameRouter.post("game gameStatus", "/gameStatus", gameStatus);
 
 export default gameRouter;

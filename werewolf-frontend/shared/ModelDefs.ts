@@ -78,3 +78,17 @@ export type WitchState = Record<Potion, PotionState>;
 export type CharacterStatus = Partial<
   HunterState | GuardState | SeerState | WerewolfState | WitchState
 >;
+
+export interface CharacterEvent {
+  character: Character;
+  events: {
+    at: day;
+    deed: string;
+  }[];
+}
+
+export type GameEvent = {
+  character: Character;
+  at: day;
+  deed: string;
+};

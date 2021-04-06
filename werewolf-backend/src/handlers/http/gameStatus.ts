@@ -2,9 +2,9 @@ import { Middleware } from "koa";
 import { listAllOfNumber } from "../../models/RoomModel";
 import Player from "../../models/PlayerModel";
 
-import { CharacterStatusResponse } from "../../../../werewolf-frontend/shared/httpMsg/CharacterStatusMsg";
+import { GameStatusResponse } from "../../../../werewolf-frontend/shared/httpMsg/GameStatusMsg";
 
-const characterStatus: Middleware = async (ctx, next) => {
+const gameStatus: Middleware = async (ctx, next) => {
   const token = ctx.get("Token");
   const roomNumber = ctx.get("RoomNumber");
 
@@ -12,16 +12,17 @@ const characterStatus: Middleware = async (ctx, next) => {
 
   const players = await listAllOfNumber(roomNumber);
 
-  const ret: CharacterStatusResponse = {
+  const ret: GameStatusResponse = {
     status: 200,
     msg: "ok",
     data: {
       curCharacter: curPlayer.character,
       curStatus: curPlayer.characterStatus,
       players,
+      events: [],
     },
   };
   ctx.body = ret;
 };
 
-export default characterStatus;
+export default gameStatus;
