@@ -30,7 +30,7 @@ export default function request(config: AxiosRequestConfig) {
       if (data.status === 200) {
         return data;
       } else {
-        showDialog(data.msg);
+        showDialog(data.msg || "不知道发生了什么呢QwQ");
         return null;
       }
     },

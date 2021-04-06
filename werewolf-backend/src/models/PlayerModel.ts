@@ -10,7 +10,7 @@ const playerSchema = new Schema({
   character: String,
   characterStatus: Schema.Types.Mixed,
   die: {
-    at: Number,
+    at: { type: Number, default: -1 },
     fromIndex: [Number],
     fromCharacter: String,
   },
