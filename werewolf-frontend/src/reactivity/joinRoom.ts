@@ -4,7 +4,6 @@ import * as sha256 from "sha256";
 import { joinRoom } from "../http/room";
 import { socket, Events } from "../socket";
 import router from "../router";
-import { toggleTheme } from "./theme";
 import { showDialog } from "./dialog";
 import { getToken, setToken } from "../utils/token";
 
@@ -44,7 +43,6 @@ export function gameBegin() {
   const roomNumber = getToken()?.roomNumber;
   showDialog("游戏开始, 天黑请闭眼👁️");
   setTimeout(() => {
-    toggleTheme("-dark");
     router.push({
       name: "play",
       query: {

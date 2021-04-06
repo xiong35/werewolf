@@ -1,14 +1,9 @@
-import { ref } from "vue";
+import { computed } from "vue";
+import { date } from "./game";
 
 export const DARK = "-dark";
 export const LIGHT = "";
-// export const theme = ref(DARK);
-export const theme = ref(LIGHT);
 
-export function toggleTheme(newTheme?: "-dark" | "") {
-  if (newTheme === undefined) {
-    theme.value = theme.value === DARK ? LIGHT : DARK;
-  } else {
-    theme.value = newTheme;
-  }
-}
+export const theme = computed(() =>
+  date.value % 2 === 0 ? DARK : LIGHT
+);

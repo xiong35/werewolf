@@ -1,4 +1,5 @@
 import { Schema, model, Model, Document } from "mongoose";
+import { GameStatus } from "../../../werewolf-frontend/shared/GameDefs";
 import {
   RoomDef,
   PlayerDef,
@@ -14,7 +15,7 @@ const roomSchema = new Schema({
   remainingCharacters: [String],
   remainingIndexes: [Number],
   isFinished: { type: Boolean, default: false },
-  gameStatus: { type: [String], default: [] },
+  gameStatus: { type: [String], default: [GameStatus.WOLF_KILL] },
   password: String,
 });
 

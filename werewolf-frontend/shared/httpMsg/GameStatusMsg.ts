@@ -22,6 +22,6 @@ export interface GameStatusResponse {
     events: GameEvent[]; // TODO get data on open menu?
 
     curDay: day;
-    gameStatus?: GameStatus;
+    gameStatus: GameStatus;
   };
 }
