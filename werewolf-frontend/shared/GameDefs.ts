@@ -51,7 +51,7 @@ export const CharacterIntro: Record<Character, string> = {
  * 当前是什么游戏阶段
  * // TODO 每个状态需要一个 http 请求来结束
  */
-export enum GameState {
+export enum GameStatus {
   /**
    * 狼人杀人
    * 预言家验人入栈

@@ -1,9 +1,9 @@
 import { day, PublicPlayerDef, index } from "../ModelDefs";
-import { GameState, Potion } from "../GameDefs";
+import { GameStatus, Potion } from "../GameDefs";
 
 export interface ChangeStatusMsg {
   day: day; // 当前天数
-  setStatus: GameState;
+  setStatus: GameStatus;
   publicMsg: PublicMsg;
   timeout: number; // 有多少秒可以确认
   curPlayerStatus: PublicPlayerDef[];

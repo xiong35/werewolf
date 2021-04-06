@@ -1,4 +1,4 @@
-import { Character, GameState, Potion } from "./GameDefs";
+import { Character, GameStatus, Potion } from "./GameDefs";
 
 export type Token = string;
 export type ID = string;
@@ -15,7 +15,7 @@ export interface RoomDef {
   needingCharacters: Character[]; // 设置的角色
   remainingIndexes: index[]; // 空缺的玩家号码
   isFinished: boolean; // 是否已结束 -> 游戏结束重置
-  nextStatus: GameState[]; // 接下来的游戏状态的栈 -> 游戏结束重置
+  gameStatus: GameStatus[]; // 所有的游戏状态的栈 -> 游戏结束重置
 }
 
 export interface PublicPlayerDef {
@@ -45,7 +45,7 @@ export interface TokenDef {
   roomNumber: string;
 }
 
-export interface HunterState {
+export interface HunterStatus {
   canShoot: boolean;
   shootAt: {
     day: day;
@@ -53,30 +53,34 @@ export interface HunterState {
   };
 }
 
-export interface GuardState {
+export interface GuardStatus {
   protects: index[];
 }
 
-export interface SeerState {
+export interface SeerStatus {
   checks: {
     index: index;
     isWerewolf: boolean;
   }[];
 }
 
-export interface WerewolfState {
+export interface WerewolfStatus {
   wantToKills: index[];
 }
 
-interface PotionState {
+interface PotionStatus {
   useDay: day;
   useAt: index;
 }
 
-export type WitchState = Record<Potion, PotionState>;
+export type WitchStatus = Record<Potion, PotionStatus>;
 
 export type CharacterStatus = Partial<
-  HunterState | GuardState | SeerState | WerewolfState | WitchState
+  | HunterStatus
+  | GuardStatus
+  | SeerStatus
+  | WerewolfStatus
+  | WitchStatus
 >;
 
 export interface CharacterEvent {
@@ -92,3 +96,5 @@ export type GameEvent = {
   at: day;
   deed: string;
 };
+
+// TODO add vote event

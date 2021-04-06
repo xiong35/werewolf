@@ -14,7 +14,7 @@ const roomSchema = new Schema({
   remainingCharacters: [String],
   remainingIndexes: [Number],
   isFinished: { type: Boolean, default: false },
-  nextStatus: { type: [String], default: [] },
+  gameStatus: { type: [String], default: [] },
   password: String,
 });
 
@@ -37,6 +37,7 @@ export function listAllOfNumber(
 ): Promise<PublicPlayerDef[]> {
   return new Promise((res) => {
     Room.findOne({ roomNumber }).exec((err, room) => {
+      if (!room || err) throw new Error();
       res(listAllOfRoom(room));
     });
   });

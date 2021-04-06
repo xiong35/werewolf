@@ -18,7 +18,7 @@ const playerSchema = new Schema({
   sheriffVotes: { type: [Number], default: [] },
 });
 
-interface PlayerProps extends Document, PlayerDef {}
+export interface PlayerProps extends Document, PlayerDef {}
 
 const Player: Model<PlayerProps> = model("Players", playerSchema);
 
