@@ -24,6 +24,7 @@
       character: { type: String, isRequired: true },
       level: { type: Number, default: 1 },
       deed: String,
+      at: Number,
     },
     setup(props) {
       return { theme };

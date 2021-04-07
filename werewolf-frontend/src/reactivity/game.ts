@@ -30,17 +30,6 @@ export const date = ref<day>(-1);
 export const gameEvents = ref<GameEvent[]>([]);
 export const gameStatus = ref<GameStatus>(GameStatus.WOLF_KILL);
 
-export const playerList = computed(() => {
-  return new Array(needingCharacters.value.length)
-    .fill(0)
-    .map(
-      (_, ind) =>
-        players.value.find(
-          (player) => player.index === ind + 1
-        ) ?? { index: ind + 1 }
-    );
-});
-
 export async function refresh() {
   const { data } = await getGameStatus({});
   character.value = data.curCharacter;

@@ -1,6 +1,6 @@
 <template>
   <div class="play">
-    <PlayerList></PlayerList>
+    <PlayerList :playerList="players"></PlayerList>
     <div class="actions">
       <Btn @click="showCharacter = true" content="查看角色"></Btn>
       <Btn @click="showActions = true" content="显示操作"></Btn>
@@ -27,7 +27,12 @@
   import Character from "../components/PlayCharacter.vue";
   import Actions from "../components/PlayActions/index.vue";
 
-  import { characterStatus, character, refresh } from "../reactivity/game";
+  import {
+    characterStatus,
+    character,
+    refresh,
+    players,
+  } from "../reactivity/game";
   import {
     showMemo,
     showActions,
@@ -49,8 +54,11 @@
       onMounted(refresh);
 
       return {
+        players,
+
         characterStatus,
         character,
+
         showMemo,
         showActions,
         showCharacter,

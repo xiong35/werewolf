@@ -33,15 +33,16 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import { playerList } from "../reactivity/game";
-
   import { theme } from "../reactivity/theme";
 
   const RoomPlayerList = defineComponent({
     name: "RoomPlayerList",
+    props: {
+      playerList: { type: Array, required: true },
+    },
     components: {},
     setup(props) {
-      return { playerList, theme };
+      return { theme };
     },
   });
 

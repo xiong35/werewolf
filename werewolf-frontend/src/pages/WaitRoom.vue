@@ -1,13 +1,13 @@
 <template>
   <div class="waitroom">
-    <RoomPlayerList></RoomPlayerList>
+    <RoomPlayerList :playerList="playerList"></RoomPlayerList>
     <div id="qr-code"></div>
     <Btn @click="showDialog('暂未实现')" content="查看规则"></Btn>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, toRefs, onMounted } from "vue";
+  import { defineComponent, toRefs, onMounted, computed } from "vue";
   import QRCode from "easyqrcodejs";
 
   import { CLIENT_BASE_URL } from "../../shared/constants";
@@ -40,7 +40,16 @@
         needingCharacters.value = res.data.needingCharacters;
       });
 
-      return { showDialog };
+      const playerList = computed(() => {
+        return new Array(needingCharacters.value.length).fill(0).map(
+          (_, ind) =>
+            players.value.find((player) => player.index === ind + 1) ?? {
+              index: ind + 1,
+            }
+        );
+      });
+
+      return { showDialog, playerList };
     },
   });
 
