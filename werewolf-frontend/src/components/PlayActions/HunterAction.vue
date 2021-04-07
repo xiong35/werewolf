@@ -1,7 +1,10 @@
 <template>
   <div class="hunter-action">
     <ActionTemplate>
-      <Btn content="查看开枪状态"></Btn>
+      <Btn
+        :disabled="gameStatus !== GameStatus.HUNTER_CHECK"
+        content="查看开枪状态"
+      ></Btn>
     </ActionTemplate>
   </div>
 </template>
@@ -11,6 +14,8 @@
 
   import Btn from "../Btn.vue";
   import ActionTemplate from "./ActionTemplate.vue";
+  import { GameStatus } from "../../../shared/GameDefs";
+  import { gameStatus } from "../../reactivity/game";
 
   const HunterAction = defineComponent({
     name: "HunterAction",
@@ -19,7 +24,10 @@
       ActionTemplate,
     },
     setup(props) {
-      return {};
+      return {
+        GameStatus,
+        gameStatus,
+      };
     },
   });
 

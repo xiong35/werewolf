@@ -119,7 +119,7 @@ export enum GameStatus {
    *
    * 狼人杀人 入栈
    */
-  EXILE_VOTE = "投票出人",
+  EXILE_VOTE = "票选狼人",
 
   /**
    * 猎人开枪

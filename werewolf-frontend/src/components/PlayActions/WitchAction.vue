@@ -1,8 +1,14 @@
 <template>
   <div class="witch-action">
     <ActionTemplate>
-      <Btn content="使用灵药"></Btn>
-      <Btn content="使用毒药"></Btn>
+      <Btn
+        :disabled="gameStatus !== GameStatus.WITCH_ACT"
+        content="使用灵药"
+      ></Btn>
+      <Btn
+        :disabled="gameStatus !== GameStatus.WITCH_ACT"
+        content="使用毒药"
+      ></Btn>
     </ActionTemplate>
   </div>
 </template>
@@ -12,6 +18,8 @@
 
   import Btn from "../Btn.vue";
   import ActionTemplate from "./ActionTemplate.vue";
+  import { GameStatus } from "../../../shared/GameDefs";
+  import { gameStatus } from "../../reactivity/game";
 
   const WitchAction = defineComponent({
     name: "WitchAction",
@@ -20,7 +28,10 @@
       ActionTemplate,
     },
     setup(props) {
-      return {};
+      return {
+        GameStatus,
+        gameStatus,
+      };
     },
   });
 

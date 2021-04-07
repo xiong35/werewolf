@@ -1,14 +1,25 @@
 <template>
   <div class="action-template">
-    <Btn content="票选警长"></Btn>
-    <Btn content="传递警徽"></Btn>
-    <Btn content="票选狼人"></Btn>
+    <Btn
+      :disabled="gameStatus !== GameStatus.SHERIFF_VOTE"
+      content="票选警长"
+    ></Btn>
+    <Btn
+      :disabled="gameStatus !== GameStatus.SHERIFF_ASSIGN"
+      content="传递警徽"
+    ></Btn>
+    <Btn
+      :disabled="gameStatus !== GameStatus.EXILE_VOTE"
+      content="票选狼人"
+    ></Btn>
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
+  import { GameStatus } from "../../../shared/GameDefs";
+  import { gameStatus } from "../../reactivity/game";
 
   import Btn from "../Btn.vue";
 
@@ -16,7 +27,11 @@
     name: "ActionTemplate",
     components: { Btn },
     setup(props) {
-      return {};
+      GameStatus.SHERIFF_VOTE;
+      return {
+        gameStatus,
+        GameStatus,
+      };
     },
   });
 
