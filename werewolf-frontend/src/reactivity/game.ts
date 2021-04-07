@@ -9,21 +9,11 @@ import {
 import { Character, GameStatus } from "../../shared/GameDefs";
 import { getGameStatus } from "../http/gameStatus";
 
-export const players: Ref<PublicPlayerDef[]> = ref([
-  { index: 1, name: "tada", isAlive: true, isSheriff: false },
-  { index: 2, name: "@#$%^&", isAlive: false, isSheriff: false },
-  { index: 3, name: "afevqqw", isAlive: true, isSheriff: true },
-]);
-export const needingCharacters = ref<Character[]>([
-  "GUARD",
-  "HUNTER",
-  "WEREWOLF",
-]); // TODO get this
+export const players: Ref<PublicPlayerDef[]> = ref([]);
+export const needingCharacters = ref<Character[]>([]);
 
-export const characterStatus = ref<CharacterStatus>({
-  protects: [],
-});
-export const character = ref<Character>("WITCH");
+export const characterStatus = ref<CharacterStatus>({});
+export const character = ref<Character>("");
 
 export const date = ref<day>(-1);
 

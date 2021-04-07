@@ -6,6 +6,7 @@ import { socket, Events } from "../socket";
 import router from "../router";
 import { showDialog } from "./dialog";
 import { getToken, setToken } from "../utils/token";
+import { needingCharacters } from "./game";
 
 export const password = ref("");
 export const roomNumber = ref("");
@@ -27,6 +28,7 @@ export async function join() {
     } else {
       socket.emit(Events.ROOM_JOIN, roomNumber.value);
       showDialog("成功加入房间!");
+      needingCharacters.value = res.data.needingCharacters;
       router.push({
         name: "waitRoom",
         query: {
@@ -41,13 +43,11 @@ export async function join() {
 
 export function gameBegin() {
   const roomNumber = getToken()?.roomNumber;
+  localStorage.removeItem("memo");
   showDialog("游戏开始, 天黑请闭眼👁️");
   setTimeout(() => {
     router.push({
       name: "play",
-      query: {
-        number: roomNumber,
-      },
     });
   }, 1000);
 }

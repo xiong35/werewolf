@@ -60,17 +60,20 @@
       flex: 1 1 33%;
       justify-content: center;
       .box {
-        $size: 20vmin;
+        $size: 6rem;
         width: $size;
         height: $size;
-        line-height: $size;
-        text-align: center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         border-radius: 5px;
         border: 2px solid;
         background-color: var(--secondary);
         position: relative;
         $icon-size: 0.25 * $size;
-        font-size: 4.5vmin;
+        font-size: 1.5rem;
         .index,
         .sherrif,
         .dead {

@@ -1,6 +1,7 @@
 <template>
   <div class="waitroom">
     <RoomPlayerList :playerList="playerList"></RoomPlayerList>
+    <div class="room-number">房间号：{{ number }}</div>
     <div id="qr-code"></div>
     <Btn @click="showDialog('暂未实现')" content="查看规则"></Btn>
   </div>
@@ -62,6 +63,11 @@
     #qr-code {
       margin: 5vh auto;
       width: min-content;
+    }
+    .room-number {
+      font-weight: bold;
+      font-size: 1.6rem;
+      text-align: center;
     }
     .btn {
       display: block;

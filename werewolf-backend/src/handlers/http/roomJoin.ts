@@ -53,9 +53,9 @@ const roomJoin: Middleware = async (ctx) => {
     ret.data.open = true;
     const needingCharacters = [...room.needingCharacters];
     const promises = [];
-    room.playerIDs.forEach(async (_id) => {
+    for (let _id of room.playerIDs) {
       const p = await Player.findOne({ _id });
-      const index = Math.round(
+      const index = Math.floor(
         Math.random() * needingCharacters.length
       );
       const character = room.needingCharacters.splice(index, 1)[0];
@@ -92,11 +92,13 @@ const roomJoin: Middleware = async (ctx) => {
             MEDICINE: { usedDay: -1, usedAt: -1 },
           };
           break;
+        case "VILLAGER":
+          p.characterStatus = {};
         default:
           break;
       }
       promises.push(p.save());
-    });
+    }
 
     await Promise.all(promises);
     io.to(roomNumber).emit(Events.GAME_BEGIN);

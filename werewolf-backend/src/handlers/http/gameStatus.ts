@@ -61,14 +61,16 @@ function getEvents(player: PlayerProps): CharacterEvent {
   switch (character) {
     case "GUARD":
       (characterStatus as GuardStatus).protects.forEach(
-        (index, at) =>
-          ret.events.push({
-            at,
-            deed:
-              index === undefined || index === null
-                ? "空守"
-                : `保护了 ${index} 号玩家`,
-          })
+        (index, at) => {
+          if (at % 2 === 0)
+            ret.events.push({
+              at,
+              deed:
+                index === undefined || index === null
+                  ? "空守"
+                  : `保护了 ${index} 号玩家`,
+            });
+        }
       );
       break;
     case "HUNTER":
@@ -76,13 +78,14 @@ function getEvents(player: PlayerProps): CharacterEvent {
         player,
         day,
       } = (characterStatus as HunterStatus).shootAt;
-      ret.events.push({
-        at: day,
-        deed:
-          player === undefined || player === null
-            ? "没有开枪"
-            : `射死了 ${player} 号玩家`,
-      });
+      if (day !== -1)
+        ret.events.push({
+          at: day,
+          deed:
+            player === undefined || player === null
+              ? "没有开枪"
+              : `射死了 ${player} 号玩家`,
+        });
       break;
     case "SEER":
       (characterStatus as SeerStatus).checks.forEach(
@@ -102,14 +105,16 @@ function getEvents(player: PlayerProps): CharacterEvent {
       break;
     case "WEREWOLF":
       (characterStatus as WerewolfStatus).wantToKills.forEach(
-        (kill, at) =>
-          ret.events.push({
-            at,
-            deed:
-              kill === undefined || kill === null
-                ? "放弃选择"
-                : `投票想杀 ${kill} 号玩家`,
-          })
+        (kill, at) => {
+          if (at % 2 === 0)
+            ret.events.push({
+              at,
+              deed:
+                kill === undefined || kill === null
+                  ? "放弃选择"
+                  : `投票想杀 ${kill} 号玩家`,
+            });
+        }
       );
       break;
     case "WITCH":

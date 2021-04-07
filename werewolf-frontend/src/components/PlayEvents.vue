@@ -5,12 +5,15 @@
     :onCancel="() => (showEvents = false)"
   >
     <div class="title">事件一览</div>
-    <EventList
-      v-for="(events, day) in groupedGameEvents"
-      :key="day"
-      :day="day"
-      :events="events"
-    ></EventList>
+    <div v-if="groupedGameEvents.length > 0">
+      <EventList
+        v-for="(events, day) in groupedGameEvents"
+        :key="day"
+        :day="day"
+        :events="events"
+      ></EventList>
+    </div>
+    <div class="placeholder" v-else>暂无事件</div>
   </UseMenu>
 </template>
 
@@ -67,6 +70,11 @@
       resize: none;
       width: 85%;
       margin: 1rem;
+    }
+    .placeholder {
+      text-align: center;
+      opacity: 0.5;
+      padding: 2rem 0;
     }
   }
 </style>
