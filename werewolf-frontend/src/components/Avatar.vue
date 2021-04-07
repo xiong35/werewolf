@@ -6,12 +6,11 @@
       :alt="name"
     />
     <div class="info">{{ name }}</div>
-    <!-- TODO change every thing into this -->
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { computed, defineComponent } from "vue";
   import { ChineseNames, SetableCharacters } from "../../shared/GameDefs";
 
   import { theme } from "../reactivity/theme";
@@ -22,8 +21,9 @@
       character: { type: String, required: true },
     },
     setup(props) {
-      const name = ChineseNames[props.character as SetableCharacters];
-
+      const name = computed(
+        () => ChineseNames[props.character as SetableCharacters]
+      );
       return { theme, name };
     },
   });
@@ -35,11 +35,12 @@
 <style lang="scss" scoped>
   .avatar {
     width: 2rem;
-    height: 2rem;
     display: inline-block;
+    position: relative;
 
     .icon {
       width: 100%;
+      border-radius: 15%;
     }
     .icon:hover + .info {
       opacity: 0.7;
@@ -50,9 +51,9 @@
       transition: opacity 0.2s;
       font-size: 0.6rem;
       position: absolute;
-      top: -0.8rem;
-      left: 0;
-      right: 0;
+      top: -1.7rem;
+      left: -5rem;
+      right: -5rem;
       margin: auto;
       background-color: var(--on-bg);
       color: var(--bg);

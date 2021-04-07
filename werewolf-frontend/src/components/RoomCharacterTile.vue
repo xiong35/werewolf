@@ -1,11 +1,6 @@
 <template>
   <div class="room-character-tile">
-    <img
-      :src="`/src/assets/${character.toLowerCase()}.svg`"
-      :alt="character"
-      class="character"
-    />
-    <div class="info">{{ name }}</div>
+    <Avatar :character="character"></Avatar>
     <div class="controll">
       <div @click="setCharacter(character, -1)" class="down"></div>
       <div class="number">{{ num }}</div>
@@ -21,9 +16,11 @@
 
   import { ChineseNames, SetableCharacters } from "../../shared/GameDefs";
 
+  import Avatar from "./Avatar.vue";
+
   const RoomCharacter = defineComponent({
     name: "RoomCharacter",
-    components: {},
+    components: { Avatar },
     props: {
       character: { type: String, required: true },
     },
@@ -44,43 +41,8 @@
     position: relative;
     text-align: center;
 
-    .info {
-      opacity: 0;
-      transition: opacity 0.2s;
-      font-size: 0.6rem;
-      position: absolute;
-      top: -0.8rem;
-      left: 0;
-      right: 0;
-      margin: auto;
-      background-color: var(--on-bg);
-      color: var(--bg);
-      padding: 0.3rem;
-      width: min-content;
-      border-radius: 5px;
-      word-break: keep-all;
-      &::before {
-        content: "";
-        position: absolute;
-        width: 0.5rem;
-        height: 0.5rem;
-        background-color: var(--on-bg);
-        transform-origin: 50% 50%;
-        left: 0;
-        right: 0;
-        margin: auto;
-        transform: rotate(45deg);
-        bottom: -12%;
-      }
-    }
-
-    .character {
+    .avatar {
       width: 40%;
-      margin: auto;
-    }
-
-    .character:hover + .info {
-      opacity: 0.7;
     }
 
     .controll {

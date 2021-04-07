@@ -1,14 +1,10 @@
 <template>
   <div class="play-event-tile" :class="'.level' + level">
     <div class="left-info">
+      <Avatar :character="character"></Avatar>
       <img
         :src="`/src/assets/${at % 2 === 1 ? 'sun' : 'moon'}${theme}.svg`"
         class="isDay"
-      />
-      <img
-        class="icon"
-        :src="`/src/assets/${character.toLowerCase()}${theme}.svg`"
-        :alt="character"
       />
     </div>
     <span class="deed"> {{ deed }}</span>
@@ -19,9 +15,11 @@
   import { defineComponent } from "vue";
   import { theme } from "../reactivity/theme";
 
+  import Avatar from "./Avatar.vue";
+
   const PlayEventTile = defineComponent({
     name: "PlayEventTile",
-    components: {},
+    components: { Avatar },
     props: {
       character: { type: String, isRequired: true },
       level: { type: Number, default: 1 },
@@ -68,10 +66,9 @@
         border: 2px solid transparent;
         box-shadow: 0 0 0 1px currentColor;
       }
-      .icon {
+      .avatar {
         width: 100%;
         background-color: transparent;
-        z-index: 2;
       }
     }
     .deed {
