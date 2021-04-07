@@ -42,12 +42,11 @@ export async function join() {
 }
 
 export function gameBegin() {
-  const roomNumber = getToken()?.roomNumber;
   localStorage.removeItem("memo");
   showDialog("游戏开始, 天黑请闭眼👁️");
   setTimeout(() => {
     router.push({
       name: "play",
     });
-  }, 1000);
+  }, 500);
 }

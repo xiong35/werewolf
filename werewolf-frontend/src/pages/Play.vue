@@ -1,6 +1,14 @@
 <template>
   <div class="play">
     <PlayerList :playerList="players"></PlayerList>
+    <div class="date">
+      Day {{ Math.ceil(date / 2) }}
+      <img
+        class="date-icon"
+        :src="`/src/assets/${date % 2 === 0 ? 'moon' : 'sun'}${theme}.svg`"
+      />
+    </div>
+    <div class="game-status">{{ gameStatus }}</div>
     <div class="actions">
       <Btn @click="showCharacter = true" content="查看角色"></Btn>
       <Btn @click="showActions = true" content="显示操作"></Btn>
@@ -11,8 +19,6 @@
       <Character></Character>
       <Memo></Memo>
       <Events></Events>
-
-      <!-- TODO show current day -->
     </div>
   </div>
 </template>
@@ -32,6 +38,8 @@
     character,
     refresh,
     players,
+    gameStatus,
+    date,
   } from "../reactivity/game";
   import {
     showMemo,
@@ -39,6 +47,7 @@
     showCharacter,
     showEvents,
   } from "../reactivity/playPage";
+  import { theme } from "../reactivity/theme";
 
   const Play = defineComponent({
     name: "Play",
@@ -63,6 +72,10 @@
         showActions,
         showCharacter,
         showEvents,
+
+        gameStatus,
+        date,
+        theme,
       };
     },
   });
@@ -73,12 +86,28 @@
 
 <style lang="scss" scoped>
   .play {
+    text-align: center;
     .actions {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
       .btn {
         margin: 0.5rem;
+      }
+    }
+    .date,
+    .game-status {
+      font-weight: bold;
+      font-size: 1.5rem;
+      padding-bottom: 1.3rem;
+    }
+    .date {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .date-icon {
+        width: 2.6rem;
+        margin: 0 1rem;
       }
     }
   }
