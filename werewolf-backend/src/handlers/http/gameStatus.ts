@@ -85,16 +85,19 @@ function getEvents(player: PlayerProps): CharacterEvent {
       });
       break;
     case "SEER":
-      (characterStatus as SeerStatus).checks.forEach((check, at) =>
-        ret.events.push({
-          at,
-          deed:
-            check === undefined || check === null
-              ? "没有查人"
-              : `查验了 ${check.index} 号玩家，他是${
-                  check.isWerewolf ? "狼人" : "良民"
-                }`,
-        })
+      (characterStatus as SeerStatus).checks.forEach(
+        (check, at) => {
+          if (at % 2 === 0)
+            ret.events.push({
+              at,
+              deed:
+                check === undefined || check === null
+                  ? "没有查人"
+                  : `查验了 ${check.index} 号玩家，他是${
+                      check.isWerewolf ? "狼人" : "良民"
+                    }`,
+            });
+        }
       );
       break;
     case "WEREWOLF":

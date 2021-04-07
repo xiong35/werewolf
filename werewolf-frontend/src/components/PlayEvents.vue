@@ -5,45 +5,42 @@
     :onCancel="() => (showEvents = false)"
   >
     <div class="title">事件一览</div>
-    <EventTile
-      v-for="item in gameEvents"
-      :key="item.at + item.deed"
-      :character="item.character"
-      :deed="item.deed"
-      :at="item.at"
-    ></EventTile>
-    <EventTile at="1" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile at="2" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile at="4" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile at="8" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile at="9" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile at="10" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile at="3" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile at="1" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile at="1" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile at="1" character="HUNTER" deed="杀死了 1 号"></EventTile>
-    <EventTile
-      character="SEER"
-      deed="杀死了杀死了杀死了杀死了杀死了杀死了杀死了杀死了杀死了 1 号"
-    ></EventTile>
+    <EventList
+      v-for="(events, day) in groupedGameEvents"
+      :key="day"
+      :day="day"
+      :events="events"
+    ></EventList>
   </UseMenu>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, computed } from "vue";
 
   import { showEvents } from "../reactivity/playPage";
   import { refresh, gameEvents } from "../reactivity/game";
+  import { GameEvent } from "../../shared/ModelDefs";
 
   import UseMenu from "./UseMenu.vue";
-  import EventTile from "./PlayEventTile.vue";
+  import EventList from "./PlayEventList.vue";
 
   const Events = defineComponent({
     name: "Events",
-    components: { UseMenu, EventTile },
+    components: { UseMenu, EventList },
     props: {},
     setup(props) {
-      return { showEvents, gameEvents };
+      const groupedGameEvents = computed(() => {
+        const list: GameEvent[][] = [];
+        gameEvents.value.forEach((e) => {
+          const at = e.at;
+          const day = Math.ceil(at / 2);
+          list[day] ??= [];
+          list[day].push(e);
+        });
+        return list;
+      });
+
+      return { showEvents, groupedGameEvents };
     },
   });
 
