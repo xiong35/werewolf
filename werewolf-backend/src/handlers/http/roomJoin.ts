@@ -88,8 +88,8 @@ const roomJoin: Middleware = async (ctx) => {
           break;
         case "WITCH":
           p.characterStatus = {
-            POISON: { useDay: -1, useAt: -1 },
-            MEDICINE: { useDay: -1, useAt: -1 },
+            POISON: { usedDay: -1, usedAt: -1 },
+            MEDICINE: { usedDay: -1, usedAt: -1 },
           };
           break;
         default:

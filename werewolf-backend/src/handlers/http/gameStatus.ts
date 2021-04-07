@@ -114,15 +114,16 @@ function getEvents(player: PlayerProps): CharacterEvent {
       break;
     case "WITCH":
       const { MEDICINE, POISON } = characterStatus as WitchStatus;
-      if (POISON.useDay !== -1)
+
+      if (POISON.usedDay !== -1)
         ret.events.push({
-          at: POISON.useDay,
-          deed: `用毒药杀害了 ${POISON.useAt} 号玩家`,
+          at: POISON.usedDay,
+          deed: `用毒药杀害了 ${POISON.usedAt} 号玩家`,
         });
-      if (MEDICINE.useDay !== -1)
+      if (MEDICINE.usedDay !== -1)
         ret.events.push({
-          at: MEDICINE.useDay,
-          deed: `用灵药复活了 ${MEDICINE.useAt} 号玩家`,
+          at: MEDICINE.usedDay,
+          deed: `用灵药复活了 ${MEDICINE.usedAt} 号玩家`,
         });
       break;
   }

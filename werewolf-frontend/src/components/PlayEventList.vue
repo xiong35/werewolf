@@ -1,5 +1,5 @@
 <template>
-  <div class="event-day">Day {{ day }}</div>
+  <div v-if="events !== undefined" class="event-day">Day {{ day }}</div>
   <Tile
     v-for="item in events"
     :key="item.at + item.deed"

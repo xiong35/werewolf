@@ -69,8 +69,8 @@ export interface WerewolfStatus {
 }
 
 interface PotionStatus {
-  useDay: day;
-  useAt: index;
+  usedDay: day;
+  usedAt: index;
 }
 
 export type WitchStatus = Record<Potion, PotionStatus>;

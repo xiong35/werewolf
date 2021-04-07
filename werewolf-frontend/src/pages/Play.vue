@@ -11,6 +11,8 @@
       <Character></Character>
       <Memo></Memo>
       <Events></Events>
+
+      <!-- TODO show current day -->
     </div>
   </div>
 </template>
