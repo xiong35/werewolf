@@ -65,7 +65,7 @@ function getEvents(player: PlayerProps): CharacterEvent {
           ret.events.push({
             at,
             deed:
-              index === undefined
+              index === undefined || index === null
                 ? "空守"
                 : `保护了 ${index} 号玩家`,
           })
@@ -79,7 +79,7 @@ function getEvents(player: PlayerProps): CharacterEvent {
       ret.events.push({
         at: day,
         deed:
-          player === undefined
+          player === undefined || player === null
             ? "没有开枪"
             : `射死了 ${player} 号玩家`,
       });
@@ -89,7 +89,7 @@ function getEvents(player: PlayerProps): CharacterEvent {
         ret.events.push({
           at,
           deed:
-            check === undefined
+            check === undefined || check === null
               ? "没有查人"
               : `查验了 ${check.index} 号玩家，他是${
                   check.isWerewolf ? "狼人" : "良民"
@@ -103,7 +103,7 @@ function getEvents(player: PlayerProps): CharacterEvent {
           ret.events.push({
             at,
             deed:
-              kill === undefined
+              kill === undefined || kill === null
                 ? "放弃选择"
                 : `投票想杀 ${kill} 号玩家`,
           })
