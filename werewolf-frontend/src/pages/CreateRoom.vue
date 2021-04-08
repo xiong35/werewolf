@@ -1,6 +1,7 @@
 <template>
   <div class="createroom">
     <span class="title">角色设置</span>
+    <!-- TODO 警长, 屠边屠城 -->
     <div class="tile-wrapper">
       <RoomCharacterTile
         :key="name"

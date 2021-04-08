@@ -16,6 +16,8 @@ export interface RoomDef {
   remainingIndexes: index[]; // 空缺的玩家号码
   isFinished: boolean; // 是否已结束 -> 游戏结束重置
   gameStatus: GameStatus[]; // 所有的游戏状态的栈 -> 游戏结束重置
+  joinElect: index[]; // 上警的玩家
+  finishSpeaking: index[]; // 发言结束的玩家
 }
 
 export interface PublicPlayerDef {

@@ -11,7 +11,11 @@
     <div class="game-status">{{ gameStatus }}</div>
     <div class="actions">
       <Btn @click="showCharacter = true" content="查看角色"></Btn>
-      <Btn @click="showActions = true" content="显示操作"></Btn>
+      <Btn
+        @click="showActions = true"
+        :class="{ active: canAct }"
+        content="显示操作"
+      ></Btn>
       <Btn @click="showMemo = true" content="备忘速记"></Btn>
       <Btn @click="showEvents = true" content="事件记录"></Btn>
 
@@ -46,6 +50,7 @@
     showActions,
     showCharacter,
     showEvents,
+    canAct,
   } from "../reactivity/playPage";
   import { theme } from "../reactivity/theme";
 
@@ -70,6 +75,7 @@
 
         showMemo,
         showActions,
+        canAct,
         showCharacter,
         showEvents,
 
@@ -108,6 +114,40 @@
       .date-icon {
         width: 2.6rem;
         margin: 0 1rem;
+      }
+    }
+  }
+</style> 
+
+<style lang="scss" >
+  .play {
+    @keyframes blink {
+      from {
+        background-color: var(--bg);
+      }
+      to {
+        background-color: var(--on-bg);
+      }
+    }
+    .btn {
+      position: relative;
+      &.active::after {
+        opacity: 1;
+      }
+      &::after {
+        transition: all 0.2s;
+        opacity: 0;
+        $size: 0.6rem;
+        content: "";
+        position: absolute;
+        right: -0.3 * $size;
+        top: -0.3 * $size;
+        width: $size;
+        height: $size;
+        background-color: var(--on-bg);
+        border: 2px solid var(--bg);
+        border-radius: 50%;
+        animation: blink 1s linear infinite alternate;
       }
     }
   }

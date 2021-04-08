@@ -17,6 +17,8 @@ const roomSchema = new Schema({
   isFinished: { type: Boolean, default: false },
   gameStatus: { type: [String], default: [GameStatus.WOLF_KILL] },
   password: String,
+  joinElect: { type: [Number], default: [] },
+  finishSpeaking: { type: [Number], default: [] },
 });
 
 roomSchema.static("listAll", function (roomNumber: string) {
@@ -47,16 +49,18 @@ export function listAllOfNumber(
 export function listAllOfRoom(
   room: RoomProps
 ): Promise<PublicPlayerDef[]> {
-  return new Promise((res) => {
+  return new Promise((resolve) => {
     room.populate("playerIDs", (err, room) => {
       const players = (room.playerIDs as unknown) as PlayerDef[];
-      res(
-        players.map((p) => ({
-          index: p.index,
-          isAlive: p.isAlive,
-          isSheriff: p.isSheriff,
-          name: p.name,
-        }))
+      resolve(
+        players
+          .map((p) => ({
+            index: p.index,
+            isAlive: p.isAlive,
+            isSheriff: p.isSheriff,
+            name: p.name,
+          }))
+          .sort((a, b) => a.index - b.index)
       );
     });
   });

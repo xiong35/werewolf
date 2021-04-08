@@ -5,6 +5,7 @@
         :disabled="gameStatus !== GameStatus.WITCH_ACT"
         content="使用灵药"
       ></Btn>
+      <!-- TODO 用过药就不能在用 -->
       <Btn
         :disabled="gameStatus !== GameStatus.WITCH_ACT"
         content="使用毒药"

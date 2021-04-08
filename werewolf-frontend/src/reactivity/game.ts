@@ -1,4 +1,4 @@
-import { ref, Ref, computed } from "vue";
+import { ref, Ref, watchEffect } from "vue";
 
 import {
   PublicPlayerDef,
@@ -8,6 +8,7 @@ import {
 } from "../../shared/ModelDefs";
 import { Character, GameStatus } from "../../shared/GameDefs";
 import { getGameStatus } from "../http/gameStatus";
+import { checkStatus } from "../utils/checkStatus";
 
 export const players: Ref<PublicPlayerDef[]> = ref([]);
 export const needingCharacters = ref<Character[]>([]);
@@ -19,6 +20,7 @@ export const date = ref<day>(-1);
 
 export const gameEvents = ref<GameEvent[]>([]);
 export const gameStatus = ref<GameStatus>(GameStatus.WOLF_KILL);
+watchEffect(checkStatus); //trigger when gameStatus is set
 
 export async function refresh() {
   const { data } = await getGameStatus({});

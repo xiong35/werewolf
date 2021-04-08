@@ -9,3 +9,5 @@ watch(memoContent, () => {
 export const showActions = ref(false);
 export const showEvents = ref(false);
 export const showCharacter = ref(true);
+
+export const canAct = ref(false);
