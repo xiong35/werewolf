@@ -34,7 +34,7 @@
     width: 100vw;
     height: 100vh;
     .main {
-      max-width: 500px;
+      max-width: 30rem;
       margin: auto;
     }
   }

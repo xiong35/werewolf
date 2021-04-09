@@ -1,6 +1,7 @@
 <template>
   <div class="play">
     <PlayerList :playerList="players"></PlayerList>
+
     <div class="date">
       Day {{ Math.ceil(date / 2) }}
       <img
@@ -8,7 +9,9 @@
         :src="`/src/assets/${date % 2 === 0 ? 'moon' : 'sun'}${theme}.svg`"
       />
     </div>
+
     <div class="game-status">{{ gameStatus }}</div>
+
     <div class="actions">
       <Btn @click="showCharacter = true" content="查看角色"></Btn>
       <Btn
@@ -24,6 +27,8 @@
       <Memo></Memo>
       <Events></Events>
     </div>
+
+    <BottomActions></BottomActions>
   </div>
 </template>
 
@@ -36,6 +41,7 @@
   import Memo from "../components/PlayMemo.vue";
   import Character from "../components/PlayCharacter.vue";
   import Actions from "../components/PlayActions/index.vue";
+  import BottomActions from "../components/PlayBottomActions.vue";
 
   import {
     characterStatus,
@@ -63,6 +69,7 @@
       Character,
       Actions,
       Events,
+      BottomActions,
     },
     setup(props) {
       onMounted(refresh);
