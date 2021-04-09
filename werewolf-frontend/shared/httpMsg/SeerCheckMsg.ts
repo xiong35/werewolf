@@ -1,9 +1,7 @@
 import { index } from "../ModelDefs";
-import {} from "../GameDefs";
+import CharacterAct from "./CharacterAct";
 
-export interface SeerCheckRequest {
-  for: index;
-}
+export interface SeerCheckRequest extends CharacterAct {}
 
 export interface SeerCheckResponse {
   status: number;

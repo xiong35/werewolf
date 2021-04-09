@@ -1,9 +1,7 @@
 import { index } from "../ModelDefs";
-import {} from "../GameDefs";
+import CharacterAct from "./CharacterAct";
 
-export interface WolfKillRequest {
-  for: index; // 杀谁
-}
+export interface WolfKillRequest extends CharacterAct {}
 
 export interface WolfKillResponse {
   status: number;

@@ -1,12 +1,11 @@
 import { index } from "../ModelDefs";
-import {} from "../GameDefs";
 
-export interface GuardProtectRequest {
-  for: index;
-}
+import CharacterAct from "./CharacterAct";
+
+export interface GuardProtectRequest extends CharacterAct {}
 
 export interface GuardProtectResponse {
   status: number;
   msg: string;
-  data: object;
+  data: {};
 }

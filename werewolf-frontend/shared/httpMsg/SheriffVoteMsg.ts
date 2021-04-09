@@ -1,9 +1,7 @@
 import { index } from "../ModelDefs";
-import {} from "../GameDefs";
+import CharacterAct from "./CharacterAct";
 
-export interface SheriffVoteRequest {
-  for: index;
-}
+export interface SheriffVoteRequest extends CharacterAct {}
 
 export interface SheriffVoteResponse {
   status: number;

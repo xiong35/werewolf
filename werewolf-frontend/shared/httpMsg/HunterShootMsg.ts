@@ -1,9 +1,7 @@
 import { index } from "../ModelDefs";
-import {} from "../GameDefs";
+import CharacterAct from "./CharacterAct";
 
-export interface HunterShootRequest {
-  to: index;
-}
+export interface HunterShootRequest extends CharacterAct {}
 
 export interface HunterShootResponse {
   status: number;
