@@ -5,6 +5,7 @@
         v-if="item.name !== undefined"
         class="box"
         :class="{ isDead: !item.isAlive }"
+        @class="() => setTarget(item.index)"
       >
         {{ item.name.slice(0, 3) + (item.name.length > 3 ? "..." : "") }}
         <div class="index">
@@ -32,6 +33,7 @@
 
 <script lang="ts">
   import { defineComponent } from "vue";
+  import { setTarget } from "../reactivity/playAction";
 
   import { theme } from "../reactivity/theme";
 
@@ -42,7 +44,7 @@
     },
     components: {},
     setup(props) {
-      return { theme };
+      return { theme, setTarget };
     },
   });
 
