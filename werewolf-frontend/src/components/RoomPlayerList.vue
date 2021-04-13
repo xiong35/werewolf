@@ -4,8 +4,12 @@
       <div
         v-if="item.name !== undefined"
         class="box"
-        :class="{ isDead: !item.isAlive }"
-        @class="() => setTarget(item.index)"
+        :style="{ cursor: isActing ? 'pointer' : 'inherit' }"
+        :class="{
+          isDead: !item.isAlive,
+          isChosen: item.index === target && isActing,
+        }"
+        @click="() => setTarget(item.index)"
       >
         {{ item.name.slice(0, 3) + (item.name.length > 3 ? "..." : "") }}
         <div class="index">
@@ -32,8 +36,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
-  import { setTarget } from "../reactivity/playAction";
+  import { defineComponent, computed } from "vue";
+  import { setTarget, isActing, target } from "../reactivity/playAction";
 
   import { theme } from "../reactivity/theme";
 
@@ -44,7 +48,7 @@
     },
     components: {},
     setup(props) {
-      return { theme, setTarget };
+      return { theme, setTarget, target, isActing };
     },
   });
 
@@ -118,6 +122,10 @@
       }
       .box.isDead {
         opacity: 50%;
+      }
+      .box.isChosen {
+        filter: brightness(1.7);
+        box-shadow: var(--on-bg) 2px 2px 0px 0px;
       }
     }
   }

@@ -21,7 +21,7 @@
   import { GameStatus } from "../../../shared/GameDefs";
   import { gameStatus } from "../../reactivity/game";
 
-  import Btn from "../Btn.vue";
+  import Btn from "./ActionBtn.vue";
 
   const ActionTemplate = defineComponent({
     name: "ActionTemplate",

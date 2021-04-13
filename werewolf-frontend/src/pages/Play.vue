@@ -13,14 +13,27 @@
     <div class="game-status">{{ gameStatus }}</div>
 
     <div class="actions">
-      <Btn @click="showCharacter = true" content="查看角色"></Btn>
       <Btn
+        :disabled="isActing"
+        @click="showCharacter = true"
+        content="查看角色"
+      ></Btn>
+      <Btn
+        :disabled="isActing"
         @click="showActions = true"
         :class="{ active: canAct }"
         content="显示操作"
       ></Btn>
-      <Btn @click="showMemo = true" content="备忘速记"></Btn>
-      <Btn @click="showEvents = true" content="事件记录"></Btn>
+      <Btn
+        :disabled="isActing"
+        @click="showMemo = true"
+        content="备忘速记"
+      ></Btn>
+      <Btn
+        :disabled="isActing"
+        @click="showEvents = true"
+        content="事件记录"
+      ></Btn>
 
       <Actions></Actions>
       <Character></Character>
@@ -59,6 +72,7 @@
     canAct,
   } from "../reactivity/playPage";
   import { theme } from "../reactivity/theme";
+  import { isActing } from "../reactivity/playAction";
 
   const Play = defineComponent({
     name: "Play",
@@ -85,6 +99,7 @@
         canAct,
         showCharacter,
         showEvents,
+        isActing,
 
         gameStatus,
         date,

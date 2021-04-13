@@ -9,7 +9,7 @@ export async function getGameStatus(
   data: GameStatusRequest
 ): Promise<GameStatusResponse> {
   const res = (await request({
-    url: "/game/gameStatus",
+    url: "/game/status",
     method: "POST",
     data,
   })) as unknown;

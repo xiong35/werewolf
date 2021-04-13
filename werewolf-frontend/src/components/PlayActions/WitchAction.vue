@@ -17,7 +17,7 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import Btn from "../Btn.vue";
+  import Btn from "./ActionBtn.vue";
   import ActionTemplate from "./ActionTemplate.vue";
   import { GameStatus } from "../../../shared/GameDefs";
   import { gameStatus } from "../../reactivity/game";
