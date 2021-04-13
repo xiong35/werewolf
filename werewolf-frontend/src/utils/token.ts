@@ -24,7 +24,8 @@ export function getToken(): TokenDef | null {
       if (dtDiff / 1000 / 3600 / 24 < 1) {
         return token;
       } else {
-        window.localStorage.removeItem(KEY);
+        // window.localStorage.removeItem(KEY);
+        // TODO remove token
       }
     }
   } catch (error) {}
