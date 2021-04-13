@@ -29,7 +29,7 @@ roomSchema.static("listAll", function (roomNumber: string) {
   });
 });
 
-interface RoomProps extends RoomDef, Document {}
+export interface RoomProps extends RoomDef, Document {}
 
 const Room: Model<RoomProps> = model("Rooms", roomSchema);
 
