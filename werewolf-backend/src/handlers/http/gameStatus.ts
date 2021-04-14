@@ -1,6 +1,9 @@
 import { Middleware } from "koa";
 import Room, { listAllOfRoom } from "../../models/RoomModel";
-import Player, { PlayerProps } from "../../models/PlayerModel";
+import Player, {
+  choosePublicInfo,
+  PlayerProps,
+} from "../../models/PlayerModel";
 import {
   CharacterEvent,
   GuardStatus,
@@ -30,8 +33,6 @@ const gameStatus: Middleware = async (ctx, next) => {
   // get events
   const events: CharacterEvent[] = [];
   if (room.isFinished) {
-    const players = ((await room.execPopulate())
-      .playerIDs as unknown) as PlayerProps[];
     players.forEach((player) => events.push(getEvents(player)));
   } else {
     events.push(getEvents(curPlayer));
@@ -46,7 +47,7 @@ const gameStatus: Middleware = async (ctx, next) => {
       self: curPlayer,
       curDay: room.currentDay,
       gameStatus: room.gameStatus?.[room.gameStatus.length - 1],
-      players,
+      players: choosePublicInfo(players),
       events: mergeEvents(events),
     },
   };

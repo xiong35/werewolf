@@ -5,6 +5,7 @@ import {
   InitRoomRequest,
   InitRoomResponse,
 } from "../../../../werewolf-frontend/shared/httpMsg/InitRoomMsg";
+import { choosePublicInfo } from "src/models/PlayerModel";
 
 const roomInit: Middleware = async (ctx) => {
   const roomNumber = ctx.get("RoomNumber");
@@ -18,7 +19,7 @@ const roomInit: Middleware = async (ctx) => {
     status: 200,
     msg: "ok",
     data: {
-      players,
+      players: choosePublicInfo(players),
       needingCharacters: room.needingCharacters,
     },
   };

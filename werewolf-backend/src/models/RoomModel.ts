@@ -33,7 +33,7 @@ export default Room;
 
 export function listAllOfNumber(
   roomNumber: string
-): Promise<PublicPlayerDef[]> {
+): Promise<PlayerProps[]> {
   return new Promise((res) => {
     Room.findOne({ roomNumber }).exec((err, room) => {
       if (!room || err) throw new Error();
@@ -44,11 +44,11 @@ export function listAllOfNumber(
 
 export function listAllOfRoom(
   room: RoomProps
-): Promise<PublicPlayerDef[]> {
+): Promise<PlayerProps[]> {
   return new Promise((resolve) => {
     room.populate("playerIDs", (err, room) => {
       const players = (room.playerIDs as unknown) as PlayerProps[];
-      resolve(choosePublicInfo(players));
+      resolve(players);
     });
   });
 }

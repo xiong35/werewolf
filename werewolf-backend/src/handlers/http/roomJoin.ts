@@ -1,6 +1,8 @@
 import { Middleware } from "koa";
 import Room, { listAllOfRoom } from "../../models/RoomModel";
-import Player from "../../models/PlayerModel";
+import Player, {
+  choosePublicInfo,
+} from "../../models/PlayerModel";
 import io from "../../index";
 import { Events } from "../../../../werewolf-frontend/shared/WSEvents";
 import { RoomJoinMsg } from "../../../../werewolf-frontend/shared/WSMsg/RoomJoin";
@@ -43,7 +45,9 @@ const roomJoin: Middleware = async (ctx) => {
 
   await Promise.all([player.save(), room.save()]);
 
-  const roomJoinMsg: RoomJoinMsg = await listAllOfRoom(room);
+  const roomJoinMsg: RoomJoinMsg = choosePublicInfo(
+    await listAllOfRoom(room)
+  );
 
   io.to(roomNumber).emit(Events.ROOM_JOIN, roomJoinMsg);
 
