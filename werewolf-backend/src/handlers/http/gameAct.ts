@@ -14,18 +14,16 @@ const gameAct: Middleware = async (ctx) => {
   if (!room) ctx.error(404, "未找到此房间号!");
   const player = await Player.findOne({ _id });
   if (!player) ctx.error(404, "id 错误!");
+  if (room.isFinished) ctx.error(404, "游戏已结束");
 
-  const gameStatus = room.gameStatus[room.gameStatus.length - 1];
+  const gameStatus = room.gameStatus?.[room.gameStatus.length - 1];
 
-  status2Handler[gameStatus](room, player, req.target, ctx);
-
-  const ret = {
-    status: 200,
-    msg: "ok",
-    data: {},
-  };
-
-  ctx.body = ret;
+  ctx.body = await status2Handler[gameStatus]?.(
+    room,
+    player,
+    req.target,
+    ctx
+  );
 };
 
 export default gameAct;

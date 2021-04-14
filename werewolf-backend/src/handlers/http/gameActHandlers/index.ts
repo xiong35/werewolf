@@ -16,11 +16,12 @@ import { SheriffVoteHandler } from "./SheriffVote";
 import { WitchActHandler } from "./WitchAct";
 import { WolfKillHandler } from "./WolfKill";
 
-interface Response {
+export interface Response {
   status: number;
   msg: string;
   data: object;
 }
+
 export type ActHandler = (
   room: RoomProps,
   player: PlayerProps,

@@ -1,6 +1,9 @@
 import { Schema, model, Model, Document } from "mongoose";
 
-import { PlayerDef } from "../../../werewolf-frontend/shared/ModelDefs";
+import {
+  PlayerDef,
+  PublicPlayerDef,
+} from "../../../werewolf-frontend/shared/ModelDefs";
 
 const playerSchema = new Schema({
   index: Number,
@@ -21,5 +24,18 @@ const playerSchema = new Schema({
 export interface PlayerProps extends Document, PlayerDef {}
 
 const Player: Model<PlayerProps> = model("Players", playerSchema);
+
+export function choosePublicInfo(
+  players: PlayerProps[]
+): PublicPlayerDef[] {
+  return players
+    .map((p) => ({
+      index: p.index,
+      isAlive: p.isAlive,
+      isSheriff: p.isSheriff,
+      name: p.name,
+    }))
+    .sort((a, b) => a.index - b.index);
+}
 
 export default Player;

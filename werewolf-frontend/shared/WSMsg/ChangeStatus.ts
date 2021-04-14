@@ -9,14 +9,18 @@ export interface ChangeStatusMsg {
   curPlayerStatus: PublicPlayerDef[];
 }
 
-type PublicMsg = VoteMsg | DayMsg;
+type PublicMsg = SheriffElectMsg | NightMsg | VoteResultMsg | {};
 
-export interface DayMsg {
-  die?: index;
+export interface NightMsg {
+  die: index;
 }
 
-export interface VoteMsg {
-  choices: index[]; // 被投票的玩家 id
+export interface SheriffElectMsg {
+  candidates: index[]; // 参与警长竞选的玩家 id
+}
+
+export interface VoteResultMsg {
+  result: index; // 票数最多的玩家 id
   for: "SHERIFF" | "EXILE";
 }
 

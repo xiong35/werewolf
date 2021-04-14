@@ -2,31 +2,27 @@ import { Schema, model, Model, Document } from "mongoose";
 import { GameStatus } from "../../../werewolf-frontend/shared/GameDefs";
 import {
   RoomDef,
-  PlayerDef,
   PublicPlayerDef,
 } from "../../../werewolf-frontend/shared/ModelDefs";
+import { choosePublicInfo, PlayerProps } from "./PlayerModel";
 
 const roomSchema = new Schema({
   roomNumber: String,
+  password: String,
   creatorID: Schema.Types.ObjectId,
   playerIDs: { type: [Schema.Types.ObjectId], ref: "Players" },
-  currentDay: { type: Number, default: 0 },
   needingCharacters: [String],
   remainingCharacters: [String],
   remainingIndexes: [Number],
   isFinished: { type: Boolean, default: false },
+
+  currentDay: { type: Number, default: 0 },
   gameStatus: { type: [String], default: [GameStatus.WOLF_KILL] },
-  password: String,
+
   joinElect: { type: [Number], default: [] },
   finishSpeaking: { type: [Number], default: [] },
-});
 
-roomSchema.static("listAll", function (roomNumber: string) {
-  return new Promise((res) => {
-    this.findOne({ roomNumber })
-      .populate("playerIDs")
-      .exec(function (err, room) {});
-  });
+  timmer: Number,
 });
 
 export interface RoomProps extends RoomDef, Document {}
@@ -51,17 +47,8 @@ export function listAllOfRoom(
 ): Promise<PublicPlayerDef[]> {
   return new Promise((resolve) => {
     room.populate("playerIDs", (err, room) => {
-      const players = (room.playerIDs as unknown) as PlayerDef[];
-      resolve(
-        players
-          .map((p) => ({
-            index: p.index,
-            isAlive: p.isAlive,
-            isSheriff: p.isSheriff,
-            name: p.name,
-          }))
-          .sort((a, b) => a.index - b.index)
-      );
+      const players = (room.playerIDs as unknown) as PlayerProps[];
+      resolve(choosePublicInfo(players));
     });
   });
 }
