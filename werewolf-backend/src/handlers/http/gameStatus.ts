@@ -23,6 +23,7 @@ const gameStatus: Middleware = async (ctx, next) => {
   ]);
   if (!curPlayer) ctx.error(401, "id 错误");
   if (!room) ctx.error(404, "未找到此房间号");
+  if (room.isFinished) ctx.error(404, "游戏已结束");
 
   const players = await listAllOfRoom(room);
 
