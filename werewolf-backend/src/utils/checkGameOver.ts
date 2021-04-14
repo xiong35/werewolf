@@ -24,6 +24,7 @@ export async function checkGameOver(
   );
   if (werewolf >= villager || werewolf === 0) {
     // TODO 哪一边获胜?
+    // TODO 关闭 ws 房间
     io.to(room.roomNumber).emit(Events.GAME_END /* TODO */);
     room.isFinished = true;
     await room.save();

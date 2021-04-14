@@ -3,7 +3,10 @@ import {
   choosePublicInfo,
   PlayerProps,
 } from "src/models/PlayerModel";
-import Room from "src/models/RoomModel";
+import Room, {
+  listAllOfRoom,
+  RoomProps,
+} from "src/models/RoomModel";
 import { dieCheckout } from "src/utils/dieCheckout";
 import { ActHandler, Response } from ".";
 import { GameStatus } from "../../../../../werewolf-frontend/shared/GameDefs";
@@ -20,10 +23,9 @@ export const ExileVoteHandler: ActHandler = async (
   player.hasVotedAt[day] = target > 0 ? target : -1;
   await player.save();
 
-  const players = ((await room.execPopulate())
-    .playerIDs as unknown) as PlayerProps[];
+  const players = await listAllOfRoom(room);
   if (players.every((p) => p.hasVotedAt[day] !== undefined)) {
-  } else {
+    return finishExileVote(room.roomNumber);
   }
 
   return {
@@ -34,14 +36,14 @@ export const ExileVoteHandler: ActHandler = async (
 };
 
 export async function finishExileVote(
-  roomNumber: string,
-  players?: PlayerProps[]
+  roomNumber: string
 ): Promise<Response> {
-  const room = await Room.findOne({ roomNumber });
-  if (!players) {
-    players = ((await room.execPopulate())
-      .playerIDs as unknown) as PlayerProps[];
-  }
+  // TODO check roomNumber when create and search
+  const room = await Room.findOne({
+    roomNumber,
+    isFinished: false,
+  });
+  const players = await listAllOfRoom(room);
 
   const day = room.currentDay;
 
@@ -85,15 +87,19 @@ export async function finishExileVote(
     setStatus: GameStatus.LEAVE_MSG,
     curPlayerStatus: choosePublicInfo(players),
   };
-  io.to(roomNumber).emit(Events.CHANGE_STATUS, msg); // to LEAVE_MSG
+  room.gameStatus.push(GameStatus.LEAVE_MSG);
+  io.to(room.roomNumber).emit(Events.CHANGE_STATUS, msg); // to LEAVE_MSG
 
   room.timmer = setTimeout(async () => {
     // 警长或猎人 -> 死亡结算
     if (diePlayer.character === "HUNTER" || diePlayer.isSheriff) {
-      return dieCheckout(room, diePlayer);
+      return dieCheckout(room.roomNumber, diePlayer._id);
     }
     // 其他 -> 进入黑夜
-    const newRoom = await Room.findOne({ roomNumber });
+    const newRoom = await Room.findOne({
+      roomNumber: room.roomNumber,
+      isFinished: false,
+    });
     if (newRoom.timmer === room.timmer) {
       newRoom.timmer = null;
       room.currentDay++;
@@ -106,7 +112,10 @@ export async function finishExileVote(
         curPlayerStatus: choosePublicInfo(players),
       };
 
-      io.to(roomNumber).emit(Events.CHANGE_STATUS, msg); // to WOLF_KILL
+      newRoom.gameStatus.push(GameStatus.WOLF_KILL);
+      await newRoom.save();
+
+      io.to(newRoom.roomNumber).emit(Events.CHANGE_STATUS, msg); // to WOLF_KILL
     }
   }, leaveMsgTime * 1000);
 
