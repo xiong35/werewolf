@@ -10,11 +10,13 @@ const gameAct: Middleware = async (ctx) => {
 
   const roomNumber = ctx.get("RoomNumber");
   const _id = ctx.get("Token");
-  const room = await Room.findOne({ roomNumber });
+  const room = await Room.findOne({
+    roomNumber,
+    isFinished: false,
+  });
   if (!room) ctx.error(404, "未找到此房间号!");
   const player = await Player.findOne({ _id });
   if (!player) ctx.error(404, "id 错误!");
-  if (room.isFinished) ctx.error(404, "游戏已结束");
 
   const gameStatus = room.gameStatus?.[room.gameStatus.length - 1];
 

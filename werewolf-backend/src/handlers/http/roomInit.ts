@@ -10,7 +10,10 @@ import { choosePublicInfo } from "src/models/PlayerModel";
 const roomInit: Middleware = async (ctx) => {
   const roomNumber = ctx.get("RoomNumber");
 
-  const room = await Room.findOne({ roomNumber });
+  const room = await Room.findOne({
+    roomNumber,
+    isFinished: false,
+  });
   if (!room) ctx.error(404, "未找到此房间号");
 
   const players = await listAllOfRoom(room);

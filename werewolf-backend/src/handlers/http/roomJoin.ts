@@ -18,6 +18,7 @@ const roomJoin: Middleware = async (ctx) => {
 
   const room = await Room.findOne({
     roomNumber,
+    isFinished: false,
   });
 
   if (!room) ctx.error(404, "未找到此房间号");
