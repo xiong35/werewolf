@@ -5,15 +5,21 @@
       :src="`/src/assets/close${theme}.svg`"
       alt="close"
     />
-    <span>选择目标</span>
-    <img :src="`/src/assets/checked${theme}.svg`" alt="checked" />
-    <!-- TODO!! bind submit method -->
+    <div>
+      <div>
+        <span>选择目标</span>
+      </div>
+      <div>
+        <small :style="{ opacity: 0.6 }">不选即为放弃</small>
+      </div>
+    </div>
+    <img @click="act" :src="`/src/assets/checked${theme}.svg`" alt="checked" />
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
-  import { isActing } from "../reactivity/playAction";
+  import { isActing, act } from "../reactivity/playAction";
   import { theme } from "../reactivity/theme";
 
   const PlayBottomActions = defineComponent({
@@ -23,6 +29,7 @@
       return {
         isActing,
         theme,
+        act,
       };
     },
   });
