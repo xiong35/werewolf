@@ -38,7 +38,6 @@ export const ExileVoteHandler: ActHandler = async (
 export async function finishExileVote(
   roomNumber: string
 ): Promise<Response> {
-  // TODO check roomNumber when create and search
   const room = await Room.findOne({
     roomNumber,
     isFinished: false,
