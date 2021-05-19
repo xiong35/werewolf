@@ -16,7 +16,7 @@ export class Room implements RoomDef {
   gameStatus: GameStatus[] = [];
   joinElect: number[] = [];
   finishSpeaking: number[] = [];
-  timmer: NodeJS.Timeout;
+  timer: NodeJS.Timeout;
 
   createdAt: Date = new Date();
 

@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 import { SERVER_BASE_URL } from "../../shared/constants";
-
 import { showDialog } from "../reactivity/dialog";
 import { getToken } from "../utils/token";
 
@@ -15,8 +14,8 @@ export default function request(config: AxiosRequestConfig) {
   instance.interceptors.request.use(
     (config) => {
       const token = getToken();
-      config.headers.Token = token?.ID;
-      config.headers.RoomNumber = token?.roomNumber;
+      config.headers.Token = token && token.ID;
+      config.headers.RoomNumber = token && token.roomNumber;
       return config;
     },
     (err) => {

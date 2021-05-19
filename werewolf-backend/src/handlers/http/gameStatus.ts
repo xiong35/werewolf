@@ -9,6 +9,9 @@ import {
 import { Player } from "../../models/PlayerModel";
 import { Room } from "../../models/RoomModel";
 
+/**
+ * fe refresh data
+ */
 const gameStatus: Middleware = async (ctx, next) => {
   const token = ctx.get("Token");
   const roomNumber = ctx.get("RoomNumber");
@@ -16,6 +19,7 @@ const gameStatus: Middleware = async (ctx, next) => {
   const room = Room.getRoom(roomNumber);
   const players = room.players;
   const curPlayer = room.getPlayerById(token);
+  console.log("# gameStatus", { room, curPlayer });
 
   // get events
   const events: CharacterEvent[] = [];

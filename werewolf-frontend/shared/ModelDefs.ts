@@ -18,7 +18,7 @@ export interface RoomDef {
   gameStatus: GameStatus[]; // 所有的游戏状态的栈 -> 游戏结束重置
   joinElect: index[]; // 上警的玩家
   finishSpeaking: index[]; // 发言结束的玩家
-  timmer: NodeJS.Timeout; // 事件定时器 id, undefined 则为结束
+  timer: NodeJS.Timeout; // 事件定时器 id, undefined 则为结束
 }
 
 export interface PublicPlayerDef {

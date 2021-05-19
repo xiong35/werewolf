@@ -1,16 +1,15 @@
-import * as Koa from "koa";
-import * as mongoose from "mongoose";
-import * as KoaBody from "koa-body";
-import * as cors from "@koa/cors";
-import * as logger from "koa-logger";
 import { createServer } from "http";
+import * as Koa from "koa";
+import * as KoaBody from "koa-body";
+import * as logger from "koa-logger";
+import * as mongoose from "mongoose";
 import { Server } from "socket.io";
 
-import { WS_PATH } from "../../werewolf-frontend/shared/constants";
+import * as cors from "@koa/cors";
 
-import router from "./routes";
+import { WS_PATH } from "../../werewolf-frontend/shared/constants";
 import useHandleError from "./middleware/handleError";
-import useAuth from "./middleware/auth";
+import router from "./routes";
 import { setup } from "./ws";
 
 mongoose.connect("mongodb://localhost/werewolf", {
@@ -33,6 +32,7 @@ const io = new Server(httpServer, {
   path: WS_PATH,
 });
 
+// listen to some events
 setup(io);
 
 app

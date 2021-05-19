@@ -8,7 +8,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, toRefs, onMounted, computed } from "vue";
+  import {
+    defineComponent,
+    toRefs,
+    onMounted,
+    computed,
+  } from "vue";
   import QRCode from "easyqrcodejs";
 
   import { CLIENT_BASE_URL } from "../../shared/constants";
@@ -29,7 +34,9 @@
       const { pw, number } = toRefs(props);
       onMounted(async () => {
         new QRCode(document.getElementById("qr-code"), {
-          text: `${CLIENT_BASE_URL}/joinRoom?pw=${pw?.value}&number=${number?.value}`,
+          text: `${CLIENT_BASE_URL}/joinRoom?pw=${
+            pw && pw.value
+          }&number=${number && number.value}`,
           logo: "/wolf.png",
           logoWidth: 20,
           logoHeight: 20,
@@ -42,12 +49,16 @@
       });
 
       const playerList = computed(() => {
-        return new Array(needingCharacters.value.length).fill(0).map(
-          (_, ind) =>
-            players.value.find((player) => player.index === ind + 1) ?? {
-              index: ind + 1,
-            }
-        );
+        return new Array(needingCharacters.value.length)
+          .fill(0)
+          .map(
+            (_, ind) =>
+              players.value.find(
+                (player) => player.index === ind + 1
+              ) ?? {
+                index: ind + 1,
+              }
+          );
       });
 
       return { showDialog, playerList };
@@ -56,7 +67,6 @@
 
   export default WaitRoom;
 </script>
-
 
 <style lang="scss" scoped>
   .waitroom {

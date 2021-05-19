@@ -56,8 +56,8 @@
     },
     setup(props) {
       const { pw, number } = toRefs(props);
-      if (pw?.value) password.value = pw.value;
-      if (number?.value)
+      if (pw && pw.value) password.value = pw.value;
+      if (number && number.value)
         roomNumber.value = number.value.slice(0, 6);
 
       return { password, roomNumber, nickname, join };

@@ -1,6 +1,10 @@
 <template>
   <div class="roomplayerlist">
-    <div v-for="item in playerList" :key="item.index" class="player">
+    <div
+      v-for="item in playerList"
+      :key="item.index"
+      class="player"
+    >
       <div
         v-if="item.name !== undefined"
         class="box"
@@ -11,7 +15,10 @@
         }"
         @click="() => setTarget(item.index)"
       >
-        {{ item.name.slice(0, 3) + (item.name.length > 3 ? "..." : "") }}
+        {{
+          item.name.slice(0, 3) +
+          (item.name.length > 3 ? "..." : "")
+        }}
         <div class="index">
           <span class="index-content">{{ item.index }}</span>
         </div>
@@ -37,7 +44,11 @@
 
 <script lang="ts">
   import { defineComponent, computed } from "vue";
-  import { setTarget, isActing, target } from "../reactivity/playAction";
+  import {
+    setTarget,
+    isActing,
+    target,
+  } from "../reactivity/playAction";
 
   import { theme } from "../reactivity/theme";
 
@@ -54,7 +65,6 @@
 
   export default RoomPlayerList;
 </script>
-
 
 <style lang="scss" scoped>
   .roomplayerlist {

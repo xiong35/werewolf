@@ -5,6 +5,9 @@ import {
 } from "../../../../werewolf-frontend/shared/httpMsg/InitRoomMsg";
 import { Room } from "../../models/RoomModel";
 
+/**
+ * enter room to get new data
+ */
 const roomInit: Middleware = async (ctx) => {
   const roomNumber = ctx.get("RoomNumber");
 
