@@ -3,35 +3,38 @@
     <span class="title">角色设置</span>
     <!-- TODO 警长, 屠边屠城 -->
     <div class="tile-wrapper">
-      <RoomCharacterTile
-        :key="name"
-        v-for="(name, value) in characters"
+      <room-character-tile
+        :key="value"
+        v-for="(_, value) in characters"
         :character="value"
-      ></RoomCharacterTile>
+      ></room-character-tile>
     </div>
     <div class="name">
       <span class="hint">你的昵称：</span>
-      <UseBorder>
+      <use-border>
         <input
-          maxlength="10"
+          :maxlength="10"
           type="text"
           placeholder="请输入昵称"
           v-model="nickname"
         />
-      </UseBorder>
+      </use-border>
     </div>
     <div class="password">
       <span class="hint">房间密码：</span>
-      <UseBorder>
+      <use-border>
         <input
           type="text"
-          maxlength="20"
+          :maxlength="20"
           placeholder="(可选)"
           v-model="password"
         />
-      </UseBorder>
+      </use-border>
     </div>
-    <Btn @click="create()" content="确认创建"></Btn>
+    <outlined-btn
+      @click="create()"
+      content="确认创建"
+    ></outlined-btn>
   </div>
 </template>
 
@@ -39,7 +42,7 @@
   import { defineComponent } from "vue";
 
   import RoomCharacterTile from "../components/RoomCharacterTile.vue";
-  import Btn from "../components/Btn.vue";
+  import OutlinedBtn from "../components/Btn.vue";
   import UseBorder from "../components/UseBorder.vue";
 
   import {
@@ -52,7 +55,7 @@
 
   const CreateRoom = defineComponent({
     name: "CreateRoom",
-    components: { RoomCharacterTile, Btn, UseBorder },
+    components: { RoomCharacterTile, OutlinedBtn, UseBorder },
     setup(props) {
       return {
         characters,
@@ -66,7 +69,6 @@
 
   export default CreateRoom;
 </script>
-
 
 <style lang="scss" scoped>
   .createroom {

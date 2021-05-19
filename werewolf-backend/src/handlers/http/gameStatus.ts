@@ -16,8 +16,6 @@ const gameStatus: Middleware = async (ctx, next) => {
   const room = Room.getRoom(roomNumber);
   const players = room.players;
   const curPlayer = room.getPlayerById(token);
-  if (curPlayer === undefined)
-    return createError({ status: 401, msg: "token 错误" });
 
   // get events
   const events: CharacterEvent[] = [];

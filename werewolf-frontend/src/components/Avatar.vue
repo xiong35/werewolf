@@ -11,7 +11,10 @@
 
 <script lang="ts">
   import { computed, defineComponent } from "vue";
-  import { ChineseNames, SetableCharacters } from "../../shared/GameDefs";
+  import {
+    ChineseNames,
+    SetableCharacters,
+  } from "../../shared/GameDefs";
 
   import { theme } from "../reactivity/theme";
 
@@ -30,7 +33,6 @@
 
   export default Avatar;
 </script>
-
 
 <style lang="scss" scoped>
   .avatar {

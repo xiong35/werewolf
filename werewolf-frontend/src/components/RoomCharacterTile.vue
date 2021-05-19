@@ -1,6 +1,6 @@
 <template>
   <div class="room-character-tile">
-    <Avatar :character="character"></Avatar>
+    <character-avatar :character="character"></character-avatar>
     <div class="controll">
       <div @click="setCharacter(character, -1)" class="down"></div>
       <div class="number">{{ num }}</div>
@@ -12,28 +12,37 @@
 <script lang="ts">
   import { defineComponent, toRef } from "vue";
 
-  import { setCharacter, characters } from "../reactivity/createRoom";
+  import {
+    setCharacter,
+    characters,
+  } from "../reactivity/createRoom";
 
-  import { ChineseNames, SetableCharacters } from "../../shared/GameDefs";
+  import {
+    ChineseNames,
+    SetableCharacters,
+  } from "../../shared/GameDefs";
 
-  import Avatar from "./Avatar.vue";
+  import CharacterAvatar from "./Avatar.vue";
 
   const RoomCharacter = defineComponent({
     name: "RoomCharacter",
-    components: { Avatar },
+    components: { CharacterAvatar },
     props: {
       character: { type: String, required: true },
     },
     setup(props) {
-      const num = toRef(characters, props.character as SetableCharacters);
-      const name = ChineseNames[props.character as SetableCharacters];
+      const num = toRef(
+        characters,
+        props.character as SetableCharacters
+      );
+      const name =
+        ChineseNames[props.character as SetableCharacters];
       return { setCharacter, name, num };
     },
   });
 
   export default RoomCharacter;
 </script>
-
 
 <style lang="scss" scoped>
   .room-character-tile {

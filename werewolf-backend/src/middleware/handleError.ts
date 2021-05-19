@@ -36,6 +36,7 @@ export function createError({
   status: number;
   msg: string;
 }): undefined {
+  console.log("# handleError", { msg });
   throw new Error(
     JSON.stringify({
       status,

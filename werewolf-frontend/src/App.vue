@@ -33,6 +33,7 @@
     .main {
       max-width: 30rem;
       margin: auto;
+      padding-bottom: 3rem;
     }
   }
 </style>
