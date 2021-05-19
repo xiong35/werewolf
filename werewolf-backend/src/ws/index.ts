@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+
 import { Events } from "../../../werewolf-frontend/shared/WSEvents";
 
 export function setup(io: Server) {
@@ -6,7 +7,7 @@ export function setup(io: Server) {
     console.log("ws connected");
 
     socket.on(Events.ROOM_JOIN, (roomNumber) => {
-      console.log("join room: " + roomNumber);
+      console.log("# join room: " + roomNumber);
       socket.join(roomNumber);
     });
   });

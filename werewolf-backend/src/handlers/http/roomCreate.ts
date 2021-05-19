@@ -30,6 +30,8 @@ const roomCreate: Middleware = async (ctx, next) => {
     },
   };
 
+  console.log("# roomCreate", { room, creator });
+
   ctx.body = ret;
 };
 

@@ -21,10 +21,15 @@
     <div class="name">
       <span class="hint">昵称：</span>
       <UseBorder>
-        <input maxlength="8" type="text" placeholder="" v-model="nickname" />
+        <input
+          :maxlength="8"
+          type="text"
+          placeholder=""
+          v-model="nickname"
+        />
       </UseBorder>
     </div>
-    <Btn @click="join()" content="确认加入"></Btn>
+    <Btn @click="join" content="确认加入"></Btn>
   </div>
 </template>
 
@@ -35,7 +40,12 @@
   import UseBorder from "../components/UseBorder.vue";
   import Btn from "../components/Btn.vue";
 
-  import { password, roomNumber, nickname, join } from "../reactivity/joinRoom";
+  import {
+    password,
+    roomNumber,
+    nickname,
+    join,
+  } from "../reactivity/joinRoom";
 
   const JoinRoom = defineComponent({
     name: "JoinRoom",
@@ -47,7 +57,8 @@
     setup(props) {
       const { pw, number } = toRefs(props);
       if (pw?.value) password.value = pw.value;
-      if (number?.value) roomNumber.value = number.value.slice(0, 6);
+      if (number?.value)
+        roomNumber.value = number.value.slice(0, 6);
 
       return { password, roomNumber, nickname, join };
     },
@@ -55,7 +66,6 @@
 
   export default JoinRoom;
 </script>
-
 
 <style lang="scss" scoped>
   .joinroom {

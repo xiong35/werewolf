@@ -26,5 +26,13 @@
 			"export default ${TM_FILENAME/(.*)\\..+$/$1/};",
 		],
 		"description": "create a http handler"
+	},
+	"debug": {
+		"scope": "typescript",
+		"prefix": "log#",
+		"body": [
+			"console.log('# ${TM_FILENAME/(.*)\\..+$/$1/}', $1);",
+		],
+		"description": "create a http handler"
 	}
 }

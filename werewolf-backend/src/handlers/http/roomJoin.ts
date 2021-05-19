@@ -13,6 +13,8 @@ const roomJoin: Middleware = async (ctx) => {
   const req = ctx.request.body as JoinRoomRequest;
   const { name, password, roomNumber } = req;
 
+  console.log("# roomJoin", { roomNumber });
+
   const room = Room.getRoom(roomNumber);
 
   const player = room.playerJoin(name, password);

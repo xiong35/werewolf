@@ -48,7 +48,7 @@ export class Room implements RoomDef {
       }
     }
     this.creatorID = creator._id;
-    this.players = [undefined, creator];
+    this.players = [creator];
     this.needingCharacters = needingCharacters; // default index=1
     this.remainingIndexes = new Array(needingCharacters.length - 1)
       .fill(0)
@@ -71,6 +71,8 @@ export class Room implements RoomDef {
 
     const index = this.remainingIndexes.shift(); // assign smallest index
     const player = new Player({ name, index });
+
+    this.players.push(player);
 
     return player;
   }

@@ -28,11 +28,8 @@
   export default Component;
 </script>
 
-
 <style lang="scss" scoped>
   .wrapper {
-    width: 100vw;
-    height: 100vh;
     .main {
       max-width: 30rem;
       margin: auto;

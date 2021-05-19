@@ -9,7 +9,7 @@ export type day = number; // 第0夜: 0, 第 n 天白天: 2n-1, 第 n 天晚上:
 export interface RoomDef {
   roomNumber: string; // 房间号码, 6 位数字
   creatorID: ID; // 创建者 ID
-  players: PlayerDef[]; // 参与者, 下标为 index
+  players: PlayerDef[]; // 参与者
   password?: string; // 是否设置密码, 存放哈希过的密码
   currentDay: day; // 当前天数 -> 游戏结束重置
   needingCharacters: Character[]; // 设置的角色
