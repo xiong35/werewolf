@@ -1,28 +1,20 @@
 import { Middleware } from "koa";
-import Room, { listAllOfRoom } from "../../models/RoomModel";
 
 import {
-  InitRoomRequest,
-  InitRoomResponse,
+    InitRoomRequest, InitRoomResponse
 } from "../../../../werewolf-frontend/shared/httpMsg/InitRoomMsg";
-import { choosePublicInfo } from "src/models/PlayerModel";
+import { Room } from "../../models/RoomModel";
 
 const roomInit: Middleware = async (ctx) => {
   const roomNumber = ctx.get("RoomNumber");
 
-  const room = await Room.findOne({
-    roomNumber,
-    isFinished: false,
-  });
-  if (!room) ctx.error(404, "未找到此房间号");
-
-  const players = await listAllOfRoom(room);
+  const room = Room.getRoom(roomNumber);
 
   const ret: InitRoomResponse = {
     status: 200,
     msg: "ok",
     data: {
-      players: choosePublicInfo(players),
+      players: room.choosePublicInfo(),
       needingCharacters: room.needingCharacters,
     },
   };

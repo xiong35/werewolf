@@ -1,6 +1,6 @@
 import { Middleware } from "koa";
 
-import Room from "../models/RoomModel";
+import { Room } from "../models/RoomModel";
 
 const UseAuth = function (): Middleware {
   return async (ctx, next) => {
@@ -8,16 +8,7 @@ const UseAuth = function (): Middleware {
       const token = ctx.get("Token");
       const roomNumber = ctx.get("RoomNumber");
 
-      let room;
-      try {
-        room = await Room.findOne({
-          roomNumber,
-          playerIDs: token,
-        });
-      } catch (e) {
-      } finally {
-        if (!room) ctx.error(401, "ID错误!");
-      }
+      Room.getRoom(roomNumber)?.getPlayerById(token); // 调用的函数自带检查
     }
     await next();
   };

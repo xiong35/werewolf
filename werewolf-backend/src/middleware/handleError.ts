@@ -2,22 +2,23 @@ import { Middleware } from "koa";
 
 const useHandleError = function (): Middleware {
   return async (ctx, next) => {
-    ctx.error = (status, msg) => {
-      ctx.status = status;
-      ctx.state.isKnownError = true;
-      throw new Error(msg);
-    };
-
+    // TODO fix all ctx.throw
     try {
       await next();
     } catch (err) {
-      const { isKnownError } = ctx.state;
-      ctx.body = {
-        status: isKnownError ? ctx.status : 500,
-        msg: isKnownError ? err.message : "服务器出了点错误呢QwQ",
-        data: {},
-      };
-      if (!isKnownError) {
+      try {
+        const msg = JSON.parse(err.message);
+        ctx.body = {
+          ...msg,
+          data: {},
+        };
+      } catch {
+        ctx.body = {
+          status: 500,
+          msg: err.message,
+          data: {},
+        };
+      } finally {
         console.error(err);
       }
     } finally {
@@ -27,3 +28,18 @@ const useHandleError = function (): Middleware {
 };
 
 export default useHandleError;
+
+export function createError({
+  status,
+  msg,
+}: {
+  status: number;
+  msg: string;
+}): undefined {
+  throw new Error(
+    JSON.stringify({
+      status,
+      msg,
+    })
+  );
+}

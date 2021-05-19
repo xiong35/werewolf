@@ -130,3 +130,9 @@ export enum GameStatus {
   /** 留遗言 */
   LEAVE_MSG = "留遗言",
 }
+
+export enum TIMEOUT {
+  leaveMsg = 90,
+  werewolfKill = 45,
+  seerCheck = 45,
+}

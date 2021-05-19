@@ -1,41 +1,38 @@
-import { Schema, model, Model, Document } from "mongoose";
-
+import { Character } from "../../../werewolf-frontend/shared/GameDefs";
 import {
-  PlayerDef,
-  PublicPlayerDef,
+    CharacterStatus, PlayerDef, PublicPlayerDef
 } from "../../../werewolf-frontend/shared/ModelDefs";
 
-const playerSchema = new Schema({
-  index: Number,
-  name: String,
-  isAlive: { type: Boolean, default: true },
-  isSheriff: { type: Boolean, default: false },
-  character: String,
-  characterStatus: Schema.Types.Mixed,
+export class Player implements PlayerDef {
+  character: Character;
+  characterStatus: CharacterStatus;
   die: {
-    at: { type: Number, default: -1 },
-    fromIndex: [Number],
-    fromCharacter: String,
-  },
-  hasVotedAt: { type: [Number], default: [] },
-  sheriffVotes: { type: [Number], default: [] },
-});
+    at: number;
+    fromIndex: number[];
+    fromCharacter: Character;
+  };
+  hasVotedAt: number[] = [];
+  sheriffVotes: number[] = [];
+  index: number;
+  name: string;
+  isAlive: boolean = true;
+  isSheriff: boolean = false;
+  _id: string;
 
-export interface PlayerProps extends Document, PlayerDef {}
+  constructor({ name, index }: { name: string; index: number }) {
+    this.name = name;
+    this.index = index;
 
-const Player: Model<PlayerProps> = model("Players", playerSchema);
+    this._id =
+      Math.random().toString(36).substring(2) + "." + Date.now();
+  }
 
-export function choosePublicInfo(
-  players: PlayerProps[]
-): PublicPlayerDef[] {
-  return players
-    .map((p) => ({
-      index: p.index,
-      isAlive: p.isAlive,
-      isSheriff: p.isSheriff,
-      name: p.name,
-    }))
-    .sort((a, b) => a.index - b.index);
+  toPublic(): PublicPlayerDef {
+    return {
+      index: this.index,
+      isAlive: this.isAlive,
+      isSheriff: this.isSheriff,
+      name: this.name,
+    };
+  }
 }
-
-export default Player;

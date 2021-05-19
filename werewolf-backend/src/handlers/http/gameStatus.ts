@@ -1,34 +1,23 @@
 import { Middleware } from "koa";
-import Room, { listAllOfRoom } from "../../models/RoomModel";
-import Player, {
-  choosePublicInfo,
-  PlayerProps,
-} from "../../models/PlayerModel";
-import {
-  CharacterEvent,
-  GuardStatus,
-  HunterStatus,
-  SeerStatus,
-  WerewolfStatus,
-  WitchStatus,
-} from "../../../../werewolf-frontend/shared/ModelDefs";
+import { createError } from "src/middleware/handleError";
 import { mergeEvents } from "src/utils/mergeEvents";
 
 import { GameStatusResponse } from "../../../../werewolf-frontend/shared/httpMsg/GameStatusMsg";
+import {
+    CharacterEvent, GuardStatus, HunterStatus, PlayerDef, SeerStatus, WerewolfStatus, WitchStatus
+} from "../../../../werewolf-frontend/shared/ModelDefs";
+import { Player } from "../../models/PlayerModel";
+import { Room } from "../../models/RoomModel";
 
 const gameStatus: Middleware = async (ctx, next) => {
   const token = ctx.get("Token");
   const roomNumber = ctx.get("RoomNumber");
 
-  const [curPlayer, room] = await Promise.all([
-    Player.findOne({ _id: token }),
-    Room.findOne({ roomNumber }),
-  ]);
-  if (!curPlayer) ctx.error(401, "id 错误");
-  if (!room) ctx.error(404, "未找到此房间号");
-  if (room.isFinished) ctx.error(404, "游戏已结束");
-
-  const players = await listAllOfRoom(room);
+  const room = Room.getRoom(roomNumber);
+  const players = room.players;
+  const curPlayer = room.getPlayerById(token);
+  if (curPlayer === undefined)
+    return createError({ status: 401, msg: "token 错误" });
 
   // get events
   const events: CharacterEvent[] = [];
@@ -47,14 +36,18 @@ const gameStatus: Middleware = async (ctx, next) => {
       self: curPlayer,
       curDay: room.currentDay,
       gameStatus: room.gameStatus?.[room.gameStatus.length - 1],
-      players: choosePublicInfo(players),
+      players: room.choosePublicInfo(),
       events: mergeEvents(events),
     },
   };
   ctx.body = ret;
 };
 
-function getEvents(player: PlayerProps): CharacterEvent {
+/**
+ * @param player 某个角色
+ * @returns 这个角色对应的 event对象列表
+ */
+function getEvents(player: PlayerDef): CharacterEvent {
   const { character, characterStatus } = player;
   const ret: CharacterEvent = {
     character,

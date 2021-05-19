@@ -1,11 +1,10 @@
 import { Middleware } from "koa";
-import Room from "../../models/RoomModel";
-import Player from "../../models/PlayerModel";
 
 import {
-  CreateRoomRequest,
-  CreateRoomResponse,
+    CreateRoomRequest, CreateRoomResponse
 } from "../../../../werewolf-frontend/shared/httpMsg/CreateRoomMsg";
+import { Player } from "../../models/PlayerModel";
+import { Room } from "../../models/RoomModel";
 
 const roomCreate: Middleware = async (ctx, next) => {
   const req = ctx.request.body as CreateRoomRequest;
@@ -16,20 +15,11 @@ const roomCreate: Middleware = async (ctx, next) => {
     name,
   });
 
-  // TODO 检查创建房间的人数配比
-
   const room = new Room({
-    roomNumber: Math.random().toString().slice(2, 8),
-    creatorID: creator._id,
-    playerIDs: [creator._id],
+    creator: creator,
     needingCharacters: characters,
-    remainingIndexes: new Array(characters.length - 1)
-      .fill(0)
-      .map((_, i) => i + 2),
     password,
   });
-
-  await Promise.all([creator.save(), room.save()]);
 
   const ret: CreateRoomResponse = {
     status: 200,

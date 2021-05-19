@@ -1,14 +1,14 @@
 import { Context } from "koa";
-import { RoomProps } from "../../../models/RoomModel";
-import { PlayerProps } from "../../../models/PlayerModel";
-import { GameStatus } from "../../../../../werewolf-frontend/shared/GameDefs";
 
+import { GameStatus } from "../../../../../werewolf-frontend/shared/GameDefs";
+import { Player } from "../../../models/PlayerModel";
+import { Room } from "../../../models/RoomModel";
 import { DayDiscussHandler } from "./DayDiscuss";
-import { LeaveMsgHandler } from "./LeaveMsg";
-import { HunterCheckHandler } from "./HunterCheck";
 import { ExileVoteHandler } from "./ExileVote";
 import { GuardProtectHandler } from "./GuardProtect";
+import { HunterCheckHandler } from "./HunterCheck";
 import { HunterShootHandler } from "./HunterShoot";
+import { LeaveMsgHandler } from "./LeaveMsg";
 import { SeerCheckHandler } from "./SeerCheck";
 import { SheriffAssignHandler } from "./SheriffAssign";
 import { SheriffElectHandler } from "./SheriffElect";
@@ -16,15 +16,15 @@ import { SheriffVoteHandler } from "./SheriffVote";
 import { WitchActHandler } from "./WitchAct";
 import { WolfKillHandler } from "./WolfKill";
 
-export interface Response {
+export interface Response<T = {}> {
   status: number;
   msg: string;
-  data: object;
+  data: T;
 }
 
 export type ActHandler = (
-  room: RoomProps,
-  player: PlayerProps,
+  room: Room,
+  player: Player,
   target: number,
   ctx: Context
 ) => Promise<Response>;

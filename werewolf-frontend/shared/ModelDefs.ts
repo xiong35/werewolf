@@ -2,14 +2,14 @@ import { Character, GameStatus, Potion } from "./GameDefs";
 
 export type Token = string;
 export type ID = string;
-export type index = number;
+export type index = number; // 从1开始
 
 export type day = number; // 第0夜: 0, 第 n 天白天: 2n-1, 第 n 天晚上: 2n
 
 export interface RoomDef {
   roomNumber: string; // 房间号码, 6 位数字
   creatorID: ID; // 创建者 ID
-  playerIDs: ID[]; // 参与者 ID
+  players: PlayerDef[]; // 参与者, 下标为 index
   password?: string; // 是否设置密码, 存放哈希过的密码
   currentDay: day; // 当前天数 -> 游戏结束重置
   needingCharacters: Character[]; // 设置的角色
@@ -40,6 +40,7 @@ export interface PlayerDef extends PublicPlayerDef {
   hasVotedAt: index[]; // index 是天数, value 是投给了谁 -> 游戏结束重置
   // 包括 狼人杀人 / 神职发动技能 / 白天投票
   sheriffVotes: index[]; // index 是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
+  _id: string; // string + 时间戳 的 token
 }
 
 export interface TokenDef {
@@ -79,11 +80,11 @@ interface PotionStatus {
 export type WitchStatus = Record<Potion, PotionStatus>;
 
 export type CharacterStatus = Partial<
-  | HunterStatus
-  | GuardStatus
-  | SeerStatus
-  | WerewolfStatus
-  | WitchStatus
+  HunterStatus &
+    GuardStatus &
+    SeerStatus &
+    WerewolfStatus &
+    WitchStatus
 >;
 
 export interface CharacterEvent {

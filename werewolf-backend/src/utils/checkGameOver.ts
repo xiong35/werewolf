@@ -1,6 +1,7 @@
 import io from "src";
-import { PlayerProps } from "src/models/PlayerModel";
-import { RoomProps } from "src/models/RoomModel";
+import { Player } from "src/models/PlayerModel";
+import { Room } from "src/models/RoomModel";
+
 import { Events } from "../../../werewolf-frontend/shared/WSEvents";
 
 /**
@@ -9,8 +10,8 @@ import { Events } from "../../../werewolf-frontend/shared/WSEvents";
  * @return {Promise<boolean>} 是否已经结束
  */
 export async function checkGameOver(
-  room: RoomProps,
-  players: PlayerProps[]
+  room: Room,
+  players: Player[]
 ): Promise<boolean> {
   const { werewolf, villager } = players.reduce(
     (prev, p) => {
@@ -27,7 +28,6 @@ export async function checkGameOver(
     // TODO 关闭 ws 房间
     io.to(room.roomNumber).emit(Events.GAME_END /* TODO */);
     room.isFinished = true;
-    await room.save();
     return true;
   } else {
     return false;

@@ -1,8 +1,9 @@
-import {
-  CharacterEvent,
-  GameEvent,
-} from "../../../werewolf-frontend/shared/ModelDefs";
+import { CharacterEvent, GameEvent } from "../../../werewolf-frontend/shared/ModelDefs";
 
+/**
+ * @param characterEvents 角色对应的 events
+ * @returns 按时间排序的events
+ */
 export function mergeEvents(
   characterEvents: CharacterEvent[]
 ): GameEvent[] {
