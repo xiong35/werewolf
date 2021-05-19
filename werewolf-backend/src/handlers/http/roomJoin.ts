@@ -39,12 +39,12 @@ const roomJoin: Middleware = async (ctx) => {
     ret.data.open = true;
     // assign characters
     const needingCharacters = [...room.needingCharacters];
-    const promises = [];
+
     for (let p of room.players) {
       const index = Math.floor(
         Math.random() * needingCharacters.length
       );
-      const character = room.needingCharacters.splice(index, 1)[0];
+      const character = needingCharacters.splice(index, 1)[0];
 
       p.character = character;
       switch (character) {

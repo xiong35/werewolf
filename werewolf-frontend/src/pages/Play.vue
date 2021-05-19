@@ -6,7 +6,9 @@
       Day {{ Math.ceil(date / 2) }}
       <img
         class="date-icon"
-        :src="`/src/assets/${date % 2 === 0 ? 'moon' : 'sun'}${theme}.svg`"
+        :src="`/src/assets/${
+          date % 2 === 0 ? 'moon' : 'sun'
+        }${theme}.svg`"
       />
     </div>
 
@@ -46,7 +48,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted } from "vue";
+  import { defineComponent, onActivated, onMounted } from "vue";
 
   import PlayerList from "../components/RoomPlayerList.vue";
   import Btn from "../components/Btn.vue";
@@ -87,6 +89,7 @@
     },
     setup(props) {
       onMounted(refresh);
+      onActivated(refresh);
 
       return {
         players,
@@ -110,7 +113,6 @@
 
   export default Play;
 </script>
-
 
 <style lang="scss" scoped>
   .play {
@@ -139,9 +141,9 @@
       }
     }
   }
-</style> 
+</style>
 
-<style lang="scss" >
+<style lang="scss">
   .play {
     @keyframes blink {
       from {
@@ -173,4 +175,4 @@
       }
     }
   }
-</style> 
+</style>
