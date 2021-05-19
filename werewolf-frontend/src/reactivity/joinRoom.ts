@@ -22,7 +22,7 @@ export async function join() {
     password: password.value ? sha256(password.value) : undefined,
   });
 
-  if (res.status === 200) {
+  if (res && res.status === 200) {
     if (res.data.open) {
       /* 如果加入后人齐了就进入游戏界面 */
       gameBegin();

@@ -9,6 +9,8 @@ export async function act() {
   const res = (await characterAct({
     target: target.value,
   })) as any; // TODO any?
+  // TODO deal with res
+
   /* hide dialog */
   isActing.value = false;
 

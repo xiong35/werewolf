@@ -44,8 +44,10 @@
           height: 100,
         });
         const res = await initRoom({ roomNumber: number.value });
-        players.value = res.data.players;
-        needingCharacters.value = res.data.needingCharacters;
+        if (res && res.status === 200) {
+          players.value = res.data.players;
+          needingCharacters.value = res.data.needingCharacters;
+        }
       });
 
       const playerList = computed(() => {

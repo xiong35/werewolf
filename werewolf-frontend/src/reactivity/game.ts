@@ -29,7 +29,9 @@ watchEffect(checkStatus); //
  * 获得最新的游戏信息
  */
 export async function refresh() {
-  const { data } = await getGameStatus({});
+  const { data } = (await getGameStatus({})) || {};
+  if (!data) return;
+
   character.value = data.curCharacter;
   date.value = data.curDay;
   characterStatus.value = data.curStatus;

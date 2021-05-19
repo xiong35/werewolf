@@ -1,17 +1,7 @@
+import { CreateRoomRequest, CreateRoomResponse } from "../../shared/httpMsg/CreateRoomMsg";
+import { InitRoomRequest, InitRoomResponse } from "../../shared/httpMsg/InitRoomMsg";
+import { JoinRoomRequest, JoinRoomResponse } from "../../shared/httpMsg/JoinRoomMsg";
 import request from "./_request";
-
-import {
-  CreateRoomRequest,
-  CreateRoomResponse,
-} from "../../shared/httpMsg/CreateRoomMsg";
-import {
-  JoinRoomResponse,
-  JoinRoomRequest,
-} from "../../shared/httpMsg/JoinRoomMsg";
-import {
-  InitRoomResponse,
-  InitRoomRequest,
-} from "../../shared/httpMsg/InitRoomMsg";
 
 export async function createRoom(
   data: CreateRoomRequest
@@ -27,7 +17,7 @@ export async function createRoom(
 
 export async function joinRoom(
   data: JoinRoomRequest
-): Promise<JoinRoomResponse> {
+): Promise<JoinRoomResponse | null> {
   const res = (await request({
     url: "/room/join",
     method: "POST",
@@ -39,7 +29,7 @@ export async function joinRoom(
 
 export async function initRoom(
   data: InitRoomRequest
-): Promise<InitRoomResponse> {
+): Promise<InitRoomResponse | null> {
   const res = (await request({
     url: "/room/init",
     method: "POST",

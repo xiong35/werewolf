@@ -19,7 +19,7 @@ export default function request(config: AxiosRequestConfig) {
       return config;
     },
     (err) => {
-      console.log(err);
+      console.error(err);
     }
   );
 
@@ -29,12 +29,13 @@ export default function request(config: AxiosRequestConfig) {
       if (data.status === 200) {
         return data;
       } else {
-        showDialog(data.msg || "不知道发生了什么呢QwQ");
+        console.error(response);
+        showDialog("不知道发生了什么呢QwQ");
         return null;
       }
     },
     (err) => {
-      console.log(err);
+      console.error(err);
     }
   );
 
