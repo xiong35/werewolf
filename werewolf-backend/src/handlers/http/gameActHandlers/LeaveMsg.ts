@@ -27,7 +27,11 @@ export const LeaveMsgHandler: GameActHandler = {
   },
 
   async finishCurrentState(room: Room) {
-
+    return {
+      status: 200,
+      msg: "ok",
+      data: {},
+    };
   },
 };
 

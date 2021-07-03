@@ -36,7 +36,7 @@ export interface GameActHandler {
   /** 在 mainHandler 中被调用
    * 在玩家做出选择或定时器到点时调用, 设置进入下一状态并开启结束下一状态的定时器
    */
-  finishCurrentState: (room: Room) => void;
+  finishCurrentState: (room: Room) => Promise<Response>;
 }
 
 export const status2Handler: Record<GameStatus, GameActHandler> = {
