@@ -1,24 +1,26 @@
 import { createError } from "src/middleware/handleError";
 
 import { Character, GameStatus } from "../../../werewolf-frontend/shared/GameDefs";
-import { PlayerDef, PublicPlayerDef, RoomDef } from "../../../werewolf-frontend/shared/ModelDefs";
+import {
+    day, ID, index, PlayerDef, PublicPlayerDef, RoomDef
+} from "../../../werewolf-frontend/shared/ModelDefs";
 import { Player } from "./PlayerModel";
 
 export class Room implements RoomDef {
   roomNumber: string;
-  creatorID: string;
+  creatorID: ID;
   players: Player[];
   password?: string;
-  currentDay: number = 0;
+  currentDay: day = 0;
   needingCharacters: Character[];
-  remainingIndexes: number[];
-  isFinished: boolean = false;
+  remainingIndexes: index[];
+  isFinished = false;
   gameStatus: GameStatus[] = [];
-  joinElect: number[] = [];
-  finishSpeaking: number[] = [];
+  joinElect: index[] = [];
+  finishSpeaking: index[] = [];
   timer: NodeJS.Timeout;
 
-  createdAt: Date = new Date();
+  createdAt = new Date();
 
   private static roomMap: Record<string, Room> = {};
 
@@ -79,7 +81,7 @@ export class Room implements RoomDef {
 
   choosePublicInfo(): PublicPlayerDef[] {
     return this.players
-      .map((p) => p.toPublic())
+      .map((p) => p.getPublic())
       .sort((a, b) => a.index - b.index);
   }
 

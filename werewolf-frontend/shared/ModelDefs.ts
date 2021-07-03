@@ -1,8 +1,7 @@
 import { Character, GameStatus, Potion } from "./GameDefs";
 
-export type Token = string;
-export type ID = string;
-export type index = number; // 从1开始
+export type ID = string; // 玩家 id
+export type index = number; // 玩家编号, 从1开始
 
 export type day = number; // 第0夜: 0, 第 n 天白天: 2n-1, 第 n 天晚上: 2n
 
@@ -30,17 +29,17 @@ export interface PublicPlayerDef {
 
 export interface PlayerDef extends PublicPlayerDef {
   character: Character; // 游戏角色 -> 游戏结束重置
-  characterStatus: CharacterStatus; // 允许自定义 -> 游戏结束重置
-  die: {
+  characterStatus?: CharacterStatus; // 允许自定义 -> 游戏结束重置
+  die?: {
     // 具体死亡信息 -> 游戏结束重置
     at: day; // 第几天死的
     fromIndex: index[]; // 被哪些人杀死的(名字)
     fromCharacter: Character; // 被哪个角色杀死的
   };
-  hasVotedAt: index[]; // index 是天数, value 是投给了谁 -> 游戏结束重置
+  hasVotedAt: index[]; // 下标是天数, value 是投给了谁 -> 游戏结束重置
   // 包括 狼人杀人 / 神职发动技能 / 白天投票
-  sheriffVotes: index[]; // index 是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
-  _id: string; // string + 时间戳 的 token
+  sheriffVotes: index[]; // 下标是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
+  _id: ID; // string + 时间戳 的 token
 }
 
 export interface TokenDef {

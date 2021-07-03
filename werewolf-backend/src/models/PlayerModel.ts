@@ -1,25 +1,25 @@
 import { Character } from "../../../werewolf-frontend/shared/GameDefs";
 import {
-    CharacterStatus, PlayerDef, PublicPlayerDef
+    CharacterStatus, day, ID, index, PlayerDef, PublicPlayerDef
 } from "../../../werewolf-frontend/shared/ModelDefs";
 
 export class Player implements PlayerDef {
   character: Character; // is set when game begins
 
-  hasVotedAt: number[] = [];
-  sheriffVotes: number[] = [];
-  isAlive: boolean = true;
-  isSheriff: boolean = false;
-  die: {
-    at: number;
-    fromIndex: number[];
+  hasVotedAt: index[];
+  sheriffVotes: index[] = [];
+  isAlive = true;
+  isSheriff = false;
+  die?: {
+    at: day;
+    fromIndex: index[];
     fromCharacter: Character;
-  } = undefined;
-  characterStatus: CharacterStatus = undefined;
+  };
+  characterStatus?: CharacterStatus;
 
-  index: number;
+  index: index;
   name: string;
-  _id: string;
+  _id: ID;
 
   constructor({ name, index }: { name: string; index: number }) {
     this.name = name;
@@ -33,7 +33,7 @@ export class Player implements PlayerDef {
    * 将 Player 信息转换成公开的信息
    * @returns 可公开的信息
    */
-  toPublic(): PublicPlayerDef {
+  getPublic(): PublicPlayerDef {
     return {
       index: this.index,
       isAlive: this.isAlive,

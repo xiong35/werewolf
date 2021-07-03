@@ -2,6 +2,7 @@ import { Middleware } from "koa";
 import { createError } from "src/middleware/handleError";
 import { mergeEvents } from "src/utils/mergeEvents";
 
+import { IDHeaderName, RoomNumberHeaderName } from "../../../../werewolf-frontend/shared/constants";
 import { GameStatusResponse } from "../../../../werewolf-frontend/shared/httpMsg/GameStatusMsg";
 import {
     CharacterEvent, GuardStatus, HunterStatus, PlayerDef, SeerStatus, WerewolfStatus, WitchStatus
@@ -13,12 +14,12 @@ import { Room } from "../../models/RoomModel";
  * fe refresh data
  */
 const gameStatus: Middleware = async (ctx, next) => {
-  const token = ctx.get("Token");
-  const roomNumber = ctx.get("RoomNumber");
+  const playerID = ctx.get(IDHeaderName);
+  const roomNumber = ctx.get(RoomNumberHeaderName);
 
   const room = Room.getRoom(roomNumber);
   const players = room.players;
-  const curPlayer = room.getPlayerById(token);
+  const curPlayer = room.getPlayerById(playerID);
   console.log("# gameStatus", { room, curPlayer });
 
   // get events
