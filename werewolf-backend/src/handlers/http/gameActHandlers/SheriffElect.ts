@@ -1,3 +1,5 @@
+  
+import { Context } from "koa";
 import io from "src";
 import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
@@ -8,27 +10,29 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { ActHandler, Response } from "./";
+import { GameActHandler, Response } from "./";
 
-export const SheriffElectHandler: ActHandler = async (
-  room,
-  player,
-  target,
-  ctx
-) => {
-  return {
-    status: 200,
-    msg: "ok",
-    data: {},
-  };
+export const SheriffElectHandler: GameActHandler = {
+  async mainHandler(
+    room: Room,
+    player: Player,
+    target: index,
+    ctx: Context
+  ) {
+    return {
+      status: 200,
+      msg: "ok",
+      data: {},
+    };
+  },
+
+  async finishCurrentState(room: Room) {
+    return {
+      status: 200,
+      msg: "ok",
+      data: {},
+    };
+  },
 };
 
-export async function finishSheriffElect(
-  roomNumber: string
-): Promise<Response> {
-  return {
-    status: 200,
-    msg: "ok",
-    data: {},
-  };
-}
+

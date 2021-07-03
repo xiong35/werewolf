@@ -131,6 +131,7 @@ export enum GameStatus {
   LEAVE_MSG = "留遗言",
 }
 
+/** 预设的每个阶段的时间限制 */
 export enum TIMEOUT {
   leaveMsg = 90,
   werewolfKill = 45,
