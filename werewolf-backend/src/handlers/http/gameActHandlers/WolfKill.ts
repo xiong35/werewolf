@@ -1,4 +1,3 @@
-  
 import { Context } from "koa";
 import io from "src";
 import { Player } from "src/models/PlayerModel";
@@ -26,13 +25,5 @@ export const WolfKillHandler: GameActHandler = {
     };
   },
 
-  async finishCurrentState(room: Room) {
-    return {
-      status: 200,
-      msg: "ok",
-      data: {},
-    };
-  },
+  async finishCurrentState(room: Room) {},
 };
-
-
