@@ -1,10 +1,8 @@
-  
 import { Context } from "koa";
 import io from "src";
 import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
-import { dieCheckout } from "src/utils/dieCheckout";
-import { getToDieFromVotes } from "src/utils/getToDieFromVotes";
+import { getVoteResult } from "src/utils/getVoteResult";
 
 import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
@@ -13,7 +11,7 @@ import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/C
 import { GameActHandler, Response } from "./";
 
 export const LeaveMsgHandler: GameActHandler = {
-  async mainHandler(
+  async handleHttp(
     room: Room,
     player: Player,
     target: index,
@@ -22,17 +20,9 @@ export const LeaveMsgHandler: GameActHandler = {
     return {
       status: 200,
       msg: "ok",
-      data: {},
+      data: { target },
     };
   },
 
-  async finishCurrentState(room: Room) {
-    return {
-      status: 200,
-      msg: "ok",
-      data: {},
-    };
-  },
+  async endOfState(room: Room) {},
 };
-
-

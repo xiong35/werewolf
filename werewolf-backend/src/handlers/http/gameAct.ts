@@ -21,9 +21,10 @@ const gameAct: Middleware = async (ctx) => {
 
   const gameStatus = room.gameStatus?.[room.gameStatus.length - 1];
   // TODO check character
+  // TODO validate request
 
   // strategy pattern
-  ctx.body = await status2Handler[gameStatus]?.mainHandler?.(
+  ctx.body = await status2Handler[gameStatus]?.handleHttp?.(
     room,
     player,
     req.target,

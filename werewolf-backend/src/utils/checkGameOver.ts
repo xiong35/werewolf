@@ -6,14 +6,10 @@ import { Events } from "../../../werewolf-frontend/shared/WSEvents";
 
 /**
  * @param room 当前房间
- * @param players 当前所有玩家
  * @return {Promise<boolean>} 是否已经结束
  */
-export async function checkGameOver(
-  room: Room,
-  players: Player[]
-): Promise<boolean> {
-  const { werewolf, villager } = players.reduce(
+export async function checkGameOver(room: Room): Promise<boolean> {
+  const { werewolf, villager } = room.players.reduce(
     (prev, p) => {
       if (p.isAlive) {
         if (p.character === "WEREWOLF") prev.werewolf++;

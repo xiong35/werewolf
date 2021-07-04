@@ -1,3 +1,5 @@
+import { RoomDef } from "./ModelDefs";
+
 export type SetableCharacters =
   | "HUNTER"
   | "WITCH"
@@ -57,6 +59,7 @@ export enum GameStatus {
    * 预言家验人入栈
    */
   WOLF_KILL = "狼人杀人",
+  WOLF_KILL_CHECK = "狼人查看投票结果",
 
   /**
    * 预言家验人
@@ -94,13 +97,13 @@ export enum GameStatus {
    * - 平票: 投票选警长 入栈
    */
   SHERIFF_VOTE = "投票选警长",
+  SHERIFF_VOTE_CHECK = "警长投票结果",
 
   /**
    * 指派警长，
    * 指当前警长去世了, 指定新的警长
    *
    * 老警长 10s 选择，
-   * 选择后 10s 时间确认
    */
   SHERIFF_ASSIGN = "指派警长",
 
@@ -120,6 +123,7 @@ export enum GameStatus {
    * 狼人杀人 入栈
    */
   EXILE_VOTE = "票选狼人",
+  EXILE_VOTE_CHECK = "票选狼人结果",
 
   /**
    * 猎人开枪
@@ -131,9 +135,21 @@ export enum GameStatus {
   LEAVE_MSG = "留遗言",
 }
 
-/** 预设的每个阶段的时间限制 */
-export enum TIMEOUT {
-  leaveMsg = 90,
-  werewolfKill = 45,
-  seerCheck = 45,
-}
+/** 预设的每个阶段的时间限制(s) */
+export const TIMEOUT: Record<GameStatus, number> = {
+  [GameStatus.WOLF_KILL]: 999,
+  [GameStatus.WOLF_KILL_CHECK]: 999,
+  [GameStatus.SEER_CHECK]: 999,
+  [GameStatus.WITCH_ACT]: 999,
+  [GameStatus.GUARD_PROTECT]: 999,
+  [GameStatus.HUNTER_CHECK]: 999,
+  [GameStatus.SHERIFF_ELECT]: 999,
+  [GameStatus.SHERIFF_VOTE]: 999,
+  [GameStatus.SHERIFF_VOTE_CHECK]: 999,
+  [GameStatus.SHERIFF_ASSIGN]: 999,
+  [GameStatus.DAY_DISCUSS]: 999,
+  [GameStatus.EXILE_VOTE]: 999,
+  [GameStatus.EXILE_VOTE_CHECK]: 999,
+  [GameStatus.HUNTER_SHOOT]: 999,
+  [GameStatus.LEAVE_MSG]: 999,
+};
