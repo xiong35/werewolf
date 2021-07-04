@@ -1,11 +1,5 @@
-import {
-  PublicPlayerDef,
-  CharacterStatus,
-  GameEvent,
-  day,
-  PlayerDef,
-} from "../ModelDefs";
 import { Character, GameStatus } from "../GameDefs";
+import { day, GameEvent, PlayerDef, PublicPlayerDef } from "../ModelDefs";
 
 export interface GameStatusRequest {}
 
@@ -17,7 +11,6 @@ export interface GameStatusResponse {
     self: PlayerDef;
 
     curCharacter: Character;
-    curStatus: CharacterStatus;
 
     events: GameEvent[]; // TODO get data on open menu?
 

@@ -34,6 +34,7 @@ const roomJoin: Middleware = async (ctx) => {
   io.to(roomNumber).emit(Events.ROOM_JOIN, roomJoinMsg);
 
   if (roomJoinMsg.length === room.needingCharacters.length) {
+    // 如果人数满了
     console.log("#game being");
 
     ret.data.open = true;
@@ -85,6 +86,7 @@ const roomJoin: Middleware = async (ctx) => {
       }
     }
     io.to(roomNumber).emit(Events.GAME_BEGIN);
+    // TODO 开始狼人杀人的定时器
   }
 
   ctx.body = ret;

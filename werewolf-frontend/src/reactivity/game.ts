@@ -1,7 +1,9 @@
 import { ref, Ref, watchEffect } from "vue";
 
 import { Character, GameStatus } from "../../shared/GameDefs";
-import { CharacterStatus, day, GameEvent, PublicPlayerDef } from "../../shared/ModelDefs";
+import {
+    CharacterStatus, day, GameEvent, PlayerDef, PublicPlayerDef
+} from "../../shared/ModelDefs";
 import { getGameStatus } from "../http/gameStatus";
 import { checkStatus } from "../utils/checkStatus";
 
@@ -10,7 +12,7 @@ export const players: Ref<PublicPlayerDef[]> = ref([]);
 /** 角色配置 */
 export const needingCharacters = ref<Character[]>([]);
 /** 自己的详细状态 */
-export const characterStatus = ref<CharacterStatus>({});
+export const self = ref<PlayerDef | null>();
 /** 自己的角色 */
 export const character = ref<Character>("");
 /** 天数 */
@@ -34,9 +36,8 @@ export async function refresh() {
 
   character.value = data.curCharacter;
   date.value = data.curDay;
-  characterStatus.value = data.curStatus;
   gameEvents.value = data.events;
   gameStatus.value = data.gameStatus;
   players.value = data.players;
-  data.self; // TODO
+  self.value = data.self;
 }

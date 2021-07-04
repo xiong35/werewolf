@@ -1,6 +1,6 @@
 import { GameStatus } from "../../shared/GameDefs";
 import { showDialog } from "../reactivity/dialog";
-import { gameStatus, character } from "../reactivity/game";
+import { character, gameStatus, players, self } from "../reactivity/game";
 import { canAct } from "../reactivity/playPage";
 
 export function checkStatus() {
@@ -31,6 +31,8 @@ function _canAct(): boolean {
       return character.value === "WITCH";
     case GameStatus.WOLF_KILL:
       return character.value === "WEREWOLF";
+    case GameStatus.SHERIFF_ASSIGN:
+      return self?.value?.isSheriff === true;
 
     default:
       return false;

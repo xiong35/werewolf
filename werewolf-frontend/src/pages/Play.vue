@@ -59,7 +59,7 @@
   import BottomActions from "../components/PlayBottomActions.vue";
 
   import {
-    characterStatus,
+    self,
     character,
     refresh,
     players,
@@ -94,7 +94,7 @@
       return {
         players,
 
-        characterStatus,
+        self,
         character,
 
         showMemo,
