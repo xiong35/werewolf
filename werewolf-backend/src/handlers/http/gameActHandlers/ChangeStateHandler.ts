@@ -2,52 +2,52 @@ import { Room } from "src/models/RoomModel";
 
 import { Character, GameStatus } from "../../../../../werewolf-frontend/shared/GameDefs";
 
+/**
+ * 根据现有房间状态判断下一游戏状态是什么, 若出现角色空缺则链式调用后续判断函数\
+ * 调用此函数时所有状态均为最新状态
+ */
 export type GetNextState = (
   room: Room,
   extra?: unknown
 ) => GameStatus;
 
-// TODO 责任链?
-export const nextStateOfWerewolf: GetNextState = (room, extra) => {
-  if (
-    room.needingCharacters.includes("WEREWOLF") &&
-    room.gameStatus[room.gameStatus.length - 1] !==
-      GameStatus.WOLF_KILL
-  )
-    return GameStatus.WOLF_KILL;
-
-  return nextStateOfSeer(room, extra);
+export const nextStateOfWolfKill: GetNextState = (room, extra) => {
+  return GameStatus.WOLF_KILL_CHECK;
 };
 
-export const nextStateOfSeer: GetNextState = (room, extra) => {
-  if (
-    room.needingCharacters.includes("SEER") &&
-    room.gameStatus[room.gameStatus.length - 1] !==
-      GameStatus.SEER_CHECK
-  )
+export const nextStateOfWolfKillCheck: GetNextState = (
+  room,
+  extra
+) => {
+  if (room.needingCharacters.includes("SEER"))
     return GameStatus.SEER_CHECK;
 
-  return nextStateOfWitch(room, extra);
+  return nextStateOfSeerCheck(room, extra);
 };
 
-export const nextStateOfWitch: GetNextState = (room, extra) => {
-  if (
-    room.needingCharacters.includes("WITCH") &&
-    room.gameStatus[room.gameStatus.length - 1] !==
-      GameStatus.WITCH_ACT
-  )
+export const nextStateOfSeerCheck: GetNextState = (
+  room,
+  extra
+) => {
+  if (room.needingCharacters.includes("WITCH"))
     return GameStatus.WITCH_ACT;
 
-  return nextStateOfGuard(room, extra);
+  return nextStateOfWitchAct(room, extra);
 };
 
-export const nextStateOfGuard: GetNextState = (room, extra) => {
-  if (
-    room.needingCharacters.includes("GUARD") &&
-    room.gameStatus[room.gameStatus.length - 1] !==
-      GameStatus.GUARD_PROTECT
-  )
+export const nextStateOfWitchAct: GetNextState = (room, extra) => {
+  if (room.needingCharacters.includes("GUARD"))
     return GameStatus.GUARD_PROTECT;
+
+  return nextStateOfGuardProtect(room, extra);
+};
+
+export const nextStateOfGuardProtect: GetNextState = (
+  room,
+  extra
+) => {
+  if (room.needingCharacters.includes("HUNTER"))
+    return GameStatus.HUNTER_CHECK;
 
   return nextStateOfHunterCheck(room, extra);
 };
@@ -56,12 +56,52 @@ export const nextStateOfHunterCheck: GetNextState = (
   room,
   extra
 ) => {
-  if (
-    room.needingCharacters.includes("HUNTER") &&
-    room.gameStatus[room.gameStatus.length - 1] !==
-      GameStatus.GUARD_PROTECT
-  )
-    return GameStatus.GUARD_PROTECT;
+  if (room.currentDay === 1) return GameStatus.SHERIFF_ELECT;
 
-  return nextStateOfGuard(room, extra);
+  return GameStatus.BEFORE_DAY_DISCUSS;
+};
+
+export const nextStateOfSheriffElect: GetNextState = (
+  room,
+  extra
+) => {
+  return GameStatus.SHERIFF_VOTE;
+};
+export const nextStateOfSheriffVote: GetNextState = (
+  room,
+  extra
+) => {
+  return GameStatus.SHERIFF_VOTE_CHECK;
+};
+export const nextStateOfSheriffVoteCheck: GetNextState = (
+  room,
+  extra
+) => {
+  return GameStatus.BEFORE_DAY_DISCUSS;
+};
+
+export const nextStateOfBeforeDayDiscuss: GetNextState = (
+  room,
+  extra
+) => {
+  return GameStatus.DAY_DISCUSS;
+};
+
+export const nextStateOfDayDiscuss: GetNextState = (
+  room,
+  extra
+) => {
+  return GameStatus.EXILE_VOTE;
+};
+export const nextStateOfExileVote: GetNextState = (
+  room,
+  extra
+) => {
+  return GameStatus.EXILE_VOTE_CHECK;
+};
+export const nextStateOfExileVoteCheck: GetNextState = (
+  room,
+  extra
+) => {
+  return GameStatus.WOLF_KILL;
 };

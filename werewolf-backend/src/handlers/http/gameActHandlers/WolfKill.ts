@@ -9,7 +9,7 @@ import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
 import { GameActHandler, Response, status2Handler } from "./";
-import { nextStateOfWerewolf } from "./ChangeStateHandler";
+import { nextStateOfWolfKill } from "./ChangeStateHandler";
 
 export const WolfKillHandler: GameActHandler = {
   async handleHttp(
@@ -63,7 +63,7 @@ export const WolfKillHandler: GameActHandler = {
     }
 
     // 通知所有人更新状态
-    const nextState = nextStateOfWerewolf(room);
+    const nextState = nextStateOfWolfKill(room);
     const timeout = TIMEOUT[nextState];
     io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
       setDay: room.currentDay,

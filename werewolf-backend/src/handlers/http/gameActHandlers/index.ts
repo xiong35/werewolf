@@ -4,6 +4,7 @@ import { GameStatus } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Player } from "../../../models/PlayerModel";
 import { Room } from "../../../models/RoomModel";
+import { BeforeDayDiscussHandler } from "./BeforeDayDiscuss";
 import { DayDiscussHandler } from "./DayDiscuss";
 import { ExileVoteHandler } from "./ExileVote";
 import { ExileVoteCheckHandler } from "./ExileVoteCheck";
@@ -68,4 +69,5 @@ export const status2Handler: Record<GameStatus, GameActHandler> = {
   [GameStatus.EXILE_VOTE_CHECK]: ExileVoteCheckHandler,
   [GameStatus.WOLF_KILL_CHECK]: WolfKillCheckHandler,
   [GameStatus.SHERIFF_VOTE_CHECK]: SheriffVoteCheckHandler,
+  [GameStatus.BEFORE_DAY_DISCUSS]: BeforeDayDiscussHandler,
 };

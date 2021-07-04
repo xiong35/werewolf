@@ -108,6 +108,13 @@ export enum GameStatus {
   SHERIFF_ASSIGN = "指派警长",
 
   /**
+   * 夜晚结算
+   * - 如果猎人死了, 猎人开枪入栈
+   * - 如果警长死了, 传警徽
+   */
+  BEFORE_DAY_DISCUSS = "夜晚结算",
+
+  /**
    * 自由发言
    * - 投票出人 入栈
    * - 如果猎人死了, 猎人开枪入栈
@@ -152,4 +159,5 @@ export const TIMEOUT: Record<GameStatus, number> = {
   [GameStatus.EXILE_VOTE_CHECK]: 999,
   [GameStatus.HUNTER_SHOOT]: 999,
   [GameStatus.LEAVE_MSG]: 999,
+  [GameStatus.BEFORE_DAY_DISCUSS]: 999,
 };
