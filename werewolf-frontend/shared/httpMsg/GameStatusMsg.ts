@@ -10,8 +10,6 @@ export interface GameStatusResponse {
     players: PublicPlayerDef[];
     self: PlayerDef;
 
-    curCharacter: Character;
-
     events: GameEvent[]; // TODO get data on open menu?
 
     curDay: day;

@@ -34,8 +34,6 @@ const gameStatus: Middleware = async (ctx, next) => {
     status: 200,
     msg: "ok",
     data: {
-      curCharacter: curPlayer.character,
-      curStatus: curPlayer.characterStatus,
       self: curPlayer,
       curDay: room.currentDay,
       gameStatus: room.gameStatus?.[room.gameStatus.length - 1],

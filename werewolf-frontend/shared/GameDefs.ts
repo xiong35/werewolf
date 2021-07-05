@@ -11,7 +11,7 @@ export type SetableCharacters =
 export type Character =
   | SetableCharacters
   | "SHERIFF"
-  | "HOST"
+  // | "HOST"
   | "";
 
 export enum Potion {
@@ -22,7 +22,7 @@ export enum Potion {
 export const ChineseNames: Record<Character, string> = {
   HUNTER: "猎人",
   GUARD: "守卫",
-  HOST: "主持人",
+  // HOST: "主持人",
   SEER: "预言家",
   SHERIFF: "警长",
   VILLAGER: "村民",
@@ -36,7 +36,7 @@ export const CharacterIntro: Record<Character, string> = {
     "你在死亡后可以选择开枪杀死任意一名玩家，但若是被女巫毒死则无法使用此技能。每晚你会醒来查看自己的开枪状态。",
   GUARD:
     "你每晚可以保护一名角色（包括自己）不被狼人伤害，但不能连续两天守护同一个人。若你守护的人同时被女巫施用了灵药，他还是会死亡。",
-  HOST: "主持人",
+  // HOST: "主持人",
   SEER: "每晚可以查验一名角色是否为狼人。",
   SHERIFF:
     "在白天的放逐投票中，你选择的人将获得 1.5 票。在你死后，可以选择指派任意玩家继任警长，也可以销毁警徽（如果这么做，村庄将再也不会有警长了）。",
