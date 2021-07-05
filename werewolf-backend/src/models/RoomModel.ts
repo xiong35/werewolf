@@ -15,7 +15,7 @@ export class Room implements RoomDef {
   needingCharacters: Character[];
   remainingIndexes: index[];
   isFinished = false;
-  gameStatus: GameStatus[] = [];
+  gameStatus: GameStatus[] = [GameStatus.WOLF_KILL];
   joinElect: index[] = [];
   finishSpeaking: index[] = [];
   timer: NodeJS.Timeout;
