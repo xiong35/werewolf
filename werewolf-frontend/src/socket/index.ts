@@ -1,8 +1,7 @@
 import * as io from "socket.io-client";
 
-import { Events } from "../../shared/WSEvents";
 import { SERVER_BASE_URL, WS_PATH } from "../../shared/constants";
-
+import { Events } from "../../shared/WSEvents";
 // handlers
 import changeStatus from "./changeStatus";
 import gameBegin from "./gameBegin";

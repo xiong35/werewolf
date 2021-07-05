@@ -5,7 +5,7 @@ import {
     CharacterStatus, day, GameEvent, PlayerDef, PublicPlayerDef
 } from "../../shared/ModelDefs";
 import { getGameStatus } from "../http/gameStatus";
-import { checkStatus } from "../utils/checkStatus";
+import { handleStatusChange } from "./handleStatusChange";
 
 /** 玩家的公开信息 */
 export const players: Ref<PublicPlayerDef[]> = ref([]);
@@ -33,10 +33,9 @@ export const gameEvents = ref<GameEvent[]>([]);
 /** 当前游戏进程 */
 export const gameStatus = ref<GameStatus>(GameStatus.WOLF_KILL);
 /**
- * trigger when gameStatus is set
- * 展示"你可以行动了"
+ * gameStatus 被修改时调用, 改变 ui 状态, 弹出提示等
  */
-watchEffect(checkStatus); //
+watchEffect(handleStatusChange); //
 
 /**
  * 获得最新的游戏信息
