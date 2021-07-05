@@ -32,7 +32,7 @@ function _canAct(): boolean {
     case GameStatus.WOLF_KILL:
       return character.value === "WEREWOLF";
     case GameStatus.SHERIFF_ASSIGN:
-      return self?.value?.isSheriff === true;
+      return self.value.isSheriff === true;
 
     default:
       return false;

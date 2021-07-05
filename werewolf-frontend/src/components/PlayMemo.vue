@@ -18,7 +18,7 @@
     props: {},
     setup(props) {
       onMounted(() => {
-        memoContent.value = localStorage.getItem("memo") ?? "";
+        memoContent.value = localStorage.getItem("memo") || "";
       });
       return { showMemo, memoContent };
     },
@@ -26,7 +26,6 @@
 
   export default Memo;
 </script>
-
 
 <style lang="scss" scoped>
   .use-menu {

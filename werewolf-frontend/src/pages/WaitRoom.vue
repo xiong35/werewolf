@@ -57,7 +57,7 @@
             (_, ind) =>
               players.value.find(
                 (player) => player.index === ind + 1
-              ) ?? {
+              ) || {
                 index: ind + 1,
               }
           );

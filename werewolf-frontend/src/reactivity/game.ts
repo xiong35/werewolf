@@ -12,7 +12,16 @@ export const players: Ref<PublicPlayerDef[]> = ref([]);
 /** 角色配置 */
 export const needingCharacters = ref<Character[]>([]);
 /** 自己的详细状态 */
-export const self = ref<PlayerDef | null>();
+export const self = ref<PlayerDef>({
+  _id: "",
+  character: "",
+  hasVotedAt: [],
+  index: 0,
+  isAlive: false,
+  isSheriff: false,
+  name: "---",
+  sheriffVotes: [],
+});
 /** 自己的角色 */
 export const character = computed(() =>
   self.value ? self.value.character : ""

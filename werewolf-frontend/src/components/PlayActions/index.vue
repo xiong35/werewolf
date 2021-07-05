@@ -1,5 +1,3 @@
-
-
 <script lang="ts">
   import { defineComponent, h, withDirectives, vShow } from "vue";
 
@@ -21,15 +19,16 @@
         {
           onCancel: () => (showActions.value = false),
         },
-        () => h(char2Action[character.value] ?? "div")
+        () => h(char2Action[character.value] || "div")
       );
-      return withDirectives(dialogVNode, [[vShow, showActions.value]]);
+      return withDirectives(dialogVNode, [
+        [vShow, showActions.value],
+      ]);
     },
   });
 
   export default PlayActions;
 </script>
-
 
 <style lang="scss" scoped>
   .use-menu {

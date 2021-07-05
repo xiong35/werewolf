@@ -26,7 +26,7 @@ export default function request(config: AxiosRequestConfig) {
 
   instance.interceptors.response.use(
     (response) => {
-      const data = response.data ?? {};
+      const data = response.data || {};
       if (data.status === 200) {
         return data;
       } else {

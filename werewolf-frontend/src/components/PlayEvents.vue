@@ -37,7 +37,7 @@
         gameEvents.value.forEach((e) => {
           const at = e.at;
           const day = Math.ceil(at / 2);
-          list[day] ??= [];
+          list[day] ? void 0 : (list[day] = []);
           list[day].push(e);
         });
         return list;
@@ -50,8 +50,7 @@
   export default Events;
 </script>
 
-
-<style lang="scss" >
+<style lang="scss">
   .use-menu.game-event {
     text-align: center;
     .use-border {

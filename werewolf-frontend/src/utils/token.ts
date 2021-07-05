@@ -13,7 +13,7 @@ export function setToken(ID: string, roomNumber: string) {
 
 export function getToken(): TokenDef | null {
   try {
-    const str = window.localStorage.getItem(KEY) ?? "@";
+    const str = window.localStorage.getItem(KEY) || "@";
     const token = JSON.parse(str) as TokenDef;
     if (
       typeof token.ID === "string" &&
