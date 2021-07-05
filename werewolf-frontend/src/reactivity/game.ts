@@ -5,7 +5,6 @@ import {
     CharacterStatus, day, GameEvent, PlayerDef, PublicPlayerDef
 } from "../../shared/ModelDefs";
 import { getGameStatus } from "../http/gameStatus";
-import { handleStatusChange } from "./handleStatusChange";
 
 /** 玩家的公开信息 */
 export const players: Ref<PublicPlayerDef[]> = ref([]);
@@ -35,7 +34,6 @@ export const gameStatus = ref<GameStatus>(GameStatus.WOLF_KILL);
 /**
  * gameStatus 被修改时调用, 改变 ui 状态, 弹出提示等
  */
-watchEffect(handleStatusChange); //
 
 /**
  * 获得最新的游戏信息

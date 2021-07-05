@@ -3,23 +3,25 @@
 
   import { showActions } from "../../reactivity/playPage";
 
-  import { char2Action } from "./char2Action";
+  import { actionList } from "./char2Action";
 
   import UseMenu from "../UseMenu.vue";
   import { character } from "../../reactivity/game";
 
   const PlayActions = defineComponent({
     name: "PlayActions",
-    components: {
-      UseMenu,
-    },
     render() {
       const dialogVNode = h(
         UseMenu,
         {
           onCancel: () => (showActions.value = false),
         },
-        () => h(char2Action[character.value] || "div")
+        () =>
+          h(
+            "div",
+            { class: "play__action-list" },
+            actionList.map((comp) => h(comp))
+          )
       );
       return withDirectives(dialogVNode, [
         [vShow, showActions.value],
@@ -30,7 +32,12 @@
   export default PlayActions;
 </script>
 
-<style lang="scss" scoped>
-  .use-menu {
+<style lang="scss">
+  .play__action-list {
+    display: flex;
+    flex-direction: column;
+    .btn {
+      margin: 8px;
+    }
   }
 </style>

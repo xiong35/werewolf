@@ -1,19 +1,16 @@
 <template>
-  <div class="seer-action">
-    <ActionTemplate>
-      <Btn
-        :disabled="gameStatus !== GameStatus.SEER_CHECK"
-        content="查看角色身份"
-      ></Btn>
-    </ActionTemplate>
-  </div>
+  <Btn
+    class="seer-action"
+    :disabled="gameStatus !== GameStatus.SEER_CHECK"
+    content="查看角色身份"
+  ></Btn>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
 
   import Btn from "./ActionBtn.vue";
-  import ActionTemplate from "./ActionTemplate.vue";
+
   import { GameStatus } from "../../../shared/GameDefs";
   import { gameStatus } from "../../reactivity/game";
 
@@ -21,7 +18,6 @@
     name: "SeerAction",
     components: {
       Btn,
-      ActionTemplate,
     },
     setup(props) {
       return {
@@ -33,7 +29,6 @@
 
   export default SeerAction;
 </script>
-
 
 <style lang="scss" scoped>
   .seer-action {

@@ -1,22 +1,22 @@
 import { ComponentOptions } from "vue";
 
 import { Character } from "../../../shared/GameDefs";
+import ExileVote from "./ExileVote.vue";
 import GuardAction from "./GuardAction.vue";
 import HunterAction from "./HunterAction.vue";
 import SeerAction from "./SeerAction.vue";
+import SheriffAssign from "./SheriffAssign.vue";
+import SheriffVote from "./SheriffVote.vue";
 import WerewolfAction from "./WerewolfAction.vue";
 import WitchAction from "./WitchAction.vue";
 
-export const char2Action: Record<
-  Character,
-  ComponentOptions | null
-> = {
-  "": null,
-  SHERIFF: null, // TODO 警长也需要
-  VILLAGER: null,
-  GUARD: GuardAction,
-  HUNTER: HunterAction,
-  SEER: SeerAction,
-  WEREWOLF: WerewolfAction,
-  WITCH: WitchAction,
-};
+export const actionList: ComponentOptions[] = [
+  ExileVote,
+  GuardAction,
+  HunterAction,
+  SeerAction,
+  SheriffAssign,
+  SheriffVote,
+  WerewolfAction,
+  WitchAction,
+];

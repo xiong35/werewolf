@@ -1,21 +1,20 @@
 <template>
   <Btn
-    class="werewolf-action"
-    :disabled="gameStatus !== GameStatus.WOLF_KILL"
-    content="选择杀害对象"
+    class="exile-vote"
+    :disabled="gameStatus !== GameStatus.GUARD_PROTECT"
+    content="票选警长"
   ></Btn>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
-
-  import Btn from "./ActionBtn.vue";
-
   import { GameStatus } from "../../../shared/GameDefs";
   import { gameStatus } from "../../reactivity/game";
 
-  const WerewolfAction = defineComponent({
-    name: "WerewolfAction",
+  import Btn from "./ActionBtn.vue";
+
+  const ExileVote = defineComponent({
+    name: "ExileVote",
     components: {
       Btn,
     },
@@ -27,10 +26,10 @@
     },
   });
 
-  export default WerewolfAction;
+  export default ExileVote;
 </script>
 
 <style lang="scss" scoped>
-  .werewolf-action {
+  .exile-vote {
   }
 </style>

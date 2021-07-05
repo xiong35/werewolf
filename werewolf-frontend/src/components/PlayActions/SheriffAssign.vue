@@ -1,21 +1,20 @@
 <template>
   <Btn
-    class="werewolf-action"
-    :disabled="gameStatus !== GameStatus.WOLF_KILL"
-    content="选择杀害对象"
+    class="sheriff-assign"
+    :disabled="gameStatus !== GameStatus.GUARD_PROTECT"
+    content="传递警徽"
   ></Btn>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
-
-  import Btn from "./ActionBtn.vue";
-
   import { GameStatus } from "../../../shared/GameDefs";
   import { gameStatus } from "../../reactivity/game";
 
-  const WerewolfAction = defineComponent({
-    name: "WerewolfAction",
+  import Btn from "./ActionBtn.vue";
+
+  const SheriffAssign = defineComponent({
+    name: "SheriffAssign",
     components: {
       Btn,
     },
@@ -27,10 +26,10 @@
     },
   });
 
-  export default WerewolfAction;
+  export default SheriffAssign;
 </script>
 
 <style lang="scss" scoped>
-  .werewolf-action {
+  .sheriff-assign {
   }
 </style>

@@ -37,8 +37,8 @@
         content="事件记录"
       ></Btn>
 
-      <Actions></Actions>
       <Character></Character>
+      <Actions></Actions>
       <Memo></Memo>
       <Events></Events>
     </div>

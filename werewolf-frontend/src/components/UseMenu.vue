@@ -34,7 +34,6 @@
   export default UseMenu;
 </script>
 
-
 <style lang="scss" scoped>
   .use-menu {
     position: fixed;

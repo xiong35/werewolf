@@ -1,12 +1,9 @@
 <template>
-  <div class="guard-action">
-    <ActionTemplate>
-      <Btn
-        :disabled="gameStatus !== GameStatus.GUARD_PROTECT"
-        content="选择守护对象"
-      ></Btn>
-    </ActionTemplate>
-  </div>
+  <Btn
+    class="guard-action"
+    :disabled="gameStatus !== GameStatus.GUARD_PROTECT"
+    content="选择守护对象"
+  ></Btn>
 </template>
 
 <script lang="ts">
@@ -15,13 +12,11 @@
   import { gameStatus } from "../../reactivity/game";
 
   import Btn from "./ActionBtn.vue";
-  import ActionTemplate from "./ActionTemplate.vue";
 
   const GuardAction = defineComponent({
     name: "GuardAction",
     components: {
       Btn,
-      ActionTemplate,
     },
     setup(props) {
       return {
@@ -33,7 +28,6 @@
 
   export default GuardAction;
 </script>
-
 
 <style lang="scss" scoped>
   .guard-action {
