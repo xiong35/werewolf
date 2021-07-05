@@ -1,5 +1,6 @@
 <template>
   <Btn
+    v-if="isShown"
     class="seer-action"
     :disabled="gameStatus !== GameStatus.SEER_CHECK"
     content="查看角色身份"
@@ -7,12 +8,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { computed, defineComponent } from "vue";
 
   import Btn from "./ActionBtn.vue";
 
   import { GameStatus } from "../../../shared/GameDefs";
-  import { gameStatus } from "../../reactivity/game";
+  import { gameStatus, self } from "../../reactivity/game";
 
   const SeerAction = defineComponent({
     name: "SeerAction",
@@ -20,9 +21,14 @@
       Btn,
     },
     setup(props) {
+      const isShown = computed(
+        () => self.value.character === "SEER"
+      );
+
       return {
         GameStatus,
         gameStatus,
+        isShown,
       };
     },
   });

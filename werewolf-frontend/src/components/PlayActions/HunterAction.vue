@@ -1,5 +1,6 @@
 <template>
   <Btn
+    v-if="isShown"
     class="hunter-action"
     :disabled="gameStatus !== GameStatus.HUNTER_CHECK"
     content="查看开枪状态"
@@ -7,12 +8,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { computed, defineComponent } from "vue";
 
   import Btn from "./ActionBtn.vue";
 
   import { GameStatus } from "../../../shared/GameDefs";
-  import { gameStatus } from "../../reactivity/game";
+  import { gameStatus, self } from "../../reactivity/game";
 
   const HunterAction = defineComponent({
     name: "HunterAction",
@@ -20,9 +21,14 @@
       Btn,
     },
     setup(props) {
+      const isShown = computed(
+        () => self.value.character === "HUNTER"
+      );
+
       return {
         GameStatus,
         gameStatus,
+        isShown,
       };
     },
   });

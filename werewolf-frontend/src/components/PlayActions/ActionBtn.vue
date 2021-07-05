@@ -1,7 +1,9 @@
 <template>
   <Btn
     :disabled="disabled"
-    :onClick="() => (disabled ? null : (commonAction(), onClick()))"
+    :onClick="
+      () => (disabled ? null : (commonAction(), onClick()))
+    "
   ></Btn>
 </template>
 
@@ -26,8 +28,4 @@
   export default ActionBtn;
 </script>
 
-
-<style lang="scss" scoped>
-  .actionbtn {
-  }
-</style>
+<style lang="scss" scoped></style>

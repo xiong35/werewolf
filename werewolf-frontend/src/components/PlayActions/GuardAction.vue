@@ -1,5 +1,6 @@
 <template>
   <Btn
+    v-if="isShown"
     class="guard-action"
     :disabled="gameStatus !== GameStatus.GUARD_PROTECT"
     content="选择守护对象"
@@ -7,9 +8,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { computed, defineComponent } from "vue";
   import { GameStatus } from "../../../shared/GameDefs";
-  import { gameStatus } from "../../reactivity/game";
+  import { gameStatus, self } from "../../reactivity/game";
 
   import Btn from "./ActionBtn.vue";
 
@@ -19,9 +20,14 @@
       Btn,
     },
     setup(props) {
+      const isShown = computed(
+        () => self.value.character === "GUARD"
+      );
+
       return {
         GameStatus,
         gameStatus,
+        isShown,
       };
     },
   });

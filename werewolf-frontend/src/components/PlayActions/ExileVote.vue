@@ -1,13 +1,13 @@
 <template>
   <Btn
     class="exile-vote"
-    :disabled="gameStatus !== GameStatus.GUARD_PROTECT"
-    content="票选警长"
+    content="票选狼人"
+    :disabled="gameStatus !== GameStatus.EXILE_VOTE"
   ></Btn>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { computed, defineComponent } from "vue";
   import { GameStatus } from "../../../shared/GameDefs";
   import { gameStatus } from "../../reactivity/game";
 

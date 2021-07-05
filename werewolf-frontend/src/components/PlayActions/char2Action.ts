@@ -12,11 +12,11 @@ import WitchAction from "./WitchAction.vue";
 
 export const actionList: ComponentOptions[] = [
   ExileVote,
+  SheriffVote,
+  SheriffAssign,
   GuardAction,
   HunterAction,
   SeerAction,
-  SheriffAssign,
-  SheriffVote,
   WerewolfAction,
   WitchAction,
 ];

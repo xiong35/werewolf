@@ -1,5 +1,6 @@
 <template>
   <Btn
+    v-if="isShown"
     class="sheriff-assign"
     :disabled="gameStatus !== GameStatus.GUARD_PROTECT"
     content="传递警徽"
@@ -7,9 +8,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { computed, defineComponent } from "vue";
   import { GameStatus } from "../../../shared/GameDefs";
-  import { gameStatus } from "../../reactivity/game";
+  import { gameStatus, self } from "../../reactivity/game";
 
   import Btn from "./ActionBtn.vue";
 
@@ -19,9 +20,12 @@
       Btn,
     },
     setup(props) {
+      const isShown = computed(() => self.value.isSheriff);
+
       return {
         GameStatus,
         gameStatus,
+        isShown,
       };
     },
   });
