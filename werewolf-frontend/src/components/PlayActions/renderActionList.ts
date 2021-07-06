@@ -2,6 +2,7 @@ import { ComponentOptions, ComputedRef, h, vShow, withDirectives } from "vue";
 
 import { Character, GameStatus } from "../../../shared/GameDefs";
 import { gameStatus, self } from "../../reactivity/game";
+import { potion } from "../../reactivity/playAction";
 import ActionBtn from "./ActionBtn.vue";
 
 const actionInfoList: {
@@ -9,6 +10,7 @@ const actionInfoList: {
   isShown: () => boolean;
   disabled: () => boolean;
   noTarget?: boolean;
+  onClick?: Function;
 }[] = [
   {
     content: "票选狼人",
@@ -40,11 +42,13 @@ const actionInfoList: {
     content: "使用毒药",
     isShown: () => self.value.character === "WITCH",
     disabled: () => gameStatus.value !== GameStatus.WITCH_ACT,
+    onClick: () => (potion.value = "POISON"),
   },
   {
     content: "使用灵药",
     isShown: () => self.value.character === "WITCH",
     disabled: () => gameStatus.value !== GameStatus.WITCH_ACT,
+    onClick: () => (potion.value = "MEDICINE"),
   },
   {
     content: "保护一名玩家",
@@ -77,5 +81,6 @@ export const renderActionList = () =>
       disabled: obj.disabled(),
       content: obj.content,
       noTarget: obj.noTarget,
+      onClick: obj.onClick,
     });
   });

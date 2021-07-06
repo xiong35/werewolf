@@ -1,7 +1,12 @@
 <template>
   <Btn
     :disabled="disabled"
-    :onClick="() => (disabled ? null : commonAction(noTarget))"
+    :onClick="
+      () => {
+        onClick ? onClick() : void 0;
+        disabled ? null : commonAction(noTarget);
+      }
+    "
   ></Btn>
 </template>
 
@@ -19,9 +24,14 @@
         type: Boolean,
         default: false,
       },
+      /** 当前操作是否是有目标的操作, 如结束发言就没有目标 */
       noTarget: {
         type: Boolean,
         default: false,
+      },
+      onClick: {
+        type: Function,
+        required: false,
       },
     },
     setup(props) {

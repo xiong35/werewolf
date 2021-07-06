@@ -14,10 +14,7 @@ export type Character =
   // | "HOST"
   | "";
 
-export enum Potion {
-  POISON = "POISON",
-  MEDICINE = "MEDICINE",
-}
+export type Potion = "POISON" | "MEDICINE";
 
 export const ChineseNames: Record<Character, string> = {
   HUNTER: "猎人",

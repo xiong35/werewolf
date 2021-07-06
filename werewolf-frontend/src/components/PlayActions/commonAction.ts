@@ -1,5 +1,3 @@
-import { GameStatus } from "../../../shared/GameDefs";
-import { gameStatus } from "../../reactivity/game";
 import { isActing, noTarget, target } from "../../reactivity/playAction";
 import { showActions } from "../../reactivity/playPage";
 

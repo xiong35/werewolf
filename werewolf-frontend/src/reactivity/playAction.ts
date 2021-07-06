@@ -1,11 +1,18 @@
 import { ref } from "vue";
 
-import { Potion } from "../../shared/GameDefs";
+import { GameStatus, Potion } from "../../shared/GameDefs";
 import { index } from "../../shared/ModelDefs";
 import { characterAct } from "../http/action";
 import { showDialog } from "./dialog";
+import { gameStatus } from "./game";
 
 export async function act() {
+  if (
+    potion.value === "POISON" &&
+    gameStatus.value === GameStatus.WITCH_ACT
+  )
+    target.value *= -1;
+
   const res = (await characterAct({
     target: target.value,
   })) as any; // TODO any?
@@ -16,11 +23,11 @@ export async function act() {
 
   if (res && res.status === 200) {
     showDialog("操作成功!");
-    /* reset */
-    potion.value = undefined;
-    target.value = 0;
-    noTarget.value = false;
   }
+  /* reset */
+  potion.value = undefined;
+  target.value = 0;
+  noTarget.value = false;
 }
 
 export const isActing = ref(false);
