@@ -13,7 +13,9 @@
           isDead: !item.isAlive,
           isChosen: item.index === target && isActing,
         }"
-        @click="() => setTarget(item.index)"
+        @click="
+          () => setTarget(target === item.index ? 0 : item.index)
+        "
       >
         {{
           item.name.slice(0, 3) +
@@ -43,7 +45,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from "vue";
+  import { defineComponent, computed, PropType } from "vue";
+  import { PublicPlayerDef } from "../../shared/ModelDefs";
+
   import {
     setTarget,
     isActing,
@@ -55,7 +59,10 @@
   const RoomPlayerList = defineComponent({
     name: "RoomPlayerList",
     props: {
-      playerList: { type: Array, required: true },
+      playerList: {
+        type: Object as PropType<PublicPlayerDef[]>,
+        required: true,
+      },
     },
     components: {},
     setup(props) {

@@ -3,7 +3,7 @@
 
   import { showActions } from "../../reactivity/playPage";
 
-  import { renderActionList } from "./char2Action";
+  import { renderActionList } from "./renderActionList";
 
   import UseMenu from "../UseMenu.vue";
   import { character } from "../../reactivity/game";

@@ -1,7 +1,7 @@
 <template>
   <Btn
     :disabled="disabled"
-    :onClick="disabled ? null : commonAction"
+    :onClick="() => (disabled ? null : commonAction(noTarget))"
   ></Btn>
 </template>
 
@@ -16,6 +16,10 @@
     components: { Btn },
     props: {
       disabled: {
+        type: Boolean,
+        default: false,
+      },
+      noTarget: {
         type: Boolean,
         default: false,
       },

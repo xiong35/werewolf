@@ -18,12 +18,14 @@ export async function act() {
     showDialog("操作成功!");
     /* reset */
     potion.value = undefined;
-    target.value = -1;
+    target.value = 0;
+    noTarget.value = false;
   }
 }
 
 export const isActing = ref(false);
-export const target = ref<index>(-1);
+export const noTarget = ref(false);
+export const target = ref<index>(0);
 export const potion = ref<Potion>();
 
 export function setTarget(index: index) {

@@ -7,19 +7,27 @@
     />
     <div>
       <div>
-        <span>选择目标</span>
+        <span>{{ noTarget ? "是否确认" : "选择目标" }}</span>
       </div>
       <div>
         <small :style="{ opacity: 0.6 }">不选即为放弃</small>
       </div>
     </div>
-    <img @click="act" :src="`/src/assets/checked${theme}.svg`" alt="checked" />
+    <img
+      @click="act"
+      :src="`/src/assets/checked${theme}.svg`"
+      alt="checked"
+    />
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
-  import { isActing, act } from "../reactivity/playAction";
+  import {
+    isActing,
+    act,
+    noTarget,
+  } from "../reactivity/playAction";
   import { theme } from "../reactivity/theme";
 
   const PlayBottomActions = defineComponent({
@@ -29,6 +37,7 @@
       return {
         isActing,
         theme,
+        noTarget,
         act,
       };
     },
@@ -36,7 +45,6 @@
 
   export default PlayBottomActions;
 </script>
-
 
 <style lang="scss" scoped>
   .play-bottom-actions {
