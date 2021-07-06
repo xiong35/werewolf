@@ -12,7 +12,7 @@
 
 <script lang="ts">
   //  TODO  水波纹效果?
-  import { defineComponent } from "vue";
+  import { ComputedRef, defineComponent } from "vue";
 
   import UseBorder from "./UseBorder.vue";
 
@@ -31,7 +31,6 @@
 
   export default Btn;
 </script>
-
 
 <style lang="scss" scoped>
   .btn {

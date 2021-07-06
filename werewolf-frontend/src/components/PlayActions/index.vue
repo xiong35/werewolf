@@ -3,7 +3,7 @@
 
   import { showActions } from "../../reactivity/playPage";
 
-  import { actionList } from "./char2Action";
+  import { renderActionList } from "./char2Action";
 
   import UseMenu from "../UseMenu.vue";
   import { character } from "../../reactivity/game";
@@ -20,7 +20,7 @@
           h(
             "div",
             { class: "play__action-list" },
-            actionList.map((comp) => h(comp))
+            renderActionList()
           )
       );
       return withDirectives(dialogVNode, [

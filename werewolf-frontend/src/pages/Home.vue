@@ -15,7 +15,6 @@
       @click="$router.push('createRoom')"
       content="创建房间"
     ></Btn>
-    <StatusChangeHint></StatusChangeHint>
   </div>
 </template>
 
@@ -25,11 +24,10 @@
   import { theme } from "../reactivity/theme";
 
   import Btn from "../components/Btn.vue";
-  import StatusChangeHint from "../components/StatusChangeHint.vue";
 
   const Home = defineComponent({
     name: "Home",
-    components: { Btn, StatusChangeHint },
+    components: { Btn },
     setup(props) {
       return { theme };
     },

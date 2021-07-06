@@ -1,14 +1,12 @@
 <template>
   <Btn
     :disabled="disabled"
-    :onClick="
-      () => (disabled ? null : (commonAction(), onClick()))
-    "
+    :onClick="disabled ? null : commonAction"
   ></Btn>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { ComputedRef, defineComponent } from "vue";
 
   import Btn from "../../components/Btn.vue";
   import { commonAction } from "./commonAction";
@@ -17,8 +15,10 @@
     name: "ActionBtn",
     components: { Btn },
     props: {
-      onClick: { type: Function, default: () => {} },
-      disabled: { type: Boolean, default: false },
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
     },
     setup(props) {
       return { commonAction };
