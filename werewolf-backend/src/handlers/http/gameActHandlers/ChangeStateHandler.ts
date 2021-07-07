@@ -108,3 +108,9 @@ export const nextStateOfExileVoteCheck: GetNextState = (
 
   return GameStatus.WOLF_KILL;
 };
+
+export const nextStateOfLeaveMsg: GetNextState = (room, extra) => {
+  // TODO 指示下一个状态是什么?
+
+  return GameStatus.WOLF_KILL;
+};

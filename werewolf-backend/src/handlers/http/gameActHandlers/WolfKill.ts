@@ -59,7 +59,6 @@ export const WolfKillHandler: GameActHandler = {
         ),
         fromCharacter: "WEREWOLF",
       };
-      toKillPlayer.isAlive = false;
     }
 
     // 通知所有人更新状态

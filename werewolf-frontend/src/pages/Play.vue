@@ -75,6 +75,7 @@
   } from "../reactivity/playPage";
   import { theme } from "../reactivity/theme";
   import { isActing } from "../reactivity/playAction";
+  import { getWolfKillVote } from "../http/gameVoteResult";
 
   const Play = defineComponent({
     name: "Play",
@@ -90,7 +91,7 @@
     setup(props) {
       onMounted(refresh);
       onActivated(refresh);
-
+      getWolfKillVote();
       return {
         players,
 
