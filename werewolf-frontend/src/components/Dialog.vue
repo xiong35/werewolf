@@ -1,8 +1,13 @@
 <template>
-  <UseMenu v-show="timeLeft > 0" :onCancel="() => (timeLeft = 0)">
+  <UseMenu
+    v-show="dialogTimeLeft > 0"
+    :onCancel="() => (dialogTimeLeft = 0)"
+  >
     <div class="dialog-content">
       <span class="content">{{ content }}</span>
-      <div @click="timeLeft = 0" class="confirm">确认({{ timeLeft }}s)</div>
+      <div @click="dialogTimeLeft = 0" class="confirm">
+        确认({{ dialogTimeLeft }}s)
+      </div>
     </div>
   </UseMenu>
 </template>
@@ -10,7 +15,7 @@
 <script lang="ts">
   import { defineComponent } from "vue";
 
-  import { content, timeLeft } from "../reactivity/dialog";
+  import { content, dialogTimeLeft } from "../reactivity/dialog";
 
   import UseMenu from "./UseMenu.vue";
 
@@ -18,13 +23,12 @@
     name: "Dialog",
     components: { UseMenu },
     setup(props) {
-      return { timeLeft, content };
+      return { dialogTimeLeft, content };
     },
   });
 
   export default Dialog;
 </script>
-
 
 <style lang="scss" scoped>
   .dialog-content {

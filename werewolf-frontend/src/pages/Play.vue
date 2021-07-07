@@ -13,6 +13,12 @@
     </div>
 
     <div class="game-status">{{ gameStatus }}</div>
+    <div class="game-status">
+      剩余时间:
+      {{
+        gameStatusTimeLeft < 0 ? "---" : gameStatusTimeLeft + "S"
+      }}
+    </div>
 
     <div class="actions">
       <Btn
@@ -48,7 +54,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onActivated, onMounted } from "vue";
+  import {
+    defineComponent,
+    onActivated,
+    onMounted,
+    onUnmounted,
+  } from "vue";
 
   import PlayerList from "../components/RoomPlayerList.vue";
   import Btn from "../components/Btn.vue";
@@ -65,6 +76,7 @@
     players,
     gameStatus,
     date,
+    gameStatusTimeLeft,
   } from "../reactivity/game";
   import {
     showMemo,
@@ -90,6 +102,17 @@
     setup(props) {
       onMounted(refresh);
       onActivated(refresh);
+
+      // 设定剩余时间每秒减一
+      let timer: NodeJS.Timeout;
+      onMounted(() => {
+        timer = setInterval(
+          () => (gameStatusTimeLeft.value -= 1),
+          1000
+        );
+      });
+      onUnmounted(() => clearInterval(timer));
+
       return {
         players,
 
@@ -106,6 +129,7 @@
         gameStatus,
         date,
         theme,
+        gameStatusTimeLeft,
       };
     },
   });

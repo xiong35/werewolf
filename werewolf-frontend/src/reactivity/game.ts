@@ -1,6 +1,6 @@
 import { computed, ref, Ref, watchEffect } from "vue";
 
-import { Character, GameStatus } from "../../shared/GameDefs";
+import { Character, GameStatus, TIMEOUT } from "../../shared/GameDefs";
 import {
     CharacterStatus, day, GameEvent, PlayerDef, PublicPlayerDef
 } from "../../shared/ModelDefs";
@@ -31,6 +31,10 @@ export const date = ref<day>(-1);
 export const gameEvents = ref<GameEvent[]>([]);
 /** 当前游戏进程 */
 export const gameStatus = ref<GameStatus>(GameStatus.WOLF_KILL);
+/** 当前状态还有多结束 */
+export const gameStatusTimeLeft = ref(
+  TIMEOUT[GameStatus.WOLF_KILL]
+);
 /**
  * gameStatus 被修改时调用, 改变 ui 状态, 弹出提示等
  */

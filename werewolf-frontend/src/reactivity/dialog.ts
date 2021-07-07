@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-export const timeLeft = ref(0);
+export const dialogTimeLeft = ref(0);
 export const content = ref("");
 
 var timer: NodeJS.Timeout;
@@ -15,12 +15,12 @@ export function showDialog(
   showTime?: number
 ) {
   clearInterval(timer);
-  timeLeft.value = showTime || 5;
+  dialogTimeLeft.value = showTime || 5;
   content.value = toShowContent;
 
   timer = setInterval(() => {
-    timeLeft.value--;
-    if (timeLeft.value <= 0) {
+    dialogTimeLeft.value--;
+    if (dialogTimeLeft.value <= 0) {
       clearInterval(timer);
     }
   }, 1000);
