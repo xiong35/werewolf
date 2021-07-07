@@ -4,7 +4,7 @@
     :onCancel="() => (dialogTimeLeft = 0)"
   >
     <div class="dialog-content">
-      <span class="content">{{ content }}</span>
+      <span class="content" v-html="content"></span>
       <div @click="dialogTimeLeft = 0" class="confirm">
         确认({{ dialogTimeLeft }}s)
       </div>
