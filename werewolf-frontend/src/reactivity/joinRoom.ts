@@ -9,8 +9,8 @@ import { showDialog } from "./dialog";
 import { needingCharacters } from "./game";
 
 export const password = ref("");
-export const roomNumber = ref("");
-export const nickname = ref("");
+export const roomNumber = ref("666666"); // # dev
+export const nickname = ref("456"); // # dev
 
 export async function join() {
   if (!roomNumber.value) return showDialog("请填写房间号");
