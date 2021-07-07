@@ -37,28 +37,33 @@ export const WolfKillHandler: GameActHandler = {
     const votes = werewolfs.map(
       (p) => p.characterStatus?.wantToKills?.[today]
     );
+    console.log("# WolfKill", { votes });
 
     // 找到死者
     const voteRes = getVoteResult(votes);
+    console.log("# WolfKill", { voteRes });
     if (voteRes !== null) {
       // 如果没有放弃杀人
       const toKillIndex = voteRes[0];
       const toKillPlayer = room.players.find(
         (p) => p.index === toKillIndex
       );
-      // 设置死亡
-      toKillPlayer.die = {
-        at: today,
-        fromIndex: werewolfs.reduce<index[]>(
-          (prev, cur) =>
-            cur.characterStatus?.wantToKills?.[today] ===
-            toKillIndex
-              ? [...prev, cur.index]
-              : prev,
-          [] as index[]
-        ),
-        fromCharacter: "WEREWOLF",
-      };
+      if (toKillPlayer) {
+        // 设置死亡
+        toKillPlayer.die = {
+          at: today,
+          fromIndex: werewolfs.reduce<index[]>(
+            (prev, cur) =>
+              cur.characterStatus?.wantToKills?.[today] ===
+              toKillIndex
+                ? [...prev, cur.index]
+                : prev,
+            [] as index[]
+          ),
+          fromCharacter: "WEREWOLF",
+        };
+      }
+      console.log("# WolfKill", { toKillPlayer });
     }
 
     // 通知所有人更新状态
@@ -73,6 +78,9 @@ export const WolfKillHandler: GameActHandler = {
     // 设置下一状态的定时器
     const endOfNextState = status2Handler[nextState].endOfState;
     clearTimeout(room.timer);
-    room.timer = setTimeout(() => endOfNextState(room), timeout);
+    room.timer = setTimeout(
+      () => endOfNextState(room),
+      timeout * 1000
+    );
   },
 };

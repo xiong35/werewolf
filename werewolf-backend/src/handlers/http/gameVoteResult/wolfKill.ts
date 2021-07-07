@@ -9,8 +9,6 @@ import {
 import { VoteResultMsg } from "../../../../../werewolf-frontend/shared/httpMsg/VoteResult";
 
 export const getWolfKillResult: Middleware = async (ctx) => {
-  console.log("# ?");
-
   const roomNumber = ctx.get(RoomNumberHeaderName);
   const playerID = ctx.get(IDHeaderName);
 

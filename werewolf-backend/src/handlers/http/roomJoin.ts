@@ -1,5 +1,6 @@
 import { Middleware } from "koa";
 
+import { GameStatus, TIMEOUT } from "../../../../werewolf-frontend/shared/GameDefs";
 import {
     JoinRoomRequest, JoinRoomResponse
 } from "../../../../werewolf-frontend/shared/httpMsg/JoinRoomMsg";
@@ -8,6 +9,7 @@ import { RoomJoinMsg } from "../../../../werewolf-frontend/shared/WSMsg/RoomJoin
 import io from "../../index";
 import { Player } from "../../models/PlayerModel";
 import { Room } from "../../models/RoomModel";
+import { status2Handler } from "./gameActHandlers";
 
 const roomJoin: Middleware = async (ctx) => {
   const req = ctx.request.body as JoinRoomRequest;
@@ -36,8 +38,6 @@ const roomJoin: Middleware = async (ctx) => {
   if (roomJoinMsg.length === room.needingCharacters.length) {
     // 如果人数满了
     console.log("#game being");
-
-    ret.data.open = true;
     // assign characters
     const needingCharacters = [...room.needingCharacters];
 
@@ -86,7 +86,14 @@ const roomJoin: Middleware = async (ctx) => {
       }
     }
     io.to(roomNumber).emit(Events.GAME_BEGIN);
-    // TODO 开始狼人杀人的定时器
+
+    room.timer = setTimeout(() => {
+      console.log("# ", "timeout");
+      room.players.map((p) => console.log(p));
+      status2Handler[GameStatus.WOLF_KILL].endOfState(room);
+    }, TIMEOUT[GameStatus.WOLF_KILL] * 1000);
+
+    ret.data.open = true; // 设置前端进入游戏页
   }
 
   ctx.body = ret;

@@ -156,7 +156,7 @@ export type StatusWithAction =
 
 /** 预设的每个阶段的时间限制(s) */
 export const TIMEOUT: Record<GameStatus, number> = {
-  [GameStatus.WOLF_KILL]: 999,
+  [GameStatus.WOLF_KILL]: 10,
   [GameStatus.WOLF_KILL_CHECK]: 999,
   [GameStatus.SEER_CHECK]: 999,
   [GameStatus.WITCH_ACT]: 999,
