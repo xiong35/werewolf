@@ -24,6 +24,8 @@ export interface PublicPlayerDef {
   index: index; // 玩家编号 -> 游戏结束重置
   name: string; // 昵称
   isAlive: boolean; // 是否存活 -> 游戏结束重置
+  // 此状态不代表实际存活状态, 仅代表公开的存活信息
+  // 如, 晚上有角色被杀了, 但是只有
   isSheriff: boolean; // 是否为警长 -> 游戏结束重置
 }
 

@@ -6,6 +6,7 @@ import CharacterAct from "../../../../werewolf-frontend/shared/httpMsg/Character
 import { Player } from "../../models/PlayerModel";
 import { Room } from "../../models/RoomModel";
 import { status2Handler } from "./gameActHandlers";
+import { validateIdentity } from "./gameActHandlers/validateIdentity";
 
 /**
  * handle character action
@@ -19,7 +20,10 @@ const gameAct: Middleware = async (ctx) => {
   const room = Room.getRoom(roomNumber);
   const player = room.getPlayerById(playerID);
 
-  const gameStatus = room.gameStatus?.[room.gameStatus.length - 1];
+  if (!validateIdentity(room, player))
+    createError({ status: 401, msg: "操作不合法" });
+
+  const gameStatus = room.curStatus;
   // TODO check character
   // TODO validate request
 

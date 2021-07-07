@@ -140,6 +140,20 @@ export enum GameStatus {
   LEAVE_MSG = "留遗言",
 }
 
+/** 可以允许玩家进行操作的状态 */
+export type StatusWithAction =
+  | GameStatus.WOLF_KILL
+  | GameStatus.SEER_CHECK
+  | GameStatus.WITCH_ACT
+  | GameStatus.GUARD_PROTECT
+  | GameStatus.SHERIFF_ELECT
+  | GameStatus.SHERIFF_VOTE
+  | GameStatus.SHERIFF_ASSIGN
+  | GameStatus.DAY_DISCUSS
+  | GameStatus.EXILE_VOTE
+  | GameStatus.HUNTER_SHOOT
+  | GameStatus.LEAVE_MSG;
+
 /** 预设的每个阶段的时间限制(s) */
 export const TIMEOUT: Record<GameStatus, number> = {
   [GameStatus.WOLF_KILL]: 999,

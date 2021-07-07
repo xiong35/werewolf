@@ -17,6 +17,8 @@ export const BeforeDayDiscussHandler: GameActHandler = {
     target: index,
     ctx: Context
   ) {
+    // TODO 真正设置 isAlive 字段
+
     return {
       status: 200,
       msg: "ok",

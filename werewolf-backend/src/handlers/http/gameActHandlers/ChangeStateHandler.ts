@@ -84,6 +84,7 @@ export const nextStateOfBeforeDayDiscuss: GetNextState = (
   room,
   extra
 ) => {
+  // TODO 判断谁死了
   return GameStatus.DAY_DISCUSS;
 };
 
@@ -103,5 +104,7 @@ export const nextStateOfExileVoteCheck: GetNextState = (
   room,
   extra
 ) => {
+  // TODO 判断谁死了
+
   return GameStatus.WOLF_KILL;
 };

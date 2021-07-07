@@ -20,7 +20,9 @@ const gameStatus: Middleware = async (ctx, next) => {
   const room = Room.getRoom(roomNumber);
   const players = room.players;
   const curPlayer = room.getPlayerById(playerID);
-  console.log("# gameStatus", { room, curPlayer });
+  // console.log("# gameStatus", { room, curPlayer });
+  console.log("# gameStatus");
+  // TODO 不是所有时候都能看到谁死了的
 
   // get events
   const events: CharacterEvent[] = [];
