@@ -1,5 +1,6 @@
-import { index, ID } from "../ModelDefs";
 import { Character } from "../GameDefs";
+import { ID, index } from "../ModelDefs";
+import { HttpRes } from "./_httpResTemplate";
 
 export interface JoinRoomRequest {
   name: string; // 昵称
@@ -7,13 +8,9 @@ export interface JoinRoomRequest {
   roomNumber: string; // 六位房间号
 }
 
-export interface JoinRoomResponse {
-  status: number;
-  msg: string;
-  data: {
-    ID: ID; // token
-    index: index;
-    needingCharacters: Character[]; // 设置的人物
-    open?: boolean; // 是否直接开始
-  };
-}
+export type JoinRoomResponse = HttpRes<{
+  ID: ID; // token
+  index: index;
+  needingCharacters: Character[]; // 设置的人物
+  open?: boolean; // 是否直接开始
+}>;

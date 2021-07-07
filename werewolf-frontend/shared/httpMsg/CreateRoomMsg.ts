@@ -1,5 +1,6 @@
-import { index, ID } from "../ModelDefs";
 import { Character } from "../GameDefs";
+import { ID, index } from "../ModelDefs";
+import { HttpRes } from "./_httpResTemplate";
 
 export interface CreateRoomRequest {
   characters: Character[];
@@ -7,11 +8,7 @@ export interface CreateRoomRequest {
   name: string;
 }
 
-export interface CreateRoomResponse {
-  status: number;
-  msg: string;
-  data: {
-    roomNumber: string;
-    ID: ID;
-  };
-}
+export type CreateRoomResponse = HttpRes<{
+  roomNumber: string;
+  ID: ID;
+}>;

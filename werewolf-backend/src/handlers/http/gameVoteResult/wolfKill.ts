@@ -28,17 +28,23 @@ export const getWolfKillResult: Middleware = async (ctx) => {
     return at === room.currentDay && fromCharacter === "WEREWOLF"; // 今天被狼杀死的目标即为投票结果
   });
 
+  let data;
   if (!finalTarget) {
-    const ret: VoteResultMsg = {
+    data = {
       hintText: "今晚是个平安夜",
       result: null,
     };
-    ctx.body = ret;
   } else {
-    const ret: VoteResultMsg = {
+    data = {
       hintText: "今晚被杀的是",
       result: [finalTarget.index],
     };
-    ctx.body = ret;
   }
+
+  const ret: VoteResultMsg = {
+    status: 200,
+    msg: "ok",
+    data,
+  };
+  ctx.body = ret;
 };

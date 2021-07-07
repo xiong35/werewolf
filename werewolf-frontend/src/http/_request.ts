@@ -1,10 +1,13 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 import { IDHeaderName, RoomNumberHeaderName, SERVER_BASE_URL } from "../../shared/constants";
+import { HttpRes } from "../../shared/httpMsg/_httpResTemplate";
 import { showDialog } from "../reactivity/dialog";
 import { getToken } from "../utils/token";
 
-export default function request(config: AxiosRequestConfig) {
+export default function request<T = {}>(
+  config: AxiosRequestConfig
+) {
   const instance = axios.create({
     baseURL: SERVER_BASE_URL,
     timeout: 60000,
@@ -30,8 +33,12 @@ export default function request(config: AxiosRequestConfig) {
       if (data.status === 200) {
         return data;
       } else {
-        console.error(response);
-        showDialog("不知道发生了什么呢QwQ");
+        if (data.msg) {
+          showDialog(data.msg);
+        } else {
+          console.error("# e", { response });
+          showDialog("不知道发生了什么呢QwQ");
+        }
         return null;
       }
     },
@@ -40,5 +47,8 @@ export default function request(config: AxiosRequestConfig) {
     }
   );
 
-  return instance(config);
+  return new Promise<HttpRes<T>>(async (resolve) => {
+    const res = await instance(config);
+    resolve((res as unknown) as HttpRes<T>);
+  });
 }

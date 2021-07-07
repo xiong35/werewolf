@@ -1,18 +1,15 @@
 import { Character, GameStatus } from "../GameDefs";
 import { day, GameEvent, PlayerDef, PublicPlayerDef } from "../ModelDefs";
+import { HttpRes } from "./_httpResTemplate";
 
 export interface GameStatusRequest {}
 
-export interface GameStatusResponse {
-  status: number;
-  msg: string;
-  data: {
-    players: PublicPlayerDef[];
-    self: PlayerDef;
+export type GameStatusResponse = HttpRes<{
+  players: PublicPlayerDef[];
+  self: PlayerDef;
 
-    events: GameEvent[]; // TODO get data on open menu?
+  events: GameEvent[]; // TODO get data on open menu?
 
-    curDay: day;
-    gameStatus: GameStatus;
-  };
-}
+  curDay: day;
+  gameStatus: GameStatus;
+}>;

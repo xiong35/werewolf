@@ -1,12 +1,9 @@
-import { index } from "../ModelDefs";
 import {} from "../GameDefs";
+import { index } from "../ModelDefs";
+import { HttpRes } from "./_httpResTemplate";
 
 export interface SheriffElectRequest {
   joinVote: boolean;
 }
 
-export interface SheriffElectResponse {
-  status: number;
-  msg: string;
-  data: object;
-}
+export type SheriffElectResponse = HttpRes; // TODO type = ?

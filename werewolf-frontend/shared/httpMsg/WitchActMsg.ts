@@ -1,12 +1,9 @@
-import CharacterAct from "./CharacterAct";
 import { Potion } from "../GameDefs";
+import { HttpRes } from "./_httpResTemplate";
+import CharacterAct from "./CharacterAct";
 
 export interface WitchActRequest extends CharacterAct {
   use: Potion;
 }
 
-export interface WitchActResponse {
-  status: number;
-  msg: string;
-  data: {};
-}
+export type WitchActResponse = HttpRes;
