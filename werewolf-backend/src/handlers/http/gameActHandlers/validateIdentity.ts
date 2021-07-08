@@ -38,6 +38,8 @@ export function validateIdentity(
     case GameStatus.DAY_DISCUSS:
     case GameStatus.SHERIFF_VOTE:
       return true;
+    case GameStatus.SHERIFF_SPEECH:
+      return player.isElecting;
     case GameStatus.LEAVE_MSG:
       return true; // TODO 如何判断留遗言的状态?
   }

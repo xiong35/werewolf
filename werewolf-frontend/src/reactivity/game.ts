@@ -20,6 +20,8 @@ export const self = ref<PlayerDef>({
   isSheriff: false,
   name: "---",
   sheriffVotes: [],
+  isElecting: false,
+  isLeavingMsg: false,
 });
 /** 自己的角色 */
 export const character = computed(() =>

@@ -45,9 +45,7 @@ export const WolfKillHandler: GameActHandler = {
     if (voteRes !== null) {
       // 如果没有放弃杀人'
       const toKillIndex = voteRes[0];
-      const toKillPlayer = room.players.find(
-        (p) => p.index === toKillIndex
-      );
+      const toKillPlayer = room.getPlayerByIndex(toKillIndex);
       if (toKillPlayer) {
         // 设置死亡
         toKillPlayer.die = {

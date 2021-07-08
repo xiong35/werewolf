@@ -19,8 +19,7 @@ export class Room implements RoomDef {
   get curStatus(): GameStatus {
     return this.gameStatus[this.gameStatus.length - 1];
   }
-  joinElect: index[] = [];
-  finishSpeaking: index[] = [];
+  finishCurStatus = new Set<index>();
   timer: NodeJS.Timeout;
 
   createdAt = new Date();
@@ -93,6 +92,12 @@ export class Room implements RoomDef {
     const player = this.players.find((p) => p._id === id);
     if (!player)
       return createError({ status: 401, msg: "id 错误" });
+    return player;
+  }
+  getPlayerByIndex(index: index): Player {
+    const player = this.players.find((p) => p.index === index);
+    if (!player)
+      return createError({ status: 401, msg: "编号错误" });
     return player;
   }
 

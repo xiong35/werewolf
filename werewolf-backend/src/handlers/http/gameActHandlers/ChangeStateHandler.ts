@@ -86,9 +86,7 @@ export const nextStateOfHunterCheck: GetNextState = (
   if (medicineStatus?.usedAt === room.currentDay - 1) {
     // 如果女巫昨晚用了药
     const savedPlayerInd = medicineStatus.usedAt;
-    const savedLastNight = room.players.find(
-      (p) => p.index === savedPlayerInd
-    );
+    const savedLastNight = room.getPlayerByIndex(savedPlayerInd);
     if (savedLastNight) savedLastNight.isAlive = true;
   }
   // TODO 什么时候进行死亡结算?
@@ -100,7 +98,7 @@ export const nextStateOfSheriffElect: GetNextState = (
   room,
   extra
 ) => {
-  return GameStatus.SHERIFF_VOTE;
+  return GameStatus.SHERIFF_SPEECH;
 };
 export const nextStateOfSheriffVote: GetNextState = (
   room,
@@ -113,6 +111,12 @@ export const nextStateOfSheriffVoteCheck: GetNextState = (
   extra
 ) => {
   return GameStatus.BEFORE_DAY_DISCUSS;
+};
+export const nextStateOfSheriffSpeech: GetNextState = (
+  room,
+  extra
+) => {
+  return GameStatus.SHERIFF_VOTE;
 };
 
 export const nextStateOfBeforeDayDiscuss: GetNextState = (

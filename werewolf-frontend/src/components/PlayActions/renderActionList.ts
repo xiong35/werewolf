@@ -68,7 +68,23 @@ const actionInfoList: {
   {
     content: "结束发言",
     isShown: () => true,
-    disabled: () => gameStatus.value !== GameStatus.DAY_DISCUSS,
+    disabled: () => {
+      if (gameStatus.value === GameStatus.DAY_DISCUSS)
+        return false;
+      if (
+        gameStatus.value === GameStatus.SHERIFF_SPEECH &&
+        self.value.isElecting
+      )
+        return false;
+
+      if (
+        gameStatus.value === GameStatus.LEAVE_MSG &&
+        self.value.isLeavingMsg
+      )
+        return false;
+
+      return true;
+    },
     noTarget: true,
   },
 ];

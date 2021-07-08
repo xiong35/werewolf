@@ -19,6 +19,7 @@ import { LeaveMsgHandler } from "./LeaveMsg";
 import { SeerCheckHandler } from "./SeerCheck";
 import { SheriffAssignHandler } from "./SheriffAssign";
 import { SheriffElectHandler } from "./SheriffElect";
+import { SheriffSpeachHandler } from "./SheriffSpeach";
 import { SheriffVoteHandler } from "./SheriffVote";
 import { SheriffVoteCheckHandler } from "./SheriffVoteCheck";
 import { WitchActHandler } from "./WitchAct";
@@ -67,6 +68,7 @@ export const status2Handler: Record<GameStatus, GameActHandler> = {
   [GameStatus.SEER_CHECK]: SeerCheckHandler,
   [GameStatus.SHERIFF_ASSIGN]: SheriffAssignHandler,
   [GameStatus.SHERIFF_ELECT]: SheriffElectHandler,
+  [GameStatus.SHERIFF_SPEECH]: SheriffSpeachHandler,
   [GameStatus.SHERIFF_VOTE]: SheriffVoteHandler,
   [GameStatus.WITCH_ACT]: WitchActHandler,
   [GameStatus.WOLF_KILL]: WolfKillHandler,

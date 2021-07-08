@@ -26,8 +26,10 @@ export class Player implements PlayerDef {
     this.index = index;
 
     this._id =
-      Math.random().toString(36).substring(2) + "." + Date.now(); // e.g. `sgbosfiyvdr.1621430145541`
+      Math.random().toString(36).substring(2) + "." + Date.now(); // e.g. `5fs6yt6htlu.1621430145541`
   }
+  isLeavingMsg: boolean = false;
+  isElecting: boolean = false;
 
   /**
    * 将 Player 信息转换成公开的信息

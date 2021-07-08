@@ -95,6 +95,7 @@ export enum GameStatus {
    * - 平票: 投票选警长 入栈
    */
   SHERIFF_VOTE = "投票选警长",
+  SHERIFF_SPEECH = "警长竞选发言",
   SHERIFF_VOTE_CHECK = "警长投票结果",
 
   /**
@@ -152,6 +153,7 @@ export type StatusWithAction =
   | GameStatus.DAY_DISCUSS
   | GameStatus.EXILE_VOTE
   | GameStatus.HUNTER_SHOOT
+  | GameStatus.SHERIFF_SPEECH
   | GameStatus.LEAVE_MSG;
 
 /** 预设的每个阶段的时间限制(s) */
@@ -172,4 +174,5 @@ export const TIMEOUT: Record<GameStatus, number> = {
   [GameStatus.HUNTER_SHOOT]: 15,
   [GameStatus.LEAVE_MSG]: 996,
   [GameStatus.BEFORE_DAY_DISCUSS]: 15,
+  [GameStatus.SHERIFF_SPEECH]: 996,
 };

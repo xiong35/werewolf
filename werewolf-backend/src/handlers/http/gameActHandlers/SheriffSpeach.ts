@@ -6,38 +6,24 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 
 import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
-import { SeerCheckResponse } from "../../../../../werewolf-frontend/shared/httpMsg/SeerCheckMsg";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response, setTimerNSendMsg, status2Handler } from "./";
-import { nextStateOfSeerCheck } from "./ChangeStateHandler";
+import { GameActHandler, Response } from "./";
 
-export const SeerCheckHandler: GameActHandler = {
+export const SheriffSpeachHandler: GameActHandler = {
   async handleHttp(
     room: Room,
     player: Player,
     target: index,
     ctx: Context
   ) {
-    const targetPlayer = room.getPlayerByIndex(target);
-
-    if (!targetPlayer)
-      createError({ status: 400, msg: "未找到此玩家" });
-
-    const isWolf = targetPlayer.character === "WEREWOLF";
-
-    const ret: SeerCheckResponse = {
-      data: {
-        isWolf,
-      },
-      msg: "ok",
+    return {
       status: 200,
+      msg: "ok",
+      data: { target },
     };
-    return ret;
   },
 
-  async endOfState(room: Room) {
-    setTimerNSendMsg(room, nextStateOfSeerCheck);
-  },
+  async endOfState(room: Room) {},
 };
