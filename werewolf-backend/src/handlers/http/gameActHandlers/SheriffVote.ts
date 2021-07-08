@@ -9,7 +9,8 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response } from "./";
+import { GameActHandler, Response, setTimerNSendMsg } from "./";
+import { nextStateOfSheriffVote } from "./ChangeStateHandler";
 
 export const SheriffVoteHandler: GameActHandler = {
   async handleHttp(
@@ -36,28 +37,9 @@ export const SheriffVoteHandler: GameActHandler = {
     // 找到警长人选
     const voteRes = getVoteResult(votes);
     if (voteRes !== null) {
-      // TODO 添加警长发言状态, 添加 pk 环节
-      // 如果没有全部弃票
-      // const toKillIndex = voteRes[0];
-      // const toKillPlayer = room.players.find(
-      //   (p) => p.index === toKillIndex
-      // );
-      // if (toKillPlayer) {
-      //   // 设置死亡
-      //   toKillPlayer.die = {
-      //     at: today,
-      //     fromIndex: werewolfs.reduce<index[]>(
-      //       (prev, cur) =>
-      //         cur.characterStatus?.wantToKills?.[today] ===
-      //         toKillIndex
-      //           ? [...prev, cur.index]
-      //           : prev,
-      //       [] as index[]
-      //     ),
-      //     fromCharacter: "WEREWOLF",
-      //   };
-      // }
-      // console.log("# WolfKill", { toKillPlayer });
     }
+    setTimerNSendMsg(room, (r) =>
+      nextStateOfSheriffVote(r, voteRes)
+    );
   },
 };

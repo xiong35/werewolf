@@ -19,7 +19,7 @@ export const SheriffElectHandler: GameActHandler = {
     ctx: Context
   ) {
     // 加入参与竞选的人
-    room.joinElect.add(player.index);
+    player.isElecting = true;
 
     return {
       status: 200,
@@ -29,6 +29,11 @@ export const SheriffElectHandler: GameActHandler = {
   },
 
   async endOfState(room: Room) {
-    setTimerNSendMsg(room, nextStateOfSheriffElect);
+    setTimerNSendMsg(room, (r) =>
+      nextStateOfSheriffElect(
+        r,
+        room.players.filter((p) => p.isElecting)
+      )
+    );
   },
 };

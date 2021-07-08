@@ -45,13 +45,15 @@ Status
 
 ## :dart: 简介 ##
 
-一款线下狼人杀软件. 为了免去线下打狼时必须带牌和需要主持人的麻烦, 我制作了一款狼人杀网站, 希望给你带来方便 ;P
+一款线下狼人杀软件.  
+为了免去线下打狼时必须带牌和需要主持人的麻烦, 我制作了一款狼人杀网站, 希望给你带来方便 ;P
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: 无需带卡牌  
-:heavy_check_mark: 无需主持人  
-:heavy_check_mark: 全设备通用
+:heavy_check_mark: 无需带卡牌, 全自动发牌  
+:heavy_check_mark: 无需主持人, 全自动游戏  
+:heavy_check_mark: 部署于网站, 全设备通用, 随时可以开一把  
+:heavy_check_mark: 可配置各个角色人数  
 
 ## :rocket: 技术栈 ##
 
@@ -61,6 +63,7 @@ Status
 - [mongoDB](https://www.mongodb.com/)
 - [Vue3](https://vue3js.cn/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [socket.io](https://socket.io/)
 
 ## :white_check_mark: 环境要求 ##
 
@@ -77,7 +80,7 @@ $ cd werewolf/werewolf-backend
 # Install dependencies
 $ npm i
 # Run the project
-$ npm start
+$ npm run dev
 
 # Access frontend
 $ cd ../werewolf-frontend
