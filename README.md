@@ -54,6 +54,7 @@ Status
 :heavy_check_mark: 无需主持人, 全自动游戏  
 :heavy_check_mark: 部署于网站, 全设备通用, 随时可以开一把  
 :heavy_check_mark: 可配置各个角色人数  
+:heavy_check_mark: 可进行警长竞选  
 
 ## :rocket: 技术栈 ##
 
