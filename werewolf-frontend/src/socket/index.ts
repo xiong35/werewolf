@@ -7,6 +7,7 @@ import changeStatus from "./changeStatus";
 import gameBegin from "./gameBegin";
 import gameEnd from "./gameEnd";
 import roomJoin from "./roomJoin";
+import showWSMsg from "./showWSMsg";
 
 const socket = io(SERVER_BASE_URL, {
   path: WS_PATH,
@@ -20,5 +21,6 @@ socket.on(Events.CHANGE_STATUS, changeStatus);
 socket.on(Events.GAME_BEGIN, gameBegin);
 socket.on(Events.GAME_END, gameEnd);
 socket.on(Events.ROOM_JOIN, roomJoin);
+socket.on(Events.SHOW_MSG, showWSMsg);
 
 export { socket, Events };

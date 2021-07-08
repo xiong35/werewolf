@@ -5,7 +5,7 @@ import { getWolfKillResult } from "./wolfKill";
 const voteResultRouter = new Router();
 
 voteResultRouter.get(
-  "game vote wolfKill",
+  "game hint wolfKill",
   "/wolfKill",
   getWolfKillResult
 );

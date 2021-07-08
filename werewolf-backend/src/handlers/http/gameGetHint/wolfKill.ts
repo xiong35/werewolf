@@ -2,11 +2,12 @@ import { Middleware } from "koa";
 import { createError } from "src/middleware/handleError";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
+import { renderHintNPlayers } from "src/utils/renderHintNplayers";
 
 import {
     IDHeaderName, RoomNumberHeaderName
 } from "../../../../../werewolf-frontend/shared/constants";
-import { VoteResultMsg } from "../../../../../werewolf-frontend/shared/httpMsg/VoteResult";
+import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 
 export const getWolfKillResult: Middleware = async (ctx) => {
   const roomNumber = ctx.get(RoomNumberHeaderName);
@@ -24,7 +25,7 @@ export const getWolfKillResult: Middleware = async (ctx) => {
     return at === room.currentDay && fromCharacter === "WEREWOLF"; // 今天被狼杀死的目标即为投票结果
   });
 
-  let data;
+  let data: { hintText: string; result: index[] };
   if (!finalTarget) {
     data = {
       hintText: "今晚是个平安夜",
@@ -37,10 +38,10 @@ export const getWolfKillResult: Middleware = async (ctx) => {
     };
   }
 
-  const ret: VoteResultMsg = {
+  const ret = {
     status: 200,
     msg: "ok",
-    data,
+    data: renderHintNPlayers(data.hintText, data.result),
   };
   ctx.body = ret;
 };
