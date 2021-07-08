@@ -8,7 +8,8 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response } from "./";
+import { GameActHandler, Response, setTimerNSendMsg } from "./";
+import { nextStateOfGuardProtect } from "./ChangeStateHandler";
 
 export const GuardProtectHandler: GameActHandler = {
   async handleHttp(
@@ -24,5 +25,7 @@ export const GuardProtectHandler: GameActHandler = {
     };
   },
 
-  async endOfState(room: Room) {},
+  async endOfState(room: Room) {
+    setTimerNSendMsg(room, nextStateOfGuardProtect);
+  },
 };

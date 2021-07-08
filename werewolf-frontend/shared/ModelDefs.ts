@@ -15,7 +15,7 @@ export interface RoomDef {
   remainingIndexes: index[]; // 空缺的玩家号码
   isFinished: boolean; // 是否已结束 -> 游戏结束重置
   gameStatus: GameStatus[]; // 所有的游戏状态的栈 -> 游戏结束重置
-  joinElect: index[]; // 上警的玩家
+  joinElect: Set<index>; // 上警的玩家
   finishSpeaking: index[]; // 发言结束的玩家
   timer: NodeJS.Timeout; // 事件定时器 id, undefined 则为结束
 }
@@ -38,7 +38,7 @@ export interface PlayerDef extends PublicPlayerDef {
     fromIndex: index[]; // 被哪些人杀死的(名字)
     fromCharacter: Character; // 被哪个角色杀死的
   };
-  hasVotedAt: index[]; // 下标是天数, value 是投给了谁 -> 游戏结束重置
+  hasVotedAt: index[]; // 下标是天数, value 是投给了谁, 下标为 0 是选警长的票
   // 包括 狼人杀人 / 神职发动技能 / 白天投票
   sheriffVotes: index[]; // 下标是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
   _id: ID; // string + 时间戳 的 token

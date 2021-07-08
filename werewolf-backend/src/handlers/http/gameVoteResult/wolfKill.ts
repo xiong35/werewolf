@@ -15,8 +15,6 @@ export const getWolfKillResult: Middleware = async (ctx) => {
   const room = Room.getRoom(roomNumber);
   const player = room.getPlayerById(playerID);
 
-  console.log({ player });
-
   if (player.character !== "WEREWOLF")
     createError({ status: 401, msg: "你的身份无法查看此消息" });
 

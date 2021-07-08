@@ -8,7 +8,7 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response, status2Handler } from "./";
+import { GameActHandler, Response, setTimerNSendMsg, status2Handler } from "./";
 import { nextStateOfWolfKill } from "./ChangeStateHandler";
 
 export const WolfKillHandler: GameActHandler = {
@@ -43,7 +43,7 @@ export const WolfKillHandler: GameActHandler = {
     const voteRes = getVoteResult(votes);
     console.log("# WolfKill", { voteRes });
     if (voteRes !== null) {
-      // 如果没有放弃杀人
+      // 如果没有放弃杀人'
       const toKillIndex = voteRes[0];
       const toKillPlayer = room.players.find(
         (p) => p.index === toKillIndex
@@ -66,21 +66,6 @@ export const WolfKillHandler: GameActHandler = {
       console.log("# WolfKill", { toKillPlayer });
     }
 
-    // 通知所有人更新状态
-    const nextState = nextStateOfWolfKill(room);
-    const timeout = TIMEOUT[nextState];
-    io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
-      setDay: room.currentDay,
-      setStatus: nextState,
-      timeout,
-    } as ChangeStatusMsg);
-
-    // 设置下一状态的定时器
-    const endOfNextState = status2Handler[nextState].endOfState;
-    clearTimeout(room.timer);
-    room.timer = setTimeout(
-      () => endOfNextState(room),
-      timeout * 1000
-    );
+    setTimerNSendMsg(room, nextStateOfWolfKill);
   },
 };

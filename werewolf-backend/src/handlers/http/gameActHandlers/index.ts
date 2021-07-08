@@ -1,10 +1,14 @@
 import { Context } from "koa";
+import io from "src";
 
-import { GameStatus } from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
+import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
+import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
 import { Player } from "../../../models/PlayerModel";
 import { Room } from "../../../models/RoomModel";
 import { BeforeDayDiscussHandler } from "./BeforeDayDiscuss";
+import { GetNextState } from "./ChangeStateHandler";
 import { DayDiscussHandler } from "./DayDiscuss";
 import { ExileVoteHandler } from "./ExileVote";
 import { ExileVoteCheckHandler } from "./ExileVoteCheck";
@@ -71,3 +75,31 @@ export const status2Handler: Record<GameStatus, GameActHandler> = {
   [GameStatus.SHERIFF_VOTE_CHECK]: SheriffVoteCheckHandler,
   [GameStatus.BEFORE_DAY_DISCUSS]: BeforeDayDiscussHandler,
 };
+
+/**
+ * 根据传入的 getNextState 获得下一状态\
+ * 向玩家通知状态发生改变并设置下一状态结束的定时器
+ * @param room 当前房间
+ * @param getNextState 获得下一状态的函数
+ */
+export function setTimerNSendMsg(
+  room: Room,
+  getNextState: GetNextState
+) {
+  // 通知所有人更新状态
+  const nextState = getNextState(room);
+  const timeout = TIMEOUT[nextState];
+  io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
+    setDay: room.currentDay,
+    setStatus: nextState,
+    timeout,
+  } as ChangeStatusMsg);
+
+  // 设置下一状态的定时器
+  const endOfNextState = status2Handler[nextState].endOfState;
+  clearTimeout(room.timer);
+  room.timer = setTimeout(
+    () => endOfNextState(room),
+    timeout * 1000
+  );
+}

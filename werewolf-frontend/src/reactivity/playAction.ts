@@ -22,7 +22,7 @@ export async function act() {
   isActing.value = false;
 
   if (res && res.status === 200) {
-    showDialog("操作成功!");
+    showDialog("操作成功!", 3);
   }
   /* reset */
   potion.value = undefined;

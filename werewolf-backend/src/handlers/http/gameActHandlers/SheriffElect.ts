@@ -8,7 +8,8 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response } from "./";
+import { GameActHandler, Response, setTimerNSendMsg } from "./";
+import { nextStateOfSheriffElect } from "./ChangeStateHandler";
 
 export const SheriffElectHandler: GameActHandler = {
   async handleHttp(
@@ -17,12 +18,17 @@ export const SheriffElectHandler: GameActHandler = {
     target: index,
     ctx: Context
   ) {
+    // 加入参与竞选的人
+    room.joinElect.add(player.index);
+
     return {
       status: 200,
       msg: "ok",
-      data: { target },
+      data: {},
     };
   },
 
-  async endOfState(room: Room) {},
+  async endOfState(room: Room) {
+    setTimerNSendMsg(room, nextStateOfSheriffElect);
+  },
 };
