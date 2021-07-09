@@ -4,10 +4,7 @@ import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -34,7 +31,7 @@ export const HunterCheckHandler: GameActHandler = {
     };
   },
 
-  startOfState(room: Room): void {
+  startOfState(room: Room) {
     // 如果没有猎人就直接结束此阶段
     if (!room.needingCharacters.includes("HUNTER"))
       return HunterCheckHandler.endOfState(room);

@@ -67,7 +67,7 @@ export const GuardProtectHandler: GameActHandler = {
     };
   },
 
-  startOfState(room: Room): void {
+  startOfState(room: Room) {
     // 如果没有守卫就直接开启猎人的阶段
     if (!room.needingCharacters.includes("GUARD"))
       return GuardProtectHandler.endOfState(room);

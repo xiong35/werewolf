@@ -36,7 +36,7 @@ export const SheriffVoteHandler: GameActHandler = {
     };
   },
 
-  startOfState(room: Room): void {
+  startOfState(room: Room) {
     startCurrentState(this, room);
   },
 

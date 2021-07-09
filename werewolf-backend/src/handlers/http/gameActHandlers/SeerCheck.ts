@@ -47,7 +47,7 @@ export const SeerCheckHandler: GameActHandler = {
     return ret;
   },
 
-  startOfState(room: Room): void {
+  startOfState(room: Room) {
     // 如果没有预言家就直接结束此阶段
     if (!room.needingCharacters.includes("SEER"))
       return SeerCheckHandler.endOfState(room);

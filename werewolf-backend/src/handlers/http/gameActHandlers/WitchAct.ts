@@ -51,7 +51,7 @@ export const WitchActHandler: GameActHandler = {
     };
   },
 
-  startOfState(room: Room): void {
+  startOfState(room: Room) {
     // 如果没有女巫就直接结束此阶段
     if (!room.needingCharacters.includes("WITCH"))
       return WitchActHandler.endOfState(room);

@@ -40,7 +40,7 @@ export const SheriffSpeachHandler: GameActHandler = {
     };
   },
 
-  startOfState(room: Room): void {
+  startOfState(room: Room) {
     startCurrentState(this, room);
   },
 
