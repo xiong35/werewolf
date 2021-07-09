@@ -185,7 +185,37 @@ export const nextStateOfSheriffVoteCheck: GetNextState = (
   room,
   extra
 ) => {
-  // TODO 进行死亡结算?
+  // TODO 进行死亡结算
+  const dieLastNight = room.players.filter(
+    (p) => p.die?.at === room.currentDay - 1 && !p.isAlive // 昨晚死的且没被女巫救活的人
+  );
+  if (dieLastNight.length === 0) {
+    // 平安夜
+    io.to(room.roomNumber).emit(Events.SHOW_MSG, {
+      innerHTML: "昨晚是个平安夜",
+    } as ShowMsg);
+  } else {
+    room.players.forEach((p) => (p.isLeavingMsg = false)); //先把所有人置空
+    dieLastNight.forEach((p) => (p.isLeavingMsg = true)); // 设置昨晚死的人正在留遗言
+
+    if (room.currentDay === 1) {
+      // 第一晚有遗言
+      io.to(room.roomNumber).emit(Events.SHOW_MSG, {
+        innerHTML: renderHintNPlayers(
+          "以下为昨晚死亡的玩家, 请发表遗言",
+          dieLastNight.map((p) => p.index)
+        ),
+      } as ShowMsg);
+    } else {
+      // 以后晚上死亡无遗言
+      io.to(room.roomNumber).emit(Events.SHOW_MSG, {
+        innerHTML: renderHintNPlayers(
+          "以下为昨晚死亡的玩家, 请发表遗言",
+          dieLastNight.map((p) => p.index)
+        ),
+      } as ShowMsg);
+    }
+  }
   // TODO 设置结束发言的人为空
   // TODO 发送消息通知大家谁死了, 并依次发表遗言
   return GameStatus.BEFORE_DAY_DISCUSS;
