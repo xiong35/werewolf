@@ -28,7 +28,7 @@ export class Player implements PlayerDef {
     this._id =
       Math.random().toString(36).substring(2) + "." + Date.now(); // e.g. `5fs6yt6htlu.1621430145541`
   }
-  isLeavingMsg: boolean = false;
+  isDying: boolean = false; // TODO isDying 的话角色闪烁?
   isElecting: boolean = false;
 
   /**

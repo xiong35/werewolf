@@ -75,7 +75,7 @@ export const GuardProtectHandler: GameActHandler = {
     // 设置此状态结束的回调
     room.timer = setTimeout(() => {
       GuardProtectHandler.endOfState(room);
-    }, timeout);
+    }, timeout * 1000);
     // 通知玩家当前状态已经发生改变, 并通知设置天数
     io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
       setDay: room.currentDay,

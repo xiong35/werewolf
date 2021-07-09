@@ -70,7 +70,7 @@ export interface GameActHandler {
    * 2. 根据局势判断要转移到什么状态
    * 3. 调用下一状态的 start
    */
-  endOfState: (room: Room) => void;
+  endOfState: (room: Room, extra?: any) => void;
 }
 
 export const status2Handler: Record<GameStatus, GameActHandler> = {

@@ -41,7 +41,7 @@ export interface PlayerDef extends PublicPlayerDef {
   // 包括 狼人杀人 / 白天投票
   sheriffVotes: index[]; // 下标是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
   _id: ID; // string + 时间戳 的 token
-  isLeavingMsg: boolean; // 是否正在留遗言
+  isDying: boolean; // 是否正在进行死亡结算
   isElecting: boolean; // 是否正在参选警长
 }
 

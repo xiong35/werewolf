@@ -21,6 +21,7 @@ export const WitchActHandler: GameActHandler = {
   ) {
     // 正编号代表救人, 负编号代表杀人
     if (target < 0) {
+      // 杀人
       room.getPlayerByIndex(-target).die = {
         at: room.currentDay,
         fromCharacter: "WITCH",
@@ -31,10 +32,10 @@ export const WitchActHandler: GameActHandler = {
         usedDay: room.currentDay,
       };
     } else {
+      // 救人
       const savedPlayer = room.getPlayerByIndex(target);
       savedPlayer.die = null;
       savedPlayer.isAlive = true;
-      // TODO 白天通知女巫救人
       player.characterStatus.MEDICINE = {
         usedAt: target,
         usedDay: room.currentDay,
@@ -57,7 +58,7 @@ export const WitchActHandler: GameActHandler = {
     // 设置此状态结束的回调
     room.timer = setTimeout(() => {
       WitchActHandler.endOfState(room);
-    }, timeout);
+    }, timeout * 1000);
     // 通知玩家当前状态已经发生改变, 并通知设置天数
     io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
       setDay: room.currentDay,

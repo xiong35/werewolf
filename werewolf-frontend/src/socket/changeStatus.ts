@@ -10,7 +10,7 @@ export default function changeStatus(msg: ChangeStatusMsg) {
   date.value = msg.setDay;
   gameStatus.value = msg.setStatus;
 
-  gameStatusTimeLeft.value = TIMEOUT[msg.setStatus];
+  gameStatusTimeLeft.value = msg.timeout || TIMEOUT[msg.setStatus];
 
   if (
     msg.setStatus === GameStatus.WOLF_KILL_CHECK &&

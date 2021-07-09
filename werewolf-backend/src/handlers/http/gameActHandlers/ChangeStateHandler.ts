@@ -195,8 +195,8 @@ export const nextStateOfSheriffVoteCheck: GetNextState = (
       innerHTML: "昨晚是个平安夜",
     } as ShowMsg);
   } else {
-    room.players.forEach((p) => (p.isLeavingMsg = false)); //先把所有人置空
-    dieLastNight.forEach((p) => (p.isLeavingMsg = true)); // 设置昨晚死的人正在留遗言
+    room.players.forEach((p) => (p.isDying = false)); //先把所有人置空
+    dieLastNight.forEach((p) => (p.isDying = true)); // 设置昨晚死的人正在留遗言
 
     if (room.currentDay === 1) {
       // 第一晚有遗言

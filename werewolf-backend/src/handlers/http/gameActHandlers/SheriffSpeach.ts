@@ -44,7 +44,7 @@ export const SheriffSpeachHandler: GameActHandler = {
     clearTimeout(room.timer);
     room.timer = setTimeout(() => {
       SheriffSpeachHandler.endOfState(room);
-    }, timeout);
+    }, timeout * 1000);
     // 通知玩家当前状态已经发生改变, 并通知设置天数
     io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
       setDay: room.currentDay,

@@ -79,7 +79,7 @@ const actionInfoList: {
 
       if (
         gameStatus.value === GameStatus.LEAVE_MSG &&
-        self.value.isLeavingMsg
+        self.value.isDying
       )
         return false;
 
