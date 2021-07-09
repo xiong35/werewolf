@@ -31,6 +31,9 @@ export const BeforeDayDiscussHandler: GameActHandler = {
   },
 
   startOfState(room: Room) {
+    if (room.curStatus !== this.curStatus) {
+      room.gameStatus.push(this.curStatus);
+    }
     // 当执行到这里的时候, 意味着刚刚进入白天
     // 此时应该进行夜晚的结算并通知所有人获得晚上的消息了
     // 在 guard 结束时天数就已经 +1 了
@@ -119,7 +122,8 @@ export const BeforeDayDiscussHandler: GameActHandler = {
   async endOfState(room: Room, hasDyingPlayers: boolean) {
     if (hasDyingPlayers) {
       // 如果死人了, 依次进行 遗言发表检查, 猎人开枪检查, 警长传递警徽检查
-      LeaveMsgHandler.startOfState(room);
+      // 死亡操作都结束后进入白天发言环节
+      LeaveMsgHandler.startOfState(room, GameStatus.DAY_DISCUSS);
     } else {
       // 如果没死人就进入白天讨论阶段
       DayDiscussHandler.startOfState(room);

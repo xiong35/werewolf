@@ -1,10 +1,7 @@
 import { Context } from "koa";
 import io from "src";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -111,6 +108,11 @@ export function startCurrentState(
   handler: GameActHandler,
   room: Room
 ) {
+  // 更新当前房间状态
+  if (room.curStatus !== handler.curStatus) {
+    room.gameStatus.push(handler.curStatus);
+  }
+
   const timeout = TIMEOUT[handler.curStatus];
   // 设置此状态结束的回调
   clearTimeout(room.timer);
