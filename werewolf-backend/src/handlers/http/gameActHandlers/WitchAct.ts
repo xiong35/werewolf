@@ -8,11 +8,13 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response } from "./";
+import { GameActHandler, Response, startCurrentState } from "./";
 import { nextStateOfWitchAct } from "./ChangeStateHandler";
 import { GuardProtectHandler } from "./GuardProtect";
 
 export const WitchActHandler: GameActHandler = {
+  curStatus: GameStatus.WITCH_ACT,
+
   async handleHttpInTheState(
     room: Room,
     player: Player,
@@ -49,22 +51,12 @@ export const WitchActHandler: GameActHandler = {
     };
   },
 
-  startOfState: function (room: Room): void {
+  startOfState(room: Room): void {
     // 如果没有女巫就直接结束此阶段
     if (!room.needingCharacters.includes("WITCH"))
       return WitchActHandler.endOfState(room);
-    const timeout = TIMEOUT[GameStatus.WITCH_ACT];
-    // TODO 改成 this ?
-    // 设置此状态结束的回调
-    room.timer = setTimeout(() => {
-      WitchActHandler.endOfState(room);
-    }, timeout * 1000);
-    // 通知玩家当前状态已经发生改变, 并通知设置天数
-    io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
-      setDay: room.currentDay,
-      setStatus: GameStatus.WITCH_ACT,
-      timeout,
-    } as ChangeStatusMsg);
+
+    startCurrentState(this, room);
   },
 
   async endOfState(room: Room) {

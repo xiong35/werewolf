@@ -10,7 +10,9 @@ import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
 import { GameActHandler, Response } from "./";
 
-export const HunterShootHandler: GameActHandler = {
+export const HunterShootHandler: GameActHandler = {\
+  curStatus: GameStatus.HUNTER_SHOOT,
+  
   async handleHttpInTheState(
     room: Room,
     player: Player,

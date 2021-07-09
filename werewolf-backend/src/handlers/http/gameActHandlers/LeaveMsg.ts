@@ -14,6 +14,8 @@ import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/C
 import { GameActHandler, Response } from "./";
 
 export const LeaveMsgHandler: GameActHandler = {
+  curStatus: GameStatus.LEAVE_MSG,
+
   async handleHttpInTheState(
     room: Room,
     player: Player,
@@ -27,7 +29,7 @@ export const LeaveMsgHandler: GameActHandler = {
     };
   },
 
-  startOfState: function (room: Room): void {
+  startOfState(room: Room): void {
     // 玩家死亡后依次进行以下检查
     // 遗言发表检查, 猎人开枪检查, 警长传递警徽检查
   },

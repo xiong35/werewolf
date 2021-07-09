@@ -10,11 +10,13 @@ import { SeerCheckResponse } from "../../../../../werewolf-frontend/shared/httpM
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response, status2Handler } from "./";
+import { GameActHandler, Response, startCurrentState, status2Handler } from "./";
 import { nextStateOfSeerCheck } from "./ChangeStateHandler";
 import { WitchActHandler } from "./WitchAct";
 
 export const SeerCheckHandler: GameActHandler = {
+  curStatus: GameStatus.SEER_CHECK,
+
   async handleHttpInTheState(
     room: Room,
     player: Player,
@@ -45,23 +47,12 @@ export const SeerCheckHandler: GameActHandler = {
     return ret;
   },
 
-  startOfState: function (room: Room): void {
+  startOfState(room: Room): void {
     // 如果没有预言家就直接结束此阶段
     if (!room.needingCharacters.includes("SEER"))
       return SeerCheckHandler.endOfState(room);
 
-    const timeout = TIMEOUT[GameStatus.SEER_CHECK];
-    // 设置此状态结束的回调
-    clearTimeout(room.timer);
-    room.timer = setTimeout(() => {
-      SeerCheckHandler.endOfState(room);
-    }, timeout * 1000);
-    // 通知玩家当前状态已经发生改变, 并通知设置天数
-    io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
-      setDay: room.currentDay,
-      setStatus: GameStatus.SEER_CHECK,
-      timeout,
-    } as ChangeStatusMsg);
+    startCurrentState(this, room);
   },
 
   async endOfState(room: Room) {

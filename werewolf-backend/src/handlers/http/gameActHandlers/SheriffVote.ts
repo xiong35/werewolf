@@ -10,12 +10,14 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response } from "./";
+import { GameActHandler, Response, startCurrentState } from "./";
 import { nextStateOfSheriffVote } from "./ChangeStateHandler";
 import { SheriffSpeachHandler } from "./SheriffSpeach";
 import { SheriffVoteCheckHandler } from "./SheriffVoteCheck";
 
 export const SheriffVoteHandler: GameActHandler = {
+  curStatus: GameStatus.SHERIFF_VOTE,
+
   async handleHttpInTheState(
     room: Room,
     player: Player,
@@ -34,19 +36,8 @@ export const SheriffVoteHandler: GameActHandler = {
     };
   },
 
-  startOfState: function (room: Room): void {
-    const timeout = TIMEOUT[GameStatus.SHERIFF_VOTE];
-    // 设置此状态结束的回调
-    clearTimeout(room.timer);
-    room.timer = setTimeout(() => {
-      SheriffVoteHandler.endOfState(room);
-    }, timeout * 1000);
-    // 通知玩家当前状态已经发生改变, 并通知设置天数
-    io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
-      setDay: room.currentDay,
-      setStatus: GameStatus.SHERIFF_VOTE,
-      timeout,
-    } as ChangeStatusMsg);
+  startOfState(room: Room): void {
+    startCurrentState(this, room);
   },
 
   async endOfState(room: Room) {

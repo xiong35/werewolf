@@ -74,6 +74,8 @@ export interface GameActHandler {
    * 3. 调用下一状态的 start
    */
   endOfState: (room: Room, extra?: any) => void;
+
+  curStatus: GameStatus;
 }
 
 export interface DieCheckHandler extends GameActHandler {
@@ -101,3 +103,24 @@ export const status2Handler: Record<GameStatus, GameActHandler> = {
   [GameStatus.SHERIFF_VOTE_CHECK]: SheriffVoteCheckHandler,
   [GameStatus.BEFORE_DAY_DISCUSS]: BeforeDayDiscussHandler,
 };
+
+/**
+ * 设置当前没状态结束的定时器, 通知玩家修改状态
+ */
+export function startCurrentState(
+  handler: GameActHandler,
+  room: Room
+) {
+  const timeout = TIMEOUT[handler.curStatus];
+  // 设置此状态结束的回调
+  clearTimeout(room.timer);
+  room.timer = setTimeout(() => {
+    handler.endOfState(room);
+  }, timeout * 1000);
+  // 通知玩家当前状态已经发生改变, 并通知设置天数
+  io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
+    setDay: room.currentDay,
+    setStatus: handler.curStatus,
+    timeout,
+  } as ChangeStatusMsg);
+}

@@ -9,13 +9,15 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response } from "./";
+import { GameActHandler, Response, startCurrentState } from "./";
 import { BeforeDayDiscussHandler } from "./BeforeDayDiscuss";
 import { nextStateOfGuardProtect } from "./ChangeStateHandler";
 import { HunterCheckHandler } from "./HunterCheck";
 import { SheriffElectHandler } from "./SheriffElect";
 
 export const GuardProtectHandler: GameActHandler = {
+  curStatus: GameStatus.GUARD_PROTECT,
+
   async handleHttpInTheState(
     room: Room,
     player: Player,
@@ -65,23 +67,12 @@ export const GuardProtectHandler: GameActHandler = {
     };
   },
 
-  startOfState: function (room: Room): void {
+  startOfState(room: Room): void {
     // 如果没有守卫就直接开启猎人的阶段
     if (!room.needingCharacters.includes("GUARD"))
       return GuardProtectHandler.endOfState(room);
 
-    const timeout = TIMEOUT[GameStatus.GUARD_PROTECT];
-    // TODO 改成 this ?
-    // 设置此状态结束的回调
-    room.timer = setTimeout(() => {
-      GuardProtectHandler.endOfState(room);
-    }, timeout * 1000);
-    // 通知玩家当前状态已经发生改变, 并通知设置天数
-    io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
-      setDay: room.currentDay,
-      setStatus: GameStatus.GUARD_PROTECT,
-      timeout,
-    } as ChangeStatusMsg);
+    startCurrentState(this, room);
   },
 
   async endOfState(room: Room) {

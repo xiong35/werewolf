@@ -5,7 +5,10 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNplayers";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -15,6 +18,7 @@ import { DayDiscussHandler } from "./DayDiscuss";
 import { LeaveMsgHandler } from "./LeaveMsg";
 
 export const BeforeDayDiscussHandler: GameActHandler = {
+  curStatus: GameStatus.BEFORE_DAY_DISCUSS,
   async handleHttpInTheState(
     room: Room,
     player: Player,
@@ -29,7 +33,7 @@ export const BeforeDayDiscussHandler: GameActHandler = {
     };
   },
 
-  startOfState: function (room: Room): void {
+  startOfState(room: Room): void {
     // 当执行到这里的时候, 意味着刚刚进入白天
     // 此时应该进行夜晚的结算并通知所有人获得晚上的消息了
     // 在 guard 结束时天数就已经 +1 了
