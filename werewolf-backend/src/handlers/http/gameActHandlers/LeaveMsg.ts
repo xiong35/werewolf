@@ -4,7 +4,10 @@ import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -24,5 +27,9 @@ export const LeaveMsgHandler: GameActHandler = {
     };
   },
 
+  startOfState: function (room: Room): void {
+    // 玩家死亡后依次进行以下检查
+    // 遗言发表检查, 猎人开枪检查, 警长传递警徽检查
+  },
   async endOfState(room: Room) {},
 };

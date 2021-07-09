@@ -1,7 +1,10 @@
 import { Context } from "koa";
 import io from "src";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -62,7 +65,7 @@ export interface GameActHandler {
    * 2. 通知玩家当前状态已经发生改变
    * 3. 通知设置天数
    */
-  startOfState: (room: Room) => void;
+  startOfState: (room: Room, extra?: any) => void;
 
   /**
    * 在某个状态结束时调用
@@ -71,6 +74,12 @@ export interface GameActHandler {
    * 3. 调用下一状态的 start
    */
   endOfState: (room: Room, extra?: any) => void;
+}
+
+export interface DieCheckHandler extends GameActHandler {
+  // 进行死亡结算时需知道在结算后进入什么状态
+  endOfState: (room: Room, nextState: GameStatus) => void;
+  startOfState: (room: Room, nextState: GameStatus) => void;
 }
 
 export const status2Handler: Record<GameStatus, GameActHandler> = {
