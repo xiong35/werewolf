@@ -28,12 +28,9 @@ const gameAct: Middleware = async (ctx) => {
   // TODO validate request
 
   // strategy pattern
-  ctx.body = await status2Handler[gameStatus]?.handleHttp?.(
-    room,
-    player,
-    req.target,
-    ctx
-  );
+  ctx.body = await status2Handler[
+    gameStatus
+  ]?.handleHttpInTheState?.(room, player, req.target, ctx);
 };
 
 export default gameAct;

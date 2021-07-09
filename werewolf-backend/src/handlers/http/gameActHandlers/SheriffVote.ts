@@ -4,16 +4,19 @@ import { createError } from "src/middleware/handleError";
 import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
+import { renderHintNPlayers } from "src/utils/renderHintNplayers";
 
 import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response, setTimerNSendMsg } from "./";
+import { GameActHandler, Response } from "./";
 import { nextStateOfSheriffVote } from "./ChangeStateHandler";
+import { SheriffSpeachHandler } from "./SheriffSpeach";
+import { SheriffVoteCheckHandler } from "./SheriffVoteCheck";
 
 export const SheriffVoteHandler: GameActHandler = {
-  async handleHttp(
+  async handleHttpInTheState(
     room: Room,
     player: Player,
     target: index,
@@ -31,15 +34,64 @@ export const SheriffVoteHandler: GameActHandler = {
     };
   },
 
+  startOfState: function (room: Room): void {
+    const timeout = TIMEOUT[GameStatus.SHERIFF_VOTE];
+    // 设置此状态结束的回调
+    clearTimeout(room.timer);
+    room.timer = setTimeout(() => {
+      SheriffVoteHandler.endOfState(room);
+    }, timeout);
+    // 通知玩家当前状态已经发生改变, 并通知设置天数
+    io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
+      setDay: room.currentDay,
+      setStatus: GameStatus.SHERIFF_VOTE,
+      timeout,
+    } as ChangeStatusMsg);
+  },
+
   async endOfState(room: Room) {
     const votes = room.players.map((p) => p.sheriffVotes[0]);
 
     // 找到警长人选
-    const voteRes = getVoteResult(votes);
-    if (voteRes !== null) {
+    const highestVotes = getVoteResult(votes);
+
+    // 如果没有全部弃票
+    if (!highestVotes || highestVotes.length === 0) {
+      // 如果所有人都弃票
+      // 直接进入白天
+      io.to(room.roomNumber).emit(Events.SHOW_MSG, {
+        innerHTML: "所有人都弃票, 即将进入自由发言阶段",
+      });
+      return SheriffVoteCheckHandler.startOfState(room);
+    } else if (highestVotes.length === 1) {
+      // 如果有票数最高的人
+      // 此人当选, 进入白天
+      room.getPlayerByIndex(highestVotes[0]).isSheriff = true;
+      io.to(room.roomNumber).emit(Events.SHOW_MSG, {
+        innerHTML: renderHintNPlayers(
+          "当选警长的玩家为:",
+          highestVotes
+        ),
+      });
+      return SheriffVoteCheckHandler.startOfState(room);
+    } else {
+      // 如果多人平票
+      // 设置参与警长竞选的人是他们几个
+      room.players.forEach((p) => {
+        if (p.index in highestVotes) p.isElecting = true;
+        else p.isElecting = false;
+      });
+      // 设置他们未结束发言
+      room.finishCurStatus = new Set();
+      // 告知所有人现在应该再依次投票
+      io.to(room.roomNumber).emit(Events.SHOW_MSG, {
+        innerHTML: renderHintNPlayers(
+          "竞争警长的玩家如下, 请再次依次进行发言",
+          highestVotes
+        ),
+      });
+      // 设置下一阶段为警长发言
+      return SheriffSpeachHandler.startOfState(room);
     }
-    setTimerNSendMsg(room, (r) =>
-      nextStateOfSheriffVote(r, voteRes)
-    );
   },
 };

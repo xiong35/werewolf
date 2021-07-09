@@ -15,7 +15,7 @@ export class Player implements PlayerDef {
     fromIndex: index[];
     fromCharacter: Character;
   };
-  characterStatus?: CharacterStatus;
+  characterStatus?: CharacterStatus = {};
 
   index: index;
   name: string;

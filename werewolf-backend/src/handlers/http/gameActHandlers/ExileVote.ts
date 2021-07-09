@@ -11,7 +11,7 @@ import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/C
 import { GameActHandler, Response } from "./";
 
 export const ExileVoteHandler: GameActHandler = {
-  async handleHttp(
+  async handleHttpInTheState(
     room: Room,
     player: Player,
     target: index,

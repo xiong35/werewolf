@@ -77,21 +77,21 @@ export const nextStateOfHunterCheck: GetNextState = (
   // 将夜晚死的人的 isAlive 设为false
   room.players
     .filter((p) => {
-      const iaKilledLastNight = p.die?.at === room.currentDay - 1;
-      return iaKilledLastNight;
+      const isKilledLastNight = p.die?.at === room.currentDay - 1;
+      return isKilledLastNight;
     })
     .forEach((p) => (p.isAlive = false));
 
-  // 将女巫救的人复活
-  const medicineStatus = room.players.find(
-    (p) => p.character === "WITCH"
-  )?.characterStatus?.MEDICINE;
-  if (medicineStatus?.usedAt === room.currentDay - 1) {
-    // 如果女巫昨晚用了药
-    const savedPlayerInd = medicineStatus.usedAt;
-    const savedLastNight = room.getPlayerByIndex(savedPlayerInd);
-    if (savedLastNight) savedLastNight.isAlive = true;
-  }
+  // // 将女巫救的人复活
+  // const medicineStatus = room.players.find(
+  //   (p) => p.character === "WITCH"
+  // )?.characterStatus?.MEDICINE;
+  // if (medicineStatus?.usedAt === room.currentDay - 1) {
+  //   // 如果女巫昨晚用了药
+  //   const savedPlayerInd = medicineStatus.usedAt;
+  //   const savedLastNight = room.getPlayerByIndex(savedPlayerInd);
+  //   if (savedLastNight) savedLastNight.isAlive = true;
+  // }
 
   return GameStatus.BEFORE_DAY_DISCUSS;
 };

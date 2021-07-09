@@ -9,11 +9,12 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response, setTimerNSendMsg } from "./";
+import { GameActHandler, Response } from "./";
 import { nextStateOfSheriffSpeech } from "./ChangeStateHandler";
+import { SheriffVoteHandler } from "./SheriffVote";
 
 export const SheriffSpeachHandler: GameActHandler = {
-  async handleHttp(
+  async handleHttpInTheState(
     room: Room,
     player: Player,
     target: index,
@@ -27,8 +28,7 @@ export const SheriffSpeachHandler: GameActHandler = {
       room.finishCurStatus.size ===
       room.players.filter((p) => p.isElecting)?.length
     ) {
-      clearTimeout(room.timer);
-      setTimerNSendMsg(room, nextStateOfSheriffSpeech);
+      SheriffVoteHandler.startOfState(room);
     }
 
     return {
@@ -38,8 +38,23 @@ export const SheriffSpeachHandler: GameActHandler = {
     };
   },
 
+  startOfState: function (room: Room): void {
+    const timeout = TIMEOUT[GameStatus.SHERIFF_SPEECH];
+    // 设置此状态结束的回调
+    clearTimeout(room.timer);
+    room.timer = setTimeout(() => {
+      SheriffSpeachHandler.endOfState(room);
+    }, timeout);
+    // 通知玩家当前状态已经发生改变, 并通知设置天数
+    io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
+      setDay: room.currentDay,
+      setStatus: GameStatus.SHERIFF_SPEECH,
+      timeout,
+    } as ChangeStatusMsg);
+  },
+
   async endOfState(room: Room) {
-    setTimerNSendMsg(room, nextStateOfSheriffSpeech);
+    SheriffVoteHandler.startOfState(room);
   },
 };
 
