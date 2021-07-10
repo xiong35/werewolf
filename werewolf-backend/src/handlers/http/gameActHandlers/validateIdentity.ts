@@ -38,9 +38,10 @@ export function validateIdentity(
       return player.character === "WITCH";
     case GameStatus.GUARD_PROTECT:
       return player.character === "GUARD";
+    case GameStatus.DAY_DISCUSS:
+      return room.toFinishPlayers.has(player.index);
     case GameStatus.SHERIFF_ELECT:
     case GameStatus.EXILE_VOTE:
-    case GameStatus.DAY_DISCUSS:
     case GameStatus.SHERIFF_VOTE:
       return true;
     case GameStatus.SHERIFF_SPEECH:

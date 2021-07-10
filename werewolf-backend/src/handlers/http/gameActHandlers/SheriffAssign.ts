@@ -52,7 +52,7 @@ export const SheriffAssignHandler: GameActHandler = {
   async endOfState(room, showSheriff: boolean = true) {
     if (!showSheriff) {
       // 无警长就直接清算
-      return w;
+      return gotoNextState(room);
     } else {
       // TODO 通知发表遗言的时间
 

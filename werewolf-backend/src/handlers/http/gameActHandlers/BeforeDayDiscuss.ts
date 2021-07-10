@@ -127,6 +127,12 @@ export const BeforeDayDiscussHandler: GameActHandler = {
       LeaveMsgHandler.startOfState(room);
     } else {
       // 如果没死人就进入白天讨论阶段
+      room.players.forEach((p) => (p.canBeVoted = p.isAlive));
+      room.toFinishPlayers = new Set(
+        room.players
+          .filter((p) => p.canBeVoted)
+          .map((p) => p.index)
+      );
       DayDiscussHandler.startOfState(room);
     }
   },

@@ -4,10 +4,7 @@ import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -30,4 +27,11 @@ export const ExileVoteCheckHandler: GameActHandler = {
   },
 
   async endOfState(room: Room) {},
+
+  /**
+   * @param nextState 在确认完结果后进入哪个状态
+   */
+  startOfState: function (room: Room, nextState: GameStatus) {
+    // TODO next state
+  },
 };
