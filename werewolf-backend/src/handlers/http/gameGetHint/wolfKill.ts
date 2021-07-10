@@ -2,7 +2,7 @@ import { Middleware } from "koa";
 import { createError } from "src/middleware/handleError";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
-import { renderHintNPlayers } from "src/utils/renderHintNplayers";
+import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
 import {
     IDHeaderName, RoomNumberHeaderName

@@ -3,7 +3,7 @@ import io from "src";
 import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
-import { renderHintNPlayers } from "src/utils/renderHintNplayers";
+import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
 import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
