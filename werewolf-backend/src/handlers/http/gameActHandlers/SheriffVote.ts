@@ -73,8 +73,11 @@ export const SheriffVoteHandler: GameActHandler = {
         else p.canBeVoted = false;
       });
       // 设置他们未结束发言
-      room.finishCurState = new Set();
-      // 告知所有人现在应该再依次投票
+      room.toFinishPlayers = new Set(
+        room.players
+          .filter((p) => p.canBeVoted)
+          .map((p) => p.index)
+      ); // 告知所有人现在应该再依次投票
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
         innerHTML: renderHintNPlayers(
           "竞争警长的玩家如下, 请再次依次进行发言",

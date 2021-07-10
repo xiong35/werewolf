@@ -23,13 +23,10 @@ export const SheriffSpeachHandler: GameActHandler = {
     ctx: Context
   ) {
     // 结束自己的发言
-    room.finishCurState.add(player.index);
+    room.toFinishPlayers.delete(player.index);
 
     // 如果所有人都发言完毕, 进入警长投票环节
-    if (
-      room.finishCurState.size ===
-      room.players.filter((p) => p.canBeVoted)?.length
-    ) {
+    if (room.toFinishPlayers.size === 0) {
       SheriffVoteHandler.startOfState(room);
     }
 

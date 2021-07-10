@@ -19,7 +19,7 @@ export class Room implements RoomDef {
   get curStatus(): GameStatus {
     return this.gameStatus[this.gameStatus.length - 1];
   }
-  finishCurState = new Set<index>();
+  toFinishPlayers = new Set<index>();
   timer: NodeJS.Timeout;
   /** 死亡结算后的下一个状态 */
   nextStateOfDieCheck: GameStatus;
