@@ -54,19 +54,19 @@ export const HunterShootHandler: GameActHandler = {
     };
   },
 
-  startOfState(room, nextState) {
+  startOfState(room) {
     // 玩家死亡后依次进行以下检查
     // 遗言发表检查, 猎人开枪检查, 警长传递警徽检查
     if (!showHunter(room)) {
-      HunterShootHandler.endOfState(room, nextState, false);
+      HunterShootHandler.endOfState(room, false);
     }
-    startCurrentState(this, room, nextState);
+    startCurrentState(this, room);
   },
 
-  async endOfState(room, nextState, showHunter: boolean = true) {
+  async endOfState(room, showHunter: boolean = true) {
     if (!showHunter) {
       // 无猎人? 直接取消这两个阶段
-      return SheriffAssignHandler.startOfState(room, nextState);
+      return SheriffAssignHandler.startOfState(room);
     }
 
     const shotByHunter = room.players.find(
@@ -77,7 +77,7 @@ export const HunterShootHandler: GameActHandler = {
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
         innerHTML: "死者不是猎人或选择不开枪",
       } as ShowMsg);
-      SheriffAssignHandler.startOfState(room, nextState);
+      SheriffAssignHandler.startOfState(room);
     } else {
       // 如果死人了, 通知死人了
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
@@ -85,7 +85,7 @@ export const HunterShootHandler: GameActHandler = {
           shotByHunter.index,
         ]),
       } as ShowMsg);
-      HunterCheckHandler.startOfState(room, nextState);
+      HunterCheckHandler.startOfState(room);
     }
   },
 };

@@ -23,6 +23,8 @@ export class Room implements RoomDef {
   timer: NodeJS.Timeout;
   /** 死亡结算后的下一个状态 */
   nextStateOfDieCheck: GameStatus;
+  /** 当前正在进行死亡结算的玩家序号 */
+  curDyingPlayer: Player;
 
   createdAt = new Date();
 

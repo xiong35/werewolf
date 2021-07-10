@@ -114,18 +114,17 @@ export const BeforeDayDiscussHandler: GameActHandler = {
       timeout: stateTimeout,
     } as ChangeStatusMsg);
     room.timer = setTimeout(() => {
-      BeforeDayDiscussHandler.endOfState(
-        room,
-        dyingPlayers.length !== 0
-      );
+      BeforeDayDiscussHandler.endOfState(room, dyingPlayers);
     }, stateTimeout * 1000);
   },
 
-  async endOfState(room: Room, hasDyingPlayers: boolean) {
-    if (hasDyingPlayers) {
+  async endOfState(room: Room, dyingPlayers: Player[]) {
+    if (dyingPlayers.length) {
       // 如果死人了, 依次进行 遗言发表检查, 猎人开枪检查, 警长传递警徽检查
       // 死亡操作都结束后进入白天发言环节
-      LeaveMsgHandler.startOfState(room, GameStatus.DAY_DISCUSS);
+      room.nextStateOfDieCheck = GameStatus.DAY_DISCUSS;
+      room.curDyingPlayer = dyingPlayers[0];
+      LeaveMsgHandler.startOfState(room);
     } else {
       // 如果没死人就进入白天讨论阶段
       DayDiscussHandler.startOfState(room);

@@ -63,7 +63,7 @@ export interface GameActHandler {
    * 2. 通知玩家当前状态已经发生改变
    * 3. 通知设置天数
    */
-  startOfState: (room: Room, extra?: any) => void;
+  startOfState: (room: Room, ...rest: any) => void;
 
   /**
    * 在某个状态结束时调用
@@ -71,15 +71,9 @@ export interface GameActHandler {
    * 2. 根据局势判断要转移到什么状态
    * 3. 调用下一状态的 start
    */
-  endOfState: (room: Room, extra?: any, ...rest: any) => void;
+  endOfState: (room: Room, ...rest: any) => void;
 
   curStatus: GameStatus;
-}
-
-export interface DieCheckHandler extends GameActHandler {
-  // 进行死亡结算时需知道在结算后进入什么状态
-  endOfState: (room: Room, nextState: GameStatus) => void;
-  startOfState: (room: Room, nextState: GameStatus) => void;
 }
 
 export const status2Handler: Record<GameStatus, GameActHandler> = {
@@ -109,7 +103,7 @@ export const status2Handler: Record<GameStatus, GameActHandler> = {
 export function startCurrentState(
   handler: GameActHandler,
   room: Room,
-  extra?: any
+  ...extra: any
 ) {
   // 更新当前房间状态
   if (room.curStatus !== handler.curStatus) {
@@ -120,7 +114,7 @@ export function startCurrentState(
   // 设置此状态结束的回调
   clearTimeout(room.timer);
   room.timer = setTimeout(() => {
-    handler.endOfState(room, extra);
+    handler.endOfState(room, ...extra);
   }, timeout * 1000);
   // 通知玩家当前状态已经发生改变, 并通知设置天数
   io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
@@ -128,4 +122,24 @@ export function startCurrentState(
     setStatus: handler.curStatus,
     timeout,
   } as ChangeStatusMsg);
+}
+
+/**
+ * 当前死亡结算正式结束, 设置此人 isDying 为 false\
+ * 判断是否还有要进行死亡检查的人
+ * 1. 如果有就把他设置为 curDyingPlayer, 进行 LeaveMsg
+ * 2. 如果没有, 设置 curDyingPlayer 为 null, 进行 nextState, 并将他设为 null
+ */
+export function gotoNextState(room: Room) {
+  room.curDyingPlayer.isDying = false;
+
+  const dyingPlayers = room.players.filter((p) => p.isDying);
+  if (dyingPlayers.length) {
+    room.curDyingPlayer = dyingPlayers[0];
+    return LeaveMsgHandler.startOfState(room);
+  } else {
+    room.curDyingPlayer = null;
+    status2Handler[room.nextStateOfDieCheck].startOfState(room);
+    room.nextStateOfDieCheck = null;
+  }
 }

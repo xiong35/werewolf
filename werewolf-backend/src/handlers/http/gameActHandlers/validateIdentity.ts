@@ -17,9 +17,14 @@ export function validateIdentity(
 
   switch (gameStatus) {
     case GameStatus.HUNTER_SHOOT:
-      return player.character === "HUNTER";
+      return (
+        player.character === "HUNTER" &&
+        room.curDyingPlayer._id === player._id
+      );
     case GameStatus.SHERIFF_ASSIGN:
-      return player.isSheriff;
+      return (
+        player.isSheriff && room.curDyingPlayer._id === player._id
+      );
   }
 
   if (!player.isAlive) return false; // 除了猎人和警长, 都必须明面上活着才能进行操作
@@ -41,7 +46,9 @@ export function validateIdentity(
     case GameStatus.SHERIFF_SPEECH:
       return player.isElecting;
     case GameStatus.LEAVE_MSG:
-      return player.isDying;
+      return (
+        player.isDying && room.curDyingPlayer._id === player._id
+      );
   }
 
   // TODO 检查是否有遗漏的状态
