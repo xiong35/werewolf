@@ -24,7 +24,7 @@ export const SheriffVoteHandler: GameActHandler = {
     target: index,
     ctx: Context
   ) {
-    if (!room.getPlayerByIndex(target)?.isElecting)
+    if (!room.getPlayerByIndex(target)?.canBeVoted)
       createError({ status: 400, msg: "选择的玩家未参与竞选" });
 
     player.sheriffVotes[0] = target;
@@ -69,8 +69,8 @@ export const SheriffVoteHandler: GameActHandler = {
       // 如果多人平票
       // 设置参与警长竞选的人是他们几个
       room.players.forEach((p) => {
-        if (p.index in highestVotes) p.isElecting = true;
-        else p.isElecting = false;
+        if (p.index in highestVotes) p.canBeVoted = true;
+        else p.canBeVoted = false;
       });
       // 设置他们未结束发言
       room.finishCurState = new Set();

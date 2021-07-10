@@ -28,7 +28,7 @@ export const SheriffSpeachHandler: GameActHandler = {
     // 如果所有人都发言完毕, 进入警长投票环节
     if (
       room.finishCurState.size ===
-      room.players.filter((p) => p.isElecting)?.length
+      room.players.filter((p) => p.canBeVoted)?.length
     ) {
       SheriffVoteHandler.startOfState(room);
     }

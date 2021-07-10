@@ -20,7 +20,7 @@ export const self = ref<PlayerDef>({
   isSheriff: false,
   name: "---",
   sheriffVotes: [],
-  isElecting: false,
+  canBeVoted: false,
   isDying: false,
 });
 /** 自己的角色 */

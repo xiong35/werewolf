@@ -29,7 +29,7 @@ export class Player implements PlayerDef {
       Math.random().toString(36).substring(2) + "." + Date.now(); // e.g. `5fs6yt6htlu.1621430145541`
   }
   isDying: boolean = false; // TODO isDying 的话角色闪烁?
-  isElecting: boolean = false;
+  canBeVoted: boolean = false;
 
   /**
    * 将 Player 信息转换成公开的信息

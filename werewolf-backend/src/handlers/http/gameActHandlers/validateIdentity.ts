@@ -44,7 +44,7 @@ export function validateIdentity(
     case GameStatus.SHERIFF_VOTE:
       return true;
     case GameStatus.SHERIFF_SPEECH:
-      return player.isElecting;
+      return player.canBeVoted;
     case GameStatus.LEAVE_MSG:
       return (
         player.isDying && room.curDyingPlayer._id === player._id

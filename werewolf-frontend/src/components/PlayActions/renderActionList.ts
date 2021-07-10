@@ -73,7 +73,7 @@ const actionInfoList: {
         return false;
       if (
         gameStatus.value === GameStatus.SHERIFF_SPEECH &&
-        self.value.isElecting
+        self.value.canBeVoted
       )
         return false;
 

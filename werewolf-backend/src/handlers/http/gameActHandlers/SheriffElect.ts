@@ -24,7 +24,7 @@ export const SheriffElectHandler: GameActHandler = {
     ctx: Context
   ) {
     // 加入参与竞选的人
-    player.isElecting = true;
+    player.canBeVoted = true;
 
     return {
       status: 200,
@@ -40,7 +40,7 @@ export const SheriffElectHandler: GameActHandler = {
 
   async endOfState(room: Room) {
     const electingPlayers = room.players.filter(
-      (p) => p.isElecting
+      (p) => p.canBeVoted
     );
 
     if (!electingPlayers || electingPlayers.length === 0) {
