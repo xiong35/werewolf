@@ -78,12 +78,6 @@ export enum GameStatus {
   GUARD_PROTECT = "守卫保人",
 
   /**
-   * 猎人查看开枪状态
-   * 自由发言或上警 入栈
-   */
-  HUNTER_CHECK = "查看猎人开枪结果",
-
-  /**
    * 上警
    * 投票选警长 入栈
    */
@@ -101,10 +95,9 @@ export enum GameStatus {
   /**
    * 指派警长，
    * 指当前警长去世了, 指定新的警长
-   *
-   * 老警长 10s 选择，
    */
   SHERIFF_ASSIGN = "指派警长",
+  SHERIFF_ASSIGN_CHECK = "检查指派警长的结果",
 
   /**
    * 夜晚结算
@@ -136,6 +129,11 @@ export enum GameStatus {
    * 可能有留遗言入栈
    */
   HUNTER_SHOOT = "猎人开枪",
+  /**
+   * 猎人查看开枪状态
+   * 自由发言或上警 入栈
+   */
+  HUNTER_CHECK = "查看猎人开枪结果",
 
   /** 留遗言 */
   LEAVE_MSG = "留遗言",
@@ -175,4 +173,5 @@ export const TIMEOUT: Record<GameStatus, number> = {
   [GameStatus.LEAVE_MSG]: 996,
   [GameStatus.BEFORE_DAY_DISCUSS]: 5,
   [GameStatus.SHERIFF_SPEECH]: 996,
+  [GameStatus.SHERIFF_ASSIGN_CHECK]: 5,
 };

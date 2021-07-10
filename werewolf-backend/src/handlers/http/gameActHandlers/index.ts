@@ -18,6 +18,7 @@ import { HunterShootHandler } from "./HunterShoot";
 import { LeaveMsgHandler } from "./LeaveMsg";
 import { SeerCheckHandler } from "./SeerCheck";
 import { SheriffAssignHandler } from "./SheriffAssign";
+import { SheriffAssignCheckHandler } from "./SheriffAssignCheck";
 import { SheriffElectHandler } from "./SheriffElect";
 import { SheriffSpeachHandler } from "./SheriffSpeach";
 import { SheriffVoteHandler } from "./SheriffVote";
@@ -70,7 +71,7 @@ export interface GameActHandler {
    * 2. 根据局势判断要转移到什么状态
    * 3. 调用下一状态的 start
    */
-  endOfState: (room: Room, extra?: any) => void;
+  endOfState: (room: Room, extra?: any, ...rest: any) => void;
 
   curStatus: GameStatus;
 }
@@ -99,6 +100,7 @@ export const status2Handler: Record<GameStatus, GameActHandler> = {
   [GameStatus.WOLF_KILL_CHECK]: WolfKillCheckHandler,
   [GameStatus.SHERIFF_VOTE_CHECK]: SheriffVoteCheckHandler,
   [GameStatus.BEFORE_DAY_DISCUSS]: BeforeDayDiscussHandler,
+  [GameStatus.SHERIFF_ASSIGN_CHECK]: SheriffAssignCheckHandler,
 };
 
 /**

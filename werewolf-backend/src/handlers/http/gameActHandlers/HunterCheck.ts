@@ -9,14 +9,14 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response, startCurrentState } from "./";
+import { DieCheckHandler, GameActHandler, Response, startCurrentState } from "./";
 import { BeforeDayDiscussHandler } from "./BeforeDayDiscuss";
 import { nextStateOfHunterCheck } from "./ChangeStateHandler";
 import { HunterShootHandler } from "./HunterShoot";
 import { SheriffAssignHandler } from "./SheriffAssign";
 import { SheriffElectHandler } from "./SheriffElect";
 
-export const HunterCheckHandler: GameActHandler = {
+export const HunterCheckHandler: DieCheckHandler = {
   curStatus: GameStatus.HUNTER_CHECK,
 
   async handleHttpInTheState(
@@ -32,11 +32,11 @@ export const HunterCheckHandler: GameActHandler = {
     };
   },
 
-  startOfState(room: Room) {
-    startCurrentState(this, room);
+  startOfState(room: Room, nextState) {
+    startCurrentState(this, room, nextState);
   },
 
-  async endOfState(room: Room) {
-    SheriffAssignHandler.startOfState(room);
+  async endOfState(room: Room, nextState) {
+    SheriffAssignHandler.startOfState(room, nextState);
   },
 };
