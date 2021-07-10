@@ -1,5 +1,6 @@
 import { Context } from "koa";
 import io from "src";
+import { createError } from "src/middleware/handleError";
 import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
@@ -21,6 +22,17 @@ export const WitchActHandler: GameActHandler = {
     target: index,
     ctx: Context
   ) {
+    if (
+      player.characterStatus?.MEDICINE?.usedDay ===
+        player.characterStatus?.POISON?.usedDay &&
+      player.characterStatus?.MEDICINE != null
+    ) {
+      createError({
+        msg: "一天只能使用一瓶药",
+        status: 401,
+      });
+    }
+
     // 正编号代表救人, 负编号代表杀人
     if (target < 0) {
       // 杀人
@@ -35,6 +47,8 @@ export const WitchActHandler: GameActHandler = {
       };
     } else {
       // 救人
+      // TODO 获得今天谁死了的接口i
+      // TODO 女巫只能救今天死的人
       const savedPlayer = room.getPlayerByIndex(target);
       savedPlayer.die = null;
       savedPlayer.isAlive = true;

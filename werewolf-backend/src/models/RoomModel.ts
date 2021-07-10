@@ -19,8 +19,10 @@ export class Room implements RoomDef {
   get curStatus(): GameStatus {
     return this.gameStatus[this.gameStatus.length - 1];
   }
-  finishCurStatus = new Set<index>();
+  finishCurState = new Set<index>();
   timer: NodeJS.Timeout;
+  /** 死亡结算后的下一个状态 */
+  nextStateOfDieCheck: GameStatus;
 
   createdAt = new Date();
 
@@ -59,8 +61,6 @@ export class Room implements RoomDef {
       .fill(0)
       .map((_, i) => i + 2);
     this.password = password;
-
-    // TODO set timer?
   }
 
   playerJoin(name: string, password?: string): Player {

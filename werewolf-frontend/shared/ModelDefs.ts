@@ -15,7 +15,7 @@ export interface RoomDef {
   remainingIndexes: index[]; // 空缺的玩家号码
   isFinished: boolean; // 是否已结束 -> 游戏结束重置
   gameStatus: GameStatus[]; // 所有的游戏状态的栈 -> 游戏结束重置
-  finishCurStatus: Set<index>; // 选择结束当前阶段的玩家(每次改变状态需重置)
+  finishCurState: Set<index>; // 选择结束当前阶段的玩家(每次改变状态需重置)
   timer: NodeJS.Timeout; // 事件定时器 id, undefined 则为结束
 }
 
@@ -52,7 +52,6 @@ export interface TokenDef {
 }
 
 export interface HunterStatus {
-  canShoot: boolean;
   shootAt: {
     day: day;
     player: index;

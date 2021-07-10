@@ -34,9 +34,11 @@ export const BeforeDayDiscussHandler: GameActHandler = {
     if (room.curStatus !== this.curStatus) {
       room.gameStatus.push(this.curStatus);
     }
+
     // 当执行到这里的时候, 意味着刚刚进入白天
+    // 如果现在day还是偶数(在夜晚)就++(设置为白天)
+    if (room.currentDay % 2 === 0) room.currentDay++;
     // 此时应该进行夜晚的结算并通知所有人获得晚上的消息了
-    // 在 guard 结束时天数就已经 +1 了
 
     // 将夜晚死的人的 isAlive 设为false
     const dyingPlayers = room.players.filter((p) => {
@@ -114,7 +116,7 @@ export const BeforeDayDiscussHandler: GameActHandler = {
     room.timer = setTimeout(() => {
       BeforeDayDiscussHandler.endOfState(
         room,
-        dyingPlayers.length === 0
+        dyingPlayers.length !== 0
       );
     }, stateTimeout * 1000);
   },

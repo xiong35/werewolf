@@ -27,6 +27,8 @@ const gameAct: Middleware = async (ctx) => {
   // TODO check character
   // TODO validate request
 
+  console.log("# gameAct", { gameStatus });
+
   // strategy pattern
   ctx.body = await status2Handler[
     gameStatus

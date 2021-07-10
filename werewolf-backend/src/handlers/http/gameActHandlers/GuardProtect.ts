@@ -76,10 +76,6 @@ export const GuardProtectHandler: GameActHandler = {
   },
 
   async endOfState(room: Room) {
-    // 下一个状态就进入到白天了
-    // 此时应该让天数加一
-    room.currentDay++;
-
     if (room.currentDay === 1) {
       return SheriffElectHandler.startOfState(room);
     }

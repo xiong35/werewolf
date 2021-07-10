@@ -41,8 +41,10 @@ export function validateIdentity(
     case GameStatus.SHERIFF_SPEECH:
       return player.isElecting;
     case GameStatus.LEAVE_MSG:
-      return true; // TODO 如何判断留遗言的状态?
+      return player.isDying;
   }
+
+  // TODO 检查是否有遗漏的状态
 
   return false;
 }

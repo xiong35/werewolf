@@ -38,7 +38,7 @@ const gameStatus: Middleware = async (ctx, next) => {
     data: {
       self: curPlayer,
       curDay: room.currentDay,
-      gameStatus: room.gameStatus?.[room.gameStatus.length - 1],
+      gameStatus: room.curStatus,
       players: room.choosePublicInfo(),
       events: mergeEvents(events),
     },

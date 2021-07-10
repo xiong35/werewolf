@@ -106,7 +106,8 @@ export const status2Handler: Record<GameStatus, GameActHandler> = {
  */
 export function startCurrentState(
   handler: GameActHandler,
-  room: Room
+  room: Room,
+  extra?: any
 ) {
   // 更新当前房间状态
   if (room.curStatus !== handler.curStatus) {
@@ -117,7 +118,7 @@ export function startCurrentState(
   // 设置此状态结束的回调
   clearTimeout(room.timer);
   room.timer = setTimeout(() => {
-    handler.endOfState(room);
+    handler.endOfState(room, extra);
   }, timeout * 1000);
   // 通知玩家当前状态已经发生改变, 并通知设置天数
   io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {

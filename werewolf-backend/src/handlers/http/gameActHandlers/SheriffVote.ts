@@ -73,7 +73,7 @@ export const SheriffVoteHandler: GameActHandler = {
         else p.isElecting = false;
       });
       // 设置他们未结束发言
-      room.finishCurStatus = new Set();
+      room.finishCurState = new Set();
       // 告知所有人现在应该再依次投票
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
         innerHTML: renderHintNPlayers(

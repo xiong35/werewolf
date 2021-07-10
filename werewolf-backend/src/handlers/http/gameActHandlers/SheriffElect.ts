@@ -34,6 +34,7 @@ export const SheriffElectHandler: GameActHandler = {
   },
 
   startOfState(room: Room) {
+    room.currentDay++;
     startCurrentState(this, room);
   },
 
@@ -59,7 +60,7 @@ export const SheriffElectHandler: GameActHandler = {
     } else {
       // 有多人参选
       // 设置参选警长的人都未结束发言
-      room.finishCurStatus = new Set();
+      room.finishCurState = new Set();
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
         innerHTML: renderHintNPlayers(
           "参选警长的玩家如下, 请依次进行发言",

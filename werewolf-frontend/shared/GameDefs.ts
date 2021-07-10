@@ -81,7 +81,7 @@ export enum GameStatus {
    * 猎人查看开枪状态
    * 自由发言或上警 入栈
    */
-  HUNTER_CHECK = "猎人查看开枪状态",
+  HUNTER_CHECK = "查看猎人开枪结果",
 
   /**
    * 上警
@@ -163,7 +163,7 @@ export const TIMEOUT: Record<GameStatus, number> = {
   [GameStatus.SEER_CHECK]: 20,
   [GameStatus.WITCH_ACT]: 20,
   [GameStatus.GUARD_PROTECT]: 20,
-  [GameStatus.HUNTER_CHECK]: 10,
+  [GameStatus.HUNTER_CHECK]: 7,
   [GameStatus.SHERIFF_ELECT]: 10,
   [GameStatus.SHERIFF_VOTE]: 20,
   [GameStatus.SHERIFF_VOTE_CHECK]: 5,
