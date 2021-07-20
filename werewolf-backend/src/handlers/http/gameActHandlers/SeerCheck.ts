@@ -28,6 +28,8 @@ export const SeerCheckHandler: GameActHandler = {
 
     if (!targetPlayer)
       createError({ status: 400, msg: "未找到此玩家" });
+    if (player.characterStatus?.checks?.[room.currentDay])
+      createError({ status: 400, msg: "一天只能查验一次" });
 
     const isWolf = targetPlayer.character === "WEREWOLF";
 

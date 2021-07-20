@@ -61,9 +61,7 @@ export const SheriffElectHandler: GameActHandler = {
       // 有多人参选
       // 设置参选警长的人都未结束发言
       room.toFinishPlayers = new Set(
-        room.players
-          .filter((p) => p.canBeVoted)
-          .map((p) => p.index)
+        electingPlayers.map((p) => p.index)
       );
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
         innerHTML: renderHintNPlayers(

@@ -20,8 +20,10 @@ const gameAct: Middleware = async (ctx) => {
   const room = Room.getRoom(roomNumber);
   const player = room.getPlayerById(playerID);
 
-  if (!validateIdentity(room, player))
-    createError({ status: 401, msg: "操作不合法" });
+  const isValidate = validateIdentity(room, player);
+  if (isValidate !== true) {
+    createError({ status: 401, msg: isValidate });
+  }
 
   const gameStatus = room.curStatus;
   // TODO check character

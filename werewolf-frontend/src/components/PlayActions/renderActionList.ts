@@ -70,7 +70,7 @@ const actionInfoList: {
     isShown: () => true,
     disabled: () => {
       if (gameStatus.value === GameStatus.DAY_DISCUSS)
-        return false;
+        return self.value.isAlive;
       if (
         gameStatus.value === GameStatus.SHERIFF_SPEECH &&
         self.value.canBeVoted

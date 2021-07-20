@@ -135,6 +135,8 @@ export function gotoNextStateAfterHandleDie(room: Room) {
   room.curDyingPlayer.isAlive = false;
 
   const dyingPlayer = room.players.find((p) => p.isDying);
+  console.log("# index", room.players);
+  console.log("# index", { dyingPlayer });
   if (dyingPlayer) {
     room.curDyingPlayer = dyingPlayer;
     return LeaveMsgHandler.startOfState(room);

@@ -5,7 +5,7 @@ import { index } from "../../../werewolf-frontend/shared/ModelDefs";
  * @returns 票数最多的几个玩家的编号, 全 undefined 返回 null
  */
 export function getVoteResult(votes: index[]): index[] | null {
-  votes = votes.filter((v) => v != 0); // 滤掉弃票的
+  votes = votes.filter((v) => v); // 滤掉弃票的
   if (votes.length === 0) return null; // 全员弃票则返回 null
 
   const index2VoteNum = votes.reduce<Record<index, number>>(
