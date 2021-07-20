@@ -58,7 +58,7 @@ export const HunterShootHandler: GameActHandler = {
     // 玩家死亡后依次进行以下检查
     // 遗言发表检查, 猎人开枪检查, 警长传递警徽检查
     if (!showHunter(room)) {
-      HunterShootHandler.endOfState(room, false);
+      return HunterShootHandler.endOfState(room, false);
     }
     startCurrentState(this, room);
   },

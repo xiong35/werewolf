@@ -6,7 +6,8 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 
 import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
-import { SeerCheckResponse } from "../../../../../werewolf-frontend/shared/httpMsg/SeerCheckMsg";
+import { HttpRes } from "../../../../../werewolf-frontend/shared/httpMsg/_httpResTemplate";
+import { SeerCheckData } from "../../../../../werewolf-frontend/shared/httpMsg/SeerCheckMsg";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -37,7 +38,7 @@ export const SeerCheckHandler: GameActHandler = {
       isWerewolf: isWolf,
     };
 
-    const ret: SeerCheckResponse = {
+    const ret: HttpRes<SeerCheckData> = {
       data: {
         isWolf,
       },

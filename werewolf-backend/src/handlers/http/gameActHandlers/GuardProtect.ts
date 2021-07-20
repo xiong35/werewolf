@@ -76,7 +76,7 @@ export const GuardProtectHandler: GameActHandler = {
   },
 
   async endOfState(room: Room) {
-    if (room.currentDay === 1) {
+    if (room.currentDay === 0) {
       return SheriffElectHandler.startOfState(room);
     }
 
