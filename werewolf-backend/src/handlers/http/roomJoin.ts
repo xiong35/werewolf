@@ -56,7 +56,6 @@ const roomJoin: Middleware = async (ctx) => {
           break;
         case "HUNTER":
           p.characterStatus = {
-            canShoot: false,
             shootAt: {
               day: -1,
               player: -1,
@@ -88,9 +87,9 @@ const roomJoin: Middleware = async (ctx) => {
     io.to(roomNumber).emit(Events.GAME_BEGIN);
 
     room.timer = setTimeout(() => {
-      console.log("# ", "timeout");
+      console.log("# roomJoin", "start");
       room.players.map((p) => console.log(p));
-      status2Handler[GameStatus.WOLF_KILL].endOfState(room);
+      status2Handler[GameStatus.WOLF_KILL].startOfState(room);
     }, TIMEOUT[GameStatus.WOLF_KILL] * 1000);
 
     ret.data.open = true; // 设置前端进入游戏页

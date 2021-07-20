@@ -11,7 +11,7 @@ export class Room implements RoomDef {
   creatorID: ID;
   players: Player[];
   password?: string;
-  currentDay: day = 0;
+  currentDay: day = -1; // 狼人杀人时会 ++
   needingCharacters: Character[];
   remainingIndexes: index[];
   isFinished = false;
