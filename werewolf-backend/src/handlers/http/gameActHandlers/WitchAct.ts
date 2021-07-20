@@ -24,8 +24,8 @@ export const WitchActHandler: GameActHandler = {
   ) {
     if (
       player.characterStatus?.MEDICINE?.usedDay ===
-        player.characterStatus?.POISON?.usedDay &&
-      player.characterStatus?.MEDICINE != null
+        room.currentDay ||
+      player.characterStatus?.POISON?.usedDay === room.currentDay
     ) {
       createError({
         msg: "一天只能使用一瓶药",

@@ -20,7 +20,7 @@ export const characters = reactive<
   SEER: 1,
   VILLAGER: 0,
   WEREWOLF: 1,
-  WITCH: 0, // # dev
+  WITCH: 1, // # dev
   // GUARD: 0,
   // HUNTER: 1,
   // SEER: 1,

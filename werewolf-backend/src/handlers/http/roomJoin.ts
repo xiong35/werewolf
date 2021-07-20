@@ -86,11 +86,8 @@ const roomJoin: Middleware = async (ctx) => {
     }
     io.to(roomNumber).emit(Events.GAME_BEGIN);
 
-    room.timer = setTimeout(() => {
-      console.log("# roomJoin", "start");
-      room.players.map((p) => console.log(p));
-      status2Handler[GameStatus.WOLF_KILL].startOfState(room);
-    }, TIMEOUT[GameStatus.WOLF_KILL] * 1000);
+    console.log("# roomJoin", "start");
+    status2Handler[GameStatus.WOLF_KILL].startOfState(room);
 
     ret.data.open = true; // 设置前端进入游戏页
   }

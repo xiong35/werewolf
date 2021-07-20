@@ -4,6 +4,6 @@ import CharacterAct from "./CharacterAct";
 
 export interface SeerCheckRequest extends CharacterAct {}
 
-export type SeerCheckResponse = HttpRes<{
+export type SeerCheckData = {
   isWolf: boolean;
-}>;
+};
