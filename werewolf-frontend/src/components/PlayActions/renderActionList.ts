@@ -1,7 +1,7 @@
 import { ComponentOptions, ComputedRef, h, vShow, withDirectives } from "vue";
 
 import { Character, GameStatus } from "../../../shared/GameDefs";
-import { gameStatus, self } from "../../reactivity/game";
+import { gameStatus, players, self } from "../../reactivity/game";
 import { potion } from "../../reactivity/playAction";
 import ActionBtn from "./ActionBtn.vue";
 
@@ -77,11 +77,11 @@ const actionInfoList: {
       )
         return false;
 
-      if (
-        gameStatus.value === GameStatus.LEAVE_MSG &&
-        self.value.isDying
-      )
-        return false;
+      if (gameStatus.value === GameStatus.LEAVE_MSG) {
+        const dyingPlayer = players.value.find((p) => p.isDying);
+        if (dyingPlayer && dyingPlayer.index === self.value.index)
+          return false;
+      }
 
       return true;
     },

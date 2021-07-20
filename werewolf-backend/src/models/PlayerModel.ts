@@ -2,6 +2,7 @@ import { Character } from "../../../werewolf-frontend/shared/GameDefs";
 import {
     CharacterStatus, day, ID, index, PlayerDef, PublicPlayerDef
 } from "../../../werewolf-frontend/shared/ModelDefs";
+import { Room } from "./RoomModel";
 
 export class Player implements PlayerDef {
   character: Character; // is set when game begins
@@ -35,12 +36,13 @@ export class Player implements PlayerDef {
    * 将 Player 信息转换成公开的信息
    * @returns 可公开的信息
    */
-  getPublic(): PublicPlayerDef {
+  getPublic(room: Room): PublicPlayerDef {
     return {
       index: this.index,
       isAlive: this.isAlive,
       isSheriff: this.isSheriff,
       name: this.name,
+      isDying: this === room.curDyingPlayer,
     };
   }
 }

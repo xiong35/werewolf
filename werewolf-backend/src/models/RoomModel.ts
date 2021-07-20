@@ -86,7 +86,7 @@ export class Room implements RoomDef {
 
   choosePublicInfo(): PublicPlayerDef[] {
     return this.players
-      .map((p) => p.getPublic())
+      .map((p) => p.getPublic(this))
       .sort((a, b) => a.index - b.index);
   }
 

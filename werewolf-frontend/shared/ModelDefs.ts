@@ -26,6 +26,7 @@ export interface PublicPlayerDef {
   // 此状态不代表实际存活状态, 仅代表公开的存活信息
   // 如, 晚上有角色被杀了, 但是只有
   isSheriff: boolean; // 是否为警长 -> 游戏结束重置
+  isDying: boolean; // 是否正在进行死亡结算
 }
 
 export interface PlayerDef extends PublicPlayerDef {
@@ -41,7 +42,6 @@ export interface PlayerDef extends PublicPlayerDef {
   // 包括 狼人杀人 / 白天投票
   sheriffVotes: index[]; // 下标是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
   _id: ID; // string + 时间戳 的 token
-  isDying: boolean; // 是否正在进行死亡结算
   canBeVoted: boolean; // 是否能在当前阶段被投票
 }
 

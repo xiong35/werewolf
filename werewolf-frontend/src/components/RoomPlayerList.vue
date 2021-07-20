@@ -1,5 +1,5 @@
 <template>
-  <div class="roomplayerlist">
+  <div class="room-player-list">
     <div
       v-for="item in playerList"
       :key="item.index"
@@ -32,6 +32,7 @@
         />
         <img
           class="dead"
+          :class="{ isDying: item.isDying }"
           v-show="!item.isAlive"
           alt="骷髅"
           :src="`/src/assets/dead${theme}.svg`"
@@ -73,8 +74,8 @@
   export default RoomPlayerList;
 </script>
 
-<style lang="scss" scoped>
-  .roomplayerlist {
+<style lang="scss">
+  .room-player-list {
     display: flex;
     flex-wrap: wrap;
     .player {
@@ -105,6 +106,17 @@
           height: $icon-size;
           text-align: center;
           box-sizing: border-box;
+          &.isDying {
+            @keyframes shine {
+              from {
+                opacity: 0;
+              }
+              to {
+                opacity: 1;
+              }
+            }
+            animation: shine 0.7s linear infinite alternate;
+          }
         }
         $offset: -0.5 * $icon-size;
 
