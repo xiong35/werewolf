@@ -13,16 +13,24 @@ export async function act() {
   )
     target.value *= -1;
 
-  const res = (await characterAct({
+  const res = await characterAct({
     target: target.value,
-  })) as any; // TODO any?
+  });
+
   // TODO deal with res
 
   /* hide dialog */
   isActing.value = false;
 
   if (res && res.status === 200) {
-    showDialog("操作成功!", 3);
+    if (res.data.isWolf !== undefined) {
+      showDialog(
+        `该玩家为${res.data.isWolf ? "狼人" : "人类"}`,
+        3
+      );
+    } else {
+      showDialog("操作成功!", 3);
+    }
   }
   /* reset */
   potion.value = undefined;

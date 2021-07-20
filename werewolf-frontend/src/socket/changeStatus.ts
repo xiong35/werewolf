@@ -1,7 +1,8 @@
 import { Character, GameStatus, TIMEOUT } from "../../shared/GameDefs";
 import { ChangeStatusMsg } from "../../shared/WSMsg/ChangeStatus";
 import { getWolfKillResNShow } from "../http/gameGetHint";
-import { date, gameStatus, gameStatusTimeLeft, self } from "../reactivity/game";
+import { getGameStatus } from "../http/gameStatus";
+import { date, gameStatus, gameStatusTimeLeft, refresh, self } from "../reactivity/game";
 
 /*  */
 
@@ -11,6 +12,8 @@ export default function changeStatus(msg: ChangeStatusMsg) {
   gameStatus.value = msg.setStatus;
 
   gameStatusTimeLeft.value = msg.timeout || TIMEOUT[msg.setStatus];
+
+  refresh();
 
   if (
     msg.setStatus === GameStatus.WOLF_KILL_CHECK &&
