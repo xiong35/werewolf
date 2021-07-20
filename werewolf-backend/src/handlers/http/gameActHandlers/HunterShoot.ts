@@ -77,7 +77,7 @@ export const HunterShootHandler: GameActHandler = {
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
         innerHTML: "死者不是猎人或选择不开枪",
       } as ShowMsg);
-      SheriffAssignHandler.startOfState(room);
+      HunterCheckHandler.startOfState(room);
     } else {
       // 如果死人了, 通知死人了
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {

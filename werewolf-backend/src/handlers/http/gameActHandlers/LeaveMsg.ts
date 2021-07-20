@@ -21,7 +21,7 @@ export const LeaveMsgHandler: GameActHandler = {
     ctx: Context
   ) {
     // 结束发言
-    LeaveMsgHandler.endOfState(room, room.nextStateOfDieCheck);
+    LeaveMsgHandler.endOfState(room);
 
     return {
       status: 200,
@@ -47,7 +47,6 @@ export const LeaveMsgHandler: GameActHandler = {
   },
 
   async endOfState(room) {
-    room.nextStateOfDieCheck = null;
     HunterShootHandler.startOfState(room);
   },
 };

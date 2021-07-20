@@ -8,7 +8,7 @@ import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/Gam
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, gotoNextState, Response, startCurrentState } from "./";
+import { GameActHandler, gotoNextStateAfterHandleDie, Response, startCurrentState } from "./";
 
 export const SheriffAssignCheckHandler: GameActHandler = {
   curStatus: GameStatus.SHERIFF_ASSIGN_CHECK,
@@ -31,6 +31,6 @@ export const SheriffAssignCheckHandler: GameActHandler = {
   },
 
   async endOfState(room: Room) {
-    gotoNextState(room);
+    gotoNextStateAfterHandleDie(room);
   },
 };

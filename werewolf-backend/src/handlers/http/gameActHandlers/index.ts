@@ -130,12 +130,13 @@ export function startCurrentState(
  * 1. 如果有就把他设置为 curDyingPlayer, 进行 LeaveMsg
  * 2. 如果没有, 设置 curDyingPlayer 为 null, 进行 nextState, 并将他设为 null
  */
-export function gotoNextState(room: Room) {
+export function gotoNextStateAfterHandleDie(room: Room) {
   room.curDyingPlayer.isDying = false;
+  room.curDyingPlayer.isAlive = false;
 
-  const dyingPlayers = room.players.filter((p) => p.isDying);
-  if (dyingPlayers.length) {
-    room.curDyingPlayer = dyingPlayers[0];
+  const dyingPlayer = room.players.find((p) => p.isDying);
+  if (dyingPlayer) {
+    room.curDyingPlayer = dyingPlayer;
     return LeaveMsgHandler.startOfState(room);
   } else {
     room.curDyingPlayer = null;

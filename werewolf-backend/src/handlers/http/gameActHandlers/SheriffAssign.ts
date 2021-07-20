@@ -10,7 +10,9 @@ import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
 import { ShowMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ShowMsg";
-import { GameActHandler, gotoNextState, Response, startCurrentState, status2Handler } from "./";
+import {
+    GameActHandler, gotoNextStateAfterHandleDie, Response, startCurrentState, status2Handler
+} from "./";
 import { LeaveMsgHandler } from "./LeaveMsg";
 import { SheriffAssignCheckHandler } from "./SheriffAssignCheck";
 
@@ -52,7 +54,7 @@ export const SheriffAssignHandler: GameActHandler = {
   async endOfState(room, showSheriff: boolean = true) {
     if (!showSheriff) {
       // 无警长就直接清算
-      return gotoNextState(room);
+      return gotoNextStateAfterHandleDie(room);
     } else {
       // TODO 通知发表遗言的时间
 
