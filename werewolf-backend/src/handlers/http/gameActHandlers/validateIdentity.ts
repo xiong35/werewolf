@@ -25,9 +25,13 @@ export function validateIdentity(
       return (
         player.isSheriff && room.curDyingPlayer._id === player._id
       );
+    case GameStatus.LEAVE_MSG:
+      return (
+        player.isDying && room.curDyingPlayer._id === player._id
+      );
   }
 
-  if (!player.isAlive) return false; // 除了猎人和警长, 都必须明面上活着才能进行操作
+  if (!player.isAlive) return false; // 除了猎人和警长或者结束发言, 都必须明面上活着才能进行操作
 
   switch (gameStatus as StatusWithAction) {
     case GameStatus.WOLF_KILL:
@@ -46,10 +50,6 @@ export function validateIdentity(
       return true;
     case GameStatus.SHERIFF_SPEECH:
       return player.canBeVoted;
-    case GameStatus.LEAVE_MSG:
-      return (
-        player.isDying && room.curDyingPlayer._id === player._id
-      );
   }
 
   // TODO 检查是否有遗漏的状态
