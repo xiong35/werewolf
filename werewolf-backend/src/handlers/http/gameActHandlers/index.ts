@@ -144,6 +144,11 @@ export function gotoNextStateAfterHandleDie(room: Room) {
     return LeaveMsgHandler.startOfState(room);
   } else {
     room.curDyingPlayer = null;
+    // 单独处理, 从夜晚进入死亡结算再进入白天时, 将未结束发言的人设为所有活着的人
+    if (room.nextStateOfDieCheck === GameStatus.DAY_DISCUSS)
+      room.toFinishPlayers = new Set(
+        room.players.filter((p) => p.isAlive).map((p) => p.index)
+      );
     status2Handler[room.nextStateOfDieCheck].startOfState(room);
     room.nextStateOfDieCheck = null;
   }
