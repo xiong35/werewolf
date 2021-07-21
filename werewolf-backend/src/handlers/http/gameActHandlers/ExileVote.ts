@@ -6,7 +6,10 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNplayers";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -43,7 +46,9 @@ export const ExileVoteHandler: GameActHandler = {
   },
 
   async endOfState(room: Room) {
-    const votes = room.players.map((p) => p.hasVotedAt[0]);
+    const votes = room.players.map(
+      (p) => p.hasVotedAt[room.currentDay]
+    );
 
     const highestVotes = getVoteResult(votes);
 
