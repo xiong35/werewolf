@@ -6,7 +6,10 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -58,14 +61,18 @@ export const HunterShootHandler: GameActHandler = {
     // 玩家死亡后依次进行以下检查
     // 遗言发表检查, 猎人开枪检查, 警长传递警徽检查
     if (!showHunter(room)) {
-      return HunterShootHandler.endOfState(room, false);
+      console.log("# HunterShoot", "not show hunter");
+      HunterShootHandler.endOfState(room, false);
+    } else {
+      console.log("# HunterShoot", "show hunter");
+      startCurrentState(this, room, true);
     }
-    startCurrentState(this, room);
   },
 
-  async endOfState(room, showHunter: boolean = true) {
+  async endOfState(room, showHunter: boolean) {
     if (!showHunter) {
       // 无猎人? 直接取消这两个阶段
+      console.log("# HunterShoot", "really not show hunter");
       return SheriffAssignHandler.startOfState(room);
     }
 
@@ -95,15 +102,17 @@ export const HunterShootHandler: GameActHandler = {
  * 如果猎人开过枪或者无猎人就不需要进行此阶段了
  */
 function showHunter(room: Room): boolean {
+  console.log("# HunterShoot", { room });
   if (!room.needingCharacters.includes("HUNTER")) return false;
 
   const hunter = room.players.find(
     (p) => p.character === "HUNTER"
   );
 
+  console.log("# HunterShoot", { hunter });
   if (!hunter) return false;
 
-  if (hunter.characterStatus.shootAt) return false;
+  if (hunter.characterStatus?.shootAt?.player) return false;
 
   return true;
 }

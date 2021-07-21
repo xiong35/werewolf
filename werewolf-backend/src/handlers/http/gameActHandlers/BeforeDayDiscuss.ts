@@ -5,7 +5,10 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -90,7 +93,7 @@ export const BeforeDayDiscussHandler: GameActHandler = {
       (p) => p.character === "WITCH"
     );
     const { usedDay, usedAt } =
-      witch.characterStatus?.MEDICINE ?? {};
+      witch?.characterStatus?.MEDICINE ?? {};
     const savedPlayer = room.players.find(
       (p) => p.index === usedAt
     );
