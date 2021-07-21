@@ -15,10 +15,10 @@ import { needingCharacters, players } from "./game";
 export const characters = reactive<
   Record<SetableCharacters, number>
 >({
-  GUARD: 0,
-  HUNTER: 0,
+  GUARD: 1,
+  HUNTER: 1,
   SEER: 1,
-  VILLAGER: 0,
+  VILLAGER: 1,
   WEREWOLF: 1,
   WITCH: 1, // # dev
   // GUARD: 0,
@@ -90,6 +90,7 @@ export async function create() {
         isAlive: true,
         name: nickname.value,
         isSheriff: false,
+        isDying: false,
       },
     ];
   }

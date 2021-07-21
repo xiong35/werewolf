@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Home from "./pages/Home.vue";
 import CreateRoom from "./pages/CreateRoom.vue";
+import Home from "./pages/Home.vue";
 import JoinRoom from "./pages/JoinRoom.vue";
 import Play from "./pages/Play.vue";
 import Recon from "./pages/Recon.vue";
 import WaitRoom from "./pages/WaitRoom.vue";
 
 const routes = [
-  { path: "/", component: Home },
+  { path: "/", name: "home", component: Home },
   {
     path: "/createRoom",
     name: "createRoom",

@@ -1,6 +1,6 @@
 import { TokenDef } from "../../shared/ModelDefs";
 
-const KEY = "token_";
+const KEY = "_werewolf_token_";
 
 export function setToken(ID: string, roomNumber: string) {
   const token: TokenDef = {

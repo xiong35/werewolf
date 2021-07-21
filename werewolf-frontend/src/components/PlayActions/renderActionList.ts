@@ -71,7 +71,7 @@ const actionInfoList: {
     isShown: () => true,
     disabled: () => {
       if (gameStatus.value === GameStatus.DAY_DISCUSS)
-        return false;
+        return !self.value.isAlive;
       if (
         gameStatus.value === GameStatus.SHERIFF_SPEECH &&
         self.value.canBeVoted
@@ -94,7 +94,7 @@ export const renderActionList = () =>
   actionInfoList.map((obj) => {
     if (!obj.isShown()) return null;
 
-    if (obj.content === "传递警徽") {
+    if (obj.content === "传递警徽" || obj.content === "结束发言") {
       return h(ActionBtn, {
         disabled: obj.disabled(),
         content: obj.content,
@@ -104,7 +104,7 @@ export const renderActionList = () =>
     }
 
     return h(ActionBtn, {
-      disabled: obj.disabled() && !self.value.isAlive,
+      disabled: obj.disabled() || !self.value.isAlive,
       content: obj.content,
       noTarget: obj.noTarget,
       onClick: obj.onClick,
