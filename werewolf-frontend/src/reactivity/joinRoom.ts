@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 import { joinRoom } from "../http/room";
 import router from "../router";
-import { Events, socket } from "../socket";
+import { Events, joinRoom as joinRoomSocket } from "../socket";
 import { getToken, setToken } from "../utils/token";
 import { showDialog } from "./dialog";
 import { needingCharacters } from "./game";
@@ -24,7 +24,7 @@ export async function join() {
 
   if (res && res.status === 200) {
     /* 向后端 socket 注册加入房间 */
-    socket.emit(Events.ROOM_JOIN, roomNumber.value);
+    joinRoomSocket(roomNumber.value);
     if (res.data.open) {
       /* 如果加入后人齐了就进入游戏界面 */
       gameBegin();

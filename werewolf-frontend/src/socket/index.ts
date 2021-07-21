@@ -9,18 +9,23 @@ import gameEnd from "./gameEnd";
 import roomJoin from "./roomJoin";
 import showWSMsg from "./showWSMsg";
 
-const socket = io(SERVER_BASE_URL, {
-  path: WS_PATH,
-});
+let socket: SocketIOClient.Socket;
 
-socket.on("connection", () => {
-  console.log("#ws connected");
-});
+function joinRoom(roomNumber: string) {
+  socket = io(SERVER_BASE_URL, {
+    path: WS_PATH,
+  });
+  socket.on("connection", () => {
+    console.log("#ws connected");
+  });
 
-socket.on(Events.CHANGE_STATUS, changeStatus);
-socket.on(Events.GAME_BEGIN, gameBegin);
-socket.on(Events.GAME_END, gameEnd);
-socket.on(Events.ROOM_JOIN, roomJoin);
-socket.on(Events.SHOW_MSG, showWSMsg);
+  socket.on(Events.CHANGE_STATUS, changeStatus);
+  socket.on(Events.GAME_BEGIN, gameBegin);
+  socket.on(Events.GAME_END, gameEnd);
+  socket.on(Events.ROOM_JOIN, roomJoin);
+  socket.on(Events.SHOW_MSG, showWSMsg);
 
-export { socket, Events };
+  socket.emit(Events.ROOM_JOIN, roomNumber);
+}
+
+export { joinRoom, Events };

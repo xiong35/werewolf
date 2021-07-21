@@ -87,6 +87,10 @@
   } from "../reactivity/playPage";
   import { theme } from "../reactivity/theme";
   import { isActing } from "../reactivity/playAction";
+  import { joinRoom } from "../socket";
+  import { getToken } from "../utils/token";
+  import { showDialog } from "../reactivity/dialog";
+  import router from "../router";
 
   const Play = defineComponent({
     name: "Play",
@@ -100,7 +104,17 @@
       BottomActions,
     },
     setup(props) {
-      onMounted(refresh);
+      onMounted(() => {
+        const token = getToken();
+        if (token === null) {
+          showDialog("未加入房间或房间已过期!");
+          router.replace({ name: "home" });
+        } else {
+          console.log("?");
+          joinRoom(token.roomNumber);
+          refresh();
+        }
+      });
       onActivated(refresh);
 
       // 设定剩余时间每秒减一

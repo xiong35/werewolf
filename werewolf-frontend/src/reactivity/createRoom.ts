@@ -4,7 +4,7 @@ import { reactive, ref } from "vue";
 import { SetableCharacters } from "../../shared/GameDefs";
 import { createRoom } from "../http/room";
 import router from "../router";
-import { Events, socket } from "../socket";
+import { joinRoom } from "../socket";
 import { setToken } from "../utils/token";
 import { showDialog } from "./dialog";
 import { needingCharacters, players } from "./game";
@@ -73,7 +73,7 @@ export async function create() {
   if (res && res.status === 200) {
     const data = res.data;
     /* 通知后端, 在 io 中加入该房间 */
-    socket.emit(Events.ROOM_JOIN, data.roomNumber);
+    joinRoom(data.roomNumber);
 
     showDialog("创建成功, 进入等待房间");
     router.push({
