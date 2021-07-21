@@ -52,90 +52,37 @@ export const CharacterIntro: Record<Character, string> = {
  */
 export enum GameStatus {
   // TODO 添加游戏开始前和游戏已经结束的状态
-  /**
-   * 狼人杀人
-   * 预言家验人入栈
-   */
   WOLF_KILL = "狼人杀人",
   WOLF_KILL_CHECK = "狼人查看投票结果",
 
-  /**
-   * 预言家验人
-   * 女巫用药 入栈
-   */
   SEER_CHECK = "预言家验人",
 
-  /**
-   * 女巫用药
-   * 守卫保人 入栈
-   */
   WITCH_ACT = "女巫用药",
 
-  /**
-   * 守卫保人
-   * 猎人查看开枪状态 入栈
-   */
   GUARD_PROTECT = "守卫保人",
 
-  /**
-   * 上警
-   * 投票选警长 入栈
-   */
   SHERIFF_ELECT = "上警",
 
-  /**
-   * 投票选警长
-   * - 自由发言, 指派警长 入栈
-   * - 平票: 投票选警长 入栈
-   */
   SHERIFF_VOTE = "投票选警长",
   SHERIFF_SPEECH = "警长竞选发言",
-  SHERIFF_VOTE_CHECK = "警长投票结果",
+  SHERIFF_VOTE_CHECK = "查看警长投票结果",
 
   /**
-   * 指派警长，
    * 指当前警长去世了, 指定新的警长
    */
   SHERIFF_ASSIGN = "指派警长",
   SHERIFF_ASSIGN_CHECK = "检查指派警长的结果",
 
-  /**
-   * 夜晚结算
-   * - 如果猎人死了, 猎人开枪入栈
-   * - 如果警长死了, 传警徽
-   */
   BEFORE_DAY_DISCUSS = "夜晚结算",
 
-  /**
-   * 自由发言
-   * - 投票出人 入栈
-   * - 如果猎人死了, 猎人开枪入栈
-   */
   DAY_DISCUSS = "自由发言",
 
-  /**
-   * 投票出人
-   * - 猎人死了: 开枪入栈
-   * - 警长死了: 指派警长入栈
-   * - 平票: 投票出人入栈
-   *
-   * 狼人杀人 入栈
-   */
   EXILE_VOTE = "票选狼人",
   EXILE_VOTE_CHECK = "票选狼人结果",
 
-  /**
-   * 猎人开枪
-   * 可能有留遗言入栈
-   */
   HUNTER_SHOOT = "猎人开枪",
-  /**
-   * 猎人查看开枪状态
-   * 自由发言或上警 入栈
-   */
   HUNTER_CHECK = "查看猎人开枪结果",
 
-  /** 留遗言 */
   LEAVE_MSG = "留遗言",
 }
 

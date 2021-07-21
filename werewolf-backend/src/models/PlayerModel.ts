@@ -1,13 +1,18 @@
 import { Character } from "../../../werewolf-frontend/shared/GameDefs";
 import {
-    CharacterStatus, day, ID, index, PlayerDef, PublicPlayerDef
+  CharacterStatus,
+  day,
+  ID,
+  index,
+  PlayerDef,
+  PublicPlayerDef,
 } from "../../../werewolf-frontend/shared/ModelDefs";
 import { Room } from "./RoomModel";
 
 export class Player implements PlayerDef {
   character: Character; // is set when game begins
 
-  hasVotedAt: index[];
+  hasVotedAt: index[] = [];
   sheriffVotes: index[] = [];
   isAlive = true;
   isSheriff = false;

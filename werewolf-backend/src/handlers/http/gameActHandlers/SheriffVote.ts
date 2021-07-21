@@ -6,12 +6,14 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
 import { GameActHandler, Response, startCurrentState } from "./";
-import { nextStateOfSheriffVote } from "./ChangeStateHandler";
 import { SheriffSpeachHandler } from "./SheriffSpeach";
 import { SheriffVoteCheckHandler } from "./SheriffVoteCheck";
 
@@ -67,17 +69,16 @@ export const SheriffVoteHandler: GameActHandler = {
       return SheriffVoteCheckHandler.startOfState(room);
     } else {
       // 如果多人平票
+      room.toFinishPlayers = new Set();
       // 设置参与警长竞选的人是他们几个
       room.players.forEach((p) => {
-        if (p.index in highestVotes) p.canBeVoted = true;
-        else p.canBeVoted = false;
+        if (p.index in highestVotes) {
+          p.canBeVoted = true;
+          room.toFinishPlayers.add(p.index); // 设置他们未结束发言
+        } else p.canBeVoted = false;
+        // 设置所有人警长投票为空
+        p.sheriffVotes[0] = undefined;
       });
-      // 设置他们未结束发言
-      room.toFinishPlayers = new Set(
-        room.players
-          .filter((p) => p.canBeVoted)
-          .map((p) => p.index)
-      );
 
       // 告知所有人现在应该再依次投票
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
