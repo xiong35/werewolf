@@ -34,7 +34,7 @@ export const HunterShootHandler: GameActHandler = {
         status: 401,
       });
     }
-    if (player.characterStatus.shootAt)
+    if (player.characterStatus.shootAt.player > 0)
       createError({ msg: "你已经开过枪了", status: 401 });
 
     const targetPlayer = room.getPlayerByIndex(target);
@@ -109,10 +109,12 @@ function showHunter(room: Room): boolean {
     (p) => p.character === "HUNTER"
   );
 
-  console.log("# HunterShoot", { hunter });
+  console.log("# HunterShoot", {
+    hunter: hunter?.characterStatus?.shootAt,
+  });
   if (!hunter) return false;
 
-  if (hunter.characterStatus?.shootAt?.player) return false;
+  if (hunter.characterStatus?.shootAt?.player > 0) return false;
 
   return true;
 }

@@ -67,6 +67,11 @@ const actionInfoList: {
     disabled: () => gameStatus.value !== GameStatus.SHERIFF_ASSIGN,
   },
   {
+    content: "猎人开枪",
+    isShown: () => self.value.character === "HUNTER",
+    disabled: () => gameStatus.value !== GameStatus.HUNTER_SHOOT,
+  },
+  {
     content: "结束发言",
     isShown: () => true,
     disabled: () => {
@@ -94,7 +99,9 @@ export const renderActionList = () =>
   actionInfoList.map((obj) => {
     if (!obj.isShown()) return null;
 
-    if (obj.content === "传递警徽" || obj.content === "结束发言") {
+    if (
+      ~["传递警徽", "猎人开枪", "结束发言"].indexOf(obj.content)
+    ) {
       return h(ActionBtn, {
         disabled: obj.disabled(),
         content: obj.content,

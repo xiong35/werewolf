@@ -12,6 +12,8 @@ import showWSMsg from "./showWSMsg";
 let socket: SocketIOClient.Socket;
 
 function joinRoom(roomNumber: string) {
+  if (socket) return;
+
   socket = io(SERVER_BASE_URL, {
     path: WS_PATH,
   });
