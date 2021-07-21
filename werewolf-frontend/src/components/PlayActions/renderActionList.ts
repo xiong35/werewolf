@@ -1,4 +1,10 @@
-import { ComponentOptions, ComputedRef, h, vShow, withDirectives } from "vue";
+import {
+  ComponentOptions,
+  ComputedRef,
+  h,
+  vShow,
+  withDirectives,
+} from "vue";
 
 import { Character, GameStatus } from "../../../shared/GameDefs";
 import { gameStatus, players, self } from "../../reactivity/game";
@@ -56,11 +62,6 @@ const actionInfoList: {
     disabled: () => gameStatus.value !== GameStatus.GUARD_PROTECT,
   },
   {
-    content: "查看开枪状态",
-    isShown: () => self.value.character === "HUNTER",
-    disabled: () => gameStatus.value !== GameStatus.HUNTER_CHECK,
-  },
-  {
     content: "传递警徽",
     isShown: () => self.value.isSheriff,
     disabled: () => gameStatus.value !== GameStatus.SHERIFF_ASSIGN,
@@ -70,7 +71,7 @@ const actionInfoList: {
     isShown: () => true,
     disabled: () => {
       if (gameStatus.value === GameStatus.DAY_DISCUSS)
-        return self.value.isAlive;
+        return false;
       if (
         gameStatus.value === GameStatus.SHERIFF_SPEECH &&
         self.value.canBeVoted
@@ -93,8 +94,17 @@ export const renderActionList = () =>
   actionInfoList.map((obj) => {
     if (!obj.isShown()) return null;
 
+    if (obj.content === "传递警徽") {
+      return h(ActionBtn, {
+        disabled: obj.disabled(),
+        content: obj.content,
+        noTarget: obj.noTarget,
+        onClick: obj.onClick,
+      });
+    }
+
     return h(ActionBtn, {
-      disabled: obj.disabled(),
+      disabled: obj.disabled() && !self.value.isAlive,
       content: obj.content,
       noTarget: obj.noTarget,
       onClick: obj.onClick,
