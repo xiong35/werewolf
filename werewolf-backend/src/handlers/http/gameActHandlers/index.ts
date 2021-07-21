@@ -144,11 +144,15 @@ export function gotoNextStateAfterHandleDie(room: Room) {
     return LeaveMsgHandler.startOfState(room);
   } else {
     room.curDyingPlayer = null;
-    // 单独处理, 从夜晚进入死亡结算再进入白天时, 将未结束发言的人设为所有活着的人
-    if (room.nextStateOfDieCheck === GameStatus.DAY_DISCUSS)
+    // 单独处理, 从夜晚进入死亡结算再进入白天时
+    // 将未结束发言的人设为所有活着的人
+    // 同时设置能被投票的人为活着的
+    if (room.nextStateOfDieCheck === GameStatus.DAY_DISCUSS) {
       room.toFinishPlayers = new Set(
         room.players.filter((p) => p.isAlive).map((p) => p.index)
       );
+      room.players.forEach((p) => (p.canBeVoted = p.isAlive));
+    }
     status2Handler[room.nextStateOfDieCheck].startOfState(room);
     room.nextStateOfDieCheck = null;
   }
