@@ -5,14 +5,21 @@ import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { HttpRes } from "../../../../../werewolf-frontend/shared/httpMsg/_httpResTemplate";
 import { SeerCheckData } from "../../../../../werewolf-frontend/shared/httpMsg/SeerCheckMsg";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response, startCurrentState, status2Handler } from "./";
-import { nextStateOfSeerCheck } from "./ChangeStateHandler";
+import {
+  GameActHandler,
+  Response,
+  startCurrentState,
+  status2Handler,
+} from "./";
 import { WitchActHandler } from "./WitchAct";
 
 export const SeerCheckHandler: GameActHandler = {

@@ -3,12 +3,19 @@ import io from "src";
 import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import { GameActHandler, Response, startCurrentState, status2Handler } from "./";
-import { nextStateOfWolfKillCheck } from "./ChangeStateHandler";
+import {
+  GameActHandler,
+  Response,
+  startCurrentState,
+  status2Handler,
+} from "./";
 import { SeerCheckHandler } from "./SeerCheck";
 
 export const WolfKillCheckHandler: GameActHandler = {

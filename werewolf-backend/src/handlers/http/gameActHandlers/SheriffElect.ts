@@ -5,13 +5,15 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
-import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
+import {
+  GameStatus,
+  TIMEOUT,
+} from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
 import { GameActHandler, Response, startCurrentState } from "./";
 import { BeforeDayDiscussHandler } from "./BeforeDayDiscuss";
-import { nextStateOfSheriffElect } from "./ChangeStateHandler";
 import { SheriffSpeachHandler } from "./SheriffSpeach";
 
 export const SheriffElectHandler: GameActHandler = {
