@@ -1,9 +1,12 @@
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 export const dialogTimeLeft = ref(0);
-export const content = ref("");
-
-var timer: NodeJS.Timeout;
+export const toShowContents = ref<
+  { content: string; timeout: number }[]
+>([]);
+export const content = computed(() =>
+  toShowContents.value.length ? toShowContents.value[0] : null
+);
 
 /**
  * 展示一个出现 showTime 秒数(默认5s) 的弹窗
@@ -14,14 +17,8 @@ export function showDialog(
   toShowContent: string,
   showTime?: number
 ) {
-  clearInterval(timer);
-  dialogTimeLeft.value = showTime || 5;
-  content.value = toShowContent;
-
-  timer = setInterval(() => {
-    dialogTimeLeft.value--;
-    if (dialogTimeLeft.value <= 0) {
-      clearInterval(timer);
-    }
-  }, 1000);
+  toShowContents.value.push({
+    content: toShowContent,
+    timeout: showTime || 5,
+  });
 }
