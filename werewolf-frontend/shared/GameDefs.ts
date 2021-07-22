@@ -80,7 +80,7 @@ export enum GameStatus {
   EXILE_VOTE = "票选狼人",
   EXILE_VOTE_CHECK = "票选狼人结果",
 
-  HUNTER_SHOOT = "猎人开枪",
+  HUNTER_SHOOT = "若你是猎人, 请选择是否开枪",
   HUNTER_CHECK = "查看猎人开枪结果",
 
   LEAVE_MSG = "留遗言",

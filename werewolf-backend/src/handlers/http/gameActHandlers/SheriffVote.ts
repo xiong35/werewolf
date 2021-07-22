@@ -26,6 +26,9 @@ export const SheriffVoteHandler: GameActHandler = {
     if (!room.getPlayerByIndex(target)?.canBeVoted)
       createError({ status: 400, msg: "选择的玩家未参与竞选" });
 
+    if (player.canBeVoted)
+      createError({ status: 400, msg: "参选者不能投票" });
+
     player.sheriffVotes[0] = target;
 
     return {
