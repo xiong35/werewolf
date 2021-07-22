@@ -6,10 +6,7 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -72,7 +69,7 @@ export const SheriffVoteHandler: GameActHandler = {
       room.toFinishPlayers = new Set();
       // 设置参与警长竞选的人是他们几个
       room.players.forEach((p) => {
-        if (p.index in highestVotes) {
+        if (highestVotes.includes(p.index)) {
           p.canBeVoted = true;
           room.toFinishPlayers.add(p.index); // 设置他们未结束发言
         } else p.canBeVoted = false;

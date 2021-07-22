@@ -104,10 +104,10 @@ export const ExileVoteHandler: GameActHandler = {
       }
       // 若最高票中无警长的影响
       // 设置参与投票的人是他们几个
-      room.players.forEach((p) => {
-        if (p.index in highestVotes) p.canBeVoted = true;
-        else p.canBeVoted = false;
-      });
+      // 设置他们未结束发言
+      room.players.forEach(
+        (p) => (p.canBeVoted = highestVotes.includes(p.index))
+      );
       // 告知所有人现在应该再依次投票
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
         innerHTML: renderHintNPlayers(
@@ -115,10 +115,6 @@ export const ExileVoteHandler: GameActHandler = {
           highestVotes
         ),
       });
-      // 设置他们未结束发言
-      room.players.forEach(
-        (p) => (p.canBeVoted = p.index in highestVotes)
-      );
       room.toFinishPlayers = new Set(highestVotes);
 
       // 设置下一阶段为自由发言
