@@ -5,15 +5,12 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
 import { ShowMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ShowMsg";
-import { GameActHandler, Response } from "./";
+import { GameActHandler, Response, startCurrentState } from "./";
 import { DayDiscussHandler } from "./DayDiscuss";
 import { LeaveMsgHandler } from "./LeaveMsg";
 
@@ -51,17 +48,13 @@ export const BeforeDayDiscussHandler: GameActHandler = {
     dyingPlayers.forEach((p) => (p.isAlive = false));
     // 守卫保的人和女巫救的人会设置 die = null, 故不会被设置为死亡
 
-    // 准备工作
-    const timeout = TIMEOUT[GameStatus.BEFORE_DAY_DISCUSS];
-    let stateTimeout = timeout;
     clearTimeout(room.timer);
 
-    // 第一波常规消息
     if (dyingPlayers.length === 0) {
       // 平安夜
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
         innerHTML: "昨晚是个平安夜",
-        showTime: timeout - 1,
+        showTime: TIMEOUT[GameStatus.BEFORE_DAY_DISCUSS],
       } as ShowMsg);
     } else {
       // 死人了
@@ -72,7 +65,7 @@ export const BeforeDayDiscussHandler: GameActHandler = {
             "以下为昨晚死亡的玩家, 请发表遗言",
             dyingPlayers.map((p) => p.index)
           ),
-          showTime: timeout - 1,
+          showTime: TIMEOUT[GameStatus.BEFORE_DAY_DISCUSS],
         } as ShowMsg);
         room.players.forEach((p) => (p.isDying = false)); //先把所有人置空
         dyingPlayers.forEach((p) => (p.isDying = true)); // 设置昨晚死的人正在留遗言
@@ -83,42 +76,12 @@ export const BeforeDayDiscussHandler: GameActHandler = {
             "以下为昨晚死亡的玩家, 不能发表遗言",
             dyingPlayers.map((p) => p.index)
           ),
-          showTime: timeout - 1,
+          showTime: TIMEOUT[GameStatus.BEFORE_DAY_DISCUSS],
         } as ShowMsg);
       }
     }
 
-    // 可能有第二波消息(女巫还救了人)
-    const witch = room.players.find(
-      (p) => p.character === "WITCH"
-    );
-    const { usedDay, usedAt } =
-      witch?.characterStatus?.MEDICINE ?? {};
-    const savedPlayer = room.players.find(
-      (p) => p.index === usedAt
-    );
-    if (usedDay === room.currentDay - 1 && savedPlayer?.isAlive) {
-      // 如果女巫昨晚了救了人且救活了
-      setTimeout(() => {
-        // 过一份 timeout 时间后再通知
-        io.to(room.roomNumber).emit(Events.SHOW_MSG, {
-          innerHTML: renderHintNPlayers("女巫昨晚救活了:", [
-            usedAt,
-          ]),
-          showTime: timeout - 1,
-        } as ShowMsg);
-      }, timeout * 1000);
-      stateTimeout += timeout; // 多出一份时间发送另一个通知
-    }
-
-    io.to(room.roomNumber).emit(Events.CHANGE_STATUS, {
-      setDay: room.currentDay,
-      setStatus: GameStatus.SEER_CHECK,
-      timeout: stateTimeout,
-    } as ChangeStatusMsg);
-    room.timer = setTimeout(() => {
-      BeforeDayDiscussHandler.endOfState(room, dyingPlayers);
-    }, stateTimeout * 1000);
+    startCurrentState(this, room, dyingPlayers);
   },
 
   async endOfState(room: Room, dyingPlayers: Player[]) {

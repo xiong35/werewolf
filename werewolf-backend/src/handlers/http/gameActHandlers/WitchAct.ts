@@ -5,10 +5,7 @@ import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -49,15 +46,34 @@ export const WitchActHandler: GameActHandler = {
       };
     } else {
       // 救人
-      // TODO 获得今天谁死了的接口i
-      // TODO 女巫只能救今天死的人
       const savedPlayer = room.getPlayerByIndex(target);
-      savedPlayer.die = null;
-      savedPlayer.isAlive = true;
-      player.characterStatus.MEDICINE = {
-        usedAt: target,
-        usedDay: room.currentDay,
-      };
+      if (
+        savedPlayer.die?.fromCharacter === "WEREWOLF" &&
+        savedPlayer.die?.at === room.currentDay
+      ) {
+        // 女巫只能救今天被狼人杀的人
+        if (
+          savedPlayer._id === player._id &&
+          room.currentDay !== 0
+        )
+          // 女巫只有第一夜才能自救
+          createError({
+            msg: "女巫只有第一夜才能自救",
+            status: 401,
+          });
+
+        // 设置成功救人
+        savedPlayer.die = null;
+        savedPlayer.isAlive = true;
+        player.characterStatus.MEDICINE = {
+          usedAt: target,
+          usedDay: room.currentDay,
+        };
+      } else
+        createError({
+          msg: "女巫只能救今天被狼人杀的人",
+          status: 401,
+        });
     }
 
     return {

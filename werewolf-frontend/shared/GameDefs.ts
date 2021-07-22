@@ -114,7 +114,7 @@ export const TIMEOUT: Record<GameStatus, number> = {
   [GameStatus.SHERIFF_VOTE_CHECK]: 5,
   [GameStatus.SHERIFF_ASSIGN]: 15,
   [GameStatus.DAY_DISCUSS]: 996,
-  [GameStatus.EXILE_VOTE]: 20,
+  [GameStatus.EXILE_VOTE]: 10,
   [GameStatus.EXILE_VOTE_CHECK]: 5,
   [GameStatus.HUNTER_SHOOT]: 15,
   [GameStatus.LEAVE_MSG]: 996,
