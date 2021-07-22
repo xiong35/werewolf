@@ -6,10 +6,7 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNplayers";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -81,6 +78,31 @@ export const ExileVoteHandler: GameActHandler = {
       );
     } else {
       // 如果多人平票
+
+      // 警长当 1.5 票
+      const sheriff = room.players.find((p) => p.isSheriff);
+      if (sheriff) {
+        const sheriffChoice = sheriff.hasVotedAt[room.currentDay];
+        if (highestVotes.includes(sheriffChoice)) {
+          // 虽然有平票, 但是警长选择的人在此之中, 则此人死亡
+          room.getPlayerByIndex(highestVotes[0]).isDying = true;
+          io.to(room.roomNumber).emit(Events.SHOW_MSG, {
+            innerHTML: renderHintNPlayers(
+              "被处死的玩家为:",
+              highestVotes
+            ),
+          });
+          room.curDyingPlayer = room.getPlayerByIndex(
+            highestVotes[0]
+          );
+
+          return ExileVoteCheckHandler.startOfState(
+            room,
+            GameStatus.LEAVE_MSG
+          );
+        }
+      }
+      // 若最高票中无警长的影响
       // 设置参与投票的人是他们几个
       room.players.forEach((p) => {
         if (p.index in highestVotes) p.canBeVoted = true;
