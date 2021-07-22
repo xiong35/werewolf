@@ -1,13 +1,20 @@
 import * as Router from "koa-router";
 
+import { witchGetDie } from "./witchGetDie";
 import { getWolfKillResult } from "./wolfKill";
 
-const voteResultRouter = new Router();
+const hintRouter = new Router();
 
-voteResultRouter.get(
+hintRouter.get(
   "game hint wolfKill",
   "/wolfKill",
   getWolfKillResult
 );
 
-export default voteResultRouter;
+hintRouter.get(
+  "game hint witchGetDie",
+  "/witchGetDie",
+  witchGetDie
+);
+
+export default hintRouter;

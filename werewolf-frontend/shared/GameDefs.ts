@@ -105,9 +105,9 @@ export type StatusWithAction =
 export const TIMEOUT: Record<GameStatus, number> = {
   [GameStatus.WOLF_KILL]: 20,
   [GameStatus.WOLF_KILL_CHECK]: 5,
-  [GameStatus.SEER_CHECK]: 20,
+  [GameStatus.SEER_CHECK]: 15,
   [GameStatus.WITCH_ACT]: 20,
-  [GameStatus.GUARD_PROTECT]: 20,
+  [GameStatus.GUARD_PROTECT]: 15,
   [GameStatus.HUNTER_CHECK]: 7,
   [GameStatus.SHERIFF_ELECT]: 10,
   [GameStatus.SHERIFF_VOTE]: 20,

@@ -1,6 +1,6 @@
 import { Character, GameStatus, TIMEOUT } from "../../shared/GameDefs";
 import { ChangeStatusMsg } from "../../shared/WSMsg/ChangeStatus";
-import { getWolfKillResNShow } from "../http/gameGetHint";
+import { getWolfKillResNShow, witchGetDieNShow } from "../http/gameGetHint";
 import { getGameStatus } from "../http/gameStatus";
 import { date, gameStatus, gameStatusTimeLeft, refresh, self } from "../reactivity/game";
 
@@ -20,6 +20,11 @@ export default function changeStatus(msg: ChangeStatusMsg) {
     self.value.character === "WEREWOLF"
   ) {
     getWolfKillResNShow();
+  } else if (
+    msg.setStatus === GameStatus.WITCH_ACT &&
+    self.value.character === "WITCH"
+  ) {
+    witchGetDieNShow();
   }
 
   // TODO 检查是否要请求各个玩家能查看到状态
