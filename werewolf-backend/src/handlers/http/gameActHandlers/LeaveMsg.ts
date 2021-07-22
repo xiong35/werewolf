@@ -31,6 +31,9 @@ export const LeaveMsgHandler: GameActHandler = {
   },
 
   startOfState(room) {
+    // 此阶段必须有 room.nextStateOfDieCheck, 否则无法进行后续状态
+    if (!room.nextStateOfDieCheck)
+      throw new Error("未设置死亡结算后去到的状态");
     // 玩家死亡后依次进行以下检查
     // 遗言发表检查, 猎人开枪检查, 警长传递警徽检查
     if (

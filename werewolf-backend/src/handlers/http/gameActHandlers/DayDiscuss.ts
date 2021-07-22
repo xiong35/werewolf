@@ -38,6 +38,7 @@ export const DayDiscussHandler: GameActHandler = {
   },
 
   async endOfState(room: Room) {
+    room.nextStateOfDieCheck = GameStatus.WOLF_KILL;
     ExileVoteHandler.startOfState(room);
   },
 };
