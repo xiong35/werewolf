@@ -72,6 +72,8 @@ export const ExileVoteHandler: GameActHandler = {
       });
       room.curDyingPlayer = room.getPlayerByIndex(highestVotes[0]);
 
+      room.curDyingPlayer.isDying = true;
+      room.curDyingPlayer.isAlive = false;
       return ExileVoteCheckHandler.startOfState(
         room,
         GameStatus.LEAVE_MSG
@@ -87,15 +89,15 @@ export const ExileVoteHandler: GameActHandler = {
           // 虽然有平票, 但是警长选择的人在此之中, 则此人死亡
           room.getPlayerByIndex(highestVotes[0]).isDying = true;
           io.to(room.roomNumber).emit(Events.SHOW_MSG, {
-            innerHTML: renderHintNPlayers(
-              "被处死的玩家为:",
-              highestVotes
-            ),
+            innerHTML: renderHintNPlayers("被处死的玩家为:", [
+              sheriffChoice,
+            ]),
           });
           room.curDyingPlayer = room.getPlayerByIndex(
             highestVotes[0]
           );
-
+          room.curDyingPlayer.isDying = true;
+          room.curDyingPlayer.isAlive = false;
           return ExileVoteCheckHandler.startOfState(
             room,
             GameStatus.LEAVE_MSG
