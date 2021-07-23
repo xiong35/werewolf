@@ -19,6 +19,7 @@
       alt="checked"
     />
   </div>
+  <div class="play-bottom-action-holder"></div>
 </template>
 
 <script lang="ts">
@@ -47,13 +48,17 @@
 </script>
 
 <style lang="scss" scoped>
+  $height: 3rem;
+  .play-bottom-action-holder {
+    height: $height;
+  }
   .play-bottom-actions {
     position: fixed;
-    background-color: transparent;
+    background-color: var(--bg);
     right: 0;
     left: 0;
     bottom: 0;
-    height: 3rem;
+    height: $height;
     display: flex;
     justify-content: space-between;
     align-items: center;
