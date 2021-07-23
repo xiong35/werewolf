@@ -26,6 +26,4 @@ export default function changeStatus(msg: ChangeStatusMsg) {
   ) {
     witchGetDieNShow();
   }
-
-  // TODO 检查是否要请求各个玩家能查看到状态
 }

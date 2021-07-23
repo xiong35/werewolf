@@ -38,3 +38,12 @@ export async function initRoom(
 
   return res as InitRoomResponse;
 }
+
+export async function gameBegin(): Promise<boolean> {
+  const res = await request({
+    url: "/game/begin",
+    method: "POST",
+  });
+
+  return res.status === 200;
+}

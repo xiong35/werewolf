@@ -3,7 +3,18 @@
     <RoomPlayerList :playerList="playerList"></RoomPlayerList>
     <div class="room-number">房间号：{{ number }}</div>
     <div id="qr-code"></div>
-    <Btn @click="showDialog('暂未实现')" content="查看规则"></Btn>
+    <Btn
+      @click="gameBegin"
+      v-if="self.index === 1"
+      content="开始游戏"
+      class="wait-btn"
+      :disabled="!canBegin"
+    ></Btn>
+    <Btn
+      class="wait-btn"
+      @click="showDialog('暂未实现')"
+      content="查看规则"
+    ></Btn>
   </div>
 </template>
 
@@ -20,8 +31,13 @@
   import RoomPlayerList from "../components/RoomPlayerList.vue";
   import Btn from "../components/Btn.vue";
   import { showDialog } from "../reactivity/dialog";
-  import { players, needingCharacters } from "../reactivity/game";
-  import { initRoom } from "../http/room";
+  import {
+    needingCharacters,
+    refresh,
+    self,
+    players,
+  } from "../reactivity/game";
+  import { gameBegin, initRoom } from "../http/room";
 
   const WaitRoom = defineComponent({
     name: "WaitRoom",
@@ -48,6 +64,7 @@
           players.value = res.data.players;
           needingCharacters.value = res.data.needingCharacters;
         }
+        refresh();
       });
 
       const playerList = computed(() => {
@@ -63,7 +80,12 @@
           );
       });
 
-      return { showDialog, playerList };
+      const canBegin = computed(
+        () =>
+          needingCharacters.value.length === players.value.length
+      );
+
+      return { showDialog, playerList, self, gameBegin, canBegin };
     },
   });
 
@@ -84,6 +106,7 @@
     .btn {
       display: block;
       text-align: center;
+      margin: 1rem;
     }
   }
 </style>

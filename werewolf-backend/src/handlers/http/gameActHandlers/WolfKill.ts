@@ -4,19 +4,12 @@ import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
-import {
-  GameActHandler,
-  Response,
-  startCurrentState,
-  status2Handler,
-} from "./";
+import { ShowMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ShowMsg";
+import { GameActHandler, Response, startCurrentState, status2Handler } from "./";
 import { WolfKillCheckHandler } from "./WolfKillCheck";
 
 export const WolfKillHandler: GameActHandler = {
@@ -40,9 +33,14 @@ export const WolfKillHandler: GameActHandler = {
     };
   },
 
-  startOfState(room: Room) {
+  startOfState(room: Room, showCloseEye = true) {
     room.currentDay++;
     startCurrentState(this, room);
+    if (showCloseEye)
+      io.to(room.roomNumber).emit(Events.SHOW_MSG, {
+        innerHTML: "天黑请闭眼👁️",
+      } as ShowMsg);
+
     // TODO 告知狼队友?
   },
 

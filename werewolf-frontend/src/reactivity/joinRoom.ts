@@ -25,20 +25,17 @@ export async function join() {
   if (res && res.status === 200) {
     /* 向后端 socket 注册加入房间 */
     joinRoomSocket(roomNumber.value);
-    if (res.data.open) {
-      /* 如果加入后人齐了就进入游戏界面 */
-      gameBegin();
-    } else {
-      showDialog("成功加入房间!");
-      needingCharacters.value = res.data.needingCharacters;
-      router.push({
-        name: "waitRoom",
-        query: {
-          pw: password.value,
-          number: roomNumber.value,
-        },
-      });
-    }
+
+    showDialog("成功加入房间!");
+    needingCharacters.value = res.data.needingCharacters;
+    router.push({
+      name: "waitRoom",
+      query: {
+        pw: password.value,
+        number: roomNumber.value,
+      },
+    });
+
     setToken(res.data.ID, roomNumber.value);
   }
 }

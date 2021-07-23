@@ -110,7 +110,6 @@
           showDialog("未加入房间或房间已过期!");
           router.replace({ name: "home" });
         } else {
-          console.log("?");
           joinRoom(token.roomNumber);
           refresh();
         }
