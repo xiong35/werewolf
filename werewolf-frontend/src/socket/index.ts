@@ -12,7 +12,10 @@ import showWSMsg from "./showWSMsg";
 let socket: SocketIOClient.Socket;
 
 function joinRoom(roomNumber: string) {
-  if (socket) return;
+  if (socket) {
+    socket.removeAllListeners();
+    socket.disconnect();
+  }
 
   socket = io(SERVER_BASE_URL, {
     path: WS_PATH,
