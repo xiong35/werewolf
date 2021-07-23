@@ -29,6 +29,7 @@
         />
       </UseBorder>
     </div>
+    <div class="spacer"></div>
     <Btn @click="join" content="确认加入"></Btn>
   </div>
 </template>
@@ -69,11 +70,14 @@
 
 <style lang="scss" scoped>
   .joinroom {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 90vh;
     .title {
       font-weight: bold;
       font-size: 2rem;
-      padding-top: 2rem;
+      padding: 2rem;
     }
 
     .pw,
@@ -89,7 +93,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 2rem 0;
+      margin: 1rem 0;
       input {
         max-width: calc(100% - 1rem);
         padding: 0.5rem;
@@ -99,12 +103,11 @@
       }
     }
 
+    .spacer {
+      flex: 1;
+    }
+
     .btn {
-      position: fixed;
-      bottom: 10vh;
-      left: 0;
-      right: 0;
-      margin: auto;
     }
   }
 </style>

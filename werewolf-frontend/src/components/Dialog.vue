@@ -59,11 +59,17 @@
 
 <style lang="scss" scoped>
   .dialog-content {
-    height: 8rem;
+    min-height: 8rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    word-break: break-word;
+    padding: 1.5rem 0 0rem;
+    .confirm {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
   }
 </style>
