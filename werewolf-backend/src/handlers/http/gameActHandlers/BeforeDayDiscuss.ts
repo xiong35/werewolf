@@ -42,7 +42,9 @@ export const BeforeDayDiscussHandler: GameActHandler = {
 
     // 将夜晚死的人的 isAlive 设为false
     const dyingPlayers = room.players.filter((p) => {
-      const isKilledLastNight = p.die?.at === room.currentDay - 1;
+      // 女巫救活了就没有 p.die?.fromCharacter 字段
+      const isKilledLastNight =
+        p.die?.at === room.currentDay - 1 && !p.die?.saved;
       return isKilledLastNight;
     });
     dyingPlayers.forEach((p) => (p.isAlive = false));

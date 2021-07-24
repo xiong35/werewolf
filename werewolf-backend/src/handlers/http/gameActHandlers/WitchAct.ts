@@ -63,7 +63,7 @@ export const WitchActHandler: GameActHandler = {
           });
 
         // 设置成功救人
-        savedPlayer.die = null;
+        savedPlayer.die.saved = true;
         savedPlayer.isAlive = true;
         player.characterStatus.MEDICINE = {
           usedAt: target,

@@ -15,6 +15,7 @@ export class Player implements PlayerDef {
     at: day;
     fromIndex: index[];
     fromCharacter: Character;
+    saved?: boolean;
   };
   characterStatus?: CharacterStatus = {};
 
