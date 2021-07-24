@@ -26,7 +26,7 @@ export function getVoteResult(votes: Vote[]): index[] | null {
       maxVoteTargets.push(Number(target));
     } else {
       // 如果现在的是最高票, 设置相关数据
-      maxVoteCount = votes.length;
+      maxVoteCount = voters.length;
       maxVoteTargets = [Number(target)];
     }
   });

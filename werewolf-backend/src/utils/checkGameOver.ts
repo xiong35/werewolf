@@ -23,7 +23,6 @@ export async function checkGameOver(room: Room): Promise<boolean> {
   if (werewolf >= villager || werewolf === 0) {
     // TODO 哪一边获胜?
     // TODO 关闭 ws 房间
-    // TODO 应该能看到票型
     io.to(room.roomNumber).emit(Events.GAME_END /* TODO */);
     room.isFinished = true;
     return true;
