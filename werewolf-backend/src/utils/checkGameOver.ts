@@ -9,10 +9,7 @@ import { Events } from "../../../werewolf-frontend/shared/WSEvents";
  * @return {Promise<boolean>} 是否已经结束
  */
 export async function checkGameOver(room: Room): Promise<boolean> {
-  // TODO 添加游戏结束的状态
-  // TODO 天黑请闭眼的提示
-  // TODO 前端的样式改改
-  //          对话框字多了的情况
+  // TODO添加游戏结束的状态
   const { werewolf, villager } = room.players.reduce(
     (prev, p) => {
       if (p.isAlive) {
@@ -26,6 +23,7 @@ export async function checkGameOver(room: Room): Promise<boolean> {
   if (werewolf >= villager || werewolf === 0) {
     // TODO 哪一边获胜?
     // TODO 关闭 ws 房间
+    // TODO 应该能看到票型
     io.to(room.roomNumber).emit(Events.GAME_END /* TODO */);
     room.isFinished = true;
     return true;

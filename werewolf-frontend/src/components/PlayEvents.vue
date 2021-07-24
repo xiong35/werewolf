@@ -21,11 +21,11 @@
   import { defineComponent, computed } from "vue";
 
   import { showEvents } from "../reactivity/playPage";
-  import { refresh, gameEvents } from "../reactivity/game";
   import { GameEvent } from "../../shared/ModelDefs";
 
   import UseMenu from "./UseMenu.vue";
   import EventList from "./PlayEventList.vue";
+  import { gameEvents } from "../reactivity/computeGameEvents";
 
   const Events = defineComponent({
     name: "Events",

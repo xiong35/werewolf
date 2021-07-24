@@ -29,8 +29,6 @@ export const character = computed(() =>
 );
 /** 天数 */
 export const date = ref<day>(-1);
-/** 事件表 */
-export const gameEvents = ref<GameEvent[]>([]);
 /** 当前游戏进程 */
 export const gameStatus = ref<GameStatus>(GameStatus.WOLF_KILL);
 /** 当前状态还有多结束 */
@@ -45,11 +43,10 @@ export const gameStatusTimeLeft = ref(
  * 获得最新的游戏信息
  */
 export async function refresh() {
-  const { data } = (await getGameStatus({})) || {};
+  const data = await getGameStatus({});
   if (!data) return;
 
   date.value = data.curDay;
-  gameEvents.value = data.events;
   gameStatus.value = data.gameStatus;
   players.value = data.players;
   self.value = data.self;

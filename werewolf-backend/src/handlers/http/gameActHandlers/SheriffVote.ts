@@ -45,10 +45,13 @@ export const SheriffVoteHandler: GameActHandler = {
   async endOfState(room: Room) {
     const votes = room.players.map((p) => ({
       from: p.index,
-      voteAt: p.hasVotedAt[room.currentDay],
+      voteAt: p.sheriffVotes[0],
     }));
     // 找到警长人选
+
     const highestVotes = getVoteResult(votes);
+    console.log("# SheriffVote", { votes });
+    console.log("# SheriffVote", { highestVotes });
 
     // 如果没有全部弃票
     if (!highestVotes || highestVotes.length === 0) {

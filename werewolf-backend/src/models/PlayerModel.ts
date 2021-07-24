@@ -1,11 +1,6 @@
 import { Character } from "../../../werewolf-frontend/shared/GameDefs";
 import {
-  CharacterStatus,
-  day,
-  ID,
-  index,
-  PlayerDef,
-  PublicPlayerDef,
+    CharacterStatus, day, ID, index, PlayerDef, PublicPlayerDef
 } from "../../../werewolf-frontend/shared/ModelDefs";
 import { Room } from "./RoomModel";
 
@@ -48,6 +43,8 @@ export class Player implements PlayerDef {
       isSheriff: this.isSheriff,
       name: this.name,
       isDying: this === room.curDyingPlayer,
+      hasVotedAt: this.hasVotedAt,
+      sheriffVotes: this.sheriffVotes,
     };
   }
 }

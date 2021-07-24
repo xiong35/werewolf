@@ -27,6 +27,9 @@ export interface PublicPlayerDef {
   // 如, 晚上有角色被杀了, 但是只有
   isSheriff: boolean; // 是否为警长 -> 游戏结束重置
   isDying: boolean; // 是否正在进行死亡结算
+  hasVotedAt: index[]; // 下标是天数, value 是投给了谁
+  // 包括 狼人杀人 / 白天投票
+  sheriffVotes: index[]; // 下标是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
 }
 
 export interface PlayerDef extends PublicPlayerDef {
@@ -38,9 +41,6 @@ export interface PlayerDef extends PublicPlayerDef {
     fromIndex: index[]; // 被哪些人杀死的(名字)
     fromCharacter: Character; // 被哪个角色杀死的
   };
-  hasVotedAt: index[]; // 下标是天数, value 是投给了谁
-  // 包括 狼人杀人 / 白天投票
-  sheriffVotes: index[]; // 下标是天数, 包括上警(index=0)和白天传警徽 -> 游戏结束重置
   _id: ID; // string + 时间戳 的 token
   canBeVoted: boolean; // 是否能在当前阶段被投票
 }

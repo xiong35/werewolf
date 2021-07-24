@@ -3,11 +3,13 @@
     <div class="left-info">
       <Avatar :character="character"></Avatar>
       <img
-        :src="`/src/assets/${at % 2 === 1 ? 'sun' : 'moon'}${theme}.svg`"
+        :src="`/src/assets/${
+          at % 2 === 1 ? 'sun' : 'moon'
+        }${theme}.svg`"
         class="isDay"
       />
     </div>
-    <span class="deed"> {{ deed }}</span>
+    <pre class="deed">{{ deed }}</pre>
   </div>
 </template>
 
@@ -33,7 +35,6 @@
 
   export default PlayEventTile;
 </script>
-
 
 <style lang="scss" scoped>
   .play-event-tile {
@@ -75,6 +76,9 @@
     .deed {
       flex: 1 0 0;
       text-align: left;
+      font: inherit;
+      word-break: break-all;
+      white-space: pre-wrap;
     }
   }
 </style>
