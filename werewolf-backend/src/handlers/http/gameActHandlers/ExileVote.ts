@@ -3,7 +3,7 @@ import io from "src";
 import { createError } from "src/middleware/handleError";
 import { Player } from "src/models/PlayerModel";
 import { Room } from "src/models/RoomModel";
-import { getVoteResult } from "src/utils/getVoteResult";
+import { getVoteResult, Vote } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNplayers";
 
 import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
@@ -43,9 +43,10 @@ export const ExileVoteHandler: GameActHandler = {
   },
 
   async endOfState(room: Room) {
-    const votes = room.players.map(
-      (p) => p.hasVotedAt[room.currentDay]
-    );
+    const votes: Vote[] = room.players.map((p) => ({
+      from: p.index,
+      voteAt: p.hasVotedAt[room.currentDay],
+    }));
 
     const highestVotes = getVoteResult(votes);
 

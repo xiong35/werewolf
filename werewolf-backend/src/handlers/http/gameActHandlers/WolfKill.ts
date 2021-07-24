@@ -50,9 +50,10 @@ export const WolfKillHandler: GameActHandler = {
       (p) => p.character === "WEREWOLF"
     );
     const today = room.currentDay;
-    const votes = werewolfs.map(
-      (p) => p.characterStatus?.wantToKills?.[today]
-    );
+    const votes = werewolfs.map((p) => ({
+      from: p.index,
+      voteAt: p.characterStatus?.wantToKills?.[today],
+    }));
     console.log("# WolfKill", { votes });
 
     // 找到死者

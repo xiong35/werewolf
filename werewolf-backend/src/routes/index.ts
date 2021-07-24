@@ -1,10 +1,9 @@
 import * as Router from "koa-router";
 
-import roomRouter from "./roomRoutes";
-import gameRouter from "./gameRoutes";
-import { test } from "../t";
-
 import UseAuth from "../middleware/auth";
+import { test } from "../t";
+import gameRouter from "./gameRoutes";
+import roomRouter from "./roomRoutes";
 
 const router = new Router();
 
