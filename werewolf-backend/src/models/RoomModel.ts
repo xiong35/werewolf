@@ -110,4 +110,8 @@ export class Room implements RoomDef {
       return createError({ status: 400, msg: "未找到房间号" });
     return room;
   }
+
+  static clearRoom(number: string): void {
+    delete this.roomMap[number];
+  }
 }

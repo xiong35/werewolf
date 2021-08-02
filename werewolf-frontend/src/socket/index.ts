@@ -33,4 +33,4 @@ function joinRoom(roomNumber: string) {
   socket.emit(Events.ROOM_JOIN, roomNumber);
 }
 
-export { joinRoom, Events };
+export { joinRoom, Events, socket };

@@ -1,8 +1,9 @@
+import { Character } from "../GameDefs";
 import {} from "../ModelDefs";
 
 /**
  * Server to Client
  */
 export interface GameEndMsg {
-  // TODO: 每个人的角色和事件表
+  winner: "WEREWOLF" | "VILLAGER"; // TODO 限制为 Character 类型
 }

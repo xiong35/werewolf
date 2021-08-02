@@ -1,10 +1,8 @@
 import { Context } from "koa";
 import io from "src";
+import { checkGameOver } from "src/utils/checkGameOver";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -133,12 +131,15 @@ export function startCurrentState(
  * 2. 如果没有, 设置 curDyingPlayer 为 null, 进行 nextState, 并将他设为 null
  */
 export function gotoNextStateAfterHandleDie(room: Room) {
+  if (checkGameOver(room)) return;
+
   room.curDyingPlayer.isDying = false;
   room.curDyingPlayer.isAlive = false;
 
   const dyingPlayer = room.players.find((p) => p.isDying);
   console.log("# index", room.players);
   console.log("# index", { dyingPlayer });
+
   if (dyingPlayer) {
     room.curDyingPlayer = dyingPlayer;
     return LeaveMsgHandler.startOfState(room);

@@ -31,7 +31,9 @@ const gameStatus: Middleware = async (ctx, next) => {
       self: curPlayer,
       curDay: room.currentDay,
       gameStatus: room.curStatus,
-      players: room.choosePublicInfo(),
+      players: room.isFinished
+        ? room.players
+        : room.choosePublicInfo(),
     },
   };
   ctx.body = ret;
