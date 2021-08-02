@@ -9,7 +9,7 @@ import { Events } from "../../../werewolf-frontend/shared/WSEvents";
  * @return {Promise<boolean>} 是否已经结束
  */
 export async function checkGameOver(room: Room): Promise<boolean> {
-  // TODO添加游戏结束的状态
+  // TODO 添加游戏结束的状态
   const { werewolf, villager } = room.players.reduce(
     (prev, p) => {
       if (p.isAlive) {

@@ -1,5 +1,6 @@
 import * as Router from "koa-router";
 
+import { getWolfs } from "./getWolfs";
 import { witchGetDie } from "./witchGetDie";
 import { getWolfKillResult } from "./wolfKill";
 
@@ -16,5 +17,7 @@ hintRouter.get(
   "/witchGetDie",
   witchGetDie
 );
+
+hintRouter.get("game hint getWolfs", "/getWolfs", getWolfs);
 
 export default hintRouter;

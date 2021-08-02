@@ -40,8 +40,6 @@ export const WolfKillHandler: GameActHandler = {
       io.to(room.roomNumber).emit(Events.SHOW_MSG, {
         innerHTML: "天黑请闭眼👁️",
       } as ShowMsg);
-
-    // TODO 告知狼队友?
   },
 
   async endOfState(room: Room) {
