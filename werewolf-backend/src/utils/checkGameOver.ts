@@ -1,9 +1,7 @@
-import io from "src";
-import { Player } from "src/models/PlayerModel";
-import { Room } from "src/models/RoomModel";
-
+import io from "../";
 import { Events } from "../../../werewolf-frontend/shared/WSEvents";
 import { GameEndMsg } from "../../../werewolf-frontend/shared/WSMsg/GameEnd";
+import { Room } from "../models/RoomModel";
 
 const CLEAR_ROOM_TIME = 3600 * 1000;
 

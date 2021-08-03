@@ -1,9 +1,8 @@
-import { createError } from "src/middleware/handleError";
-
 import { Character, GameStatus } from "../../../werewolf-frontend/shared/GameDefs";
 import {
     day, ID, index, PlayerDef, PublicPlayerDef, RoomDef
 } from "../../../werewolf-frontend/shared/ModelDefs";
+import { createError } from "../middleware/handleError";
 import { Player } from "./PlayerModel";
 
 export class Room implements RoomDef {

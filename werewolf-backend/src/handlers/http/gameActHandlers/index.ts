@@ -1,13 +1,13 @@
 import { Context } from "koa";
-import io from "src";
-import { checkGameOver } from "src/utils/checkGameOver";
 
+import io from "../../..";
 import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
 import { Player } from "../../../models/PlayerModel";
 import { Room } from "../../../models/RoomModel";
+import { checkGameOver } from "../../../utils/checkGameOver";
 import { BeforeDayDiscussHandler } from "./BeforeDayDiscuss";
 import { DayDiscussHandler } from "./DayDiscuss";
 import { ExileVoteHandler } from "./ExileVote";

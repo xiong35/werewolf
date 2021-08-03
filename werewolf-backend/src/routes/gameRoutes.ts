@@ -1,8 +1,8 @@
 import * as Router from "koa-router";
-import gameBegin from "src/handlers/http/gameBegin";
-import hintResultRouter from "src/handlers/http/gameGetHint";
 
 import gameAct from "../handlers/http/gameAct";
+import gameBegin from "../handlers/http/gameBegin";
+import hintResultRouter from "../handlers/http/gameGetHint";
 import gameStatus from "../handlers/http/gameStatus";
 
 const gameRouter = new Router();

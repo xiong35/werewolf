@@ -1,7 +1,6 @@
-import { Player } from "src/models/PlayerModel";
-import { Room } from "src/models/RoomModel";
-
 import { GameStatus, StatusWithAction } from "../../../../../werewolf-frontend/shared/GameDefs";
+import { Player } from "../../../models/PlayerModel";
+import { Room } from "../../../models/RoomModel";
 
 /**
  * 检验此玩家是否能在当前阶段发送请求

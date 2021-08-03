@@ -1,13 +1,12 @@
 import { Middleware } from "koa";
-import { createError } from "src/middleware/handleError";
-import { Room } from "src/models/RoomModel";
-import { getVoteResult } from "src/utils/getVoteResult";
-import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
 import {
     IDHeaderName, RoomNumberHeaderName
 } from "../../../../../werewolf-frontend/shared/constants";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
+import { createError } from "../../../middleware/handleError";
+import { Room } from "../../../models/RoomModel";
+import { renderHintNPlayers } from "../../../utils/renderHintNPlayers";
 
 export const witchGetDie: Middleware = async (ctx) => {
   const roomNumber = ctx.get(RoomNumberHeaderName);

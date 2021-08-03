@@ -2,7 +2,6 @@ import { createServer } from "http";
 import * as Koa from "koa";
 import * as KoaBody from "koa-body";
 import * as logger from "koa-logger";
-import * as mongoose from "mongoose";
 import { Server } from "socket.io";
 
 import * as cors from "@koa/cors";
@@ -11,11 +10,6 @@ import { WS_PATH } from "../../werewolf-frontend/shared/constants";
 import useHandleError from "./middleware/handleError";
 import router from "./routes";
 import { setup } from "./ws";
-
-mongoose.connect("mongodb://localhost/werewolf", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
 const app = new Koa<
   { isKnownError: Boolean },

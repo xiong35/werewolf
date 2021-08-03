@@ -1,8 +1,8 @@
 import { Middleware } from "koa";
-import { createError } from "src/middleware/handleError";
 
 import { IDHeaderName, RoomNumberHeaderName } from "../../../../werewolf-frontend/shared/constants";
 import CharacterAct from "../../../../werewolf-frontend/shared/httpMsg/CharacterAct";
+import { createError } from "../../middleware/handleError";
 import { Player } from "../../models/PlayerModel";
 import { Room } from "../../models/RoomModel";
 import { status2Handler } from "./gameActHandlers";

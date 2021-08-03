@@ -1,12 +1,12 @@
 import { Middleware } from "koa";
-import io from "src";
-import { createError } from "src/middleware/handleError";
 
+import io from "../../";
 import { IDHeaderName, RoomNumberHeaderName } from "../../../../werewolf-frontend/shared/constants";
 import { GameStatus } from "../../../../werewolf-frontend/shared/GameDefs";
 import { HttpRes } from "../../../../werewolf-frontend/shared/httpMsg/_httpResTemplate";
 import CharacterAct from "../../../../werewolf-frontend/shared/httpMsg/CharacterAct";
 import { Events } from "../../../../werewolf-frontend/shared/WSEvents";
+import { createError } from "../../middleware/handleError";
 import { Player } from "../../models/PlayerModel";
 import { Room } from "../../models/RoomModel";
 import { status2Handler } from "./gameActHandlers";

@@ -1,13 +1,13 @@
 import { Context } from "koa";
-import io from "src";
-import { Player } from "src/models/PlayerModel";
-import { Room } from "src/models/RoomModel";
-import { getVoteResult } from "src/utils/getVoteResult";
 
+import io from "../../..";
 import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
+import { Player } from "../../../models/PlayerModel";
+import { Room } from "../../../models/RoomModel";
+import { getVoteResult } from "../../../utils/getVoteResult";
 import { GameActHandler, gotoNextStateAfterHandleDie, Response, startCurrentState } from "./";
 
 export const SheriffAssignCheckHandler: GameActHandler = {

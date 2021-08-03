@@ -1,5 +1,4 @@
 import { Middleware } from "koa";
-import { createError } from "src/middleware/handleError";
 
 import { IDHeaderName, RoomNumberHeaderName } from "../../../../werewolf-frontend/shared/constants";
 import { HttpRes } from "../../../../werewolf-frontend/shared/httpMsg/_httpResTemplate";
