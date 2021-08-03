@@ -126,6 +126,17 @@ function mergeEvents(
     .sort((e1, e2) => e1.at - e2.at);
 }
 
+export const groupedGameEvents = computed(() => {
+  const list: GameEvent[][] = [];
+  gameEvents.value.forEach((e) => {
+    const at = e.at;
+    const day = Math.ceil(at / 2);
+    list[day] ? void 0 : (list[day] = []);
+    list[day].push(e);
+  });
+  return list;
+});
+
 /**
  * @param player 某个角色
  * @returns 这个角色对应的 event对象列表

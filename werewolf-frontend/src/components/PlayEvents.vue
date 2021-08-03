@@ -25,24 +25,13 @@
 
   import UseMenu from "./UseMenu.vue";
   import EventList from "./PlayEventList.vue";
-  import { gameEvents } from "../reactivity/computeGameEvents";
+  import { groupedGameEvents } from "../reactivity/computeGameEvents";
 
   const Events = defineComponent({
     name: "Events",
     components: { UseMenu, EventList },
     props: {},
     setup(props) {
-      const groupedGameEvents = computed(() => {
-        const list: GameEvent[][] = [];
-        gameEvents.value.forEach((e) => {
-          const at = e.at;
-          const day = Math.ceil(at / 2);
-          list[day] ? void 0 : (list[day] = []);
-          list[day].push(e);
-        });
-        return list;
-      });
-
       return { showEvents, groupedGameEvents };
     },
   });

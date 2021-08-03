@@ -1,5 +1,7 @@
 <template>
-  <div v-if="events !== undefined" class="event-day">Day {{ day }}</div>
+  <div v-if="events !== undefined" class="event-day">
+    Day {{ day }}
+  </div>
   <Tile
     v-for="item in events"
     :key="item.at + item.deed"
@@ -11,6 +13,7 @@
 
 <script lang="ts">
   import { defineComponent } from "vue";
+  import type { GameEvent } from "../../shared/ModelDefs";
 
   import Tile from "../components/PlayEventTile.vue";
 
@@ -18,7 +21,7 @@
     name: "PlayEventList",
     components: { Tile },
     props: {
-      events: Array, // GameEvent 的数组
+      events: Object as () => GameEvent[], // GameEvent 的数组
       day: Number,
     },
     setup(props) {
@@ -28,7 +31,6 @@
 
   export default PlayEventList;
 </script>
-
 
 <style lang="scss" scoped>
   .event-day {
