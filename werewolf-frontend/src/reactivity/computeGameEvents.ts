@@ -55,9 +55,9 @@ export const gameEvents = computed(() => {
     ([target, voters]) => {
       const votersStr = voters.join("，");
       if (target === "0") {
-        sheriffVoteEvent.deed += `${votersStr} 弃票\n`;
+        sheriffVoteEvent.deed += `警长投票中, ${votersStr} 弃票\n`;
       } else {
-        sheriffVoteEvent.deed += `${votersStr} 投给了 ${target}\n`;
+        sheriffVoteEvent.deed += `警长投票中, ${votersStr} 投给了 ${target}\n`;
       }
     }
   );
@@ -76,9 +76,9 @@ export const gameEvents = computed(() => {
         ([target, voters]) => {
           const votersStr = voters.join("，");
           if (target === "0") {
-            exileVoteEvent.deed += `${votersStr} 弃票\n`;
+            exileVoteEvent.deed += `放逐投票中, ${votersStr} 弃票\n`;
           } else {
-            exileVoteEvent.deed += `${votersStr} 投给了 ${target}\n`;
+            exileVoteEvent.deed += `放逐投票中, ${votersStr} 投给了 ${target}\n`;
           }
         }
       );
@@ -142,7 +142,7 @@ export const groupedGameEvents = computed(() => {
  * @returns 这个角色对应的 event对象列表
  */
 function getEvents(player: PlayerDef): CharacterEvent {
-  const { character, characterStatus } = player;
+  const { character, characterStatus, index } = player;
   const ret: CharacterEvent = {
     character,
     events: [],
@@ -156,8 +156,8 @@ function getEvents(player: PlayerDef): CharacterEvent {
               at,
               deed:
                 index === undefined || index === null
-                  ? "空守"
-                  : `保护了 ${index} 号玩家`,
+                  ? `${index} 号空守`
+                  : `${index} 号保护了 ${index} 号玩家`,
             });
         }
       );
@@ -172,8 +172,8 @@ function getEvents(player: PlayerDef): CharacterEvent {
           at: day,
           deed:
             player === undefined || player === null
-              ? "没有开枪"
-              : `射死了 ${player} 号玩家`,
+              ? `${index} 号没有开枪`
+              : `${index} 号射死了 ${player} 号玩家`,
         });
       break;
     case "SEER":
@@ -184,8 +184,10 @@ function getEvents(player: PlayerDef): CharacterEvent {
               at,
               deed:
                 check === undefined || check === null
-                  ? "没有查人"
-                  : `查验了 ${check.index} 号玩家，他是${
+                  ? `${index} 号没有查人`
+                  : `${index} 号查验了 ${
+                      check.index
+                    } 号玩家，他是${
                       check.isWerewolf ? "狼人" : "良民"
                     }`,
             });
@@ -200,8 +202,8 @@ function getEvents(player: PlayerDef): CharacterEvent {
               at,
               deed:
                 kill === undefined || kill === null
-                  ? "放弃选择"
-                  : `投票想杀 ${kill} 号玩家`,
+                  ? `${index} 号放弃选择`
+                  : `${index} 号投票想杀 ${kill} 号玩家`,
             });
         }
       );
@@ -212,12 +214,12 @@ function getEvents(player: PlayerDef): CharacterEvent {
       if (POISON.usedDay !== -1)
         ret.events.push({
           at: POISON.usedDay,
-          deed: `用毒药杀害了 ${POISON.usedAt} 号玩家`,
+          deed: `${index} 号用毒药杀害了 ${POISON.usedAt} 号玩家`,
         });
       if (MEDICINE.usedDay !== -1)
         ret.events.push({
           at: MEDICINE.usedDay,
-          deed: `用灵药复活了 ${MEDICINE.usedAt} 号玩家`,
+          deed: `${index} 号用灵药复活了 ${MEDICINE.usedAt} 号玩家`,
         });
       break;
   }

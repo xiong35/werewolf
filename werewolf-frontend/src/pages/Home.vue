@@ -15,6 +15,7 @@
       @click="$router.push('createRoom')"
       content="创建房间"
     ></Btn>
+    <Btn @click="$router.push('review')" content="游戏记录"></Btn>
   </div>
 </template>
 

@@ -25,10 +25,10 @@ export const HunterShootHandler: GameActHandler = {
     ctx: Context
   ) {
     console.log("# HunterShoot", { player });
-    if (player.die?.fromCharacter !== "WEREWOLF") {
+    if (player.die?.fromCharacter === "WITCH") {
       // 如果被女巫毒死了就不能开枪
       createError({
-        msg: "你不是被狼人杀死, 无法开枪",
+        msg: "你被女巫毒死, 无法开枪",
         status: 401,
       });
     }
