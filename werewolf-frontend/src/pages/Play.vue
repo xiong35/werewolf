@@ -91,6 +91,7 @@
   import { getToken } from "../utils/token";
   import { showDialog } from "../reactivity/dialog";
   import router from "../router";
+  import { roomNumber } from "../reactivity/joinRoom";
 
   const Play = defineComponent({
     name: "Play",
@@ -110,6 +111,7 @@
           showDialog("未加入房间或房间已过期!");
           router.replace({ name: "home" });
         } else {
+          roomNumber.value = token.roomNumber;
           joinRoom(token.roomNumber);
           refresh();
         }

@@ -4,7 +4,8 @@ import CreateRoom from "./pages/CreateRoom.vue";
 import Home from "./pages/Home.vue";
 import JoinRoom from "./pages/JoinRoom.vue";
 import Play from "./pages/Play.vue";
-import Recon from "./pages/Recon.vue";
+import Review from "./pages/Review.vue";
+import ReviewDetail from "./pages/ReviewDetail.vue";
 import WaitRoom from "./pages/WaitRoom.vue";
 
 const routes = [
@@ -24,7 +25,20 @@ const routes = [
     }),
   },
   { path: "/play", name: "play", component: Play },
-  { path: "/recon", name: "recon", component: Recon },
+  {
+    path: "/review-detail",
+    name: "review-detail",
+    component: ReviewDetail,
+    props: (route: any) => ({
+      roomNumber: route.query.roomNumber,
+      time: route.query.time,
+    }),
+  },
+  {
+    path: "/review",
+    name: "review",
+    component: Review,
+  },
   {
     path: "/waitRoom",
     name: "waitRoom",
