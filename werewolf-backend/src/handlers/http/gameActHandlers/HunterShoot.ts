@@ -6,10 +6,7 @@ import { Room } from "src/models/RoomModel";
 import { getVoteResult } from "src/utils/getVoteResult";
 import { renderHintNPlayers } from "src/utils/renderHintNPlayers";
 
-import {
-  GameStatus,
-  TIMEOUT,
-} from "../../../../../werewolf-frontend/shared/GameDefs";
+import { GameStatus, TIMEOUT } from "../../../../../werewolf-frontend/shared/GameDefs";
 import { index } from "../../../../../werewolf-frontend/shared/ModelDefs";
 import { Events } from "../../../../../werewolf-frontend/shared/WSEvents";
 import { ChangeStatusMsg } from "../../../../../werewolf-frontend/shared/WSMsg/ChangeStatus";
@@ -27,13 +24,15 @@ export const HunterShootHandler: GameActHandler = {
     target: index,
     ctx: Context
   ) {
-    if (player.die?.fromCharacter === "WITCH") {
+    console.log("# HunterShoot", { player });
+    if (player.die?.fromCharacter !== "WEREWOLF") {
       // 如果被女巫毒死了就不能开枪
       createError({
-        msg: "你被女巫毒死, 无法开枪",
+        msg: "你不是被狼人杀死, 无法开枪",
         status: 401,
       });
     }
+
     if (player.characterStatus.shootAt.player > 0)
       createError({ msg: "你已经开过枪了", status: 401 });
 

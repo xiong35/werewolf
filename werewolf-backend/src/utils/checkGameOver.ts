@@ -35,6 +35,7 @@ export function checkGameOver(room: Room): boolean {
     /* 设置房间状态 */
     room.isFinished = true;
     clearTimeout(room.timer);
+    clearTimeout(room.clearSelfTimer);
     /* 关闭 sockets */
     // make all Socket instances leave the room
     io.socketsLeave(room.roomNumber);

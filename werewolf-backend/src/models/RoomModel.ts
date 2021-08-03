@@ -21,6 +21,7 @@ export class Room implements RoomDef {
   }
   toFinishPlayers = new Set<index>();
   timer: NodeJS.Timeout;
+  clearSelfTimer: NodeJS.Timeout;
   /** 死亡结算后的下一个状态 */
   nextStateOfDieCheck: GameStatus;
   /** 当前正在进行死亡结算的玩家序号 */
@@ -41,8 +42,8 @@ export class Room implements RoomDef {
   }) {
     // TODO 检查创建房间的人数配比
     while (true) {
-      // const roomNumber = Math.random().toString().slice(2, 8);
-      const roomNumber = "666666"; // # dev
+      const roomNumber = Math.random().toString().slice(2, 8);
+      // const roomNumber = "666666"; // # dev
       const prevRoom = Room.roomMap[roomNumber];
       if (
         prevRoom &&
@@ -63,6 +64,11 @@ export class Room implements RoomDef {
       .fill(0)
       .map((_, i) => i + 2);
     this.password = password;
+
+    this.clearSelfTimer = setTimeout(
+      () => Room.clearRoom(this.roomNumber),
+      3600 * 1000 * 12
+    ); // 12h 后清除此房间
   }
 
   playerJoin(name: string, password?: string): Player {

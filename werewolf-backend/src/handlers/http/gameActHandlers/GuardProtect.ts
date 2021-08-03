@@ -27,7 +27,7 @@ export const GuardProtectHandler: GameActHandler = {
       player.characterStatus.protects || [];
 
     const protects = player.characterStatus.protects;
-    if (protects[protects.length - 1] === target) {
+    if (protects[room.currentDay - 2] === target && target) {
       // 如果两天保了同一个人
       createError({
         status: 401,
@@ -36,6 +36,7 @@ export const GuardProtectHandler: GameActHandler = {
     } else {
       protects[room.currentDay] = target;
       const protectPlayer = room.getPlayerByIndex(target);
+      console.log("# GuardProtect", { protectPlayer });
       if (
         protectPlayer.die?.at === room.currentDay &&
         protectPlayer.die?.fromCharacter === "WEREWOLF"
