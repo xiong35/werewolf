@@ -15,18 +15,12 @@ import { needingCharacters, players } from "./game";
 export const characters = reactive<
   Record<SetableCharacters, number>
 >({
-  GUARD: 0,
-  HUNTER: 0,
-  SEER: 0,
-  VILLAGER: 3,
-  WEREWOLF: 1,
-  WITCH: 0, // # dev
-  // GUARD: 0,
-  // HUNTER: 1,
-  // SEER: 1,
-  // VILLAGER: 2,
-  // WEREWOLF: 3,
-  // WITCH: 1,
+  GUARD: 1,
+  HUNTER: 1,
+  SEER: 1,
+  VILLAGER: 2,
+  WEREWOLF: 3,
+  WITCH: 1,
 });
 
 /**
@@ -48,7 +42,7 @@ export function setCharacter(
 }
 
 /* 玩家信息 */
-export const nickname = ref<string>("123"); // # dev
+export const nickname = ref<string>("");
 export const password = ref<string>("");
 
 export async function create() {

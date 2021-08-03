@@ -42,7 +42,6 @@ export class Room implements RoomDef {
     // TODO 检查创建房间的人数配比
     while (true) {
       const roomNumber = Math.random().toString().slice(2, 8);
-      // const roomNumber = "666666"; // # dev
       const prevRoom = Room.roomMap[roomNumber];
       if (
         prevRoom &&
