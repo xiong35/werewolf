@@ -44,7 +44,7 @@
       ></PlayEventList>
     </div>
 
-    <div v-else>
+    <div v-else class="placeholder">
       未找到对局记录
     </div>
 
@@ -100,6 +100,12 @@
     .btn {
       margin: 2rem auto;
       display: block;
+      text-align: center;
+    }
+
+    .placeholder {
+      margin: 2rem 0 4rem;
+      opacity: 0.5;
       text-align: center;
     }
   }
