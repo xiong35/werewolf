@@ -27,7 +27,7 @@
         <img
           v-show="item.isSheriff"
           alt="警长"
-          :src="`/src/assets/sheriff${theme}.svg`"
+          :src="`/public/assets/sheriff${theme}.svg`"
           class="sherrif"
         />
         <img
@@ -35,7 +35,7 @@
           :class="{ isDying: item.isDying }"
           v-show="!item.isAlive"
           alt="骷髅"
-          :src="`/src/assets/dead${theme}.svg`"
+          :src="`/public/assets/dead${theme}.svg`"
         />
       </div>
       <div v-else class="box empty">

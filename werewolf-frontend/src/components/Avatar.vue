@@ -2,7 +2,7 @@
   <div class="avatar">
     <img
       class="icon"
-      :src="`/src/assets/${character.toLowerCase()}${theme}.svg`"
+      :src="`/public/assets/${character.toLowerCase()}${theme}.svg`"
       :alt="name"
     />
     <div class="info">{{ name }}</div>

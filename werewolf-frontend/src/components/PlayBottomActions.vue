@@ -2,7 +2,7 @@
   <div class="play-bottom-actions" v-show="isActing">
     <img
       @click="isActing = false"
-      :src="`/src/assets/close${theme}.svg`"
+      :src="`/public/assets/close${theme}.svg`"
       alt="close"
     />
     <div>
@@ -15,7 +15,7 @@
     </div>
     <img
       @click="act"
-      :src="`/src/assets/checked${theme}.svg`"
+      :src="`/public/assets/checked${theme}.svg`"
       alt="checked"
     />
   </div>

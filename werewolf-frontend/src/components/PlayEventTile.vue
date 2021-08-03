@@ -3,7 +3,7 @@
     <div class="left-info">
       <Avatar :character="character"></Avatar>
       <img
-        :src="`/src/assets/${
+        :src="`/public/assets/${
           at % 2 === 1 ? 'sun' : 'moon'
         }${theme}.svg`"
         class="isDay"

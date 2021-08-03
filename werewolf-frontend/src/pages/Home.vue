@@ -1,7 +1,7 @@
 <template>
   <div class="main-page">
     <img
-      :src="`/src/assets/werewolf${theme}.svg`"
+      :src="`/public/assets/werewolf${theme}.svg`"
       alt="logo"
       class="logo"
     />
@@ -39,7 +39,7 @@
 <style lang="scss" scoped>
   @font-face {
     font-family: gete;
-    src: url(../assets/gete.ttf);
+    src: url("../../public/assets/gete.ttf");
   }
 
   .main-page {

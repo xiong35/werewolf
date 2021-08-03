@@ -9,7 +9,7 @@ import { createError } from "../../../middleware/handleError";
 import { Player } from "../../../models/PlayerModel";
 import { Room } from "../../../models/RoomModel";
 import { getVoteResult, Vote } from "../../../utils/getVoteResult";
-import { renderHintNPlayers } from "../../../utils/renderHintNplayers";
+import { renderHintNPlayers } from "../../../utils/renderHintNPlayers";
 import { GameActHandler, Response, startCurrentState } from "./";
 import { DayDiscussHandler } from "./DayDiscuss";
 import { ExileVoteCheckHandler } from "./ExileVoteCheck";

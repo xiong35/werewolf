@@ -5,7 +5,7 @@
       <img
         @click="onCancel"
         class="cancel"
-        :src="`/src/assets/close${theme}.svg`"
+        :src="`/public/assets/close${theme}.svg`"
       />
     </UseBorder>
   </div>
