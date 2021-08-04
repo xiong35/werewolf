@@ -13,7 +13,7 @@
   <img alt="License" src="https://img.shields.io/github/license/xiong35/werewolf?color=56BEB8">
 </p>
 
-<h3><a href="http://werewolf.xiong35.cn/">在线使用地址</a></h3>
+<h3 align="center"><a href="http://werewolf.xiong35.cn/">在线使用地址</a></h3>
 
 <p align="center">
   <a href="#dart-简介">简介</a> &#xa0; | &#xa0; 
