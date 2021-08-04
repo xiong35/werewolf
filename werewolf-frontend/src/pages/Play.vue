@@ -6,7 +6,7 @@
       Day {{ Math.ceil(date / 2) }}
       <img
         class="date-icon"
-        :src="`/werewolf/game/assets/${
+        :src="`/assets${
           date % 2 === 0 ? 'moon' : 'sun'
         }${theme}.svg`"
       />

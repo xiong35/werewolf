@@ -2,7 +2,7 @@
   <div class="avatar">
     <img
       class="icon"
-      :src="`/werewolf/game/assets/${character.toLowerCase()}${theme}.svg`"
+      :src="`/assets/${character.toLowerCase()}${theme}.svg`"
       :alt="name"
     />
     <div class="info">{{ name }}</div>

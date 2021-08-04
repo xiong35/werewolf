@@ -5,7 +5,7 @@
       <img
         @click="onCancel"
         class="cancel"
-        :src="`/werewolf/game/assets/close${theme}.svg`"
+        :src="`/assets/close${theme}.svg`"
       />
     </UseBorder>
   </div>
