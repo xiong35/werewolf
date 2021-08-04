@@ -1,7 +1,7 @@
 export const CLIENT_BASE_URL =
-  "http://game.xiong35.cn/werewolf/game";
+  "http://werewolf.xiong35.cn";
 export const SERVER_BASE_URL =
-  "http://game.xiong35.cn/werewolf/api";
+  "http://werewolf.xiong35.cn/api";
 
 export const WS_PATH = "/werewolf-ws";
 
