@@ -40,7 +40,8 @@ export class Room implements RoomDef {
     password?: string;
   }) {
     // TODO 检查创建房间的人数配比
-    while (true) {
+    let tryTime = 20;
+    while (tryTime--) {
       const roomNumber = Math.random().toString().slice(2, 8);
       const prevRoom = Room.roomMap[roomNumber];
       if (
@@ -54,6 +55,9 @@ export class Room implements RoomDef {
         Room.roomMap[this.roomNumber] = this;
         break;
       }
+    }
+    if (tryTime <= 0) {
+      createError({ msg: "创建错误, 请重试!", status: 500 });
     }
     this.creatorID = creator._id;
     this.players = [creator];
