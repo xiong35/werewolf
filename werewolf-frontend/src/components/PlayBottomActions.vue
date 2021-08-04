@@ -2,7 +2,7 @@
   <div class="play-bottom-actions" v-show="isActing">
     <img
       @click="isActing = false"
-      :src="`/public/assets/close${theme}.svg`"
+      :src="`/werewolf/game/assets/close${theme}.svg`"
       alt="close"
     />
     <div>
@@ -15,7 +15,7 @@
     </div>
     <img
       @click="act"
-      :src="`/public/assets/checked${theme}.svg`"
+      :src="`/werewolf/game/assets/checked${theme}.svg`"
       alt="checked"
     />
   </div>
