@@ -17,7 +17,7 @@ function joinRoom(roomNumber: string) {
     socket.disconnect();
   }
 
-  socket = io(SERVER_BASE_URL, {
+  socket = io.connect(SERVER_BASE_URL, {
     path: WS_PATH,
   });
   socket.on("connection", () => {
