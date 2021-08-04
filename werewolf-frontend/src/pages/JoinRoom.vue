@@ -96,7 +96,9 @@
       margin: 1rem 0;
       input {
         max-width: calc(100% - 1rem);
-        padding: 0.5rem;
+        padding: 0 0.5rem;
+        line-height: 2.4rem;
+        overflow: visible;
       }
       .useborder {
         max-width: 50%;
