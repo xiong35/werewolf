@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 
 // const io = require("socket.io-client");
-import { SERVER_BASE_URL, WS_PATH } from "../../shared/constants";
+import { SERVER_DOMAIN, WS_PATH } from "../../shared/constants";
 import { Events } from "../../shared/WSEvents";
 // handlers
 import changeStatus from "./changeStatus";
@@ -18,7 +18,7 @@ function joinRoom(roomNumber: string) {
     socket.disconnect();
   }
 
-  socket = io(SERVER_BASE_URL, {
+  socket = io(SERVER_DOMAIN, {
     path: WS_PATH,
   });
   socket.on("connection", () => {
