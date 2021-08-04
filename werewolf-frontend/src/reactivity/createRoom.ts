@@ -1,4 +1,4 @@
-import * as sha256 from "sha256";
+import sha256 from "sha256";
 import { reactive, ref } from "vue";
 
 import { SetableCharacters } from "../../shared/GameDefs";
