@@ -52,11 +52,11 @@ export const WolfKillHandler: GameActHandler = {
       from: p.index,
       voteAt: p.characterStatus?.wantToKills?.[today],
     }));
-    console.log("# WolfKill", { votes });
+    // console.log("# WolfKill", { votes });
 
     // 找到死者
     const voteRes = getVoteResult(votes);
-    console.log("# WolfKill", { voteRes });
+    // console.log("# WolfKill", { voteRes });
     if (voteRes !== null) {
       // 如果没有放弃杀人'
       const toKillIndex = voteRes[0];
@@ -76,7 +76,7 @@ export const WolfKillHandler: GameActHandler = {
           fromCharacter: "WEREWOLF",
         };
       }
-      console.log("# WolfKill", { toKillPlayer });
+      // console.log("# WolfKill", { toKillPlayer });
     }
 
     // 进入下一状态， 狼人确认杀人结果

@@ -32,7 +32,7 @@ const gameBegin: Middleware = async (ctx) => {
       status: 401,
     });
 
-  console.log("#game being");
+  // console.log("#game being");
   // assign characters
   const needingCharacters = [...room.needingCharacters];
 
@@ -81,7 +81,7 @@ const gameBegin: Middleware = async (ctx) => {
   }
   io.to(roomNumber).emit(Events.GAME_BEGIN);
 
-  console.log("# roomJoin", "start");
+  // console.log("# roomJoin", "start");
   status2Handler[GameStatus.WOLF_KILL].startOfState(room, false);
 
   ctx.body = {

@@ -13,7 +13,7 @@ const roomInit: Middleware = async (ctx) => {
   const roomNumber = ctx.get(RoomNumberHeaderName);
 
   const room = Room.getRoom(roomNumber);
-  console.log("# roomInit", { room, roomNumber });
+  // console.log("# roomInit", { room, roomNumber });
 
   const ret: InitRoomResponse = {
     status: 200,

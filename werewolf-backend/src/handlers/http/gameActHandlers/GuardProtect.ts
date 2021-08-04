@@ -36,7 +36,7 @@ export const GuardProtectHandler: GameActHandler = {
     } else {
       protects[room.currentDay] = target;
       const protectPlayer = room.getPlayerByIndex(target);
-      console.log("# GuardProtect", { protectPlayer });
+      // console.log("# GuardProtect", { protectPlayer });
       if (
         protectPlayer.die?.at === room.currentDay &&
         protectPlayer.die?.fromCharacter === "WEREWOLF"

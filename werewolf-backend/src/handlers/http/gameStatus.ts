@@ -19,7 +19,7 @@ const gameStatus: Middleware = async (ctx, next) => {
 
   const room = Room.getRoom(roomNumber);
   const curPlayer = room.getPlayerById(playerID);
-  console.log("# gameStatus");
+  // console.log("# gameStatus");
   // TODO 不是所有时候都能看到谁死了的
 
   const ret: HttpRes<GameStatusResponse> = {
