@@ -1,6 +1,14 @@
-import { Character, GameStatus } from "../../../werewolf-frontend/shared/GameDefs";
 import {
-    day, ID, index, PlayerDef, PublicPlayerDef, RoomDef
+  Character,
+  GameStatus,
+} from "../../../werewolf-frontend/shared/GameDefs";
+import {
+  day,
+  ID,
+  index,
+  PlayerDef,
+  PublicPlayerDef,
+  RoomDef,
 } from "../../../werewolf-frontend/shared/ModelDefs";
 import { createError } from "../middleware/handleError";
 import { Player } from "./PlayerModel";
@@ -39,7 +47,9 @@ export class Room implements RoomDef {
     needingCharacters: Character[];
     password?: string;
   }) {
-    // TODO 检查创建房间的人数配比
+    if (!checkNeedingCharacters(needingCharacters))
+      createError({ msg: "人数配比不合法", status: 401 });
+
     let tryTime = 20;
     while (tryTime--) {
       const roomNumber = Math.random().toString().slice(2, 8);
@@ -122,4 +132,25 @@ export class Room implements RoomDef {
   static clearRoom(number: string): void {
     delete this.roomMap[number];
   }
+}
+
+function checkNeedingCharacters(
+  needingCharacters: Character[]
+): boolean {
+  if (!needingCharacters.length) return false;
+  const charMap: Partial<Record<
+    Character,
+    number
+  >> = needingCharacters.reduce((map, character) => {
+    map[character] = map[character] || 0;
+    map[character]++;
+    return map;
+  }, {});
+
+  if (!charMap.WEREWOLF) return false;
+
+  if (charMap.WEREWOLF > needingCharacters.length / 2)
+    return false;
+
+  return true;
 }
