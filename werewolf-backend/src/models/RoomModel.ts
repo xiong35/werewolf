@@ -113,7 +113,7 @@ export class Room implements RoomDef {
 
   static getRoom(number: string): Room {
     const room = Room.roomMap[number];
-    // console.log("# RoomModel", { room });
+    // // console.log("# RoomModel", { room });
     if (!room)
       return createError({ status: 400, msg: "未找到房间号" });
     return room;

@@ -44,6 +44,9 @@ input:focus {
   border-radius: 20px;
   border: 0px solid var(--on-bg);
 }
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 
 .spacer {
   flex: 1;

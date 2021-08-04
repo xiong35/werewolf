@@ -50,8 +50,8 @@ export const SheriffVoteHandler: GameActHandler = {
     // 找到警长人选
 
     const highestVotes = getVoteResult(votes);
-    console.log("# SheriffVote", { votes });
-    console.log("# SheriffVote", { highestVotes });
+    // console.log("# SheriffVote", { votes });
+    // console.log("# SheriffVote", { highestVotes });
 
     // 如果没有全部弃票
     if (!highestVotes || highestVotes.length === 0) {

@@ -22,7 +22,7 @@ export function checkGameOver(room: Room): boolean {
     { werewolf: 0, villager: 0 }
   );
 
-  console.log("# checkGameOver", { werewolf, villager }); // TODO
+  // console.log("# checkGameOver", { werewolf, villager }); // TODO
   if (werewolf >= villager || werewolf === 0) {
     // 通知游戏已结束
     const winner = werewolf === 0 ? "VILLAGER" : "WEREWOLF";

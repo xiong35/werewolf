@@ -22,7 +22,7 @@ function joinRoom(roomNumber: string) {
     path: WS_PATH,
   });
   socket.on("connection", () => {
-    console.log("#ws connected");
+    // console.log("#ws connected");
   });
 
   socket.on(Events.CHANGE_STATUS, changeStatus);

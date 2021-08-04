@@ -7,7 +7,7 @@ import { date, gameStatus, gameStatusTimeLeft, refresh, self } from "../reactivi
 /*  */
 
 export default async function changeStatus(msg: ChangeStatusMsg) {
-  console.log("# changeStatus", { msg });
+  // console.log("# changeStatus", { msg });
   date.value = msg.setDay;
   gameStatus.value = msg.setStatus;
 

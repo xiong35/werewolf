@@ -24,7 +24,7 @@ export const HunterShootHandler: GameActHandler = {
     target: index,
     ctx: Context
   ) {
-    console.log("# HunterShoot", { player });
+    // console.log("# HunterShoot", { player });
     if (player.die?.fromCharacter === "WITCH") {
       // 如果被女巫毒死了就不能开枪
       createError({
@@ -60,10 +60,10 @@ export const HunterShootHandler: GameActHandler = {
     // 玩家死亡后依次进行以下检查
     // 遗言发表检查, 猎人开枪检查, 警长传递警徽检查
     if (!showHunter(room)) {
-      console.log("# HunterShoot", "not show hunter");
+      // console.log("# HunterShoot", "not show hunter");
       HunterShootHandler.endOfState(room, false);
     } else {
-      console.log("# HunterShoot", "show hunter");
+      // console.log("# HunterShoot", "show hunter");
       startCurrentState(this, room, true);
     }
   },
@@ -71,7 +71,7 @@ export const HunterShootHandler: GameActHandler = {
   async endOfState(room, showHunter: boolean) {
     if (!showHunter) {
       // 无猎人? 直接取消这两个阶段
-      console.log("# HunterShoot", "really not show hunter");
+      // console.log("# HunterShoot", "really not show hunter");
       return SheriffAssignHandler.startOfState(room);
     }
 
@@ -101,14 +101,14 @@ export const HunterShootHandler: GameActHandler = {
  * 如果猎人开过枪或者无猎人就不需要进行此阶段了
  */
 function showHunter(room: Room): boolean {
-  console.log("# HunterShoot", { room });
+  // console.log("# HunterShoot", { room });
   if (!room.needingCharacters.includes("HUNTER")) return false;
 
   const hunter = room.players.find(
     (p) => p.character === "HUNTER"
   );
 
-  console.log("# HunterShoot", {
+  // console.log("# HunterShoot", {
     hunter: hunter?.characterStatus?.shootAt,
   });
   if (!hunter) return false;

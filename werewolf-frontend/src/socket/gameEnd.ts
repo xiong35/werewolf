@@ -12,7 +12,7 @@ export default async function gameEnd(msg: GameEndMsg) {
   socket.removeAllListeners();
   socket.disconnect();
 
-  console.log("# gameEnd", "end");
+  // console.log("# gameEnd", "end");
   // TODO game over
 
   await refresh();

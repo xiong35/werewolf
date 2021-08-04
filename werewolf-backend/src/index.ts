@@ -6,7 +6,7 @@ import { Server } from "socket.io";
 
 import * as cors from "@koa/cors";
 
-import { WS_PATH } from "../../werewolf-frontend/shared/constants";
+import { WS_PATH_CLIPED } from "../../werewolf-frontend/shared/constants";
 import useHandleError from "./middleware/handleError";
 import router from "./routes";
 import { setup } from "./ws";
@@ -23,7 +23,7 @@ const io = new Server(httpServer, {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
-  path: WS_PATH,
+  path: WS_PATH_CLIPED,
 });
 
 // listen to some events
@@ -44,6 +44,6 @@ app
 
 httpServer.listen(3011);
 
-console.log("listen on 3011");
+// console.log("listen on 3011");
 
 export default io;

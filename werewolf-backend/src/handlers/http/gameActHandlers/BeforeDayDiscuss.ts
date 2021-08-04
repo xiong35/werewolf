@@ -100,7 +100,7 @@ export const BeforeDayDiscussHandler: GameActHandler = {
           .filter((p) => p.canBeVoted)
           .map((p) => p.index)
       );
-      console.log(
+      // console.log(
         "# BeforeDayDiscuss",
         "room.toFinishPlayers",
         room.toFinishPlayers
