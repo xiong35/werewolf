@@ -31,8 +31,8 @@ input:focus {
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 0px;
+  height: 0px;
 }
 
 *::-webkit-scrollbar-track {
@@ -42,7 +42,7 @@ input:focus {
 *::-webkit-scrollbar-thumb {
   background-color: var(--bg);
   border-radius: 20px;
-  border: 3px solid var(--on-bg);
+  border: 0px solid var(--on-bg);
 }
 
 .spacer {

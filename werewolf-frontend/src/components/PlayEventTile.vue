@@ -47,7 +47,10 @@
       content: "";
       position: absolute;
       background-color: currentColor;
-      inset: -0.3rem 0 -0.3rem 1.12rem;
+      top: -0.3rem;
+      right: 0;
+      bottom: -0.3rem;
+      left: 1.12rem;
       border-radius: 999px;
       width: 2px;
     }
