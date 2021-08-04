@@ -101,10 +101,10 @@ export const BeforeDayDiscussHandler: GameActHandler = {
           .map((p) => p.index)
       );
       // console.log(
-        "# BeforeDayDiscuss",
-        "room.toFinishPlayers",
-        room.toFinishPlayers
-      );
+      //   "# BeforeDayDiscuss",
+      //   "room.toFinishPlayers",
+      //   room.toFinishPlayers
+      // );
       DayDiscussHandler.startOfState(room);
     }
   },

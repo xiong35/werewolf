@@ -109,8 +109,8 @@ function showHunter(room: Room): boolean {
   );
 
   // console.log("# HunterShoot", {
-    hunter: hunter?.characterStatus?.shootAt,
-  });
+  //   hunter: hunter?.characterStatus?.shootAt,
+  // });
   if (!hunter) return false;
 
   if (hunter.characterStatus?.shootAt?.player > 0) return false;
