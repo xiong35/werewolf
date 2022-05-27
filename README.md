@@ -1,6 +1,5 @@
-<div align="center" id="top"> 
+<div align="center" id="top">
   <img width="100" src="werewolf-frontend/public/wolf.png" alt="Werewolf Logo" />
-
 
   <!-- <a href="https://werewolf.netlify.app">Demo</a> -->
 </div>
@@ -16,7 +15,7 @@
 <h3 align="center"><a href="http://werewolf.xiong35.cn/">在线使用地址: http://werewolf.xiong35.cn</a></h3>
 
 <p align="center">
-  <a href="#dart-简介">简介</a> &#xa0; | &#xa0; 
+  <a href="#dart-简介">简介</a> &#xa0; | &#xa0;
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-技术栈">技术栈</a> &#xa0; | &#xa0;
   <a href="#deciduous_tree-目录结构">目录结构</a> &#xa0; | &#xa0;
@@ -28,12 +27,12 @@
 
 <br>
 
-## :dart: 简介 ##
+## :dart: 简介
 
 一款线下狼人杀软件.  
 为了免去线下打狼时必须带牌和需要主持人的麻烦, 我制作了一款狼人杀网站, 希望给你带来方便 ;P
 
-## :sparkles: Features ##
+## :sparkles: Features
 
 ### 特色
 
@@ -47,13 +46,13 @@
 :heavy_check_mark: 可在游戏中查看事件表、编写备忘  
 :heavy_check_mark: 即是中途不小心退出游戏, 也可刷新页面直接重连  
 :heavy_check_mark: 可查看历史对局  
-:heavy_check_mark: 数据完全安全, 杜绝任何形式的作弊  
+:heavy_check_mark: 数据完全安全, 杜绝任何形式的作弊
 
 ### 不足
 
-🥺 **不支持**实时语音交流, 仅供线下面基使用  
+🥺 **不支持**实时语音交流, 仅供线下面基使用
 
-## :rocket: 技术栈 ##
+## :rocket: 技术栈
 
 本项目主要运用以下技术:
 
@@ -62,7 +61,7 @@
 - [Vue3](https://vue3js.cn/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-## :deciduous_tree: 目录结构 ##
+## :deciduous_tree: 目录结构
 
 ```txt
 ├── docs                          # 随手写的笔记
@@ -94,11 +93,11 @@
         └── utils                 # 工具函数
 ```
 
-## :white_check_mark: 使用指南 ##
+## :white_check_mark: 使用指南
 
 ### 开发者
 
-使用前 :checkered_flag:, 安装 mongoDB, 拥有 git 和 node 环境
+使用前 :checkered_flag:, 拥有 git 和 node 环境
 
 ```bash
 # Clone this project
@@ -123,19 +122,17 @@ $ npm run dev
 
 直接访问[网址](http://werewolf.xiong35.cn/)即可!
 
-## :memo: License ##
+## :memo: License
 
 本项目使用 MIT 证书. 查看 [LICENSE](LICENSE) 以了解详情.
-
 
 Made with :heart: by <a href="https://github.com/xiong35" target="_blank">xiong35</a>
 &#xa0;
 
-## :hugs: Thanks ##
+## :hugs: Thanks
 
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div><div>Icons made by <a href="https://www.flaticon.com/authors/wanicon" title="wanicon">wanicon</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 &#xa0;
-
 
 <a href="#top">Back to top</a>
